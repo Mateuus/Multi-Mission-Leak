@@ -1,0 +1,648 @@
+author = "Asylum Entertainment";
+onLoadName = "Asylum Life v7.5.4";
+onLoadMission = "Be a part of the community at www.Gaming-Asylum.com.";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 10;
+disabledAI = true;
+disableChannels[]={0,1,2,3};
+loadScreen = "images\mission_splash.jpg";
+enableDebugConsole = 0;
+respawnDialog = 0;
+scriptedPlayer = 1;
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 150;
+};
+
+wreckManagerMode = 0;
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseManagerMode = 0;
+corpseLimit = 150;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+showHUD[] = {
+	true,	// Scripted HUD (same as showHUD command)
+	false,	// Vehicle + soldier info
+	false,	// Vehicle radar [HIDDEN]
+	false,	// Vehicle compass [HIDDEN]
+	false,	// Tank direction indicator
+	false,	// Commanding menu
+	true,	// Group Bar
+	true,	// HUD Weapon Cursors
+	true	// HUD Squad Radar
+};
+
+#include "dialog\common.hpp"
+#include "dialog\history.hpp"
+#include "dialog\shop_items.hpp"
+#include "dialog\inventory.hpp"
+#include "dialog\settings.hpp"
+#include "dialog\group.hpp"
+#include "dialog\gang.hpp"
+#include "dialog\key_chain.hpp"
+#include "dialog\lootcrate.hpp"
+#include "dialog\impound.hpp"
+#include "dialog\bank.hpp"
+#include "dialog\veh_shop.hpp"
+#include "dialog\shops.hpp"
+#include "dialog\shop_weapons.hpp"
+#include "dialog\housesale.hpp"
+#include "dialog\ui.hpp"
+#include "dialog\talent.hpp"
+#include "dialog\admin_menu.hpp"
+#include "dialog\cell_phone.hpp"
+#include "dialog\achievements.hpp"
+#include "dialog\wanted_list.hpp"
+#include "dialog\ticket.hpp"
+#include "dialog\clothing.hpp"
+#include "dialog\trunk.hpp"
+#include "dialog\house.hpp"
+#include "dialog\spawnSelection.hpp"
+#include "dialog\chop_shop.hpp"
+#include "dialog\candidate.hpp"
+#include "dialog\lootticker.hpp"
+#include "dialog\market.hpp"
+#include "dialog\capture.hpp"
+#include "dialog\vote.hpp"
+#include "dialog\deathScreen.hpp"
+#include "dialog\endorse.hpp"
+#include "dialog\broadcast.hpp"
+#include "dialog\input.hpp"
+#include "dialog\prisonbreak.hpp"
+#include "dialog\charge.hpp"
+#include "dialog\pickup.hpp"
+#include "dialog\governor.hpp"
+#include "dialog\smartphone.hpp"
+#include "dialog\money.hpp"
+#include "dialog\licenses.hpp"
+#include "dialog\weather.hpp"
+#include "dialog\confirm.hpp"
+#include "dialog\dispatch.hpp"
+#include "dialog\prestige.hpp"
+#include "dialog\factory.hpp"
+#include "dialog\cell_call.hpp"
+#include "dialog\Grand_Exchange.hpp"
+#include "dialog\priceDiag.hpp"
+#include "dialog\donations.hpp"
+#include "dialog\treasure.hpp"
+#include "outlw_magRepack\MagRepack_config.hpp"
+
+class RscTitles
+{
+	#include "dialog\ui.hpp"
+	#include "dialog\progress.hpp"
+	#include "dialog\nameTags.hpp"
+};
+
+class CfgFunctions
+{
+	#include "Functions.hpp"
+};
+
+class CfgSounds
+{
+  sounds[] = {};
+
+  class SirenMedic
+  {
+    name = "SirenMedic";
+    sound[] = {"\sounds\Siren_Medic.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class seatbelt
+  {
+	name = "seatbelt";
+	sound[] = {"\sounds\seatbelt.ogg", 1.0, 1};
+	titles[] = {};
+  };
+  class siren2
+  {
+    name = "siren2";
+    sound[] = {"\sounds\siren2.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class Airhorn
+  {
+    name = "Airhorn";
+    sound[] = {"\sounds\Airhorn.ogg", 2.0, 1};
+    titles[] = {};
+  };
+  class SirenWail
+  {
+    name = "SirenWail";
+    sound[] = {"\sounds\SirenWail.ogg", 2, 1};
+    titles[] = {};
+  };
+  class SirenYelp
+  {
+    name = "SirenYelp";
+    sound[] = {"\sounds\SirenYelp.ogg", 1, 1};
+    titles[] = {};
+  };
+  class SirenPhaser
+  {
+    name = "SirenPhaser";
+    sound[] = {"\sounds\SirenPhaser.ogg", 1, 1};
+    titles[] = {};
+  };
+  class PhoneRing
+  {
+    name = "PhoneRing";
+    sound[] = {"\sounds\phonering.ogg", 1, 1};
+    titles[] = {};
+  };
+  class PhoneDial
+  {
+    name = "PhoneDial";
+    sound[] = {"\sounds\phonedial.ogg", 1, 1};
+    titles[] = {};
+  };
+   class tazersound
+  {
+    name = "Tazersound";
+    sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+    titles[] = {};
+  };
+  class Flashbang
+  {
+    name = "Flashbang";
+    sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class car_lock
+  {
+    name = "car_lock";
+    sound[] = {"\sounds\car_lock.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class caralarm
+  {
+    name = "caralarm";
+    sound[] = {"\sounds\caralarm.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class elechair
+  {
+    name = "elechair";
+    sound[] = {"\sounds\elechair.ogg", 3.0, 1};
+    titles[] = {};
+  };
+  class airalarm
+  {
+    name = "airalarm";
+    sound[] = {"\sounds\airalarm.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class bombarm
+  {
+    name = "bombarm";
+    sound[] = {"\sounds\bombarm.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class handcuffs
+  {
+    name = "handcuffs";
+    sound[] = {"\sounds\handcuffs.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class lock
+  {
+    name = "lock";
+    sound[] = {"\sounds\lock.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class unlock
+  {
+    name = "unlock";
+    sound[] = {"\sounds\unlock.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class pickaxe
+  {
+    name = "pickaxe";
+    sound[] = {"\sounds\pickaxe.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class purchase
+  {
+    name = "purchase";
+    sound[] = {"\sounds\purchase.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class sms
+  {
+    name = "sms";
+    sound[] = {"\sounds\sms.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class bonebreak
+  {
+    name = "bonebreak";
+    sound[] = {"\sounds\break.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class racebeep1
+  {
+    name = "racebeep1";
+    sound[] = {"\sounds\racebeep1.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class racebeep2
+  {
+    name = "racebeep2";
+    sound[] = {"\sounds\racebeep2.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class airplane
+  {
+    name = "airplane";
+    sound[] = {"\sounds\airplane.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class EMP
+  {
+    name = "EMP";
+    sound[] = {"\sounds\EMP.ogg", 9, 1};
+    titles[] = {};
+  };
+  class BoltAction
+  {
+    name = "BoltAction";
+    sound[] = {"\sounds\BoltAction.ogg", 2, 1};
+    titles[] = {};
+  };
+  class camera
+  {
+    name = "camera";
+    sound[] = {"\sounds\camera.ogg", 2, 1};
+    titles[] = {};
+  };
+  class CokeSlosh1
+  {
+    name = "CokeSlosh1";
+    sound[] = {"\sounds\CokeSlosh1.ogg", 4, 1};
+    titles[] = {};
+  };
+  class CokeSlosh2
+  {
+    name = "CokeSlosh2";
+    sound[] = {"\sounds\CokeSlosh2.ogg", 4, 1};
+    titles[] = {};
+  };
+  class CokeSlosh3
+  {
+    name = "CokeSlosh3";
+    sound[] = {"\sounds\CokeSlosh3.ogg", 4, 1};
+    titles[] = {};
+  };
+  class drilling
+  {
+    name = "drilling";
+    sound[] = {"\sounds\drilling.ogg", 2, 1};
+    titles[] = {};
+  };
+  class bankalarm
+  {
+    name = "bankalarm";
+    sound[] = {"\sounds\bankalarm.ogg", 1, 1};
+    titles[] = {};
+  };
+  class signal
+  {
+    name = "signal";
+    sound[] = {"\sounds\signal.ogg", 1, 1};
+    titles[] = {};
+  };
+  class chop
+  {
+    name = "chop";
+    sound[] = {"\sounds\chop.ogg", 1, 1};
+    titles[] = {};
+  };
+  class ziptie
+  {
+    name = "ziptie";
+    sound[] = {"\sounds\zip.ogg", 1, 1};
+    titles[] = {};
+  };
+  class loottick
+  {
+    name = "loottick";
+    sound[] = {"\sounds\loottick.ogg", 1, 1};
+    titles[] = {};
+  };
+  class lootreward1
+  {
+    name = "lootreward1";
+    sound[] = {"\sounds\lootreward1.ogg", 1, 1};
+    titles[] = {};
+  };
+  class lootreward2
+  {
+    name = "lootreward2";
+    sound[] = {"\sounds\lootreward2.ogg", 1, 1};
+    titles[] = {};
+  };
+  class lootreward3
+  {
+    name = "lootreward3";
+    sound[] = {"\sounds\lootreward3.ogg", 1, 1};
+    titles[] = {};
+  };
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are not white-listed to use this slot";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Blacklisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class End1
+	{
+		title = "Asylum Life Restarted";
+		subtitle = "Everything is saved. Restarting now...";
+		description = "The Asylum servers restart automatically to keep performance high! All vehicles in the world are saved.";
+		pictureBackground = "";
+		picture = "icons\asylum.paa";
+		pictureColor[] = {1,1,1,1};
+	};
+	
+	class Heart
+	{
+		title = "Server Problem";
+		subtitle = "Can't hear the server heartbeat. Restarting now...";
+		description = "This error usually happens when the headless client can no longer talk to the server. The game must restart to ensure that you don't lose progress!";
+		pictureBackground = "";
+		picture = "icons\asylum.paa";
+		pictureColor[] = {1,1,1,1};
+	};
+	
+	class EndHC
+	{
+		title = "Server Problem";
+		subtitle = "Headless client was lost. Restarting now...";
+		description = "When we lose the headless client to a crash, all progress stops saving. Restarting gets us back on track.";
+		pictureBackground = "";
+		picture = "icons\asylum.paa";
+		pictureColor[] = {1,1,1,1};
+	};
+	
+	class EndDB
+	{
+		title = "Server Problem";
+		subtitle = "Connection to database lost. Restarting now...";
+		description = "While a rare thing, when we lose connection to the database we can no longer save your progress. Restarting gets us back on track.";
+		pictureBackground = "";
+		picture = "icons\asylum.paa";
+		pictureColor[] = {1,1,1,1};
+	};
+	
+	class SpyGlass
+	{
+		title = "The SpyGlass sees you";
+		subTitle = "You were detected by the SpyGlass";
+		description = "You were detected for cheating and have been reported to the server. Enjoy your day.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepted";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+	
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+	
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+	
+	class Achievement
+	{
+		title = "New Achievement";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+	
+	class TextMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class PoliceDispatch
+	{
+		title = "911 Dispatch Center";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class StatGain
+	{
+		title = "Stat Gain";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIconDone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+		color[] = {0.7,1.0,0.3,1.0};
+		sound = "taskSucceeded";
+	};
+	
+	class StatLoss
+	{
+		title = "Stat Loss";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIconFailed_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+		color[] = {1.0,0.3,0.2,1.0};
+		sound = "taskFailed";
+	};
+	
+	class AllPointsBulletin
+	{
+		title = "All Points Bulletin";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminMessage
+	{
+		title = "Admin Message";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+	
+	class GovMessage
+	{
+		title = "Governor Message";
+		iconPicture = "icons\govern.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+	class BountyUpdate
+	{
+		title = "Bounty Update";
+		iconPicture = "icons\police.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	
+	class TaxiRequest
+	{
+		title = "Taxi Pickup Request";
+		iconPicture = "icons\speaking.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	
+	class NewEvent
+	{
+		title = "New Event";
+		iconPicture = "icons\speaking.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	
+	class MedicalRequestEmerg
+	{
+		title = "Paramedic Requested";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+};
+
+class Params {
+        class PARAM_TimeOfDay {
+                title = "    Time of Day";
+                values[] = {1,2,3,4};
+                texts[] = {"04:00", "12:00", "17:00", "22:00"};
+                default = 2;
+        };
+
+        class PARAM_fastime {
+                title = "    Fast time";
+                values[] = {0,1};
+                texts[] = {"No", "Yes"};
+                default = 1;
+        };
+
+        class PARAM_dynamicweather {
+                title = "    Dynamic Weather";
+                values[] = {0,1};
+                texts[] = {"No", "Yes"};
+                default = 1;
+        };
+		
+		class ace_common_forceAllSettings {
+			ACE_setting = 1;
+			values[] = {0, 1};
+			value = 1;
+			default = 1;
+			typeName = "BOOL";
+			force = 1;
+		};
+		
+		class ace_nametags_showPlayerRanks {
+			ACE_setting = 1;
+			values[] = {0, 1};
+			value = 0;
+			default = 0;
+			typeName = "BOOL";
+			force = 1;
+		};
+		class ace_viewdistance_enabled {
+			ACE_setting = 1;
+			values[] = {0, 1};
+			value = 0;
+			default = 0;
+			typeName = "BOOL";
+			force = 0;
+		};
+		class ace_captives_allowHandcuffOwnSide {
+			ACE_setting = 1;
+			values[] = {0, 1};
+			value = 0;
+			default = 0;
+			typeName = "BOOL";
+			force = 1;
+		};
+		class ace_captives_allowSurrender {
+			ACE_setting = 1;
+			values[] = {0, 1};
+			value = 0;
+			default = 0;
+			typeName = "BOOL";
+			force = 1;
+		};
+};

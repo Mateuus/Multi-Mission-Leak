@@ -1,0 +1,102 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, Server-Side Cleanup">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,4346,-64.651031,-279.265625,25.348923,-229.265625,0.000000,"init"};
+item1[] = {"true",8,4314,-63.823933,-197.996109,26.176064,-147.996109,0.000000,"true"};
+item2[] = {"Dummy",2,250,-64.934135,-100.072090,25.065914,-50.072136,0.000000,"Dummy"};
+item3[] = {"true",8,218,-65.588120,186.864395,24.411943,236.864334,0.000000,"true"};
+item4[] = {"Time_Check",4,218,-65.193451,-14.120168,24.806463,35.879887,0.000000,"Time Check"};
+item5[] = {"Run_Function",2,250,-64.653526,82.788559,25.346380,132.788376,0.000000,"Run Function"};
+item6[] = {"",7,210,-311.337433,208.170959,-303.337433,216.170959,0.000000,""};
+item7[] = {"",7,210,-311.750000,-79.350464,-303.750000,-71.350449,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,4};
+link3[] = {3,6};
+link4[] = {4,5};
+link5[] = {5,3};
+link6[] = {6,7};
+link7[] = {7,2};
+globals[] = {0.000000,0,0,0,0,640,480,1,47,6316128,1,-895.805664,574.516113,296.915588,-539.725952,1601,911,1};
+window[] = {2,-1,-1,-32000,-32000,896,135,1778,136,3,1619};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "Server-Side Cleanup";
+  class States
+  {
+    /*%FSM<STATE "init">*/
+    class init
+    {
+      name = "init";
+      init = /*%FSM<STATEINIT""">*/"private[""_function"",""_duration"",""_sleep""];" \n
+       "_function = _this select 0;" \n
+       "_duration = _this select 1;" \n
+       "_sleep = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Dummy";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Dummy">*/
+    class Dummy
+    {
+      name = "Dummy";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Time_Check">*/
+        class Time_Check
+        {
+          priority = 0.000000;
+          to="Run_Function";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((time - _sleep) > _duration)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Run_Function">*/
+    class Run_Function
+    {
+      name = "Run_Function";
+      init = /*%FSM<STATEINIT""">*/"[] call _function;" \n
+       "" \n
+       "_sleep = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Dummy";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="init";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/

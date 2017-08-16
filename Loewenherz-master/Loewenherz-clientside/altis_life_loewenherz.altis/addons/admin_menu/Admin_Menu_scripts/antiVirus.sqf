@@ -1,0 +1,1 @@
+[{ LHM_Disease_healed = true; sleep 10; LHM_Disease_healed = false; },"BIS_fnc_spawn", true, false] call LHM_fnc_MP;

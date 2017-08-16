@@ -1,0 +1,1 @@
+(call compile ("extDB2" callExtension "9:UPTIME:MINUTES")) select 1

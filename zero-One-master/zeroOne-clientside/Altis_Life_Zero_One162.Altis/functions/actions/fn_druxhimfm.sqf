@@ -1,0 +1,1 @@
+private['_kMp','_ZnOi'];_kMp = param[0,ObjNull,[ObjNull]];if(isNull _kMp) exitWith {};hint localize "STR_NOTF_Searching";if(player distance _kMp > 5 || !alive player || !alive _kMp) exitWith {hint localize "STR_ISTR_Lock_TooFar"};_ZnOi = ["search"] call zero_fnc_KTrFY;[player,_ZnOi] remoteExecCall ["zero_fnc_YaHAnEo",_kMp];RuqfuBIBK = false;

@@ -1,0 +1,1 @@
+private['_fLSH'];_fLSH = param[0,ObjNull,[ObjNull]];if(isNull _fLSH) exitWith {};for "_i" from 1 to 7 step 1 do { _fLSH say3D "car_alarm"; uisleep 2;};

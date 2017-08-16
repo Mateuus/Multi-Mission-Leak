@@ -1,0 +1,619 @@
+#define true 1
+#define TRUE 1
+#define false 0
+#define FALSE 0
+
+author = "ArmA.Network";
+onLoadName = "Tanoa Life V2.0";
+onLoadMission = "A RPG mode developed by ArmA.Network and Tonic";
+joinUnassigned = 1;
+
+DebugMode = 0;
+
+respawn = 3;
+respawnTemplates[] = {"Base"};
+respawndelay = 5;
+respawnDialog = 0;
+respawnOnStart = -1;
+
+disabledAI = 1;
+disableChannels[]={{0,1,1},{1,1,1},{2,1,1},{3,1,1}};
+enableDebugConsole = 1;
+loadScreen = "\sndimg\sahrani\icons\loadscreensahrani.paa";
+
+showHUD[] = {
+	1,	// Scripted HUD (same as showHUD command)
+	1,	// Vehicle + soldier info
+	1,	// Vehicle radar [HIDDEN]
+	0,	// Vehicle compass [HIDDEN]
+	0,	// Tank direction indicator
+	0,	// Commanding menu
+	0,	// Group Bar
+	1	// HUD Weapon Cursors
+};
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 100;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 90;
+corpseRemovalMinTime = 600;
+corpseRemovalMaxTime = 900;
+onPauseScript[] = {life_fnc_drebuswaswu};
+
+#include "dialog\MasterHandler.h"
+#include "configs\CfgMaster.hpp"
+#include "core\config.h"
+
+class RscTitles
+{
+	class playerHUD {
+		idd = -1;
+		duration = 1e+1000;
+		movingEnable = 0;
+		fadein = 0;
+		fadeout = 0;
+		name = "playerHUD";
+		onLoad = "uiNamespace setVariable ['playerHUD',_this select 0]";
+		onUnload = "uiNamespace setVariable ['playerHUD', displayNull]";
+		objects[] = {};
+		class controls {
+			class RscText_1000: Life_RscText
+			{
+				idc = 1000;
+				text = "ARMA.NETWORK"; //--- ToDo: Localize;
+				x = -0.000156274 * safezoneW + safezoneX;
+				y = 0.973 * safezoneH + safezoneY;
+				w = 0.0670312 * safezoneW;
+				h = 0.022 * safezoneH;
+				sizeEx = "0.8 * (((( safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+			};
+			class RscPicture_1200: Life_RscPicture
+			{
+				idc = 1204;
+				text = "\sndimg\sahrani\icons\Bone.paa";
+				x = 0.964063 * safezoneW + safezoneX;
+				y = 0.676 * safezoneH + safezoneY;
+				w = 0.0309375 * safezoneW;
+				h = 0.055 * safezoneH;
+				blinkingPeriod = 0.8;
+				show = "false";
+			};
+			class RscPicture_1201: Life_RscPicture
+			{
+				idc = 1201;
+				text = "\sndimg\sahrani\icons\Health.paa";
+				x = 0.964063 * safezoneW + safezoneX;
+				y = 0.456 * safezoneH + safezoneY;
+				w = 0.0309375 * safezoneW;
+				h = 0.055 * safezoneH;
+				blinkingPeriod = 0.8;
+				show = "false";
+			};
+			class RscPicture_1202: Life_RscPicture
+			{
+				idc = 1200;
+				text = "\sndimg\sahrani\icons\Bleeding.paa";
+				x = 0.964063 * safezoneW + safezoneX;
+				y = 0.511 * safezoneH + safezoneY;
+				w = 0.0309375 * safezoneW;
+				h = 0.055 * safezoneH;
+				blinkingPeriod = 0.8;
+				show = "false";
+			};
+			class RscPicture_1203: Life_RscPicture
+			{
+				idc = 1202;
+				text = "\sndimg\sahrani\icons\Hunger.paa";
+				x = 0.964063 * safezoneW + safezoneX;
+				y = 0.566 * safezoneH + safezoneY;
+				w = 0.0309375 * safezoneW;
+				h = 0.055 * safezoneH;
+				blinkingPeriod = 0.8;
+				show = "false";
+			};
+			class RscPicture_1204: Life_RscPicture
+			{
+				idc = 1203;
+				text = "\sndimg\sahrani\icons\Thirst.paa";
+				x = 0.964063 * safezoneW + safezoneX;
+				y = 0.621 * safezoneH + safezoneY;
+				w = 0.0309375 * safezoneW;
+				h = 0.055 * safezoneH;
+				blinkingPeriod = 0.8;
+				show = "false";
+			};
+			class RscPicture_1205: Life_RscPicture
+			{
+				idc = 1205;
+				text = "\sndimg\sahrani\icons\Headphones.paa";
+				x = 0.964063 * safezoneW + safezoneX;
+				y = 0.731 * safezoneH + safezoneY;
+				w = 0.0309375 * safezoneW;
+				h = 0.055 * safezoneH;
+				show = "false";
+			};
+			class RscPicture_1206: Life_RscPicture
+			{
+				idc = 1206;
+				text = "\sndimg\sahrani\icons\Weight.paa";
+				x = 0.964063 * safezoneW + safezoneX;
+				y = 0.786 * safezoneH + safezoneY;
+				w = 0.0309375 * safezoneW;
+				h = 0.055 * safezoneH;
+				blinkingPeriod = 0.8;
+				show = "false";
+			};
+		};
+	};
+	class life_progress
+	{
+		name = "life_progress";
+		idd = 38200;
+		fadein=0;
+		duration = 1e+1000;
+		fadeout=0;
+		movingEnable = 0;
+		onLoad="uiNamespace setVariable ['life_progress',_this select 0]";
+		onUnload = "uiNamespace setVariable ['life_progress', displayNull]";
+		objects[]={};
+
+		class controlsBackground
+		{
+			class ProgressBar: Life_RscProgress
+			{
+				idc = 38201;
+				x = 0.355625 * safezoneW + safezoneX;
+				y = 0.951 * safezoneH + safezoneY;
+				w = 0.28875 * safezoneW;
+				h = 0.033 * safezoneH;
+				colorBar[] = {1,0.6,0,1};
+			};
+			class RscText_1001: Life_RscText
+			{
+				idc = 38202;
+				text = "";
+				x = 0.355625 * safezoneW + safezoneX;
+				y = 0.951 * safezoneH + safezoneY;
+				w = 0.28875 * safezoneW;
+				h = 0.033 * safezoneH;
+				colorText[] = {0,0,0,1};
+				sizeEx = "1 * (((( safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
+				class Attributes
+				{
+					align = "center";
+				};
+			};
+		};
+	};
+	class ANIDLayer
+	{
+	  idd = 98738;
+	  name = "ANIDLayer";
+	  onLoad = "uiNamespace setVariable ['ANIDLayer', _this select 0];";
+	  onUnload = "uiNamespace setVariable ['ANIDLayer', displayNull]";
+	  duration = 1e+1000;
+	  class controlsBackground {
+	    class RscPicture_1200: Life_RscPicture
+	    {
+	    	idc = 1200;
+	    	text = "";
+	    	x = 0.592812 * safezoneW + safezoneX;
+	    	y = 0.28 * safezoneH + safezoneY;
+	    	w = 0.422812 * safezoneW;
+	    	h = 0.759 * safezoneH;
+	    };
+	  };
+	  class controls {
+	    class RscButtonMenu_2400: Life_RscStructuredText
+	    {
+	    	idc = 2400;
+	    	text = "Name:"; //--- ToDo: Localize;
+	    	x = 0.773281 * safezoneW + safezoneX;
+	    	y = 0.401 * safezoneH + safezoneY;
+	    	w = 0.0360937 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class RscButtonMenu_2401: Life_RscStructuredText
+	    {
+	    	idc = 2401;
+	    	text = "Rank:"; //--- ToDo: Localize;
+	    	x = 0.773281 * safezoneW + safezoneX;
+	    	y = 0.423 * safezoneH + safezoneY;
+	    	w = 0.0360937 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class RscButtonMenu_2402: Life_RscStructuredText
+	    {
+	    	idc = 2402;
+	    	text = "Age (DD/MM/YY):"; //--- ToDo: Localize;
+	    	x = 0.773281 * safezoneW + safezoneX;
+	    	y = 0.445 * safezoneH + safezoneY;
+	    	w = 0.0825 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class Age: Life_RscStructuredText
+	    {
+	    	idc = 2403;
+			text = "";
+	    	x = 0.855781 * safezoneW + safezoneX;
+	    	y = 0.445 * safezoneH + safezoneY;
+	    	w = 0.0825 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class rank: Life_RscStructuredText
+	    {
+	    	idc = 2404;
+			text = "";
+	    	x = 0.809375 * safezoneW + safezoneX;
+	    	y = 0.423 * safezoneH + safezoneY;
+	    	w = 0.128906 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class playername: Life_RscStructuredText
+	    {
+	    	idc = 2405;
+			text = "";
+	    	x = 0.809375 * safezoneW + safezoneX;
+	    	y = 0.401 * safezoneH + safezoneY;
+	    	w = 0.134062 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class RscButtonMenu_2406: Life_RscStructuredText
+	    {
+	    	idc = 2406;
+	    	text = "Gender:"; //--- ToDo: Localize;
+	    	x = 0.773281 * safezoneW + safezoneX;
+	    	y = 0.467 * safezoneH + safezoneY;
+	    	w = 0.0464063 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class RscButtonMenu_2407: Life_RscStructuredText
+	    {
+	    	idc = 2407;
+	    	text = "Height(cm):"; //--- ToDo: Localize;
+	    	x = 0.773281 * safezoneW + safezoneX;
+	    	y = 0.5 * safezoneH + safezoneY;
+	    	w = 0.061875 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class gender: Life_RscStructuredText
+	    {
+	    	idc = 2408;
+			text = "";
+	    	x = 0.819688 * safezoneW + safezoneX;
+	    	y = 0.467 * safezoneH + safezoneY;
+	    	w = 0.118594 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class RscButtonMenu_2409: Life_RscStructuredText
+	    {
+	    	idc = 2409;
+	    	text = "Weight(kg):"; //--- ToDo: Localize;
+	    	x = 0.773281 * safezoneW + safezoneX;
+	    	y = 0.522 * safezoneH + safezoneY;
+	    	w = 0.061875 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class RscButtonMenu_2410: Life_RscStructuredText
+	    {
+	    	idc = 2410;
+	    	text = "Eye Color:"; //--- ToDo: Localize;
+	    	x = 0.773281 * safezoneW + safezoneX;
+	    	y = 0.544 * safezoneH + safezoneY;
+	    	w = 0.061875 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class height: Life_RscStructuredText
+	    {
+	    	idc = 2411;
+			text = "";
+	    	x = 0.835156 * safezoneW + safezoneX;
+	    	y = 0.5 * safezoneH + safezoneY;
+	    	w = 0.103125 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class weight: Life_RscStructuredText
+	    {
+	    	idc = 2412;
+			text = "";
+	    	x = 0.835156 * safezoneW + safezoneX;
+	    	y = 0.522 * safezoneH + safezoneY;
+	    	w = 0.103125 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class eyecolor: Life_RscStructuredText
+	    {
+	    	idc = 2413;
+			text = "";
+	    	x = 0.835156 * safezoneW + safezoneX;
+	    	y = 0.544 * safezoneH + safezoneY;
+	    	w = 0.103125 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class RscButtonMenu_2414: Life_RscStructuredText
+	    {
+	    	idc = 2414;
+	    	text = "Religion:"; //--- ToDo: Localize;
+	    	x = 0.690781 * safezoneW + safezoneX;
+	    	y = 0.588 * safezoneH + safezoneY;
+	    	w = 0.0515625 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class RscButtonMenu_2415: Life_RscStructuredText
+	    {
+	    	idc = 2415;
+	    	text = "Residence:"; //--- ToDo: Localize;
+	    	x = 0.690781 * safezoneW + safezoneX;
+	    	y = 0.61 * safezoneH + safezoneY;
+	    	w = 0.061875 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class religion: Life_RscStructuredText
+	    {
+	    	idc = 2416;
+	      text = "";
+	    	x = 0.742344 * safezoneW + safezoneX;
+	    	y = 0.588 * safezoneH + safezoneY;
+	    	w = 0.144375 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	    class residence: Life_RscStructuredText
+	    {
+	    	idc = 2417;
+			text = "";
+	    	x = 0.752656 * safezoneW + safezoneX;
+	    	y = 0.61 * safezoneH + safezoneY;
+	    	w = 0.134062 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	  };
+	};
+	class ANJail
+	{
+	  idd = 87621;
+	  name = "ANJail";
+	  onLoad = "uiNamespace setVariable ['ANJail', _this select 0];";
+	  onUnload = "uiNamespace setVariable ['ANJail', displayNull]";
+	  duration = 1e+1000;
+	  class controls {
+	    class RscStructuredText_1100: Life_RscStructuredText
+	    {
+	    	idc = 1100;
+	    	text = "";
+	    	x = 0.278281 * safezoneW + safezoneX;
+	    	y = 0.973 * safezoneH + safezoneY;
+	    	w = 0.45375 * safezoneW;
+	    	h = 0.022 * safezoneH;
+	    };
+	  };
+	};
+	class PainFlash
+	{
+		idd = -1;
+		duration = 0;
+		fadein = 0;
+		fadeout = 1;
+		class controls
+		{
+			class RedScreen
+			{
+				idc = -1;
+				type = 0;
+				style = 48;
+				x = safeZoneXAbs;
+				y = safeZoneY;
+				w = safeZoneWAbs;
+				h = safeZoneH;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.1;
+				colorBackground[] = {1,0,0,0.75};
+				colorText[] = {"0.5 + random 0.5",0,0,0.75};
+				text = "\sndimg\sahrani\icons\whitevignette.paa";
+			};
+		};
+	};
+	class DamageVignette
+	{
+		idd = 1;
+		duration = 1;
+		fadein = 0;
+		fadeout = 0;
+		class controls
+		{
+			class TheActualVignette
+			{
+				idc = -1;
+				type = 0;
+				style = 48;
+				x = safeZoneXAbs;
+				y = safeZoneY;
+				w = safeZoneWAbs;
+				h = safeZoneH;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.1;
+				colorBackground[] = {1, 1, 1, "missionNamespace getVariable 'VignetteAlpha'"};
+				colorText[] = {1, 1, 1, "missionNamespace getVariable 'VignetteAlpha'"};
+				text = "\sndimg\sahrani\icons\vignette.paa";
+			};
+		};
+	};
+	class ANNotification
+	{
+	  idd = 98734;
+	  name = "ANNotification";
+	  onLoad = "uiNamespace setVariable ['ANNotification', _this select 0];";
+	  onUnload = "uiNamespace setVariable ['ANNotification', displayNull]";
+	  duration = 1e+1000;
+	  class controls {};
+	};
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are not white-listed to use this slot";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class Blacklisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class SpyGlass
+	{
+		title = "The SpyGlass sees you";
+		subTitle = "You were detected by the SpyGlass";
+		description = "You were detected for cheating and have been reported to the server. Enjoy your day.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Timedout
+	{
+		title = "Timed Out";
+		subTitle = "Client Timed Out";
+		description = "You timed out whilst initializing your player with the server!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class WhitelistedPlayer
+	{
+		title = "Not Whitelisted";
+		subTitle = "Whitelist not found";
+		description = "You're not whitelisted on this server. Apply on the ArmA.Network Forums!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Saved
+	{
+		title = "Saved Data...";
+		subTitle = "Player information was successfully saved";
+		description = "Visit arma.network for news and additional information";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "EMS Requested";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class UrgentAPB
+	{
+		title = "All units respond - Urgent APB";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class UrgentAPBName
+	{
+		title = "Urgent APB Assigned";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepted";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "\sndimg\icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "\sndimg\icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Admin Message";
+		iconPicture = "\sndimg\icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+	class PoliceAN
+	{
+		title = "TSO Announcement";
+		iconPicture = "\sndimg\icons\messagetsf.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class BackupRequest
+	{
+		title = "Dispatch Center";
+		iconPicture = "\sndimg\icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+};

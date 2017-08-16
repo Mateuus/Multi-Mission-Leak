@@ -1,0 +1,178 @@
+/*%FSM<COMPILE "D:\Program Files\FSM Editor Personal Edition\scriptedFSM.cfg, fuelMonitor">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,4346,89.053802,-288.939453,179.053802,-238.939362,0.000000,"init"};
+item1[] = {"true",4,218,89.882782,-174.418274,179.882782,-124.418266,0.000000,"true"};
+item2[] = {"update_dialog",2,250,87.787521,-89.921265,177.787689,-39.921318,0.000000,"update dialog"};
+item3[] = {"time_check",4,218,1.268057,22.638004,91.267990,72.638000,2.000000,"time check"};
+item4[] = {"in_vehicle_",4,218,137.982605,39.909042,227.982635,89.909042,0.000000,"in vehicle?"};
+item5[] = {"off_",4,218,266.836670,30.510201,356.836670,80.510208,1.000000,"off?"};
+item6[] = {"END",1,250,292.131317,322.562042,382.131287,372.562012,0.000000,"END"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {2,4};
+link4[] = {2,5};
+link5[] = {3,2};
+link6[] = {4,6};
+link7[] = {5,6};
+globals[] = {0.000000,0,0,0,0,640,480,1,11,6316128,1,-487.953033,628.255798,519.726440,-439.581238,1060,911,1};
+window[] = {2,-1,-1,-1,-1,934,175,1615,175,3,1078};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "fuelMonitor";
+  class States
+  {
+    /*%FSM<STATE "init">*/
+    class init
+    {
+      name = "init";
+      init = /*%FSM<STATEINIT""">*/"" \n
+       "if(LHM_Small_Radar_on) exitWith {LHM_Small_Radar_on = false;};" \n
+       "[1] call lhm_fnc_cop_Radar_update;" \n
+       "LHM_Small_Radar_on = true;" \n
+       "[4] call lhm_fnc_cop_Radar_update;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="update_dialog";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "update_dialog">*/
+    class update_dialog
+    {
+      name = "update_dialog";
+      init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+       "_objects = [];" \n
+       "_allObjects = [];" \n
+       "_objectsAir = allMissionObjects ""Air"";" \n
+       "_objectsCAR = allMissionObjects ""Landvehicle"";" \n
+       "_objectsShip = allMissionObjects ""Ship"";" \n
+       "" \n
+       "{" \n
+       "	_allObjects append _x;" \n
+       "} foreach [_objectsAir,_objectsCAR,_objectsShip];" \n
+       "" \n
+       "{" \n
+       "	if((player distance _x) < 2000) then {" \n
+       "		_objects pushback _x;" \n
+       "" \n
+       "	};" \n
+       "" \n
+       "" \n
+       "} foreach _allObjects;" \n
+       "	_objects = _objects - [vehicle player];" \n
+       "	_allText = [];" \n
+       "	{" \n
+       "		if(isEngineOn _x) then {" \n
+       "				switch (true) do" \n
+       "				{" \n
+       "					case (_x iskindof ""helicopter""):" \n
+       "					{" \n
+       "						_text = parseText format[""<t color='#FE2E2E' align='left'>Helicopter</t>  <t color='#FE2E2E' align='right'>%1m</t> <br/>"",round(_x distance (vehicle player))];" \n
+       "						_alltext pushback _text;" \n
+       "					};" \n
+       "" \n
+       "					case (_x iskindof ""plane""):" \n
+       "					{" \n
+       "						_text = parseText format[""<t color='#FF8000' align='left'>Plane</t>  <t color='#FF8000' align='right'>%1m</t> <br/>"",round(_x distance (vehicle player))];" \n
+       "						_alltext pushback _text;" \n
+       "					};" \n
+       "" \n
+       "					case (_x iskindof ""LandVehicle""):" \n
+       "					{" \n
+       "						_text = parseText format[""<t color='#58FA58' align='left'>LandVehicle</t>  <t color='#58FA58' align='right'>%1m</t> <br/>"",round(_x distance (vehicle player))];" \n
+       "						_alltext pushback _text;" \n
+       "					};" \n
+       "" \n
+       "					case (_x iskindof ""Ship""):" \n
+       "					{" \n
+       "						_text = parseText format[""<t color='#2E64FE' align='left'>Ship</t>  <t color='#2E64FE' align='right'>%1m</t> <br/>"",round(_x distance (vehicle player))];" \n
+       "						_alltext pushback _text;" \n
+       "					};" \n
+       "" \n
+       "" \n
+       "				};" \n
+       "		};" \n
+       "" \n
+       "" \n
+       "	} foreach _objects;" \n
+       "" \n
+       "	if(_alltext isEqualTo []) then {" \n
+       "		_text = parseText format[""<t color='#FF0000' align='left'>No Vehicles found...</t>""];" \n
+       "		_alltext pushback _text;" \n
+       "	};" \n
+       "" \n
+       "" \n
+       "[2,_alltext] call lhm_fnc_cop_Radar_update;" \n
+       "" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "time_check">*/
+        class time_check
+        {
+          priority = 2.000000;
+          to="update_dialog";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(_time + 30) < time"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "off_">*/
+        class off_
+        {
+          priority = 1.000000;
+          to="END";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!LHM_Small_Radar_on || !alive player || !alive (vehicle player)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "in_vehicle_">*/
+        class in_vehicle_
+        {
+          priority = 0.000000;
+          to="END";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"vehicle player == player"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "END">*/
+    class END
+    {
+      name = "END";
+      init = /*%FSM<STATEINIT""">*/"[3] call lhm_fnc_cop_Radar_update;" \n
+       "LHM_Small_Radar_on = false;" \n
+       "[4] call lhm_fnc_cop_Radar_update;" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="init";
+  finalStates[] =
+  {
+    "END",
+  };
+};
+/*%FSM</COMPILE>*/

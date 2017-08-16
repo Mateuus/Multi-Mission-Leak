@@ -1,0 +1,274 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, sirenLightsLoop">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-41.490662,-168.257797,48.509338,-118.257797,0.000000,"init"};
+item1[] = {"time_check",4,218,166.052795,-66.600204,256.052795,-16.600204,0.000000,"time check"};
+item2[] = {"_",2,250,-58.415802,5.542328,31.584213,55.542328,0.000000,""};
+item3[] = {"vehicle_dead",4,218,59.757347,66.056122,149.757355,116.056122,2.000000,"vehicle dead"};
+item4[] = {"Lights_off",4,218,-57.127083,118.072601,32.872925,168.072601,1.000000,"Lights off"};
+item5[] = {"Distance__150",4,218,-185.723114,68.339661,-95.723114,118.339661,0.000000,"Distance  150"};
+item6[] = {"End",1,250,59.522400,186.170029,149.522430,236.170013,0.000000,"End"};
+item7[] = {"__1",2,250,-184.615189,189.026749,-94.615173,239.026749,0.000000,""};
+item8[] = {"left_light",4,218,-300.657959,245.617645,-210.657745,295.617645,1.000000,"left light"};
+item9[] = {"right_light",4,218,-81.892159,242.258270,8.107849,292.258270,0.000000,"right light"};
+item10[] = {"left_light",2,250,-302.663727,330.388428,-212.663559,380.388428,0.000000,"left light"};
+item11[] = {"right_light",2,250,-79.725006,332.180939,10.275009,382.180939,0.000000,"right light"};
+item12[] = {"_",8,218,-301.501465,414.368439,-211.501328,464.368408,0.000000,""};
+item13[] = {"__2",2,250,-174.152679,537.831238,-84.152679,587.831238,0.000000,""};
+item14[] = {"_",8,218,-79.052948,411.848206,10.947052,461.848206,0.000000,""};
+item15[] = {"_",4,218,-170.005585,649.966736,-80.005585,699.966675,0.000000,""};
+item16[] = {"__3",2,250,175.140381,652.723938,265.140381,702.723938,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {2,4};
+link4[] = {2,5};
+link5[] = {3,6};
+link6[] = {4,6};
+link7[] = {5,7};
+link8[] = {7,8};
+link9[] = {7,9};
+link10[] = {8,10};
+link11[] = {9,11};
+link12[] = {10,12};
+link13[] = {11,14};
+link14[] = {12,13};
+link15[] = {13,15};
+link16[] = {14,13};
+link17[] = {15,16};
+link18[] = {16,1};
+globals[] = {0.000000,0,0,0,0,640,480,1,24,6316128,1,-627.014404,627.013367,841.188965,-213.578476,1051,884,1};
+window[] = {2,-1,-1,-32000,-32000,785,26,1466,26,3,1069};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "sirenLightsLoop";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"_lightLeft = _this select 0;" \n
+                         "_lightRight = _this select 1;" \n
+                         "_vehicle = _this select 2;" \n
+                         "_brightness = _this select 3;" \n
+                         "_sleep = _this select 4;" \n
+                         "_bool = true;" \n
+                         "_time = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "time_check">*/
+                                class time_check
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _time) > _sleep"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "vehicle_dead">*/
+                                class vehicle_dead
+                                {
+                                        itemno = 3;
+                                        priority = 2.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!alive _vehicle"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Lights_off">*/
+                                class Lights_off
+                                {
+                                        itemno = 4;
+                                        priority = 1.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(_vehicle getVariable [""lights"",false])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Distance__150">*/
+                                class Distance__150
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="__1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(player distance _vehicle) < 150"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"deleteVehicle _lightLeft;" \n
+                         "deleteVehicle _lightRight;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__1">*/
+                class __1
+                {
+                        name = "__1";
+                        itemno = 7;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "left_light">*/
+                                class left_light
+                                {
+                                        itemno = 8;
+                                        priority = 1.000000;
+                                        to="left_light";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_bool"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "right_light">*/
+                                class right_light
+                                {
+                                        itemno = 9;
+                                        priority = 0.000000;
+                                        to="right_light";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "left_light">*/
+                class left_light
+                {
+                        name = "left_light";
+                        itemno = 10;
+                        init = /*%FSM<STATEINIT""">*/"_lightLeft setLightBrightness _brightness;" \n
+                         "_lightRight setLightBrightness 0;" \n
+                         "_time = time;" \n
+                         "_bool = false;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 12;
+                                        priority = 0.000000;
+                                        to="__2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "right_light">*/
+                class right_light
+                {
+                        name = "right_light";
+                        itemno = 11;
+                        init = /*%FSM<STATEINIT""">*/"_lightLeft setLightBrightness 0;" \n
+                         "_lightRight setLightBrightness _brightness;" \n
+                         "_time = time;" \n
+                         "_bool = true;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 14;
+                                        priority = 0.000000;
+                                        to="__2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__2">*/
+                class __2
+                {
+                        name = "__2";
+                        itemno = 13;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 15;
+                                        priority = 0.000000;
+                                        to="__3";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__3">*/
+                class __3
+                {
+                        name = "__3";
+                        itemno = 16;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "time_check">*/
+                                class time_check
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _time) > _sleep"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+                "End",
+        };
+};
+/*%FSM</COMPILE>*/

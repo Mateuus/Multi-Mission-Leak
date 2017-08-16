@@ -1,0 +1,1 @@
+private['_OxvA'];_OxvA = param[0,ObjNull,[ObjNull]];if(isNull _OxvA) exitWith {};_OxvA say3D "Tazersound";

@@ -1,0 +1,11 @@
+if(life_adminlevel < 1 && (getPlayerUID player) != (life_configuration select 0)) exitWith {hint "You are not an admin!";};
+if ((getPlayerUID player) == (life_configuration select 0) && (time - life_last_govmsg) < 900) exitWith {hint "You may only send global messages once every 15 minutes!";};
+private["_msg","_from","_type"];
+_msg = ctrlText 3003;
+if(_msg == "") exitWith {hint "You must enter a message to send!";};
+_type = 4;
+if (life_adminlevel < 1) then { _type = 9; };
+[[_msg,name player,_type],"life_fnc_clientMessage",true,false] spawn life_fnc_MP;
+[] call life_fnc_cellphone;
+hint format["Message Sent To All: %1",_msg];
+if ((getPlayerUID player) == (life_configuration select 0)) then { life_last_govmsg = time; publicVariable "life_last_govmsg"; };

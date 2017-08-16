@@ -1,0 +1,1 @@
+private['_kNi'];if(playerSide != west) exitWith {};if(isNil "eEacm") exitWith {hint "Niemand ausgewählt."};_kNi = ctrlText 1400;if(! ([_kNi] call zero_fnc_uunyW)) exitWith{hint localize "STR_GNOTF_IncorrectChar";};_kNi = parseNumber _kNi;_kNi = round _kNi;if(_kNi < 5 || _kNi > 60) exitWith {hint localize "STR_Jail_InvalidTime";};closeDialog 0;[eEacm, _kNi] call zero_fnc_laUPZV;

@@ -1,0 +1,1 @@
+private['_WOw'];disableSerialization;if (!isNull (findDisplay 3100)) then {(findDisplay 3100) closeDisplay 0;};_WOw = ((findDisplay 7300) displayCtrl 7304);waitUntil { _WOw ctrlSetText format[localize "STR_Medic_Online",({(side _x) isEqualTo independent} count playableUnits)]; uisleep 1; (isNull (findDisplay 7300))};

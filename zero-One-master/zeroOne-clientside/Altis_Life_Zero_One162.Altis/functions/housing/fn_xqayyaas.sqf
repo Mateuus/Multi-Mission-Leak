@@ -1,0 +1,1 @@
+private['_yZIM'];_yZIM = param[0,ObjNull,[ObjNull]];if(isNull _yZIM || !(_yZIM isKindOf "House_F")) exitWith {};if(isNil {(_yZIM getVariable "onUxX")}) exitWith {hint localize "STR_House_Raid_NoOwner"};hint parseText format["<t color='#FF0000'><t size='2'>" +(localize "STR_House_Raid_Owner")+ "</t></t><br/>%1",(_yZIM getVariable "onUxX") select 1];

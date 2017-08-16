@@ -1,0 +1,599 @@
+
+class FSM
+{
+        fsmName = "emptyFuel";
+        class States
+        {
+                /*%FSM<STATE "Init">*/
+                class Init
+                {
+                        name = "Init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private[""_time"",""_message_nempty"",""_message_empty"",""_count_warn"",""_warn1"",""_warn2"",""_warn3""];" \n
+                         "_fuelConsumption = 0;" \n
+                         "" \n
+                         "_time = 0;" \n
+                         "_message_nempty = false;" \n
+                         "_message_empty = false;" \n
+                         "_count_warn = 0;" \n
+                         "_warn1 = false;" \n
+                         "_warn2 = false;" \n
+                         "_warn3 = false;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Split">*/
+                class Split
+                {
+                        name = "Split";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"//Setup Vehicle" \n
+                         "_vehicle = vehicle player;" \n
+                         "_speed = speed _vehicle;" \n
+                         "" \n
+                         "_velocityOfVehicle = sqrt(((velocity _vehicle select 0)^2)+((velocity _vehicle select 1)^2))*3.6;" \n
+                         "" \n
+                         "//Setup Fueltype Check" \n
+                         "_fueldefault = getText(missionConfigFile >> ""CfgVehicles"" >> (typeOf _vehicle) >> ""fuel"");" \n
+                         "_fuelSort = _vehicle getVariable ""vehicle_fuellocation"";" \n
+                         "" \n
+                         "//systemChat ""FuelSystem gestartet"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Fuel_Empty_">*/
+                                class Fuel_Empty_
+                                {
+                                        itemno = 13;
+                                        priority = 1.000000;
+                                        to="Message_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"fuel _vehicle < 0.03 && !(_message_empty)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Fuel_nearly_Empty">*/
+                                class Fuel_nearly_Empty
+                                {
+                                        itemno = 14;
+                                        priority = 1.000000;
+                                        to="Message";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"fuel _vehicle < 0.2 && fuel _vehicle > 0.04 && !(_message_nempty)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Player_not_In_Vehicle">*/
+                                class Player_not_In_Vehicle
+                                {
+                                        itemno = 22;
+                                        priority = 1.000000;
+                                        to="Reset_Message";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"player == vehicle player &&" \n
+                                         "(_message_nempty || _message_empty || (_count_warn > 0) || _warn1 || _warn2 || _warn3)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Warning_1">*/
+                                class Warning_1
+                                {
+                                        itemno = 24;
+                                        priority = 1.000000;
+                                        to="Engine_damage_0";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_fuelSort != _fueldefault) &&" \n
+                                         "((_vehicle getHitPointDamage ""HitEngine"") < 0.66) &&" \n
+                                         "fuel _vehicle < 0.81 &&" \n
+                                         "fuel _vehicle > 0.60 &&" \n
+                                         "_count_warn == 0 &&" \n
+                                         "!(_warn1)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Warning_2">*/
+                                class Warning_2
+                                {
+                                        itemno = 25;
+                                        priority = 1.000000;
+                                        to="Engine_damage_0_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_fuelSort != _fueldefault) &&" \n
+                                         "((_vehicle getHitPointDamage ""HitEngine"") < 0.66) &&" \n
+                                         "fuel _vehicle < 0.61 &&" \n
+                                         "fuel _vehicle > 0.30 &&" \n
+                                         "(_count_warn == 0 || _count_warn == 1) &&" \n
+                                         "!(_warn2)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Warning_3">*/
+                                class Warning_3
+                                {
+                                        itemno = 26;
+                                        priority = 1.000000;
+                                        to="Engine_damage_0_2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_fuelSort != _fueldefault) &&" \n
+                                         "((_vehicle getHitPointDamage ""HitEngine"") < 0.66) &&" \n
+                                         "fuel _vehicle < 0.31 &&" \n
+                                         "fuel _vehicle > 0.03 &&" \n
+                                         "(_count_warn == 0 || _count_warn == 1 || _count_warn == 2) &&" \n
+                                         "!(_warn3)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Warning_4">*/
+                                class Warning_4
+                                {
+                                        itemno = 27;
+                                        priority = 1.000000;
+                                        to="Engine_damage_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_fuelSort != _fueldefault) &&" \n
+                                         "_count_warn == 3 &&" \n
+                                         "_vehicle getHitPointDamage ""HitEngine"" < 0.91"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Start_Fuel__System">*/
+                                class Start_Fuel__System
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Split_Vehicle_Ty";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(isEngineOn _vehicle || (!(isEngineOn _vehicle) && (_speed >= 10))) && (_vehicle != player)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Split_Vehicle_Ty">*/
+                class Split_Vehicle_Ty
+                {
+                        name = "Split_Vehicle_Ty";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Boat">*/
+                                class Boat
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="Reduce_Fuel_2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_vehicle iskindof ""Boat"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Air">*/
+                                class Air
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Reduce_Fuel";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_vehicle iskindof ""Air"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Car">*/
+                                class Car
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="Reduce_Fuel_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_vehicle iskindof ""Car"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Reduce_Fuel">*/
+                class Reduce_Fuel
+                {
+                        name = "Reduce_Fuel";
+                        itemno = 8;
+                        init = /*%FSM<STATEINIT""">*/"switch (typeOf (_vehicle)) do " \n
+                         "{" \n
+                         "	case ""B_Heli_Light_01_F"": 					{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0007}; 		//Hummingbird" \n
+                         "	case ""C_Heli_Light_01_civil_F"": 			{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0007}; 		//M900" \n
+                         "	case ""O_Heli_Light_02_unarmed_F"": 		{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Orca" \n
+                         "	case ""I_Heli_Transport_02_F"": 			{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Mohawk" \n
+                         "	case ""I_Heli_light_03_unarmed_F"": 		{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Hellcat" \n
+                         "	case ""B_Heli_Transport_03_unarmed_F"": 	{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Ghosthawk" \n
+                         "	case ""O_Heli_Transport_04_F"": 			{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Taru" \n
+                         "	case ""O_Heli_Transport_04_covered_F"": 	{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Taru Transport" \n
+                         "	case ""O_Heli_Transport_04_bench_F"": 	{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Taru Bank" \n
+                         "	case ""O_Heli_Transport_04_ammo_F"": 		{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Taru Ammo" \n
+                         "	case ""B_Heli_Transport_03_unarmed_F"": 	{_fuelConsumption = _velocityOfVehicle/1000000 + 0.0005}; 		//Huron" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="SetFuel";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Reduce_Fuel_1">*/
+                class Reduce_Fuel_1
+                {
+                        name = "Reduce_Fuel_1";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"switch(true) do" \n
+                         "{" \n
+                         "	case (_speed >= 0 and _speed < 5): 		{_fuelConsumption = _velocityOfVehicle/100000 + 0.00001};" \n
+                         "	case (_speed >= 5 and _speed < 15): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.00002};" \n
+                         "	case (_speed >= 15 and _speed < 30): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.00003};" \n
+                         "	case (_speed >= 30 and _speed < 55): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.00004};" \n
+                         "	case (_speed >= 55 and _speed < 70): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.00005};" \n
+                         "	case (_speed >= 70 and _speed < 85): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.00006};" \n
+                         "	case (_speed >= 85 and _speed < 100): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.00007};" \n
+                         "	case (_speed >= 100 and _speed < 115): {_fuelConsumption = _velocityOfVehicle/100000 + 0.00008};" \n
+                         "	case (_speed >= 115 and _speed < 130): {_fuelConsumption = _velocityOfVehicle/100000 + 0.00009};" \n
+                         "	case (_speed >= 130 and _speed < 500): {_fuelConsumption = _velocityOfVehicle/100000 + 0.00010};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="SetFuel";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Reduce_Fuel_2">*/
+                class Reduce_Fuel_2
+                {
+                        name = "Reduce_Fuel_2";
+                        itemno = 10;
+                        init = /*%FSM<STATEINIT""">*/"switch(true) do" \n
+                         "{" \n
+                         "	case (_speed >= 0 and _speed < 15): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.000001};" \n
+                         "	case (_speed >= 15 and _speed < 300): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.000002};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="SetFuel";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "SetFuel">*/
+                class SetFuel
+                {
+                        name = "SetFuel";
+                        itemno = 12;
+                        init = /*%FSM<STATEINIT""">*/"_vehicle setFuel ((fuel _vehicle) - _fuelConsumption);" \n
+                         "" \n
+                         "//hint format [""Verbrauch: %1"",_fuelConsumption];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Message">*/
+                class Message
+                {
+                        name = "Message";
+                        itemno = 15;
+                        init = /*%FSM<STATEINIT""">*/"[""Fahrzeug Information"",[""Du fährst/fliegst mit dem Reserve Tank"",""Suche eine Tankstelle auf!""],""#0090ff""] call EMonkeys_fnc_specialText;" \n
+                         "" \n
+                         "_message_nempty = true;" \n
+                         "" \n
+                         "//systemChat ""FuelSystem Message1"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Message_1">*/
+                class Message_1
+                {
+                        name = "Message_1";
+                        itemno = 17;
+                        init = /*%FSM<STATEINIT""">*/"[""Fahrzeug Information"",[""Wer sein Fahrzeug liebt der schiebt!""],""#0090ff""] call EMonkeys_fnc_specialText;" \n
+                         "" \n
+                         "_message_empty = true;" \n
+                         "" \n
+                         "//systemChat ""FuelSystem Message2"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 18;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Player_not_In_Vehicle">*/
+                                class Player_not_In_Vehicle
+                                {
+                                        itemno = 22;
+                                        priority = 1.000000;
+                                        to="Reset_Message";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"player == vehicle player &&" \n
+                                         "(_message_nempty || _message_empty || (_count_warn > 0) || _warn1 || _warn2 || _warn3)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Player_In_Vehicle">*/
+                                class Player_In_Vehicle
+                                {
+                                        itemno = 19;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"player != vehicle player && ((driver vehicle player) == player)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Set_wait_Time">*/
+                class Set_wait_Time
+                {
+                        name = "Set_wait_Time";
+                        itemno = 20;
+                        init = /*%FSM<STATEINIT""">*/"_time = time + 2;" \n
+                         "" \n
+                         "//systemChat ""Warte Zeit gesetzt"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Is_Time_">*/
+                                class Is_Time_
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time >= _time"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Reset_Message">*/
+                class Reset_Message
+                {
+                        name = "Reset_Message";
+                        itemno = 23;
+                        init = /*%FSM<STATEINIT""">*/"_message_nempty = false;" \n
+                         "_message_empty = false;" \n
+                         "_count_warn = 0;" \n
+                         "_warn1 = false;" \n
+                         "_warn2 = false;" \n
+                         "_warn3 = false;" \n
+                         "" \n
+                         "//systemChat ""FuelSystem Nachrichten Reset"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Engine_damage_0">*/
+                class Engine_damage_0
+                {
+                        name = "Engine_damage_0";
+                        itemno = 28;
+                        init = /*%FSM<STATEINIT""">*/"[""Fahrzeug Information"",[""Du hast den falschen Treibstoff getankt"",""Dein Motor wurde beschädigt!""],""#0090ff""] call EMonkeys_fnc_specialText;" \n
+                         "" \n
+                         "_vehicle setHitPointDamage [""HitEngine"", 0.65];" \n
+                         "_count_warn = _count_warn + 1;" \n
+                         "_warn1 = true;" \n
+                         "" \n
+                         "//systemChat ""FuelSystem Warn1"";" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Engine_damage_0_1">*/
+                class Engine_damage_0_1
+                {
+                        name = "Engine_damage_0_1";
+                        itemno = 29;
+                        init = /*%FSM<STATEINIT""">*/"[""Fahrzeug Information"",[""Du hast den falschen Treibstoff getankt"",""Dein Motor wurde beschädigt!""],""#0090ff""] call EMonkeys_fnc_specialText;" \n
+                         "" \n
+                         "_vehicle setHitPointDamage [""HitEngine"", 0.65];" \n
+                         "_count_warn = _count_warn + 1;" \n
+                         "_warn2 = true;" \n
+                         "" \n
+                         "//systemChat ""FuelSystem Warn2"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Engine_damage_0_2">*/
+                class Engine_damage_0_2
+                {
+                        name = "Engine_damage_0_2";
+                        itemno = 30;
+                        init = /*%FSM<STATEINIT""">*/"[""Fahrzeug Information"",[""Du hast den falschen Treibstoff getankt"",""Dein Motor wurde beschädigt!""],""#0090ff""] call EMonkeys_fnc_specialText;" \n
+                         "" \n
+                         "_vehicle setHitPointDamage [""HitEngine"", 0.65];" \n
+                         "_count_warn = _count_warn + 1;" \n
+                         "_warn3 = true;" \n
+                         "" \n
+                         "//systemChat ""FuelSystem Warn3"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Engine_damage_1">*/
+                class Engine_damage_1
+                {
+                        name = "Engine_damage_1";
+                        itemno = 31;
+                        init = /*%FSM<STATEINIT""">*/"[""Fahrzeug Information"",[""Du hast den falschen Treibstoff getankt"",""Dein Motor wurde zerstört!""],""#0090ff""] call EMonkeys_fnc_specialText;" \n
+                         "_vehicle setHitPointDamage [""HitEngine"", 1];" \n
+                         "" \n
+                         "//systemChat ""FuelSystem Damage!"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 21;
+                                        priority = 0.000000;
+                                        to="Set_wait_Time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="Init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

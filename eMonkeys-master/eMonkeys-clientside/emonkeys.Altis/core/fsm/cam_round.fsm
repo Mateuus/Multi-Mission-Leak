@@ -1,0 +1,159 @@
+class FSM
+{
+        fsmName = "cam_round";
+        class States
+        {
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private[""_camera"",""_pos"",""_high"",""_radius"",""_time"",""_i"",""_degre""];" \n
+                         "" \n
+                         "EMonkeys_EscRoundCam = false;" \n
+                         "EMonkeys_RoundCamDegre = nil;" \n
+                         "" \n
+                         "_camera = _this select 0;" \n
+                         "_pos = _this select 1;" \n
+                         "_high = _this select 2;" \n
+                         "_radius = _this select 3;" \n
+                         "_time = _this select 4;" \n
+                         "_i = _this select 5;" \n
+                         "_degre = 2;" \n
+                         "" \n
+                         "if (!_i) then {_i = 0} else {_i = _this select 6};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "wait_time">*/
+                                class wait_time
+                                {
+                                        itemno = 10;
+                                        priority = 0.000000;
+                                        to="set_cam";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"camCommitted _camera && !EMonkeys_EscRoundCam"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "end_cam_">*/
+                                class end_cam_
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="end_fsm";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"EMonkeys_EscRoundCam"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "end_fsm">*/
+                class end_fsm
+                {
+                        name = "end_fsm";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"EMonkeys_RoundCamDegre = _i;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "set_cam">*/
+                class set_cam
+                {
+                        name = "set_cam";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"_i = _i + _degre;" \n
+                         "_set1 = (_pos select 0) + (cos _i) * _radius;" \n
+                         "_set2 = (_pos select 1) + (sin _i) * _radius;" \n
+                         "//systemChat format [""[%1 , %2, %3]"",_set1,_set2,_high];" \n
+                         "_camera camSetPos [_set1, _set2, _high];" \n
+                         "_camera camCommit _time;" \n
+                         "" \n
+                         "//systemChat format [""Round Degre: %1"", _i];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "higher_than_360">*/
+                                class higher_than_360
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="reset__i";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"_i >= 360"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "reset__i">*/
+                class reset__i
+                {
+                        name = "reset__i";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"_i = 0;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT";
+        finalStates[] =
+        {
+                "end_fsm",
+        };
+};
+/*%FSM</COMPILE>*/

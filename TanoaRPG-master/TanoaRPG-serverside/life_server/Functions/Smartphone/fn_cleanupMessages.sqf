@@ -1,0 +1,18 @@
+/* 
+ 
+ file: fn_cleanupMessages.sqf 
+ Author: Silex 
+ 
+ Description: Deletes all messages that belongs to the given id. 
+*/ 
+if(!isNull life_hc_inUse) exitWith {_this remoteExec ["TEX_fnc_cleanupMessages", life_hc_inUse]}; 
+ 
+private["_player","_query"]; 
+_player = [_this,0,ObjNull,[objNull]] call BIS_fnc_param; 
+ 
+if(isNull _player) exitWith {}; 
+ 
+_query = format["DELETE FROM messages WHERE toID='%1'",getPlayerUID _player]; 
+ 
+//waitUntil{!DB_Async_Active}; 
+[_query,1] call DB_fnc_asyncCall; 

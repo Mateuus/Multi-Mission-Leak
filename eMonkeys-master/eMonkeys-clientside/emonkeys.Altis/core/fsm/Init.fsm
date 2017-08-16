@@ -1,0 +1,1111 @@
+
+class FSM
+{
+        fsmName = "EMonkeys Init";
+        class States
+        {
+                /*%FSM<STATE "INIT_">*/
+                class INIT_
+                {
+                        name = "INIT_";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"EMonkeys_fnc_MPexec = compilefinal preprocessFile ""core\functions\network\fn_MPexec.sqf"";" \n
+                         "" \n
+                         "EMonkeys_objspawn = false;" \n
+                         "EMonkeys_firstSpawn = true;" \n
+                         "eM_session_completed = false;" \n
+                         "EMonkeys_backgroundCam = false;" \n
+                         "" \n
+                         "_playerIDs = [];" \n
+                         "" \n
+                         "0 cutText ["""",""BLACK FADED""];" \n
+                         "0 cutFadeOut 9999999;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Objekte_erstelle";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Objekte_erstelle">*/
+                class Objekte_erstelle
+                {
+                        name = "Objekte_erstelle";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"[] call EMonkeys_fnc_test1;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Player">*/
+                                class Player
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="Lade_Dialog__ffn";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNull player &&" \n
+                                         "player == player &&" \n
+                                         "!isNull (findDisplay 46) &&" \n
+                                         "!isNil {clientGangLeader}"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Spieler_aufsetze">*/
+                class Spieler_aufsetze
+                {
+                        name = "Spieler_aufsetze";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"[""<t align='center' shadow='1' size='1.2'>Spieler wird vorbereitet</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;" \n
+                         "" \n
+                         "[] call EMonkeys_fnc_firstjoin;" \n
+                         "" \n
+                         "[] call compile PreprocessFileLineNumbers ""core\configuration.sqf"";" \n
+                         "" \n
+                         "[] call EMonkeys_fnc_setupEVH;" \n
+                         "" \n
+                         "[] call EMonkeys_fnc_setupActions;" \n
+                         "" \n
+                         "[] spawn Emonkeys_fnc_igiload_config;" \n
+                         "" \n
+                         "[] spawn EMonkeys_fnc_initFuelAction; " \n
+                         "" \n
+                         "player setVariable[""perms"",[],true];" \n
+                         "" \n
+                         "0 enableChannel [false, false];" \n
+                         "1 enableChannel [false, false];" \n
+                         "2 enableChannel [false, false];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Variabeln_nicht">*/
+                                class Variabeln_nicht
+                                {
+                                        itemno = 9;
+                                        priority = 0.000000;
+                                        to="Error_003";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isNil ""EMonkeys_server_isReady"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Variabeln_gesetzt">*/
+                                class Variabeln_gesetzt
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNil ""EMonkeys_server_isReady"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Lade_Dialog__ffn">*/
+                class Lade_Dialog__ffn
+                {
+                        name = "Lade_Dialog__ffn";
+                        itemno = 7;
+                        init = /*%FSM<STATEINIT""">*/"//playSound ""Start"";" \n
+                         "[] spawn Emonkeys_fnc_progressBar_loading;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Lade_Dialog_offen">*/
+                                class Lade_Dialog_offen
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="Split_2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNull (findDisplay 38210)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Split">*/
+                class Split
+                {
+                        name = "Split";
+                        itemno = 8;
+                        init = /*%FSM<STATEINIT""">*/"[""<t align='center' shadow='1' size='1.2'>Spieler ist bereit</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Server_nicht_fertig">*/
+                                class Server_nicht_fertig
+                                {
+                                        itemno = 13;
+                                        priority = 0.000000;
+                                        to="Error_004";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!EMonkeys_server_isReady OR isNil ""EMonkeys_server_extDB_notLoaded"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Server_fertig_">*/
+                                class Server_fertig_
+                                {
+                                        itemno = 12;
+                                        priority = 0.000000;
+                                        to="Split_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"EMonkeys_server_isReady OR !isNil ""EMonkeys_server_extDB_notLoaded"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Error_003">*/
+                class Error_003
+                {
+                        name = "Error_003";
+                        itemno = 10;
+                        init = /*%FSM<STATEINIT""">*/"diag_log ""ERROR 003"";" \n
+                         "" \n
+                         "[""<t align='center' shadow='1' size='1.2'>Der Server ist noch nicht bereit</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Variabeln_gesetzt">*/
+                                class Variabeln_gesetzt
+                                {
+                                        itemno = 39;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNil ""EMonkeys_server_isReady"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Error_004">*/
+                class Error_004
+                {
+                        name = "Error_004";
+                        itemno = 14;
+                        init = /*%FSM<STATEINIT""">*/"diag_log ""ERROR 004"";" \n
+                         "" \n
+                         "[""<t align='center' shadow='1' size='1.2'>Der Server ist noch nicht bereit</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Server_fertig_">*/
+                                class Server_fertig_
+                                {
+                                        itemno = 36;
+                                        priority = 0.000000;
+                                        to="Split_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"EMonkeys_server_isReady OR !isNil ""EMonkeys_server_extDB_notLoaded"""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Split_1">*/
+                class Split_1
+                {
+                        name = "Split_1";
+                        itemno = 16;
+                        init = /*%FSM<STATEINIT""">*/"[""<t align='center' shadow='1' size='1.2'>Du wirst mit dem Server Synchronisiert</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "HC_nicht_verbunden">*/
+                                class HC_nicht_verbunden
+                                {
+                                        itemno = 18;
+                                        priority = 0.000000;
+                                        to="Error_005";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!EMonkeys_HC_isActive"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "HC_verbunden_">*/
+                                class HC_verbunden_
+                                {
+                                        itemno = 17;
+                                        priority = 0.000000;
+                                        to="Spieler_Daten_ab";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"EMonkeys_HC_isActive"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Error_005">*/
+                class Error_005
+                {
+                        name = "Error_005";
+                        itemno = 19;
+                        init = /*%FSM<STATEINIT""">*/"diag_log ""ERROR 005"";" \n
+                         "" \n
+                         "[""<t align='center' shadow='1' size='1.2'>Es besteht keine Verbindung zur Datenbank</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "HC_verbunden_">*/
+                                class HC_verbunden_
+                                {
+                                        itemno = 38;
+                                        priority = 0.000000;
+                                        to="Spieler_Daten_ab";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"EMonkeys_HC_isActive"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Spieler_Daten_ab">*/
+                class Spieler_Daten_ab
+                {
+                        name = "Spieler_Daten_ab";
+                        itemno = 21;
+                        init = /*%FSM<STATEINIT""">*/"[] call SOCK_fnc_dataQuery;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 22;
+                                        priority = 0.000000;
+                                        to="Spieler_Seite";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"eM_session_completed && !isNull (findDisplay 46)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Spieler_Seite">*/
+                class Spieler_Seite
+                {
+                        name = "Spieler_Seite";
+                        itemno = 23;
+                        init = /*%FSM<STATEINIT""">*/"[""<t align='center' shadow='1' size='1.2'>Spieler Daten wurden abgerufen</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Polizei">*/
+                                class Polizei
+                                {
+                                        itemno = 41;
+                                        priority = 0.000000;
+                                        to="InitCop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"playerside == west"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Medic">*/
+                                class Medic
+                                {
+                                        itemno = 42;
+                                        priority = 0.000000;
+                                        to="InitMedic";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"playerside == independent"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Zivilist">*/
+                                class Zivilist
+                                {
+                                        itemno = 40;
+                                        priority = 0.000000;
+                                        to="InitCiv";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"playerSide == civilian || playerSide == east"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "InitCiv">*/
+                class InitCiv
+                {
+                        name = "InitCiv";
+                        itemno = 24;
+                        init = /*%FSM<STATEINIT""">*/"private[""_spawnPos"",""_uniform""];" \n
+                         "" \n
+                         "civ_spawn_1 = nearestObjects[getMarkerPos  ""civ_spawn_1"", [""Land_i_Shop_01_V1_F"",""Land_i_Shop_02_V1_F"",""Land_i_Shop_01_V1_dam_F"",""Land_i_Shop_02_V1_dam_F"",""Land_i_Barracks_V1_F"",""Land_i_Barracks_V2_dam_F"",""Land_i_Barracks_V2_F"",""Land_i_Garage_V1_F""],100];" \n
+                         "civ_spawn_2 = nearestObjects[getMarkerPos  ""civ_spawn_2"", [""Land_i_Shop_01_V1_F"",""Land_i_Shop_02_V1_F"",""Land_i_Shop_01_V1_dam_F"",""Land_i_Shop_02_V1_dam_F"",""Land_i_Barracks_V1_F"",""Land_i_Barracks_V2_dam_F"",""Land_i_Barracks_V2_F"",""Land_i_Garage_V1_F""],100];" \n
+                         "civ_spawn_3 = nearestObjects[getMarkerPos  ""civ_spawn_3"", [""Land_i_Shop_01_V1_F"",""Land_i_Shop_02_V1_F"",""Land_i_Shop_01_V1_dam_F"",""Land_i_Shop_02_V1_dam_F"",""Land_i_Barracks_V1_F"",""Land_i_Barracks_V2_dam_F"",""Land_i_Barracks_V2_F"",""Land_i_Garage_V1_F""],100];" \n
+                         "civ_spawn_4 = nearestObjects[getMarkerPos  ""civ_spawn_4"", [""Land_i_Shop_01_V1_F"",""Land_i_Shop_02_V1_F"",""Land_i_Shop_01_V1_dam_F"",""Land_i_Shop_02_V1_dam_F"",""Land_i_Barracks_V1_F"",""Land_i_Barracks_V2_dam_F"",""Land_i_Barracks_V2_F"",""Land_i_Garage_V1_F""],100];" \n
+                         "" \n
+                         "if(EMonkeys_blacklisted) exitWith" \n
+                         "{" \n
+                         "	[""<t align='center' shadow='1' size='1.2'>Spieler wurde gesperrt</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;" \n
+                         "	[] spawn {" \n
+                         "		uisleep 10;" \n
+                         "		[""Blacklist"",true,0.1,false,false] call BIS_fnc_endMission;" \n
+                         "	};" \n
+                         "};" \n
+                         "" \n
+                         "if(playerSide == east) then" \n
+                         "{" \n
+                         "	if(EMonkeys_VIP == 0 && call EMonkeys_adminlevel < 3) exitWith" \n
+                         "	{" \n
+                         "		[""<t align='center' shadow='1' size='1.2'>Du bist kein VIP</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;" \n
+                         "		[] spawn {" \n
+                         "			uisleep 10;" \n
+                         "			[""noVIP"",true,0.1,false,false] call BIS_fnc_endMission;" \n
+                         "		};" \n
+                         "	};" \n
+                         "};" \n
+                         "" \n
+                         "[[getPlayerUID player],""TON_fnc_loadBounties"",false,false] call EMonkeys_fnc_MP;" \n
+                         "" \n
+                         "[] spawn Emonkeys_fnc_var;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Civ_im_Gef_ngnis">*/
+                                class Civ_im_Gef_ngnis
+                                {
+                                        itemno = 52;
+                                        priority = 0.000000;
+                                        to="Ins_Gef_ngnis";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"eM_is_arrested && EMonkeys_loadingD_ready"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Tutorial_starten">*/
+                                class Tutorial_starten
+                                {
+                                        itemno = 66;
+                                        priority = 0.000000;
+                                        to="Tutorial_starten";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"EMonkeys_loadingD_ready && eM_StartTutorial"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Laden_fertig_">*/
+                                class Laden_fertig_
+                                {
+                                        itemno = 28;
+                                        priority = 0.000000;
+                                        to="SpawnMenu__ffnen";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!eM_is_arrested && EMonkeys_loadingD_ready && !eM_StartTutorial"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Spieler_fertig_a">*/
+                class Spieler_fertig_a
+                {
+                        name = "Spieler_fertig_a";
+                        itemno = 25;
+                        init = /*%FSM<STATEINIT""">*/"player setVariable[""restrained"",false,true];" \n
+                         "player setVariable[""Escorting"",false,true];" \n
+                         "player setVariable[""transporting"",false,true];" \n
+                         "player setVariable[""restrainedciv"",false,true];" \n
+                         "player setVariable[""Escortingciv"",false,true];" \n
+                         "player setVariable[""transportingciv"",false,true];" \n
+                         "player setVariable[""invisible"",true,true];" \n
+                         "player setVariable[""name"",profileName,TRUE];" \n
+                         "player setVariable[""onkill"",false,true];" \n
+                         "player setVariable[""steam64ID"",getPlayerUID player];" \n
+                         "player setVariable[""realname"",profileName,true];" \n
+                         "player setVariable[""gagged"",false,true];" \n
+                         "" \n
+                         "player addRating 9999999;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 26;
+                                        priority = 0.000000;
+                                        to="FSM_s_starten";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "FSM_s_starten">*/
+                class FSM_s_starten
+                {
+                        name = "FSM_s_starten";
+                        itemno = 27;
+                        init = /*%FSM<STATEINIT""">*/"[] execFSM ""core\fsm\c1337.fsm"";" \n
+                         "[] execFSM ""core\fsm\uni.fsm"";" \n
+                         "[] execFSM ""core\fsm\damage.fsm"";" \n
+                         "[] execFSM ""core\fsm\FuelSystem.fsm"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 45;
+                                        priority = 0.000000;
+                                        to="Funktionen_start";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Funktionen_start">*/
+                class Funktionen_start
+                {
+                        name = "Funktionen_start";
+                        itemno = 29;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "(findDisplay 46) displayAddEventHandler [""KeyDown"", ""_this call EMonkeys_fnc_keyHandler""];" \n
+                         "" \n
+                         "EMonkeys_sidechat = true;" \n
+                         "[[player,EMonkeys_sidechat,playerSide],""TON_fnc_managesc"",false,false] call EMonkeys_fnc_mp;" \n
+                         "[] call EMonkeys_fnc_hudSetup;" \n
+                         "" \n
+                         "[] spawn EMonkeys_fnc_statusBar;" \n
+                         "" \n
+                         "EMonkeys_ID_RevealObjects = [""eM_revealObjects"",""onEachFrame"",""EMonkeys_fnc_revealObjects""] call BIS_fnc_addStackedEventHandler;" \n
+                         "" \n
+                         "[] call EMonkeys_fnc_settingsInit;" \n
+                         "[] execVM ""core\init_survival.sqf"";" \n
+                         "" \n
+                         "EMonkeys_paycheck = compileFinal (if(typeName EMonkeys_paycheck == ""STRING"") then {EMonkeys_paycheck} else {str(EMonkeys_paycheck)});" \n
+                         "" \n
+                         "player enableFatigue (call EMonkeys_enableFatigue);" \n
+                         "" \n
+                         "[] execVM ""core\eMonkeys\emp\empinit.sqf"";" \n
+                         "[] execVM ""core\eMonkeys\houseinventory\system_init.sqf"";" \n
+                         "[] execVM ""core\emonkeys\fn_nosidechat.sqf"";" \n
+                         "" \n
+                         "[[player,getPlayerUID player,name player],""EMonkeys_fnc_ausweisload"",false,false] call EMonkeys_fnc_mp;" \n
+                         "" \n
+                         "CPE_Last_Contacts = [];" \n
+                         "CPE_Last_Message = """";" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 30;
+                                        priority = 0.000000;
+                                        to="Fahrzeug__vorber";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Dealer_unsichtbar">*/
+                class Dealer_unsichtbar
+                {
+                        name = "Dealer_unsichtbar";
+                        itemno = 31;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn {" \n
+                         "Dealer_1 hideObject true;" \n
+                         """Dealer_1"" setMarkerAlphaLocal 0;" \n
+                         """kreis_8"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_2 hideObject true;" \n
+                         """Dealer_1_4"" setMarkerAlphaLocal 0;" \n
+                         """kreis_7"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_3 hideObject true;" \n
+                         """Dealer_1_3"" setMarkerAlphaLocal 0;" \n
+                         """kreis_9"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1 hideObject true;" \n
+                         """Dealer_1_1"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_1 hideObject true;" \n
+                         """Dealer_1_1_1"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_2 hideObject true;" \n
+                         """Dealer_1_1_2"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1_2"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_3 hideObject true;" \n
+                         """Dealer_1_1_3"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1_3"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_4 hideObject true;" \n
+                         """Dealer_1_1_4"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1_4"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_5 hideObject true;" \n
+                         """Dealer_1_1_5"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1_5"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_6 hideObject true;" \n
+                         """Dealer_1_1_6"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1_6"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_7 hideObject true;" \n
+                         """Dealer_1_1_7"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1_7"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_8 hideObject true;" \n
+                         """Dealer_1_1_8"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1_8"" setMarkerAlphaLocal 0;" \n
+                         "" \n
+                         "Dealer_1_1_9 hideObject true;" \n
+                         """Dealer_1_1_9"" setMarkerAlphaLocal 0;" \n
+                         """kreis_1_1_9"" setMarkerAlphaLocal 0;" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "keine_Lizenz_">*/
+                                class keine_Lizenz_
+                                {
+                                        itemno = 35;
+                                        priority = 0.000000;
+                                        to="END";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!license_civ_log && side player in [east,civilian]"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "IngiLoad_f_r_Spieler">*/
+                                class IngiLoad_f_r_Spieler
+                                {
+                                        itemno = 32;
+                                        priority = 0.000000;
+                                        to="IgiLoad_starten";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"license_civ_log OR playerSide == west OR playerSide == independent"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "IgiLoad_starten">*/
+                class IgiLoad_starten
+                {
+                        name = "IgiLoad_starten";
+                        itemno = 33;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn Emonkeys_fnc_IgiLoadInit"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 37;
+                                        priority = 0.000000;
+                                        to="END";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "END">*/
+                class END
+                {
+                        name = "END";
+                        itemno = 34;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "InitMedic">*/
+                class InitMedic
+                {
+                        name = "InitMedic";
+                        itemno = 43;
+                        init = /*%FSM<STATEINIT""">*/"if(EMonkeys_blacklisted) exitWith" \n
+                         "{" \n
+                         "	[""<t align='center' shadow='1' size='1.2'>Spieler wurde gesperrt</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;" \n
+                         "	[] spawn {" \n
+                         "		uisleep 10;" \n
+                         "		[""Blacklist"",true,0.1,false,false] call BIS_fnc_endMission;" \n
+                         "	};" \n
+                         "};" \n
+                         "" \n
+                         "if(call EMonkeys_medicLevel < 1 && call EMonkeys_adminlevel < 3) exitWith" \n
+                         "{" \n
+                         "	[""<t align='center' shadow='1' size='1.2'>Du bist nicht als Sanitäter/in freigeschaltet</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;" \n
+                         "	[] spawn {" \n
+                         "		uisleep 10;" \n
+                         "		[""Whitelist"",true,0.1,false,false] call BIS_fnc_endMission;" \n
+                         "	};" \n
+                         "};" \n
+                         "" \n
+                         "[] call EMonkeys_fnc_playerLoadout;" \n
+                         "" \n
+                         "[player] join Emonkeys_medg;" \n
+                         "" \n
+                         "[] spawn Emonkeys_fnc_var;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Tutorial_starten">*/
+                                class Tutorial_starten
+                                {
+                                        itemno = 66;
+                                        priority = 0.000000;
+                                        to="Tutorial_starten";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"EMonkeys_loadingD_ready && eM_StartTutorial"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Laden_fertig_">*/
+                                class Laden_fertig_
+                                {
+                                        itemno = 28;
+                                        priority = 0.000000;
+                                        to="SpawnMenu__ffnen";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!eM_is_arrested && EMonkeys_loadingD_ready && !eM_StartTutorial"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "InitCop">*/
+                class InitCop
+                {
+                        name = "InitCop";
+                        itemno = 44;
+                        init = /*%FSM<STATEINIT""">*/"if(EMonkeys_blacklisted) exitWith" \n
+                         "{" \n
+                         "	[""<t align='center' shadow='1' size='1.2'>Spieler wurde gesperrt</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;" \n
+                         "	[] spawn {" \n
+                         "		uisleep 10;" \n
+                         "		[""Blacklist"",true,0.1,false,false] call BIS_fnc_endMission;" \n
+                         "	};" \n
+                         "};" \n
+                         "" \n
+                         "if(call EMonkeys_coplevel == 0 && call EMonkeys_adminlevel < 3) exitWith " \n
+                         "{" \n
+                         "	[""<t align='center' shadow='1' size='1.2'>Du bist nicht als Polizist/in freigeschaltet</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;" \n
+                         "		[] spawn {" \n
+                         "		uisleep 10;" \n
+                         "		[""Whitelist"",true,0.1,false,false] call BIS_fnc_endMission;" \n
+                         "		};" \n
+                         "};" \n
+                         "" \n
+                         "[player] join Emonkeys_copg ;" \n
+                         "" \n
+                         "switch(EMonkeys_VIP) do" \n
+                         "{" \n
+                         "	case 2: {EMonkeys_paycheck = EMonkeys_paycheck + 1500;};" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "[] spawn Emonkeys_fnc_var;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Tutorial_starten">*/
+                                class Tutorial_starten
+                                {
+                                        itemno = 66;
+                                        priority = 0.000000;
+                                        to="Tutorial_starten";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"EMonkeys_loadingD_ready && eM_StartTutorial"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Laden_fertig_">*/
+                                class Laden_fertig_
+                                {
+                                        itemno = 28;
+                                        priority = 0.000000;
+                                        to="SpawnMenu__ffnen";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!eM_is_arrested && EMonkeys_loadingD_ready && !eM_StartTutorial"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Definierte_Tasten">*/
+                class Definierte_Tasten
+                {
+                        name = "Definierte_Tasten";
+                        itemno = 46;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn EMonkeys_fnc_IntroCam;" \n
+                         "" \n
+                         "dokeyCheck={" \n
+                         "	private [""_r""];	" \n
+                         "	_r = false;" \n
+                         "	if ((_this select 1) in (actionKeys ""TacticalView"")) then " \n
+                         "	{" \n
+                         "		hint ""Commandermodus deaktiviert"";" \n
+                         "		_r=true;" \n
+                         "	};" \n
+                         "	_r;" \n
+                         "};" \n
+                         "" \n
+                         "(FindDisplay 46) displaySetEventHandler [""keydown"", ""_this call dokeyCheck""];" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 47;
+                                        priority = 0.000000;
+                                        to="Spieler_fertig_a";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "SpawnMenu__ffnen">*/
+                class SpawnMenu__ffnen
+                {
+                        name = "SpawnMenu__ffnen";
+                        itemno = 49;
+                        init = /*%FSM<STATEINIT""">*/"[[player], ""HOUSE_fnc_requestSpawnMenu"", false, false] call EMonkeys_fnc_mp;" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Spawnmenu_offen">*/
+                                class Spawnmenu_offen
+                                {
+                                        itemno = 48;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNull (findDisplay 38500)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 50;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Spawnmenu_geschlossen">*/
+                                class Spawnmenu_geschlossen
+                                {
+                                        itemno = 51;
+                                        priority = 0.000000;
+                                        to="Definierte_Tasten";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isNull (findDisplay 38500)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Ins_Gef_ngnis">*/
+                class Ins_Gef_ngnis
+                {
+                        name = "Ins_Gef_ngnis";
+                        itemno = 53;
+                        init = /*%FSM<STATEINIT""">*/"eM_is_arrested = false;" \n
+                         "[player,true] spawn EMonkeys_fnc_jail;" \n
+                         "" \n
+                         "EMonkeys_IntroCam cameraEffect [""terminate"",""back""];" \n
+                         "camDestroy EMonkeys_IntroCam;" \n
+                         "closeDialog 0;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 55;
+                                        priority = 0.000000;
+                                        to="Definierte_Tasten";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Split_2">*/
+                class Split_2
+                {
+                        name = "Split_2";
+                        itemno = 56;
+                        init = /*%FSM<STATEINIT""">*/"[""<t align='center' shadow='1' size='1.2'>Du wirst mit dem Server Synchronisiert</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "UID_vorhanden">*/
+                                class UID_vorhanden
+                                {
+                                        itemno = 58;
+                                        priority = 0.000000;
+                                        to="UID_s_vergleiche";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"getPlayerUID player != """""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "UID_nicht_vorhan">*/
+                                class UID_nicht_vorhan
+                                {
+                                        itemno = 57;
+                                        priority = 0.000000;
+                                        to="Error_001";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"getPlayerUID player == """""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "UID_s_vergleiche">*/
+                class UID_s_vergleiche
+                {
+                        name = "UID_s_vergleiche";
+                        itemno = 59;
+                        init = /*%FSM<STATEINIT""">*/"{" \n
+                         "	if((getPlayerUID _x) == (getPlayerUID player)) then {_playerIDs pushBack _x};" \n
+                         "}forEach playableUnits;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "UID_bereits_verb">*/
+                                class UID_bereits_verb
+                                {
+                                        itemno = 61;
+                                        priority = 0.000000;
+                                        to="Error_002";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"count _playerIDs > 1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "UID_nicht_verbun">*/
+                                class UID_nicht_verbun
+                                {
+                                        itemno = 60;
+                                        priority = 0.000000;
+                                        to="Spieler_aufsetze";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"count _playerIDs <= 1"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Mission_beenden">*/
+                class Mission_beenden
+                {
+                        name = "Mission_beenden";
+                        itemno = 62;
+                        init = /*%FSM<STATEINIT""">*/"uisleep 10;" \n
+                         "" \n
+                         "[""BackToLobby"",true,0.1,false,false] call BIS_fnc_endMission;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Error_001">*/
+                class Error_001
+                {
+                        name = "Error_001";
+                        itemno = 63;
+                        init = /*%FSM<STATEINIT""">*/"diag_log ""ERROR 001"";" \n
+                         "" \n
+                         "[""<t align='center' shadow='1' size='1.2'>Beim Abfragen deiner Spieler Daten ist ein fehler aufgetretten</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 65;
+                                        priority = 0.000000;
+                                        to="Mission_beenden";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Error_002">*/
+                class Error_002
+                {
+                        name = "Error_002";
+                        itemno = 64;
+                        init = /*%FSM<STATEINIT""">*/"diag_log ""ERROR 002"";" \n
+                         "" \n
+                         "[""<t align='center' shadow='1' size='1.2'>Beim Abfragen deiner Spieler Daten ist ein fehler aufgetretten</t>"",(findDisplay 38210) displayCtrl 3400, 1] call EMonkeys_fnc_updateDialogText;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 65;
+                                        priority = 0.000000;
+                                        to="Mission_beenden";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Tutorial_starten">*/
+                class Tutorial_starten
+                {
+                        name = "Tutorial_starten";
+                        itemno = 68;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn EMonkeys_fnc_TutorialCam"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 69;
+                                        priority = 0.000000;
+                                        to="Definierte_Tasten";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Fahrzeug__vorber">*/
+                class Fahrzeug__vorber
+                {
+                        name = "Fahrzeug__vorber";
+                        itemno = 70;
+                        init = /*%FSM<STATEINIT""">*/"{" \n
+                         "	if(_x iskindof ""Air"" || _x iskindof ""Car"" || _x iskindof ""Boat"" || typeOf _x in [""Box_IND_AmmoVeh_F"",""Land_Cargo20_blue_F""]) then" \n
+                         "	{" \n
+                         "		_skin = _x getVariable ""EMonkeys_VEH_color"";" \n
+                         "		_keys = _x getVariable ""vehicle_info_owners"";" \n
+                         "		_copcar = _x getVariable [""copcar"",false];" \n
+                         "		_medcar = _x getVariable [""medcar"",false];" \n
+                         "		if(!isNil ""_skin"") then" \n
+                         "		{" \n
+                         "			[_x,(parseNumber _skin)] spawn EMonkeys_fnc_colorVehicle;" \n
+                         "		};" \n
+                         "		if(!isNil ""_keys"") then" \n
+                         "		{" \n
+                         "			_mykey = [getPlayerUID player,_keys] call TON_fnc_index;" \n
+                         "			if(_mykey >= 0) then" \n
+                         "			{" \n
+                         "				if(!_copcar && !_medcar && playerSide in [civilian,opfor]) then" \n
+                         "				{" \n
+                         "					EMonkeys_vehic164 pushBack _x;" \n
+                         "				};" \n
+                         "				if(_copcar && playerSide == west) then" \n
+                         "				{" \n
+                         "					EMonkeys_vehic164 pushBack _x;" \n
+                         "				};" \n
+                         "				if(_medcar && playerSide == independent) then" \n
+                         "				{" \n
+                         "					EMonkeys_vehic164 pushBack _x;" \n
+                         "				};" \n
+                         "			};" \n
+                         "		};" \n
+                         "	};" \n
+                         "} foreach vehicles;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 71;
+                                        priority = 0.000000;
+                                        to="Dealer_unsichtbar";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT_";
+        finalStates[] =
+        {
+                "END",
+                "Mission_beenden",
+        };
+};
+/*%FSM</COMPILE>*/

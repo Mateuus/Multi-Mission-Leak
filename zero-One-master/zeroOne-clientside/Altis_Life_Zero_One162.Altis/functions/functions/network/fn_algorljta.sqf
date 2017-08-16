@@ -1,0 +1,1 @@
+private['_imOL'];_imOL = param[0,ObjNull,[ObjNull]];if(isNull _imOL || alive _imOL) exitWith {};_imOL hideObject true;deleteVehicle _imOL;

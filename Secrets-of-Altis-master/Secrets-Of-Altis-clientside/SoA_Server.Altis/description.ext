@@ -1,0 +1,44 @@
+﻿author = "SoA-Team und Co.";
+onLoadName = "Secrets of Altis";
+onLoadMission = "Dich erwartet eine aufregende Insel voller Abenteuer. Entscheide deinen Werdegang und werde Bürger von Altis!";
+joinUnassigned = 1;
+respawn = 3;
+respawndelay = 0;
+respawnOnStart = 0;
+disabledAI = 1;
+disableChannels[]={0,1,2};
+enableDebugConsole = 1;
+respawnDialog = 0;
+respawnButton = 0;
+scriptedPlayer = 1;
+saving = 0;
+debriefing = 0;
+disableRandomization[] = {"All"};
+loadScreen = "loadscreen_co.paa";
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 122;
+};
+
+wreckLimit = 120;
+wreckRemovalMinTime = 600;
+wreckRemovalMaxTime = 1500;
+corpseLimit = 120;
+corpseRemovalMinTime = 600;
+corpseRemovalMaxTime = 1500;
+
+#include "CfgRemoteExec.h"
+#include "dialog\MasterHandler.h"
+#include "CfgSounds.h"
+#include "CfgDebriefing.h"
+#include "CfgNotifications.h"
+#include "dialog\rsctitles.h"
+
+class CfgFunctions
+{
+	#include "Functions.h"
+	#include "RageWorks\RageFunction.h"
+};

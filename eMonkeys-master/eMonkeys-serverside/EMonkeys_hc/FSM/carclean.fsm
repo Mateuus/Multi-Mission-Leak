@@ -1,0 +1,189 @@
+/*%FSM<COMPILE "D:\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Server-Side Cleanup">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-65.004578,-391.651611,24.995417,-341.651672,0.000000,"init"};
+item1[] = {"true",8,218,-62.976639,-315.185364,27.023363,-265.185364,0.000000,"true"};
+item2[] = {"Share__Work_load",2,250,-35.396049,-233.318130,54.603951,-183.318130,0.000000,"Share " \n "Work-load"};
+item3[] = {"true",8,218,-69.853363,-63.372826,20.146629,-13.372744,0.000000,"true"};
+item4[] = {"_",4,218,164.265640,-251.141891,254.265640,-201.141891,0.000000,""};
+item5[] = {"_",2,250,334.715912,-252.829529,424.715942,-202.829529,0.000000,""};
+item6[] = {"",7,210,-235.432190,-34.937447,-227.432236,-26.937513,0.000000,""};
+item7[] = {"",7,210,-244.908478,-193.740524,-236.908524,-185.740524,0.000000,""};
+item8[] = {"_",4,218,344.841614,-149.884323,434.841614,-99.884323,0.000000,""};
+item9[] = {"__1",2,4346,184.517166,-141.446198,274.517181,-91.446198,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,4};
+link3[] = {3,6};
+link4[] = {4,5};
+link5[] = {5,8};
+link6[] = {6,7};
+link7[] = {7,2};
+link8[] = {8,9};
+link9[] = {9,3};
+globals[] = {0.000000,0,0,0,0,640,480,1,79,6316128,1,-250.810486,525.483643,124.873962,-486.993225,924,884,1};
+window[] = {2,-1,-1,-1,-1,916,156,1799,156,3,942};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "Server-Side Cleanup";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private[""_cars""];" \n
+                         "_cars = time;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Share__Work_load">*/
+                class Share__Work_load
+                {
+                        name = "Share__Work_load";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((time - _cars) > 300)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn {" \n
+                         "	Emonkeys_cleancars = [];" \n
+                         "" \n
+                         "	{   " \n
+                         "		_vehicle = _x; " \n
+                         "		_owners = (_vehicle getVariable ""vehicle_info_owners""); " \n
+                         "		 _del = false;    " \n
+                         "		{  " \n
+                         "			_uid = getPlayerUID _x;   " \n
+                         "			{" \n
+                         "				if(_uid in _x) then {  _del = true;  };      " \n
+                         "			} forEach _owners;        " \n
+                         "		} forEach allUnits;             " \n
+                         "" \n
+                         "		if(!_del) then" \n
+                         "		{ " \n
+                         "			Emonkeys_cleancars  pushBack _vehicle;" \n
+                         "			_text = format [""*** CleanigScript | Emonkeys_cleancars: %1 |"",Emonkeys_cleancars];" \n
+                         "			[10,_text] call TON_fnc_log;" \n
+                         "" \n
+                         "		};   " \n
+                         "	} foreach allMissionObjects ""LandVehicle"";" \n
+                         "" \n
+                         "};" \n
+                         "_cars = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="__1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((time - _cars) > 300)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__1">*/
+                class __1
+                {
+                        name = "__1";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn {" \n
+                         "	Emonkeys_cleancars1 = [];" \n
+                         "" \n
+                         "	{   " \n
+                         "		 _vehicle = _x; " \n
+                         "		_owners = (_vehicle getVariable ""vehicle_info_owners""); " \n
+                         "		_del = false;    " \n
+                         "		{  " \n
+                         "			_uid = getPlayerUID _x;   " \n
+                         "			{" \n
+                         "				if(_uid in _x) then   {  _del = true;  };      " \n
+                         "			} forEach _owners;        " \n
+                         "		} forEach allUnits;             " \n
+                         "" \n
+                         "		if(!_del) then " \n
+                         "		{ " \n
+                         "			Emonkeys_cleancars1  pushBack _vehicle;" \n
+                         "			_text = format [""*** CleanigScript |Emonkeys_cleancars1: %1 |"",Emonkeys_cleancars1];" \n
+                         "			[10,_text] call TON_fnc_log;" \n
+                         "		};" \n
+                         "	} foreach allMissionObjects ""LandVehicle"";" \n
+                         "" \n
+                         "	_cars = time;" \n
+                         "	{" \n
+                         "		if (_x in Emonkeys_cleancars1) then" \n
+                         "		{" \n
+                         "			_text = format [""*** CleanigScript | Fahrzeug: %1 entfernt |"",_x];" \n
+                         "			[10,_text] call TON_fnc_log;" \n
+                         "			[_x,true,player,1] spawn TON_fnc_vehicleStore;" \n
+                         "		};" \n
+                         "	} foreach Emonkeys_cleancars;" \n
+                         "};" \n
+                         "" \n
+                         "_cars = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

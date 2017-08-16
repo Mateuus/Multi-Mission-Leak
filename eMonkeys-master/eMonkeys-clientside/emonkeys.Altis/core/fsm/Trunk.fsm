@@ -1,0 +1,246 @@
+class FSM
+{
+        fsmName = "Trunk1";
+        class States
+        {
+                /*%FSM<STATE "INIT">*/
+                class INIT
+                {
+                        name = "INIT";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private[""_vehicle"",""_veh_data"",""_boxType"",""_check"",""_range""];" \n
+                         "" \n
+                         "player setVariable[""trunk_in_use_car"",nil,true];" \n
+                         "trunk_in_use_car_exit = false;" \n
+                         "_check = time;" \n
+                         "_boxType = [""Box_IND_AmmoVeh_F"",""Land_Cargo20_blue_F""];" \n
+                         "_vehicle = [_this,0,Objnull,[Objnull]] call BIS_fnc_param;   " \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "_range =(((boundingBox _vehicle select 1) select 0) + 3);" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Split">*/
+                class Split
+                {
+                        name = "Split";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Nicht_benutzt">*/
+                                class Nicht_benutzt
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="Ende___ffen";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((_vehicle in EMonkeys_vehic164) || !(_vehicle  getVariable [""lock_trunk"",true])) && !trunk_in_use_car_exit  && !(_vehicle getVariable [""trunk_in_use"",false])" \n
+                                         ""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "kein_Schl__ssel">*/
+                                class kein_Schl__ssel
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="Ende_schlie__en_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(_vehicle in EMonkeys_vehic164) && (_vehicle  getVariable [""lock_trunk"",true])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 10;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(((count ((nearestObjects[player, [""Man""], _range]) arrayIntersect playableUnits)) > 1) && (time - _check) > (3) )"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "__1">*/
+                                class __1
+                                {
+                                        itemno = 12;
+                                        priority = 0.000000;
+                                        to="__1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_vehicle  getVariable [""trunk_in_use"",false]) && (isNull (findDisplay 3500)) OR (isNull _vehicle OR !(_vehicle isKindOf ""Car"" OR _vehicle isKindOf ""Air"" OR _vehicle isKindOf ""Ship"" OR typeof _vehicle in _boxType))"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "In_Benutzung">*/
+                                class In_Benutzung
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Ende_schlie__en";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"trunk_in_use_car_exit"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Ende___ffen">*/
+                class Ende___ffen
+                {
+                        name = "Ende___ffen";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"_vehicle setVariable[""trunk_in_use"",true,true];" \n
+                         "player setVariable[""trunk_in_use_car"",_vehicle,true];" \n
+                         "" \n
+                         "if(!createDialog ""TrunkMenu"") exitWith {};" \n
+                         "disableSerialization;" \n
+                         "" \n
+                         "" \n
+                         "_veh_data = [_vehicle] call EMonkeys_fnc_vehicleWeight;" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "ctrlSetText[3504,format[""Gewicht:""+ "" %1/%2"",_veh_data select 1,_veh_data select 0]];" \n
+                         "[_vehicle] call EMonkeys_fnc_vehInventory;" \n
+                         "eM_trunk_vehicle = _vehicle;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Ende_schlie__en">*/
+                class Ende_schlie__en
+                {
+                        name = "Ende_schlie__en";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"closedialog 0;" \n
+                         "Hint ""trunk_in_use_car_exit"";" \n
+                         "trunk_in_use_car_exit  =false;" \n
+                         "player setVariable[""trunk_in_use_car"",nil,true];" \n
+                         "hint ""Der Kofferraum dieses Fahrzeuges wird bereits benutzt, nur eine Person kann auf ihn zugreifen."";" \n
+                         "" \n
+						 "text = format [""*** Inventar geöffnet | SpielerID: %1 | Name: %2 | Objekt: %3 |"",getPlayerUID player,name player,_vehicle];" \n
+                         "" \n
+                         "[[2,_text],""TON_fnc_log"",false,false] call EMonkeys_fnc_mp;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Ende_schlie__en_1">*/
+                class Ende_schlie__en_1
+                {
+                        name = "Ende_schlie__en_1";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"closedialog 0;" \n
+                         "Hint ""Du hast keinen Schlüssel"";" \n
+                         "trunk_in_use_car_exit  =false;" \n
+                         "player setVariable[""trunk_in_use_car"",nil,true];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 11;
+                        init = /*%FSM<STATEINIT""">*/"_arrayplayer = (nearestObjects[_vehicle, [""Man""], 7]) arrayIntersect playableUnits;" \n
+                         "" \n
+                         "" \n
+                         "{" \n
+                         "	if (!(_x == player)) then" \n
+                         "	{ " \n
+                         "		_play = player getVariable [""trunk_in_use_car"",nil];" \n
+                         "		_explay = _x getVariable [""trunk_in_use_car"",nil];" \n
+                         "" \n
+                         "		if (!(isnil ""_explay"") && !( isnil ""_play"")) then" \n
+                         "		{" \n
+                         "			if (_explay ==  _play) then" \n
+                         "			{" \n
+                         "				trunk_in_use_car_exit = true;" \n
+                         "			};" \n
+                         "		};" \n
+                         "	};" \n
+                         "}forEach _arrayplayer;" \n
+                         "" \n
+                         "_check = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__1">*/
+                class __1
+                {
+                        name = "__1";
+                        itemno = 13;
+                        init = /*%FSM<STATEINIT""">*/"trunk_in_use_car_exit  =false;" \n
+                         "player setVariable[""trunk_in_use_car"",nil,true];" \n
+                         "trunk_in_use_car_exit  =false;" \n
+                         "_vehicle setVariable[""trunk_in_use"",false,true];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="INIT";
+        finalStates[] =
+        {
+                "Ende_schlie__en",
+                "Ende_schlie__en_1",
+                "__1",
+        };
+};
+/*%FSM</COMPILE>*/

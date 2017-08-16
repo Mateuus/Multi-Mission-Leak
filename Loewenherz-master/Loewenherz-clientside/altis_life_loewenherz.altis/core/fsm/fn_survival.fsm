@@ -1,0 +1,555 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, survival">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"prepare",2,250,475.000000,-528.621948,575.000000,-478.621918,0.000000,"prepare"};
+item1[] = {"init",0,250,805.706787,-605.688477,905.706787,-555.688477,0.000000,"init"};
+item2[] = {"initialized",4,218,474.988586,-604.603027,574.988647,-554.603027,0.000000,"initialized"};
+item3[] = {"true",8,218,475.000000,-450.000000,575.000000,-400.000000,0.000000,"true"};
+item4[] = {"waiting",2,250,475.000000,-375.000000,575.000000,-325.000000,0.000000,"waiting"};
+item5[] = {"true",8,218,475.000000,-100.000000,575.000000,-50.000000,0.000000,"true"};
+item6[] = {"general_loop",2,250,475.000000,-25.000000,575.000000,25.000000,0.000000,"general" \n "loop"};
+item7[] = {"",7,210,120.999977,-4.000000,129.000015,4.000000,0.000000,""};
+item8[] = {"",7,210,120.999977,-429.000000,129.000015,-421.000000,0.000000,""};
+item9[] = {"",7,210,1110.573364,-351.198456,1118.573364,-343.198456,0.000000,""};
+item10[] = {"",7,210,1112.440918,-79.000000,1120.440918,-71.000000,0.000000,""};
+item11[] = {"___5_sec_loop_1",4,218,475.000000,-300.000000,575.000000,-250.000000,3.000000,"1.5 sec loop"};
+item12[] = {"stamina_check",2,250,475.000000,-200.000000,575.000000,-150.000000,0.000000,"stamina check"};
+item13[] = {"___sec_loop",4,218,325.000000,-300.000000,425.000000,-250.000000,2.000000,"1 sec loop"};
+item14[] = {"random_loop_1",4,218,175.000000,-300.000000,275.000000,-250.000000,1.000000,"random loop"};
+item15[] = {"___5_sec_loop",4,218,625.000000,-300.000000,725.000000,-250.000000,4.000000,"0.5 sec loop"};
+item16[] = {"call_water_or_fo",2,250,175.000000,-100.000000,275.000000,-50.000000,0.000000,"call water or food"};
+item17[] = {"weight_check",2,250,325.000000,-198.570129,425.000000,-148.570129,0.000000,"weight check"};
+item18[] = {"walk_distance",2,250,625.000000,-200.000000,725.000000,-150.000000,0.000000,"walk distance"};
+item19[] = {"___1_sec_loop",4,218,751.741638,-301.890747,841.741638,-251.890747,5.000000,"0.1 sec loop"};
+item20[] = {"buff_handling",2,250,744.252808,-199.682739,876.405334,-151.940887,0.000000,"buff handling"};
+item21[] = {"random_loop",4,218,934.831970,-299.157135,1024.832031,-249.157135,6.000000,"random loop"};
+item22[] = {"Alcohol_check",2,250,935.255554,-200.307373,1025.255615,-150.307373,0.000000,"Alcohol check"};
+item23[] = {"dead",4,218,617.117126,-448.074768,707.117188,-398.074768,0.000000,"dead"};
+item24[] = {"End",1,250,811.481140,-449.125458,901.481262,-399.125488,0.000000,"End"};
+link0[] = {0,3};
+link1[] = {1,2};
+link2[] = {2,0};
+link3[] = {3,4};
+link4[] = {4,9};
+link5[] = {4,11};
+link6[] = {4,13};
+link7[] = {4,14};
+link8[] = {4,15};
+link9[] = {4,19};
+link10[] = {4,21};
+link11[] = {4,23};
+link12[] = {5,6};
+link13[] = {6,7};
+link14[] = {7,8};
+link15[] = {8,3};
+link16[] = {9,10};
+link17[] = {10,5};
+link18[] = {11,12};
+link19[] = {12,5};
+link20[] = {13,17};
+link21[] = {14,16};
+link22[] = {15,18};
+link23[] = {16,5};
+link24[] = {17,5};
+link25[] = {18,5};
+link26[] = {19,20};
+link27[] = {20,5};
+link28[] = {21,22};
+link29[] = {22,5};
+link30[] = {23,24};
+globals[] = {0.000000,0,0,0,0,640,480,3,280,6316128,1,-19.968716,1324.895874,232.533142,-726.999023,1239,884,1};
+window[] = {2,-1,-1,-1,-1,1120,156,1687,156,3,1257};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "survival";
+        class States
+        {
+                /*%FSM<STATE "prepare">*/
+                class prepare
+                {
+                        name = "prepare";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"diag_log ""Survival Initialization..."";" \n
+                         "" \n
+                         "// Update Times" \n
+                         "_lastWaterFoodCheck = diag_tickTime;" \n
+                         "_lastWeightCheck = diag_tickTime;" \n
+                         "_lastStaminaCheck = diag_tickTime;" \n
+                         "_lastWalkCheck = diag_tickTime;" \n
+                         "_lastBuffCheck = diag_tickTime;" \n
+                         "_lastAlcoholCheck = diag_tickTime;" \n
+                         "" \n
+                         "_changeWaterFood = true;" \n
+                         "" \n
+                         "// Survival" \n
+                         "" \n
+                         "	_fnc_food =" \n
+                         "	{" \n
+                         "		if(lhm_hunger < 2) then {player setDamage 1; hint localize ""STR_NOTF_EatMSG_Death"";}" \n
+                         "		else" \n
+                         "		{" \n
+                         "		lhm_hunger = lhm_hunger - 10;" \n
+                         "		[] call lhm_fnc_hudUpdate;" \n
+                         "		if(lhm_hunger < 2) then {player setDamage 1; hint localize ""STR_NOTF_EatMSG_Death"";};" \n
+                         "		switch(lhm_hunger) do {" \n
+                         "			case 30: {hint localize ""STR_NOTF_EatMSG_1"";};" \n
+                         "			case 20: {hint localize ""STR_NOTF_EatMSG_2"";};" \n
+                         "			case 10: {hint localize ""STR_NOTF_EatMSG_3"";player setFatigue 1;};" \n
+                         "			};" \n
+                         "		};" \n
+                         "	};" \n
+                         "" \n
+                         "	_fnc_water =" \n
+                         "	{" \n
+                         "		if(lhm_thirst < 2) then {player setDamage 1; hint localize ""STR_NOTF_DrinkMSG_Death"";}" \n
+                         "		else" \n
+                         "		{" \n
+                         "			lhm_thirst = lhm_thirst - 10;" \n
+                         "			[] call lhm_fnc_hudUpdate;" \n
+                         "			if(lhm_thirst < 2) then {player setDamage 1; hint localize ""STR_NOTF_DrinkMSG_Death"";};" \n
+                         "			switch(lhm_thirst) do" \n
+                         "			{" \n
+                         "				case 30: {hint localize ""STR_NOTF_DrinkMSG_1"";};" \n
+                         "				case 20: {hint localize ""STR_NOTF_DrinkMSG_2""; player setFatigue 1;};" \n
+                         "				case 10: {hint localize ""STR_NOTF_DrinkMSG_3""; player setFatigue 1;};" \n
+                         "			};" \n
+                         "		};" \n
+                         "	};" \n
+                         "" \n
+                         "" \n
+                         "	_walkDis = 0;" \n
+                         "	_myLastPos = (getPos player select 0) + (getPos player select 1);" \n
+                         "	_MaxWalk = 1200;" \n
+                         "" \n
+                         "" \n
+                         "	_dam = damage player;" \n
+                         "	_hungerP = lhm_hunger;" \n
+                         "	_thirstP = lhm_thirst;" \n
+                         "	if (LHM_AdrenalinBuffTimer > 60) then {" \n
+                         "		_adrenbuff = floor (LHM_AdrenalinBuffTimer / 60);" \n
+                         "	} else {" \n
+                         "		_adrenbuff = LHM_AdrenalinBuffTimer;" \n
+                         "	};" \n
+                         "	if (LHM_NanoBotsBuffTimer > 60) then {" \n
+                         "		_hpregbuff = floor (LHM_NanoBotsBuffTimer / 60);" \n
+                         "	} else {" \n
+                         "		_hpregbuff = LHM_NanoBotsBuffTimer;" \n
+                         "	};" \n
+                         "	if (LHM_SoylentGreenBuffTimer > 60) then {" \n
+                         "		_SoylentGreenBuff = floor (LHM_SoylentGreenBuffTimer / 60);" \n
+                         "	} else {" \n
+                         "		_SoylentGreenBuff = LHM_SoylentGreenBuffTimer;" \n
+                         "	};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="waiting";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 1;
+                        init = /*%FSM<STATEINIT""">*/"// init survival monitoring" \n
+                         "_initTime = diag_tickTime;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "initialized">*/
+                                class initialized
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="prepare";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isNull player and ((diag_tickTime - _initTime) > 2);"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_initTime = diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "waiting">*/
+                class waiting
+                {
+                        name = "waiting";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "random_loop">*/
+                                class random_loop
+                                {
+                                        itemno = 21;
+                                        priority = 6.000000;
+                                        to="Alcohol_check";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _lastAlcoholCheck) > (120 + (round random 100)));"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_lastAlcoholCheck = diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "___1_sec_loop">*/
+                                class ___1_sec_loop
+                                {
+                                        itemno = 19;
+                                        priority = 5.000000;
+                                        to="buff_handling";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _lastBuffCheck) > 2);"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_lastBuffCheck = diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "___5_sec_loop">*/
+                                class ___5_sec_loop
+                                {
+                                        itemno = 15;
+                                        priority = 4.000000;
+                                        to="walk_distance";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"( (diag_tickTime - _lastWalkCheck) > 0.5);"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_lastWalkCheck =  diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "___5_sec_loop_1">*/
+                                class ___5_sec_loop_1
+                                {
+                                        itemno = 11;
+                                        priority = 3.000000;
+                                        to="stamina_check";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"// check each cycle condition" \n
+                                         "( (diag_tickTime - _lastStaminaCheck) >= 1.5);"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_lastStaminaCheck = diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "___sec_loop">*/
+                                class ___sec_loop
+                                {
+                                        itemno = 13;
+                                        priority = 2.000000;
+                                        to="weight_check";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _lastWeightCheck) > 0);"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_lastWeightCheck = diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "random_loop_1">*/
+                                class random_loop_1
+                                {
+                                        itemno = 14;
+                                        priority = 1.000000;
+                                        to="call_water_or_fo";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _lastWaterFoodCheck) > (120 + (round random 200)));"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_lastWaterFoodCheck = diag_tickTime;"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="general_loop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "dead">*/
+                                class dead
+                                {
+                                        itemno = 23;
+                                        priority = 0.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!alive player"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "general_loop">*/
+                class general_loop
+                {
+                        name = "general_loop";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"//diag_log ""Starting loop for next task"";" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="waiting";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "stamina_check">*/
+                class stamina_check
+                {
+                        name = "stamina_check";
+                        itemno = 12;
+                        init = /*%FSM<STATEINIT""">*/"if(lhm_carryWeight > lhm_maxWeight && !isForcedWalk player) then {" \n
+                         "	player forceWalk true;" \n
+                         "	player setFatigue 1;" \n
+                         "	hint localize ""STR_NOTF_MaxWeight"";" \n
+                         "} else {" \n
+                         "	if(isForcedWalk player) then {" \n
+                         "			player forceWalk false;" \n
+                         "	};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="general_loop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "call_water_or_fo">*/
+                class call_water_or_fo
+                {
+                        name = "call_water_or_fo";
+                        itemno = 16;
+                        init = /*%FSM<STATEINIT""">*/"// change around water or food" \n
+                         "if(_changeWaterFood) then {" \n
+                         "	[] call _fnc_water;" \n
+                         "	_changeWaterFood =false;" \n
+                         "} else {" \n
+                         "	[] call _fnc_food;" \n
+                         "	_changeWaterFood =true;" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="general_loop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "weight_check">*/
+                class weight_check
+                {
+                        name = "weight_check";
+                        itemno = 17;
+                        init = /*%FSM<STATEINIT""">*/"if (backpack player != """") then {" \n
+                         "" \n
+                         "		_bp = backpack player;" \n
+                         "		_cfg = getNumber(configFile >> ""CfgVehicles"" >> (backpack player) >> ""maximumload"");" \n
+                         "		_load = round(_cfg / 8);" \n
+                         "		lhm_maxWeight = lhm_maxWeightT + _load;" \n
+                         "" \n
+                         "		if(backpack player != _bp) then {" \n
+                         "			if(backpack player == """") then" \n
+                         "			{" \n
+                         "				lhm_maxWeight = lhm_maxWeightT;" \n
+                         "			};" \n
+                         "		};" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="general_loop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "walk_distance">*/
+                class walk_distance
+                {
+                        name = "walk_distance";
+                        itemno = 18;
+                        init = /*%FSM<STATEINIT""">*/"if(!alive player) then {_walkDis = 0;}" \n
+                         "else" \n
+                         "{" \n
+                         "	_CurPos = (getPos player select 0) + (getPos player select 1);" \n
+                         "	if((_CurPos != _myLastPos) && (vehicle player == player)) then" \n
+                         "	{" \n
+                         "		_walkDis = _walkDis + 1;" \n
+                         "		if(_walkDis == _MaxWalk) then" \n
+                         "		{" \n
+                         "			_walkDis = 0;" \n
+                         "			lhm_thirst = lhm_thirst - 5;" \n
+                         "			lhm_hunger = lhm_hunger - 5;" \n
+                         "			[] call lhm_fnc_hudUpdate;" \n
+                         "		};" \n
+                         "	};" \n
+                         "	_myLastPos = (getPos player select 0) + (getPos player select 1);" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="general_loop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "buff_handling">*/
+                class buff_handling
+                {
+                        name = "buff_handling";
+                        itemno = 20;
+                        init = /*%FSM<STATEINIT""">*/"[] call lhm_fnc_hudUpdate;" \n
+                         "" \n
+                         "if (((damage player) != _dam) || (LHM_AdrenalinBuffTimer != _adrenbuff) || (LHM_NanoBotsBuffTimer != _hpregbuff) || (LHM_SoylentGreenBuffTimer != _SoylentGreenBuff) || (lhm_hunger != _hungerP) || (lhm_thirst != _thirstP)) then {" \n
+                         "	_dam = damage player;" \n
+                         "	if (LHM_AdrenalinBuffTimer > 60) then {" \n
+                         "		_adrenbuff = floor (LHM_AdrenalinBuffTimer / 60);" \n
+                         "	} else {" \n
+                         "		_adrenbuff = LHM_AdrenalinBuffTimer;" \n
+                         "	};" \n
+                         "	if (LHM_NanoBotsBuffTimer > 60) then {" \n
+                         "		_hpregbuff = floor (LHM_NanoBotsBuffTimer / 60);" \n
+                         "	} else {" \n
+                         "		_hpregbuff = LHM_NanoBotsBuffTimer;" \n
+                         "	};" \n
+                         "	if (LHM_SoylentGreenBuffTimer > 60) then {" \n
+                         "		_SoylentGreenBuff = floor (LHM_SoylentGreenBuffTimer / 60);" \n
+                         "	} else {" \n
+                         "		_SoylentGreenBuff = LHM_SoylentGreenBuffTimer;" \n
+                         "	};" \n
+                         "	_hungerP = lhm_hunger;" \n
+                         "	_thirstP = lhm_thirst;" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="general_loop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Alcohol_check">*/
+                class Alcohol_check
+                {
+                        name = "Alcohol_check";
+                        itemno = 22;
+                        init = /*%FSM<STATEINIT""">*/"if(lhm_drink > 0.08) then {" \n
+                         "	""radialBlur"" ppEffectEnable true;" \n
+                         "	""radialBlur"" ppEffectAdjust[0.08, 0,0.35,0.37];" \n
+                         "	""radialBlur"" ppEffectCommit 3;" \n
+                         "" \n
+                         "	lhm_drink = lhm_drink - 0.02;" \n
+                         "} else {" \n
+                         "	""radialBlur"" ppEffectEnable true;" \n
+                         "	""radialBlur"" ppEffectAdjust[0.05, 0,0.36,0.38];" \n
+                         "	""radialBlur"" ppEffectCommit 1;" \n
+                         "" \n
+                         "	lhm_drink = lhm_drink - 0.02;" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "if (lhm_drink == 0) then {" \n
+                         "	""radialBlur"" ppEffectAdjust  [0,0,0,0];" \n
+                         "	""radialBlur"" ppEffectCommit 5;" \n
+                         "	""radialBlur"" ppEffectEnable false;" \n
+                         "	lhm_drink = 0;" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="general_loop";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 24;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+                "End",
+        };
+};
+/*%FSM</COMPILE>*/

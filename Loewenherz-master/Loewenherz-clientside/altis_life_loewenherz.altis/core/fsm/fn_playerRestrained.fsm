@@ -1,0 +1,209 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, lhmRestrained">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-39.298981,-164.641708,50.701019,-114.641708,0.000000,"init"};
+item1[] = {"else",4,218,108.163849,-163.985565,198.163849,-113.985588,0.000000,"else"};
+item2[] = {"caller_null",4,218,-176.955002,-164.422501,-86.955002,-114.422523,1.000000,"caller null"};
+item3[] = {"End",1,250,-177.429092,-92.878441,-87.429062,-42.878456,0.000000,"End"};
+item4[] = {"Stuff",2,250,108.566963,-85.664680,198.566971,-35.664680,0.000000,"Stuff"};
+item5[] = {"_",4,218,109.393967,-10.843582,199.393982,39.156418,0.000000,""};
+item6[] = {"Thread",2,250,110.206047,68.639099,200.206055,118.639099,0.000000,"Thread"};
+item7[] = {"Unrestrained_or",4,218,109.374939,147.251770,199.374939,197.251770,99.000000,"Unrestrained or"};
+item8[] = {"_",2,250,-19.887054,145.581787,70.112961,195.581787,0.000000,""};
+item9[] = {"End_1",1,250,-222.755630,148.090073,-132.755585,198.090073,0.000000,"End 1"};
+item10[] = {"not_death",4,218,-112.316711,82.617950,-22.316711,132.617950,1.000000,"not death"};
+item11[] = {"else",4,218,-115.028481,212.781677,-25.028473,262.781677,0.000000,"else"};
+link0[] = {0,1};
+link1[] = {0,2};
+link2[] = {1,4};
+link3[] = {2,3};
+link4[] = {4,5};
+link5[] = {5,6};
+link6[] = {6,7};
+link7[] = {7,8};
+link8[] = {8,10};
+link9[] = {8,11};
+link10[] = {10,9};
+link11[] = {11,9};
+globals[] = {0.000000,0,0,0,0,640,480,1,15,6316128,1,-334.423401,440.457092,427.603699,-171.691528,1143,884,1};
+window[] = {2,-1,-1,-1,-1,882,570,2010,123,3,1161};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "lhmRestrained";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"_caller = param[0,objnull,[objnull]];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "caller_null">*/
+                                class caller_null
+                                {
+                                        itemno = 2;
+                                        priority = 1.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"isNull _caller"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "else">*/
+                                class else
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Stuff";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 3;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Stuff">*/
+                class Stuff
+                {
+                        name = "Stuff";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"if(animationState player == ""Incapacitated"") then " \n
+                         "{" \n
+                         "	player playMoveNow ""amovppnemstpsraswrfldnon"";" \n
+                         "}; " \n
+                         "" \n
+                         "while {dialog} do" \n
+                         "{ " \n
+                         "	closeDialog 0;" \n
+                         "}; " \n
+                         "" \n
+                         "{" \n
+                         "	[_x] call lhm_fnc_stopEscorting;" \n
+                         "} forEach attachedObjects player; " \n
+                         "" \n
+                         "titleText[format[""Du wurdest von %1 festgenommen!"",_caller getVariable[""realname"",name _caller]],""PLAIN""];" \n
+                         "player say3D ""handcuffs"";" \n
+                         "_restrainTime = diag_tickTime; " \n
+                         "_checkTime = diag_tickTime;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="Thread";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Thread">*/
+                class Thread
+                {
+                        name = "Thread";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"_anim = [] spawn {" \n
+                         "	while{player getVariable[""restrained"",false]} do {" \n
+                         "	 player playMove ""AmovPercMstpSnonWnonDnon_Ease"";" \n
+                         "	waitUntil{vehicle player == player || !(player getVariable[""restrained"",false])};" \n
+                         "	};" \n
+                         "" \n
+                         "	player switchMove ""AmovPercMstpSlowWrflDnon_SaluteIn"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Unrestrained_or">*/
+                                class Unrestrained_or
+                                {
+                                        itemno = 7;
+                                        priority = 99.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(player getVariable[""restrained"",false]) || !(alive player)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 8;
+                        init = /*%FSM<STATEINIT""">*/"player setVariable [""Escorting"",false,true];" \n
+                         "player setVariable [""restrained"",false,true];" \n
+                         "detach player;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "not_death">*/
+                                class not_death
+                                {
+                                        itemno = 10;
+                                        priority = 1.000000;
+                                        to="End_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"alive player"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_time = diag_tickTime;" \n
+                                         "titleText[""Du wurdest freigelassen."",""PLAIN""];" \n
+                                         ""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "else">*/
+                                class else
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="End_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End_1">*/
+                class End_1
+                {
+                        name = "End_1";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"terminate _anim;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+                "End",
+                "End_1",
+        };
+};
+/*%FSM</COMPILE>*/

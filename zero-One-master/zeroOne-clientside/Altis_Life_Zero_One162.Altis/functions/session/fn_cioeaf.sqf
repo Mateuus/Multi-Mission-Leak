@@ -1,0 +1,1 @@
+if(ZmB) exitWith {hint localize "STR_Session_SyncdAlready";};[] call zero_fnc_nbxA;hint localize "STR_Session_SyncData";[] spawn { ZmB = true; uisleep (5 * 60); ZmB = false;};

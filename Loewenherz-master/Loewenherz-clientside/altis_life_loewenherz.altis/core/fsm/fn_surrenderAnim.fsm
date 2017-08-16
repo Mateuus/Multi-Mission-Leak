@@ -1,0 +1,130 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, surrenderAnim">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-193.860809,-147.861969,-103.860809,-97.861992,0.000000,"init"};
+item1[] = {"_",4,218,317.390869,-23.333069,407.390869,26.666931,0.000000,""};
+item2[] = {"getVar_Check",4,4314,525.532104,265.081909,626.326050,318.165924,1.000000,"getVar Check"};
+item3[] = {"End",1,250,726.619568,266.472748,816.619568,316.472687,0.000000,"End"};
+item4[] = {"_",4,218,-193.961533,-21.813538,-103.961533,28.186462,0.000000,""};
+item5[] = {"PlayMove",2,250,-34.646057,-22.811401,55.353958,27.188599,0.000000,"PlayMove"};
+item6[] = {"_",4,218,-39.190796,266.228485,50.809204,316.228485,0.000000,""};
+item7[] = {"_",2,250,317.818176,266.900757,407.818176,316.900757,0.000000,""};
+link0[] = {0,4};
+link1[] = {1,5};
+link2[] = {2,3};
+link3[] = {4,5};
+link4[] = {5,6};
+link5[] = {6,7};
+link6[] = {7,1};
+link7[] = {7,2};
+globals[] = {0.000000,0,0,0,0,640,480,1,47,6316128,1,-387.524750,865.657837,769.240051,-284.816223,1362,884,1};
+window[] = {2,-1,-1,-1,-1,993,234,1674,234,3,1380};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "surrenderAnim";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"titleText[""You have surrendered!"",""PLAIN""];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="PlayMove";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 3;
+                        init = /*%FSM<STATEINIT""">*/"player playMoveNow ""AmovPercMstpSsurWnonDnon_AmovPercMstpSnonWnonDnon"";" \n
+                         "titleText[""You put down your hands..."",""PLAIN""];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "PlayMove">*/
+                class PlayMove
+                {
+                        name = "PlayMove";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"player playMove ""amovpercmstpsnonwnondnon_amovpercmstpssurwnondnon""; //Animation in"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 7;
+                        init = /*%FSM<STATEINIT""">*/"if (!alive player) then {" \n
+                         "		player setVariable [""playerSurrender"", false, true];" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "getVar_Check">*/
+                                class getVar_Check
+                                {
+                                        itemno = 2;
+                                        priority = 1.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(player getVariable [""playerSurrender"", false])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="PlayMove";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+                "End",
+        };
+};
+/*%FSM</COMPILE>*/

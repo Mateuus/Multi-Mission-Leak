@@ -1,0 +1,104 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, settingsInit">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-193.860809,-147.861969,-103.860809,-97.861992,0.000000,"init"};
+item1[] = {"_",4,218,317.390869,-23.333069,407.390869,26.666931,0.000000,""};
+item2[] = {"_",4,218,-193.961533,-21.813538,-103.961533,28.186462,0.000000,""};
+item3[] = {"set_Distance",2,250,-34.646057,-22.811401,55.353958,27.188599,0.000000,"set Distance"};
+item4[] = {"time_check",4,4314,-39.190796,266.228485,50.809204,316.228485,0.000000,"time check"};
+item5[] = {"reset_loop_time",2,250,317.818176,266.900757,407.818176,316.900757,0.000000,"reset loop time"};
+link0[] = {0,2};
+link1[] = {1,3};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,5};
+link5[] = {5,1};
+globals[] = {0.000000,0,0,0,0,640,480,1,47,6316128,1,-387.524750,865.657837,769.240051,-284.816223,1044,884,1};
+window[] = {2,-1,-1,-32000,-32000,811,52,1492,52,3,1062};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "settingsInit";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"tawvd_addon_disable = true;" \n
+                         "" \n
+                         "_sleep = 2;" \n
+                         "_time = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="set_Distance";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "set_Distance">*/
+                class set_Distance
+                {
+                        name = "set_Distance";
+                        itemno = 3;
+                        init = /*%FSM<STATEINIT""">*/"_recorded = vehicle player;" \n
+                         "[] call lhm_fnc_updateViewDistance;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "time_check">*/
+                                class time_check
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="reset_loop_time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _time) > _sleep && _recorded != vehicle player || !alive player || LHM_settings_AutoViewDistance"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "reset_loop_time">*/
+                class reset_loop_time
+                {
+                        name = "reset_loop_time";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="set_Distance";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

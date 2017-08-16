@@ -1,0 +1,265 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, speedtrap">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-193.860809,-147.861969,-103.860809,-97.861992,0.000000,"init"};
+item1[] = {"near_speedtrap",4,218,558.300110,-217.192871,648.300110,-167.192871,0.000000,"near speedtrap"};
+item2[] = {"_",4,218,-193.961533,-21.813538,-103.961533,28.186462,0.000000,""};
+item3[] = {"cycle",2,250,-34.646057,-22.811401,55.353958,27.188599,0.000000,"cycle"};
+item4[] = {"driver_check",4,218,-39.190796,266.228485,50.809204,316.228485,0.000000,"driver check"};
+item5[] = {"get_trap",2,250,317.818176,266.900757,407.818176,316.900757,0.000000,"get trap"};
+item6[] = {"_",4,218,564.271790,265.465942,654.271790,315.465942,0.000000,""};
+item7[] = {"check_trap",2,4346,561.286377,-29.105652,651.286377,20.894348,0.000000,"check trap"};
+item8[] = {"no_speedtraps",4,218,388.125366,-25.124237,478.125366,24.875763,1.000000,"no speedtraps"};
+item9[] = {"faster_rescan",2,250,231.883057,-215.202515,321.883057,-165.202515,0.000000,"faster rescan"};
+item10[] = {"slow_down",2,250,235.863770,-23.133881,325.863770,26.866119,0.000000,"slow down"};
+item11[] = {"_",4,218,106.490913,-215.202576,196.490906,-165.202728,0.000000,""};
+item12[] = {"_",4,218,100.519867,-22.138947,190.519867,27.861053,1.000000,""};
+link0[] = {0,2};
+link1[] = {1,9};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,5};
+link5[] = {5,6};
+link6[] = {6,7};
+link7[] = {7,1};
+link8[] = {7,8};
+link9[] = {8,10};
+link10[] = {9,11};
+link11[] = {10,12};
+link12[] = {11,3};
+link13[] = {12,3};
+globals[] = {0.000000,0,0,0,0,640,480,1,57,6316128,1,-345.489105,759.930176,444.300262,-426.636169,1122,884,1};
+window[] = {2,-1,-1,-32000,-32000,1002,217,1712,101,3,1140};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "speedtrap";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"_blocktime_trap = 10;" \n
+                         "_blocktime_detector = 10;" \n
+                         "_search_range = 200;" \n
+                         "_detector_search_range = 100;" \n
+                         "_trap_distance = 15;" \n
+                         "_trap_speed_tolerance = 3;" \n
+                         "_time = time;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="cycle";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "cycle">*/
+                class cycle
+                {
+                        name = "cycle";
+                        itemno = 3;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "driver_check">*/
+                                class driver_check
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="get_trap";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/"(player == vehicle player) || (player != driver (vehicle player))"/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"player != vehicle player && player == driver (vehicle player)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "get_trap">*/
+                class get_trap
+                {
+                        name = "get_trap";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"    _speedtraps = nearestObjects[player, [""Land_Runway_PAPI_4""], _search_range];" \n
+                         "" \n
+                         "    _speed = floor(speed (vehicle player));" \n
+                         "    if(_speed < 0) then" \n
+                         "    {" \n
+                         "        _speed = _speed * (-1);" \n
+                         "    };" \n
+                         "" \n
+                         "_has_radar_detector = 0;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="check_trap";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "check_trap">*/
+                class check_trap
+                {
+                        name = "check_trap";
+                        itemno = 7;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "{" \n
+                         "    _trap_object = _x;" \n
+                         "    _speedlimit = _trap_object getVariable[""speedtrap_speedlimit"", 0];" \n
+                         "" \n
+                         "    //diag_log format [""%1 ::King:: speedtrap _trap_object=%2 _speedlimit=%3"", time, _trap_object, _speedlimit];" \n
+                         "    " \n
+                         "    if(_speedlimit > 0) then" \n
+                         "    {" \n
+                         "        //init of trap already done so calculate some stuff               " \n
+                         "        _distance = _trap_object distance (vehicle player);" \n
+                         "        if(_distance < _trap_distance && _speed > (_speedlimit + _trap_speed_tolerance)) then" \n
+                         "        {" \n
+                         "            _visible = lineIntersects [position player, position _trap_object, player, _trap_object];" \n
+                         "            if(!_visible) then" \n
+                         "            {" \n
+                         "                //trapped!" \n
+                         "                _trapped_speed = _speed;" \n
+                         "                _trapped_drivername = name player;" \n
+                         "                _trap_object_position = position _trap_object;" \n
+                         "                _trapped_vehicle = vehicle player;" \n
+                         "                _trapped_uid     = getPlayerUID player;" \n
+                         "                _trapped_side    = side player;" \n
+                         "                //diag_log format [""%1 ::King:: speedtrap _distance=%2 _speed=%3"", time, _distance, _speed];" \n
+                         "" \n
+                         "                _last_traptime = _trap_object getVariable[""speedtrap_last_traptime"", 0];" \n
+                         "                if( (_last_traptime == 0) || ((_last_traptime + _blocktime_trap) < time) ) then" \n
+                         "                {" \n
+                         "                    _trap_object setVariable [""speedtrap_last_traptime"", time, false]; //only local to block the driver at this trap for some seconds" \n
+                         "                    //hint format[""TRAPPED speed=%1 bei=%2"",_speed,_speedlimit];" \n
+                         "" \n
+                         "                    titleText[format[""Sie wurden geblitzt! Geschwindigkeit %1km/h bei %2km/h"", _trapped_speed, floor(_speedlimit)],""PLAIN""];" \n
+                         "" \n
+                         "						     _cash = (_trapped_speed - floor(_speedlimit)) * 100;" \n
+                         "                        if(_cash < 0) then {_cash = 0;};" \n
+                         "                        [[getPlayerUID player, name player, ""500"", _cash],""lhm_fnc_wantedAdd"",false,false] call lhm_fnc_mp;" \n
+                         "" \n
+                         "                    _trapped_infos = [];" \n
+                         "		_trapped_infos pushBack _trapped_drivername;" \n
+                         "		_trapped_infos pushBack time;" \n
+                         "		_trapped_infos pushBack _trapped_speed;" \n
+                         "		_trapped_infos pushBack _speedlimit;" \n
+                         "		_trapped_infos pushBack _trap_object_position;" \n
+                         "		_trapped_infos pushBack _trapped_vehicle;" \n
+                         "		_trapped_infos pushBack _trapped_uid;" \n
+                         "		_trapped_infos pushBack _trapped_side;                                  " \n
+                         "                    _photos = _trap_object getVariable[""speedtrap_photos"", []];" \n
+                         "		_photos pushBack _trapped_infos;" \n
+                         "                    _trap_object setVariable [""speedtrap_photos"", _photos, true];" \n
+                         "                    [_trapped_infos, _trap_object] spawn lhm_fnc_trapped;" \n
+                         "                };" \n
+                         "            };" \n
+                         "        };" \n
+                         "    };" \n
+                         "} foreach _speedtraps;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "no_speedtraps">*/
+                                class no_speedtraps
+                                {
+                                        itemno = 8;
+                                        priority = 1.000000;
+                                        to="slow_down";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/"(time - _time) > 1"/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(count _speedtraps) == 0"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "near_speedtrap">*/
+                                class near_speedtrap
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="faster_rescan";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/"(time - _time) > 0.05"/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(count _speedtraps) > 0"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "faster_rescan">*/
+                class faster_rescan
+                {
+                        name = "faster_rescan";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="cycle";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "slow_down">*/
+                class slow_down
+                {
+                        name = "slow_down";
+                        itemno = 10;
+                        init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 12;
+                                        priority = 1.000000;
+                                        to="cycle";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

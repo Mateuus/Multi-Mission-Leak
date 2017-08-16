@@ -1,0 +1,1 @@
+lhm_thirst = 100;lhm_hunger = 100;player setFatigue 0;antidote1 = 2581;player setDamage 0;LHM_Disease_healed = true;[] call lhm_fnc_hudUpdate;cutText [format["Player healed!"], "PLAIN DOWN"];[["admin",(format["%1 with UID %2 has used the Heal Script",name player,getPlayerUID player])],"TON_fnc_externLog",false,false] call lhm_fnc_mp;

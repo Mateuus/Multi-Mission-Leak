@@ -1,0 +1,286 @@
+/*%FSM<COMPILE "D:\Program Files\FSM Editor Personal Edition\scriptedFSM.cfg, fn_disease">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-205.824051,-449.341980,-115.824051,-399.341949,0.000000,"init"};
+item1[] = {"am_Leben",4,218,-271.776581,-287.959747,-181.776642,-237.959747,1.000000,"am Leben"};
+item2[] = {"_",2,250,-215.259491,-210.148483,-125.259483,-160.148483,0.000000,""};
+item3[] = {"Bein_im_Arsch_",4,218,-152.072693,145.164352,-62.072479,195.164337,1.000000,"Bein" \n "im" \n "Arsch?"};
+item4[] = {"__1",2,250,-152.528625,278.292480,-62.528641,328.292450,0.000000,""};
+item5[] = {"Blutet_",4,218,-109.567841,-112.019287,-19.567772,-62.019279,1.000000,"Blutet?"};
+item6[] = {"Bluten",2,250,-110.940430,11.828377,-20.940357,61.828369,0.000000,"Bluten"};
+item7[] = {"Kein_Blut_",4,218,83.743225,8.684132,173.743073,58.684158,2.000000,"Kein" \n "Blut?"};
+item8[] = {"_",4,218,-466.235321,385.617767,-376.235382,435.617767,0.000000,""};
+item9[] = {"Tod",2,4346,83.835258,-288.451477,173.835236,-238.451721,0.000000,"Tod"};
+item10[] = {"__2",2,250,-458.459869,-425.183411,-368.459900,-375.183441,0.000000,""};
+item11[] = {"blutet_nicht",4,218,-314.172119,-133.044556,-224.172119,-83.044556,0.000000,"blutet nicht"};
+item12[] = {"__3",2,250,-314.172150,13.439215,-224.172134,63.439220,0.000000,""};
+item13[] = {"Bein_nicht__im_A",4,218,-313.018738,149.542252,-223.018723,199.542252,0.000000,"Bein nicht" \n " im Arsch"};
+item14[] = {"__4",2,250,-309.558472,276.417969,-219.558456,326.417969,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,5};
+link3[] = {2,11};
+link4[] = {3,4};
+link5[] = {4,8};
+link6[] = {5,6};
+link7[] = {6,3};
+link8[] = {6,7};
+link9[] = {6,13};
+link10[] = {7,9};
+link11[] = {8,10};
+link12[] = {9,1};
+link13[] = {10,1};
+link14[] = {11,12};
+link15[] = {12,3};
+link16[] = {12,13};
+link17[] = {13,14};
+link18[] = {14,8};
+globals[] = {0.000000,0,0,0,0,640,480,1,104,6316128,1,-604.054199,506.681366,563.514771,-671.992126,819,911,1};
+window[] = {2,-1,-1,-1,-1,934,175,1615,175,3,837};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "fn_disease";
+  class States
+  {
+    /*%FSM<STATE "init">*/
+    class init
+    {
+      name = "init";
+      init = /*%FSM<STATEINIT""">*/"AWS_Running = true;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "am_Leben">*/
+        class am_Leben
+        {
+          priority = 1.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"alive player"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "_">*/
+    class _
+    {
+      name = "_";
+      init = /*%FSM<STATEINIT""">*/"_timeWAIT = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Blutet_">*/
+        class Blutet_
+        {
+          priority = 1.000000;
+          to="Bluten";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(AWS_CONFIG select 4) || (AWS_CONFIG select 5) || (AWS_CONFIG select 6) || (AWS_CONFIG select 7) || (AWS_CONFIG select 8) || (AWS_CONFIG select 9) || (AWS_CONFIG select 10) || (AWS_CONFIG select 11) || (AWS_CONFIG select 12) || (AWS_CONFIG select 13)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "blutet_nicht">*/
+        class blutet_nicht
+        {
+          priority = 0.000000;
+          to="__3";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!(AWS_CONFIG select 4) && !(AWS_CONFIG select 5) && !(AWS_CONFIG select 6) && !(AWS_CONFIG select 7) && !(AWS_CONFIG select 8) && !(AWS_CONFIG select 9) && !(AWS_CONFIG select 10) && !(AWS_CONFIG select 11) && !(AWS_CONFIG select 12) && !(AWS_CONFIG select 13)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__1">*/
+    class __1
+    {
+      name = "__1";
+      init = /*%FSM<STATEINIT""">*/"AWS_Leg_Wound = true;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="__2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Bluten">*/
+    class Bluten
+    {
+      name = "Bluten";
+      init = /*%FSM<STATEINIT""">*/"AWS_Blood = AWS_Blood - 0.5;" \n
+       "_timeBlood = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Kein_Blut_">*/
+        class Kein_Blut_
+        {
+          priority = 2.000000;
+          to="Tod";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"AWS_Blood <= 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Bein_im_Arsch_">*/
+        class Bein_im_Arsch_
+        {
+          priority = 1.000000;
+          to="__1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((AWS_CONFIG select 0) || (AWS_CONFIG select 1) || (AWS_CONFIG select 6) ||( AWS_CONFIG select 7) || ( AWS_CONFIG select 12) || (AWS_CONFIG select 13))"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Bein_nicht__im_A">*/
+        class Bein_nicht__im_A
+        {
+          priority = 0.000000;
+          to="__4";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(!(AWS_CONFIG select 0) || !(AWS_CONFIG select 1) || !(AWS_CONFIG select 6) || !( AWS_CONFIG select 7) || !( AWS_CONFIG select 12) || !(AWS_CONFIG select 13))"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Tod">*/
+    class Tod
+    {
+      name = "Tod";
+      init = /*%FSM<STATEINIT""">*/"player setdamage 1;" \n
+       "" \n
+       "" \n
+       "AWS_Body = objNull;" \n
+       "" \n
+       "AWS_Leg_Wound = false;" \n
+       "AWS_Blood = 12000;" \n
+       "AWS_CONFIG =" \n
+       "[" \n
+       "	false, //""broken_left_leg""" \n
+       "	false, //""broken_right_leg""" \n
+       "	false, // ""broken_left_arm""" \n
+       "	false, //""broken_right_arm""" \n
+       "	false, //""bullet_wound_left_arm""" \n
+       "	false, //""Bullet_wound_right_arm""" \n
+       "	false, //""bullet_wound_left_leg""" \n
+       "	false, //""bullet_wound_right_leg""" \n
+       "	false, //""bullet_wound_torso""" \n
+       "	false, //""big_wound_torso""" \n
+       "	false, //""big_wound_left_arm""" \n
+       "	false, //""big_wound_right_arm""" \n
+       "	false, // ""big_wound_left_leg""" \n
+       "	false, //""big_wound_right_leg""" \n
+       "	false, //""traumatic_brain_injury""" \n
+       "	false // ""fever""" \n
+       "];"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "am_Leben">*/
+        class am_Leben
+        {
+          priority = 1.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"alive player"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__2">*/
+    class __2
+    {
+      name = "__2";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "am_Leben">*/
+        class am_Leben
+        {
+          priority = 1.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"alive player"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__3">*/
+    class __3
+    {
+      name = "__3";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Bein_im_Arsch_">*/
+        class Bein_im_Arsch_
+        {
+          priority = 1.000000;
+          to="__1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((AWS_CONFIG select 0) || (AWS_CONFIG select 1) || (AWS_CONFIG select 6) ||( AWS_CONFIG select 7) || ( AWS_CONFIG select 12) || (AWS_CONFIG select 13))"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Bein_nicht__im_A">*/
+        class Bein_nicht__im_A
+        {
+          priority = 0.000000;
+          to="__4";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(!(AWS_CONFIG select 0) || !(AWS_CONFIG select 1) || !(AWS_CONFIG select 6) || !( AWS_CONFIG select 7) || !( AWS_CONFIG select 12) || !(AWS_CONFIG select 13))"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__4">*/
+    class __4
+    {
+      name = "__4";
+      init = /*%FSM<STATEINIT""">*/"AWS_Leg_Wound = false;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="__2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="init";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/

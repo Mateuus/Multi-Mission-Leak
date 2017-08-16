@@ -1,0 +1,1 @@
+private['_htk','_tQQ'];_htk = param[0,-1,[0]];_tQQ = param[1,0,[0]];if(_htk isEqualTo 0) then { [0, ([2, 0] call zero_fnc_JNHrfnI) + round((_tQQ)*0.5)] call zero_fnc_JNHrfnI;}else{ DXi = nil; KmSS = nil;};

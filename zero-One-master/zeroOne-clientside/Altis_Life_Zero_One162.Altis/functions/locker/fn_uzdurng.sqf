@@ -1,0 +1,1 @@
+if(servertime - WHgKT < 30) exitWith {hint "Du kannst nur alle 30 Sekunden auf das Schließfach zugreifen!";};WHgKT = servertime;disableSerialization;createDialog "CtjFPq";

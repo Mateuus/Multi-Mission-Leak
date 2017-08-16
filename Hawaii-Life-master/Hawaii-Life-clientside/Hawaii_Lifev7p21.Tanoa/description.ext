@@ -1,0 +1,268 @@
+author = "Tonic";
+loadScreen = "textures\logo.paa";
+onLoadName = "Hawaii Life v7";
+onLoadMission = "Edit by hawaii-life.net";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 5;
+disabledAI = 1;
+disableChannels[]={{0,true,true},{1,true,true},{2,true,true},{7,false,true},{9,false,true},{10,false,true}};
+enableDebugConsole = 1;
+respawnDialog = 0;
+saving = 0;
+
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 201;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 15;
+corpseRemovalMinTime = 900;
+corpseRemovalMaxTime = 960;
+
+#include "CfgRemoteExec.hpp"
+#include "dialog\MasterHandler.hpp"
+#include "Config_Master.hpp"
+#include "core\Scripts\CHVD\dialog.hpp"
+
+class RscTitles {
+	#include "dialog\progress.hpp"
+	#include "dialog\statusBar.hpp"
+ 
+class RageCoreintro {
+	idd = -1;
+	duration = 6;
+		class controls {
+			class ExampleControl {
+				idc = -1;
+				type = 0;
+				style = 2192;
+				x = 0.125;
+				y = 0.125;
+				h = 0.75;
+				w = 0.75;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.05;
+				colorBackground[] = {1,1,1,0};
+				colorText[] = {1,1,1,1};
+				text = "textures\intro.paa";
+				lineSpacing = 1;
+			};
+		};
+	};
+};
+
+class CfgFunctions {
+	#include "Functions.hpp"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\Siren_Long.ogg", 0.8, 1};
+		titles[] = {};
+	};
+	
+	class SirenBoden
+	{
+		name = "SirenBoden";
+		sound[] = {"\sounds\Siren_Boden.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class SirenRechts
+	{
+		name = "SirenRechts";
+		sound[] = {"\sounds\Siren_Rechts.ogg", 3.0, 1};
+		titles[] = {};
+	};
+
+	class medicSiren
+	{
+		name = "medicSiren";
+		sound[] = {"\sounds\medic_siren.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class alarmanlage
+	{
+		name = "alarmanlage";
+		sound[] = {"\sounds\alarmanlage.ogg", 2.0, 1};
+		titles[] = {};
+	};
+	
+	class handcuffs
+    {
+        name="handcuffs";
+		sound[] = {"\sounds\handcuffs.ogg", 1.0, 1};
+		titles[] = {};
+    };
+	
+	class welcome
+	{
+		name = "welcome";
+		sound[] = {"\sounds\welcome.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class empwarn
+	{
+		name = "empwarn";
+		sound[] = {"\sounds\empwarn.ogg", 2.0, 1};
+		titles[] = {};
+	};
+	
+	class empacsound
+	{
+		name = "empacsound";
+		sound[] = {"\sounds\empac.ogg", db-2, 1};
+		titles[] = {};
+	};
+	
+	class introJet
+	{
+		name = "introJet";
+		sound[] = {"\sounds\introJet.ogg", 1.5, 1};
+		titles[] = {};
+	};
+
+    class lockCarSound {
+        name = "lockCarSound";
+        sound[] = {"\sounds\carLock.ogg", 0.25, 1};
+        titles[] = {};
+    };
+
+    class unlockCarSound {
+        name = "unlockCarSound";
+        sound[] = {"\sounds\carUnlock.ogg", 0.25, 1};
+        titles[] = {};
+    };
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission fehlgeschlagen";
+		subtitle = "Du bist nicht für diese Fraktion Freigeschaltet";
+		description = "Du hast nicht genug Rechte um diesen Slot zu nutzen. Benutze einen anderen Slot.";
+		pictureBackground = "";
+		picture = "";
+	};
+	
+	class Blacklisted
+	{
+		title = "Mission fehlgeschlagen";
+		subtitle = "Du bist auf der Blacklist der Cops.";
+		description = "Du wurdest von den Admins auf die Cop Blacklist gesetzt.";
+		pictureBackground = "";
+		picture = "";
+	};
+	
+	class Aborted
+	{
+		title = "Auf Wiedersehen";
+		subTitle = "Tanoa Server IP: s.hawaii-life.net";
+		description = "Tanoa Life RPG || ServerIP: s.hawaii-life.net || TeamSpeak: ts.hawaii-life.net || Webseite: www.hawaii-life.net || Restarts 0,6,12,18,24 UHR";
+		pictureBackground = "";
+		picture = "";
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "Notruf";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	
+	class DeliveryAssigned
+	{
+		title = "Kurierauftrag angenommen";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+	
+	class DeliveryFailed
+	{
+		title = "Kurierauftrag fehlgeschlagen";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+	
+	class DeliverySucceeded
+	{
+		title = "Kurierauftrag abgeschlossen";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+	
+	class TextMessage
+	{
+		title = "Nachricht empfangen";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class PoliceDispatch
+	{
+		title = "Notruf";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminDispatch
+	{
+		title = "Admin Anfrage";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminMessage
+	{
+		title = "Admin Nachricht";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};

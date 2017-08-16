@@ -1,0 +1,470 @@
+/*%FSM<COMPILE "E:\Spiele\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, Server-Side Cleanup">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-65.004578,-391.651611,24.995417,-341.651672,0.000000,"init"};
+item1[] = {"true",8,218,-62.976639,-315.185364,27.023363,-265.185364,0.000000,"true"};
+item2[] = {"Share__Work_load",2,250,-35.396049,-233.318130,54.603951,-183.318130,0.000000,"Share " \n "Work-load"};
+item3[] = {"true",8,218,-17.536982,510.420105,72.463036,560.420105,0.000000,"true"};
+item4[] = {"Time_Check_3",4,218,41.868942,-149.267517,131.868530,-99.267372,0.000000,"Time Check"};
+item5[] = {"___min",2,250,50.083557,-35.232452,140.082825,14.767594,0.000000,"5 min"};
+item6[] = {"",7,210,-513.890503,324.526947,-505.890594,332.526886,0.000000,""};
+item7[] = {"",7,210,-511.553436,-193.740524,-503.553467,-185.740524,0.000000,""};
+item8[] = {"Time_Check",4,218,191.111954,-149.267563,281.111572,-99.267410,0.000000,"Time Check"};
+item9[] = {"___min_1",2,250,199.326553,-35.232460,289.325867,14.767593,0.000000,"5 min"};
+item10[] = {"Time_Check_1",4,218,334.960083,-157.771271,424.959686,-107.771141,0.000000,"Time Check"};
+item11[] = {"___min_2",2,4346,340.384308,-39.550552,430.383606,10.449499,0.000000,"5 min"};
+item12[] = {"Time_Check_2",4,218,575.581665,-152.247528,665.581238,-102.247391,0.000000,"Time Check"};
+item13[] = {"___min_3",2,250,582.108704,-51.713490,672.107971,-1.713444,0.000000,"5 min"};
+item14[] = {"_",4,218,704.306091,-157.205353,794.306091,-107.205353,0.000000,""};
+item15[] = {"_",2,250,707.681335,-37.383884,797.681335,12.616116,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,4};
+link3[] = {2,8};
+link4[] = {2,10};
+link5[] = {2,12};
+link6[] = {2,14};
+link7[] = {3,6};
+link8[] = {4,5};
+link9[] = {5,3};
+link10[] = {6,7};
+link11[] = {7,2};
+link12[] = {8,9};
+link13[] = {9,3};
+link14[] = {10,11};
+link15[] = {11,3};
+link16[] = {12,13};
+link17[] = {13,3};
+link18[] = {14,15};
+link19[] = {15,3};
+globals[] = {0.000000,0,0,0,0,640,480,1,75,6316128,1,-222.766678,1091.894165,679.542847,-356.659637,779,614,1};
+window[] = {0,-1,-1,-1,-1,920,158,1801,160,1,797};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "Server-Side Cleanup";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private[""_first"",""_cars"",""_cars1"",""_cars2"",""_objs"",""_totCars"",""_thread"",""_impound""];" \n
+                         "_cars = time;" \n
+                         "_cars1 = time;" \n
+                         "_cars2 = time;" \n
+                         "_cars3 = time;" \n
+                         "_cars4 = time;" \n
+                         "_first = true;" \n
+                         "cleandeleted = false;" \n
+                         "_objs = time;" \n
+                         "_impound = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Share__Work_load">*/
+                class Share__Work_load
+                {
+                        name = "Share__Work_load";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Time_Check">*/
+                                class Time_Check
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="___min_1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((time - _cars1) > (300))"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Time_Check_1">*/
+                                class Time_Check_1
+                                {
+                                        itemno = 10;
+                                        priority = 0.000000;
+                                        to="___min_2";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((time - _cars2) > (900))"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Time_Check_2">*/
+                                class Time_Check_2
+                                {
+                                        itemno = 12;
+                                        priority = 0.000000;
+                                        to="___min_3";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((time - _cars4) > 120)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 14;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(count allDeadMen > 0)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Time_Check_3">*/
+                                class Time_Check_3
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="___min";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((time - _cars) > (600))"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "___min">*/
+                class ___min
+                {
+                        name = "___min";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "[] spawn {" \n
+                         "" \n
+                         "diag_log ""Update Paintballt"";" \n
+                         "" \n
+                         "em_paintball_stats = [];" \n
+                         "" \n
+                         "			_query =  format[""SELECT paintballk,paintballd,name,playerid FROM players WHERE paintballk !=0 ORDER BY paintballk DESC LIMIT 15""];" \n
+                         "" \n
+                         "			em_paintball_stats = [_query,2,true] call DB_fnc_asyncCall;" \n
+                         "" \n
+                         "" \n
+                         "em_paintball_stats = em_paintball_stats;" \n
+                         "publicVariable ""em_paintball_stats"";" \n
+                         "" \n
+                         "" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "_cars = time;" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "___min_1">*/
+                class ___min_1
+                {
+                        name = "___min_1";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "[]spawn {" \n
+                         "" \n
+                         "" \n
+                         "diag_log ""Update Markt"";" \n
+                         "" \n
+                         "Emonkeys_price	= [];" \n
+                         "Emonkeys_event = [];" \n
+                         "" \n
+                         "" \n
+                         "	Emonkeys_price = [""SELECT preis, item, differenz, prozent, eventprozent FROM economy"",2,true] call DB_fnc_asyncCall;" \n
+                         "" \n
+                         "" \n
+                         "	Emonkeys_event = [""SELECT beschreibung FROM economy_events WHERE id='1'"",2] call DB_fnc_asyncCall;	" \n
+                         "" \n
+                         "Emonkeys_Market_price = Emonkeys_price;" \n
+                         "	" \n
+                         "publicVariable ""Emonkeys_Market_price"";" \n
+                         "" \n
+                         "" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "_cars1 = time;" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "___min_2">*/
+                class ___min_2
+                {
+                        name = "___min_2";
+                        itemno = 11;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "[]spawn {" \n
+                         "" \n
+                         "diag_log ""Update CraftItems"";" \n
+                         "" \n
+                         "	Emonkeys_craftitem = [];" \n
+                         "" \n
+                         "	_weaponQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""weapons""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_weaponA = [_weaponQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _weaponA;" \n
+                         "" \n
+                         "	_magazineQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""magazine""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_magazineA = [_magazineQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _magazineA;" \n
+                         "" \n
+                         "	_AttachmentsQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""Attachments""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_AttachmentsA = [_AttachmentsQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _AttachmentsA;" \n
+                         "" \n
+                         "	_zubehoerQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""zubehoer""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_zubehoerA = [_zubehoerQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _zubehoerA;" \n
+                         "" \n
+                         "	_uniformQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""Kleidung""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_uniformA = [_uniformQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _uniformA;" \n
+                         "" \n
+                         "	_VesteQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""Veste""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_VesteA = [_VesteQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _VesteA;" \n
+                         "" \n
+                         "	_BackpacksQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""Backpacks""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_BackpacksA = [_BackpacksQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _BackpacksA;" \n
+                         "" \n
+                         "	_itemsQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""items""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_itemsA = [_itemsQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _itemsA;" \n
+                         "" \n
+                         "	_vehicleQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""Fahrzeuge""""' AND active = '1'""; " \n
+                         "" \n
+                         "	_vehicleA = [_vehicleQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _vehicleA;" \n
+                         "" \n
+                         "	_headQ = ""SELECT `item`,`resources`,`farbe` FROM craft WHERE typ = '""""Kopfbedeckung""""' AND active = '1'""; " \n
+                         "	_headA = [_headQ,2,true] call DB_fnc_asyncCall;  " \n
+                         "" \n
+                         "	Emonkeys_craftitem pushBack _headA;" \n
+                         "" \n
+                         "" \n
+                         "	publicVariable ""Emonkeys_craftitem"";" \n
+                         "};" \n
+                         "" \n
+                         "[]spawn {" \n
+                         "" \n
+                         "	diag_log ""Update GatherCfg"";" \n
+                         "	" \n
+                         "	_gatherDB = ""SELECT `name`,`nr`,`items`,`random`,`tool`,`nr_special`,`items_special`,`random_special`,`tool_special` FROM gather_altis WHERE active = '1'""; " \n
+                         "	_gatherCfg = [_gatherDB,2,true] call DB_fnc_asyncCall;" \n
+                         "	" \n
+                         "	EMonkeys_GatherCfg = _gatherCfg;" \n
+                         "	publicVariable ""EMonkeys_GatherCfg"";" \n
+                         "};" \n
+                         "_cars2 = time;" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "___min_3">*/
+                class ___min_3
+                {
+                        name = "___min_3";
+                        itemno = 13;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "	{" \n
+                         "		if((typeOf _x) in [""Land_BottlePlastic_V1_F"",""Land_TacticalBacon_F"",""Land_Can_V3_F"",""Land_CanisterFuel_F"", ""Land_Can_V3_F"",""Land_Money_F"",""Land_Suitcase_F""]) then" \n
+                         "		{" \n
+                         "			deleteVehicle _x;" \n
+                         "		};" \n
+                         "	} foreach (allMissionObjects ""Thing"");" \n
+                         "" \n
+                         "	{" \n
+                         "		deleteVehicle _x;" \n
+                         "	} foreach (allMissionObjects ""GroundWeaponHolder"");" \n
+                         "" \n
+                         "	" \n
+                         "	_uid = """";_id = """"; _name=""""; " \n
+                         "	{" \n
+                         "	_pid = _x getVariable[""steam64ID"",""""];" \n
+                         "	if(_uid == _pid OR _pid == """" OR owner _x < 3) then {" \n
+                         "		_containers = nearestObjects[_x,[""WeaponHolderSimulated""],5];" \n
+                         "		{deleteVehicle _x;} foreach _containers;" \n
+                         "		deleteVehicle _x; " \n
+                         "	};" \n
+                         "" \n
+                         "	} foreach allDeadMen;" \n
+                         "" \n
+                         "{" \n
+                         "	if(!alive _x) then" \n
+                         "	{" \n
+                         "		_dbInfo = _x getVariable[""dbInfo"",[]];" \n
+                         "		if(count _dbInfo > 0) then" \n
+                         "		{" \n
+                         "			_uid = _dbInfo select 0;" \n
+                         "			_plate = _dbInfo select 1;" \n
+                         "" \n
+                         "			_query = format[""UPDATE vehicles SET alive='0' WHERE pid='%1' AND plate='%2'"",_uid,_plate];" \n
+                         "			_query spawn {" \n
+                         "			" \n
+                         "				_thread = [_this,1] spawn DB_fnc_asyncCall;" \n
+                         "			};" \n
+                         "		};" \n
+                         "		if(!isNil ""_x"" && {!isNull _x}) then {" \n
+                         "			deleteVehicle _x;" \n
+                         "		};" \n
+                         "	};" \n
+                         "} foreach allMissionObjects ""LandVehicle"";" \n
+                         "" \n
+                         "{" \n
+                         "	if(!alive _x) then" \n
+                         "	{" \n
+                         "		_dbInfo = _x getVariable[""dbInfo"",[]];" \n
+                         "		if(count _dbInfo > 0) then" \n
+                         "		{" \n
+                         "			_uid = _dbInfo select 0;" \n
+                         "			_plate = _dbInfo select 1;" \n
+                         "" \n
+                         "			_query = format[""UPDATE vehicles SET alive='0' WHERE pid='%1' AND plate='%2'"",_uid,_plate];" \n
+                         "			_query spawn {" \n
+                         "			" \n
+                         "				_thread = [_this,1] spawn DB_fnc_asyncCall;" \n
+                         "			};" \n
+                         "		};" \n
+                         "		if(!isNil ""_x"" && {!isNull _x}) then {" \n
+                         "			deleteVehicle _x;" \n
+                         "		};" \n
+                         "	};" \n
+                         "} foreach allMissionObjects ""Air"";" \n
+                         "" \n
+                         "_cars4 = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 15;
+                        init = /*%FSM<STATEINIT""">*/"{" \n
+                         "	_containers = nearestObjects[_x,[""WeaponHolderSimulated""],5];" \n
+                         "	_containers =_containers + nearestObjects[_x,[ ""GroundWeaponHolder""],5];" \n
+                         "" \n
+                         "	{deleteVehicle _x;} foreach _containers;" \n
+                         "	deleteVehicle _x; " \n
+                         "} foreach allDeadMen;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Share__Work_load";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

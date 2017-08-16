@@ -1,0 +1,1 @@
+private['_yZIM'];_yZIM = param[0,ObjNull,[ObjNull]];if(isNull _yZIM || !(_yZIM isKindOf "House_F")) exitWith {};if(isNull (_yZIM getVariable ["lightSource",ObjNull])) then { [_yZIM,true] remoteExecCall ["zero_fnc_TIpIu",(allPlayers - entities "HeadlessClient_F")];} else { [_yZIM,false] remoteExecCall ["zero_fnc_TIpIu",(allPlayers - entities "HeadlessClient_F")];};

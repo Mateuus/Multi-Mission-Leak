@@ -1,0 +1,43 @@
+/*
+	Written by loewenherz-projekt.de
+	You're not allowed to use this file!
+	You're not allowed to modify this file!
+*/
+author = "Loewenherz-Projekt";
+onLoadName = "Loewenherz Life";
+onLoadMission = "RPG Life Server";
+onLoadIntro = "Willkommen! Loewenherz ist eine deutschsprachige ArmA 3 Community.";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 5;
+disabledAI = true;
+disableChannels[]={{0,true,true},{1,false,true},{2,true,true}};    // Disabled text and voice for global, side, and command channels. disableChannels[] = {{channelID<number>, disableChat<bool>, disableVoice<bool>}};
+
+enableDebugConsole = 1;
+respawnDialog = 0;
+respawnOnStart = -1;
+Briefing = 0;
+loadScreen = "core\textures\misc\logo\lhlife_loading.jpg";
+allowFunctionsRecompile = 0;
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 190;
+};
+
+wreckLimit = 5;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 240;
+
+corpseLimit = 30;
+corpseRemovalMinTime = 600;
+corpseRemovalMaxTime = 1200;
+
+onPauseScript[] = {lhm_fnc_escInterupt};
+
+#include "GUI\dialogs.hpp"
+#include "GUI\displays.hpp"
+
+#include "core\cfg\cfgMaster.hpp"

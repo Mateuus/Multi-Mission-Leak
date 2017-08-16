@@ -1,0 +1,1 @@
+private['_qZe','_kTg','_tCZv','_PdK'];disableSerialization;_qZe = findDisplay 2400;_kTg = _qZe displayCtrl 2402;_PdK = lbData[2401,(lbCurSel 2401)];_PdK = call compile format["%1", _PdK];if(isNil "_PdK") exitWith {};if(typeName _PdK != "ARRAY") exitWith {};if(_PdK isEqualTo []) exitWith {};_tCZv = _PdK select 0;[_tCZv] remoteExecCall ["zero_fnc_wantedPardon",2];

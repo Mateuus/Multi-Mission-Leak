@@ -1,0 +1,165 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, sirenSoundLoop">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-193.860809,-147.861969,-103.860809,-97.861992,0.000000,"init"};
+item1[] = {"distance_check",4,218,317.390869,-23.333069,407.390869,26.666931,0.000000,"distance check"};
+item2[] = {"vehicle_dead",4,218,525.532104,265.081909,626.326050,318.165924,2.000000,"vehicle dead"};
+item3[] = {"getVariable_Chec",4,4314,515.471191,365.337799,631.685181,420.734772,1.000000,"getVariable Check"};
+item4[] = {"End",1,250,726.619568,266.472748,816.619568,316.472687,0.000000,"End"};
+item5[] = {"crew_is_0",4,218,527.901428,168.229767,634.863403,222.855774,3.000000,"crew is 0"};
+item6[] = {"_",4,218,-193.961533,-21.813538,-103.961533,28.186462,0.000000,""};
+item7[] = {"play_sound",2,250,-34.646057,-22.811401,55.353958,27.188599,0.000000,"play sound"};
+item8[] = {"time_check",4,218,-39.190796,266.228485,50.809204,316.228485,0.000000,"time check"};
+item9[] = {"condition_check",2,250,317.818176,266.900757,407.818176,316.900757,0.000000,"condition check"};
+link0[] = {0,6};
+link1[] = {1,7};
+link2[] = {2,4};
+link3[] = {3,4};
+link4[] = {5,4};
+link5[] = {6,7};
+link6[] = {7,8};
+link7[] = {8,9};
+link8[] = {9,1};
+link9[] = {9,2};
+link10[] = {9,3};
+link11[] = {9,5};
+globals[] = {0.000000,0,0,0,0,640,480,1,47,6316128,1,-387.524750,865.657837,769.240051,-284.816223,1362,884,1};
+window[] = {2,-1,-1,-1,-1,785,26,1466,26,3,1380};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "sirenSoundLoop";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"_vehicle = _this select 0;" \n
+                         "_sleep = _this select 1;" \n
+                         "_sound = _this select 2;" \n
+                         "_time = time;" \n
+                         "" \n
+                         "//hint format [""%1\n%2\n%3"",_vehicle,_sleep,_sound];" \n
+                         "" \n
+                         "if(isNull _vehicle) exitWith {};" \n
+                         "if(isNil {_vehicle getVariable ""siren""}) exitWith {};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="play_sound";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "play_sound">*/
+                class play_sound
+                {
+                        name = "play_sound";
+                        itemno = 7;
+                        init = /*%FSM<STATEINIT""">*/"_vehicle say3D _sound;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "time_check">*/
+                                class time_check
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="condition_check";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _time) > _sleep"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "condition_check">*/
+                class condition_check
+                {
+                        name = "condition_check";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "crew_is_0">*/
+                                class crew_is_0
+                                {
+                                        itemno = 5;
+                                        priority = 3.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"count (crew (_vehicle)) == 0"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_vehicle setVariable[""siren"",false,true];" \n
+                                         "//hint ""crew is null"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "vehicle_dead">*/
+                                class vehicle_dead
+                                {
+                                        itemno = 2;
+                                        priority = 2.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!alive _vehicle or isNull _vehicle"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//hint ""vehicle dead"""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "getVariable_Chec">*/
+                                class getVariable_Chec
+                                {
+                                        itemno = 3;
+                                        priority = 1.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(_vehicle getVariable [""siren"",false])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"//hint ""getvariable check"""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "distance_check">*/
+                                class distance_check
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="play_sound";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(player distance _vehicle) < 2000"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+                "End",
+        };
+};
+/*%FSM</COMPILE>*/

@@ -1,0 +1,2 @@
+deletevehicle snow; 
+deletevehicle foggy;

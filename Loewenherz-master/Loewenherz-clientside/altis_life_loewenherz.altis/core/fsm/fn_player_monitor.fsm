@@ -1,0 +1,338 @@
+/*%FSM<COMPILE "D:\Program Files\FSM Editor Personal Edition\scriptedFSM.cfg, LHM Player Monitor">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"prepare",2,250,475.000000,-575.000000,575.000000,-525.000000,0.000000,"prepare"};
+item1[] = {"init",0,250,150.000000,-575.000000,250.000000,-525.000000,0.000000,"init"};
+item2[] = {"initialized",4,218,325.000000,-575.000000,425.000000,-525.000000,0.000000,"initialized"};
+item3[] = {"true",8,218,475.000000,-450.000000,575.000000,-400.000000,0.000000,"true"};
+item4[] = {"waiting",2,250,475.000000,-375.000000,575.000000,-325.000000,0.000000,"waiting"};
+item5[] = {"true",8,218,475.000000,-100.000000,575.000000,-50.000000,0.000000,"true"};
+item6[] = {"general_loop",2,250,475.000000,-25.000000,575.000000,25.000000,0.000000,"general" \n "loop"};
+item7[] = {"",7,210,120.999977,-4.000000,129.000015,4.000000,0.000000,""};
+item8[] = {"",7,210,120.999977,-429.000000,129.000015,-421.000000,0.000000,""};
+item9[] = {"",7,210,921.000000,-354.000000,929.000000,-346.000000,0.000000,""};
+item10[] = {"",7,210,921.000000,-79.000000,929.000000,-71.000000,0.000000,""};
+item11[] = {"__0_second__loop",4,218,475.000000,-300.000000,575.000000,-250.000000,4.000000,"30 second" \n " loop"};
+item12[] = {"Save_Position",2,250,475.000000,-200.000000,575.000000,-150.000000,0.000000,"Save Position"};
+item13[] = {"___sec_loop_1",4,218,325.000000,-300.000000,425.000000,-250.000000,2.000000,"2 sec loop"};
+item14[] = {"___sec_loop",4,218,625.000000,-300.000000,725.000000,-250.000000,3.000000,"3 sec loop"};
+item15[] = {"time",2,250,325.000000,-198.570129,425.000000,-148.570129,0.000000,"time"};
+item16[] = {"set_alive_status",2,250,625.000000,-200.000000,725.000000,-150.000000,0.000000,"set alive status"};
+item17[] = {"__0_sec_loop",4,218,751.741638,-301.890747,841.741638,-251.890747,5.000000,"10 sec loop"};
+item18[] = {"update_survival",2,4346,755.236084,-198.767517,887.388611,-151.025665,0.000000,"update survival  stats"};
+link0[] = {0,3};
+link1[] = {1,2};
+link2[] = {2,0};
+link3[] = {3,4};
+link4[] = {4,9};
+link5[] = {4,11};
+link6[] = {4,13};
+link7[] = {4,14};
+link8[] = {4,17};
+link9[] = {5,6};
+link10[] = {6,7};
+link11[] = {7,8};
+link12[] = {8,3};
+link13[] = {9,10};
+link14[] = {10,5};
+link15[] = {11,12};
+link16[] = {12,5};
+link17[] = {13,15};
+link18[] = {14,16};
+link19[] = {15,5};
+link20[] = {16,5};
+link21[] = {17,18};
+link22[] = {18,5};
+globals[] = {0.000000,0,0,0,0,640,480,3,275,6316128,1,-138.200043,1072.586182,168.385620,-698.282410,1235,911,1};
+window[] = {2,-1,-1,-1,-1,1189,225,1756,225,3,1253};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "LHM Player Monitor";
+  class States
+  {
+    /*%FSM<STATE "prepare">*/
+    class prepare
+    {
+      name = "prepare";
+      init = /*%FSM<STATEINIT""">*/"diag_log ""Player Monitor loaded"";" \n
+       "" \n
+       "// Vars" \n
+       "_pid = getPlayerUID player;" \n
+       "_side = side player;" \n
+       "_position = getPos player;" \n
+       "" \n
+       "// Update Times" \n
+       "_lastPosUpdate = diag_tickTime;" \n
+       "_lastUniformCheck = diag_tickTime;" \n
+       "_lastAliveCheck =  diag_tickTime;" \n
+       "_lastUniformReset = diag_tickTime;" \n
+       "_lastSurvivalCheck = diag_tickTime;" \n
+       "" \n
+       "// Survival" \n
+       "_hunger = lhm_hunger;" \n
+       "_thirst = lhm_thirst;" \n
+       "_health = lhm_health;" \n
+       "_disease = LHM_disease;" \n
+       "" \n
+       "" \n
+       "// set player as alive" \n
+       "playerAlive = true;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="waiting";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "init">*/
+    class init
+    {
+      name = "init";
+      init = /*%FSM<STATEINIT""">*/"// Player Monitor for Loewenherz RPG"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "initialized">*/
+        class initialized
+        {
+          priority = 0.000000;
+          to="prepare";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!isNull player;"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "waiting">*/
+    class waiting
+    {
+      name = "waiting";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "__0_sec_loop">*/
+        class __0_sec_loop
+        {
+          priority = 5.000000;
+          to="update_survival";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _lastSurvivalCheck) > 10);"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/"_lastSurvivalCheck = diag_tickTime;"/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "__0_second__loop">*/
+        class __0_second__loop
+        {
+          priority = 4.000000;
+          to="Save_Position";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"// check each cycle condition" \n
+           "( (diag_tickTime - _lastPosUpdate) >= 30);"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/"_lastPosUpdate = diag_tickTime;"/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "___sec_loop">*/
+        class ___sec_loop
+        {
+          priority = 3.000000;
+          to="set_alive_status";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"( (diag_tickTime - _lastAliveCheck) > 2);"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/"_lastAliveCheck =  diag_tickTime;"/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "___sec_loop_1">*/
+        class ___sec_loop_1
+        {
+          priority = 2.000000;
+          to="time";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"( (diag_tickTime - _lastUniformReset) > 1);"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/"_lastUniformReset = diag_tickTime;"/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="general_loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "general_loop">*/
+    class general_loop
+    {
+      name = "general_loop";
+      init = /*%FSM<STATEINIT""">*/"//diag_log ""Starting loop for next task"";" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="waiting";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Save_Position">*/
+    class Save_Position
+    {
+      name = "Save_Position";
+      init = /*%FSM<STATEINIT""">*/"// If position has not changed do nothing" \n
+       "" \n
+       "if (_position distance getPos player > 5 and isnull (findDisplay 7300)) then {" \n
+       "" \n
+       "_dir = round (getDir player);" \n
+       "_position = getPos player;" \n
+       "" \n
+       "[[_pid,_side,_dir,_position],""lhm_fnc_updatePos"",false,false] call lhm_fnc_mp;" \n
+       "" \n
+       "//hint format [""DiagTime: %1\nPlayer Position saved"",diag_tickTime];" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="general_loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "time">*/
+    class time
+    {
+      name = "time";
+      init = /*%FSM<STATEINIT""">*/"" \n
+       "// Loewenherz Serveruptime format" \n
+       "_stime = servertime;" \n
+       "_hours = (_stime/60/60);" \n
+       "_hours = toArray (str _hours);" \n
+       "_hours resize 1;" \n
+       "_hours = toString _hours;" \n
+       "_hours = compile _hours;" \n
+       "_hours = call  _hours;" \n
+       "_minutes = round(_stime/60);" \n
+       "_minutes2 = _minutes - (_hours*60);" \n
+       "lhm_serverUptime = [_hours,_minutes2];"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="general_loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "set_alive_status">*/
+    class set_alive_status
+    {
+      name = "set_alive_status";
+      init = /*%FSM<STATEINIT""">*/"if (!isnull (findDisplay 7300) and playerAlive) then {" \n
+       "" \n
+       "//cutText [""Set alive false"",""PLAIN"",2];" \n
+       "playerAlive = false;" \n
+       "" \n
+       "[[_pid,_side,false],""lhm_fnc_setAlivePos"",false,false] call lhm_fnc_mp;" \n
+       "" \n
+       "};" \n
+       "" \n
+       "if (isnull (findDisplay 7300) and !playerAlive) then {" \n
+       "" \n
+       "//cutText [""set alive true"",""PLAIN"",2];" \n
+       "" \n
+       "playerAlive = true;" \n
+       "" \n
+       "[[_pid,_side,true],""lhm_fnc_setAlivePos"",false,false] call lhm_fnc_mp;" \n
+       "" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="general_loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "update_survival">*/
+    class update_survival
+    {
+      name = "update_survival";
+      init = /*%FSM<STATEINIT""">*/"if(_hunger != lhm_hunger || _thirst != lhm_thirst || _health != lhm_health || _disease != LHM_disease) then {" \n
+       "" \n
+       "_hunger = lhm_hunger;" \n
+       "_thirst = lhm_thirst;" \n
+       "_health = lhm_health;" \n
+       "_disease = LHM_disease;" \n
+       "" \n
+       "[8] call SOCK_fnc_updatePartial;" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="general_loop";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="init";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/

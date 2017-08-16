@@ -1,0 +1,1 @@
+if(GmRPE) exitWith {};cutText[localize "STR_Session_QueryFail","BLACK FADED"];0 cutFadeOut 9999999;[getPlayerUID player,profileName,([3, 0] call zero_fnc_JNHrfnI),([2, 0] call zero_fnc_JNHrfnI),player] remoteExec ["zero_fnc_insertRequest",2];

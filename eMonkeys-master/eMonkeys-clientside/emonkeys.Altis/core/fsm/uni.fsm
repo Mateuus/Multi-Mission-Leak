@@ -1,0 +1,311 @@
+class FSM
+{
+        fsmName = "Life Client FSM";
+        class States
+        {
+                /*%FSM<STATE "Main_Init">*/
+                class Main_Init
+                {
+                        name = "Main_Init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private[""_lastuniform"",""_lastcheck"",""_coplevel"",""_medlevel"",""_agentscount"",""_agent""];" \n
+                         "_lastuniform = """";" \n
+                         "_lastcheck = time;" \n
+                         "_coplevel = (call EMonkeys_coplevel);" \n
+                         "_medlevel = (call EMonkeys_medicLevel);" \n
+                         "" \n
+                         "_agentscount = count agents;" \n
+                         "_agent = [""Hen_random_F"",""Cock_random_F"",""Cock_white_F"",""Snake_random_F"",""Rabbit_F"",""Sheep_random_F"",""Goat_random_F"",""Alsatian_Random_F""," \n
+                         "		""Alsatian_Sandblack_F"",""Alsatian_Black_F"",""Alsatian_Sand_F"",""Fin_random_F"",""Fin_tricolour_F"",""Fin_ocherwhite_F"",""Fin_blackwhite_F"",""Fin_sand_F""];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Split">*/
+                class Split
+                {
+                        name = "Split";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Time_Check">*/
+                                class Time_Check
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="Del_agents";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(_agentscount != count agents)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Time_to_pay_">*/
+                                class Time_to_pay_
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="Pay_me_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((_lastuniform != uniform player) || (time - _lastcheck) > (20))" \n
+                                         "" \n
+                                         ""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Pay_me_">*/
+                class Pay_me_
+                {
+                        name = "Pay_me_";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "if (playerSide == civilian || playerSide == east) then {" \n
+                         "switch(true) do" \n
+                         "" \n
+                         "{" \n
+                         "			case (uniform player == ""U_C_Poloshirt_blue"") : " \n
+                         "			{" \n
+                         "				player setObjectTextureGlobal [0, ""core\textures\skins_clothing\zivilist\emonk_shirt.jpg""];" \n
+                         "			};" \n
+                         "			case (uniform player == ""U_C_Poloshirt_burgundy"") : " \n
+                         "			{" \n
+                         "				player setObjectTextureGlobal [0, ""core\textures\skins_clothing\zivilist\lbgt.jpg""];" \n
+                         "			};" \n
+                         "			case (uniform player == ""U_C_Poloshirt_redwhite"") : " \n
+                         "			{" \n
+                         "				player setObjectTextureGlobal [0, ""core\textures\skins_clothing\zivilist\dfb.jpg""];" \n
+                         "			};" \n
+                         "			case (uniform player == ""U_C_Commoner1_3"") : " \n
+                         "			{" \n
+                         "				player setObjectTextureGlobal [0, ""core\textures\skins_clothing\zivilist\paws.jpg""];" \n
+                         "			};" \n
+                         "			case (uniform player == ""U_C_Commoner1_1"") : " \n
+                         "			{" \n
+                         "				player setObjectTextureGlobal [0, ""core\textures\skins_clothing\zivilist\hawaii.jpg""];" \n
+                         "			};" \n
+                         "			case (uniform player == ""U_C_ShirtSurfer_shorts"") : " \n
+                         "			{" \n
+                         "				player setObjectTextureGlobal [0, ""core\textures\skins_clothing\zivilist\lotse.jpg""];" \n
+                         "			};" \n
+                         "			case ((uniform player == ""U_B_CombatUniform_mcam"") && ([""ps""] call EMonkeys_fnc_permLevel > 0)): " \n
+                         "			{" \n
+                         "				player setObjectTextureGlobal [0, ""core\textures\skins_clothing\zivilist\ps_uniform.jpg""];" \n
+                         "			};" \n
+                         "		  " \n
+                         "};" \n
+                         "};" \n
+                         "" \n
+                         "if (playerSide == west) then {" \n
+                         "" \n
+                         "switch (_coplevel) do {" \n
+                         "" \n
+                         "    case 1:" \n
+                         "    {" \n
+                         "        if(uniform player == ""U_Rangemaster"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\cop1.jpg""];" \n
+                         "        };" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\polizei\backpack_police_2.paa""];" \n
+                         "			};" \n
+                         "    };" \n
+                         "" \n
+                         "    case 2:" \n
+                         "    {" \n
+                         "        if(uniform player == ""U_Rangemaster"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\cop1.jpg""];" \n
+                         "        };" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\polizei\backpack_police_2.paa""];" \n
+                         "			};" \n
+                         "    };" \n
+                         "    " \n
+                         "    case 3:" \n
+                         "    {" \n
+                         "        if(uniform player == ""U_Rangemaster"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\cop1.jpg""];" \n
+                         "        };" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\polizei\backpack_police_2.paa""];" \n
+                         "			};" \n
+                         "    };" \n
+                         "    " \n
+                         "    case 4:" \n
+                         "    {" \n
+                         "        if(uniform player == ""U_Rangemaster"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\cop1.jpg""];" \n
+                         "        };" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\polizei\backpack_police_2.paa""];" \n
+                         "			};" \n
+                         "    };" \n
+                         "" \n
+                         "     case 5:" \n
+                         "    {" \n
+                         "        if(uniform player == ""U_Rangemaster"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\cop2.jpg""];" \n
+                         "        };" \n
+                         "         if(uniform player == ""U_B_CombatUniform_mcam"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\sek.paa""];" \n
+                         "        };" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\polizei\backpack_police_2.paa""];" \n
+                         "			};" \n
+                         "    };" \n
+                         "    case 6:" \n
+                         "    {" \n
+                         "        if(uniform player == ""U_Rangemaster"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\cop2.jpg""];" \n
+                         "        };" \n
+                         "		if(uniform player == ""U_B_CombatUniform_mcam"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\sek.paa""];" \n
+                         "        };" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\polizei\backpack_police_2.paa""];" \n
+                         "			};" \n
+                         "    };" \n
+                         "    case 7:" \n
+                         "    {" \n
+                         "        if(uniform player == ""U_Rangemaster"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\cop3.jpg""];" \n
+                         "        };" \n
+                         "		if(uniform player == ""U_B_CombatUniform_mcam"") then {" \n
+                         "            player setObjectTextureGlobal [0,""core\textures\skins_clothing\polizei\sek.paa""];" \n
+                         "        };" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\polizei\backpack_police_2.paa""];" \n
+                         "			};" \n
+                         "    };" \n
+                         "};" \n
+                         "};" \n
+                         "" \n
+                         "if (playerSide == independent) then {" \n
+                         "" \n
+                         "switch (_medlevel) do " \n
+                         "	{" \n
+                         "	" \n
+                         "" \n
+                         "		case 1:" \n
+                         "		{" \n
+                         "			if(uniform player == ""U_C_WorkerCoveralls"") then {" \n
+                         "				player setObjectTextureGlobal [0,""core\textures\skins_clothing\feuerwehr\feuerwehr.paa""];" \n
+                         "			};" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\feuerwehr\medic_backpack1.paa""];" \n
+                         "			};" \n
+                         "		};" \n
+                         "" \n
+                         "		case 2:" \n
+                         "		{" \n
+                         "			if(uniform player == ""U_C_WorkerCoveralls"") then {" \n
+                         "				player setObjectTextureGlobal [0,""core\textures\skins_clothing\feuerwehr\feuerwehr.paa""];" \n
+                         "			};" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\feuerwehr\medic_backpack1.paa""];" \n
+                         "			};" \n
+                         "		};" \n
+                         "		" \n
+                         "		case 3:" \n
+                         "		{" \n
+                         "			if(uniform player == ""U_C_WorkerCoveralls"") then {" \n
+                         "				player setObjectTextureGlobal [0,""core\textures\skins_clothing\feuerwehr\feuerwehr.paa""];	" \n
+                         "			};" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\feuerwehr\medic_backpack1.paa""];" \n
+                         "			};" \n
+                         "		};" \n
+                         "		" \n
+                         "		case 4:" \n
+                         "		{" \n
+                         "			if(uniform player == ""U_C_WorkerCoveralls"") then {" \n
+                         "				player setObjectTextureGlobal [0,""core\textures\skins_clothing\feuerwehr\feuerwehr.paa""];" \n
+                         "			};" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\feuerwehr\medic_backpack1.paa""];" \n
+                         "			};" \n
+                         "		};" \n
+                         "" \n
+                         "		case 5:" \n
+                         "		{" \n
+                         "			if(uniform player == ""U_C_WorkerCoveralls"") then {" \n
+                         "				player setObjectTextureGlobal [0,""core\textures\skins_clothing\feuerwehr\feuerwehr.paa""];" \n
+                         "			};" \n
+                         "			if(backpack player == ""B_Kitbag_cbr"") then {" \n
+                         "			(unitBackpack player) setObjectTextureGlobal [0, ""core\textures\skins_clothing\feuerwehr\medic_backpack1.paa""];" \n
+                         "			};" \n
+                         "		};" \n
+                         "	};" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "_lastuniform = uniform player;" \n
+                         "_lastcheck = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Del_agents">*/
+                class Del_agents
+                {
+                        name = "Del_agents";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "{" \n
+                         "         if ((typeof agent _x) in _agent) then { deleteVehicle agent _x; };" \n
+                         "" \n
+                         "}forEach agents;" \n
+                         "" \n
+                         "_agentscount = count agents;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="Main_Init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

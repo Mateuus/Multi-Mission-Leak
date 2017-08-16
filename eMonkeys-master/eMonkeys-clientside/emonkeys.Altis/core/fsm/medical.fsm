@@ -1,0 +1,391 @@
+class FSM
+{
+        fsmName = "medical";
+        class States
+        {
+                /*%FSM<STATE "start">*/
+                class start
+                {
+                        name = "start";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private [""_unit"",""_lastcheck"",""_Reviving"",""_ausgeraubt"",""_lastcheck1""];" \n
+                         "" \n
+                         "" \n
+                         "eM_tot = true;" \n
+                         "" \n
+                         "time_add =false;" \n
+                         "" \n
+                         "_lastcheck = time;" \n
+                         "" \n
+                         "" \n
+                         "_Reviving = true;" \n
+                         "" \n
+                         "_ausgeraubt = true;" \n
+                         "Emonkeys_timeadd = false;" \n
+                         "Emonkeys_timeadd1 = true;" \n
+                         "" \n
+                         "_lastcheck1 = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="Verteiler";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Cammera_Position">*/
+                class Cammera_Position
+                {
+                        name = "Cammera_Position";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"EMonkeys_deathCamera camSetTarget player; " \n
+                         "EMonkeys_deathCamera camSetRelPos [0,3.5,7.5]; " \n
+                         "EMonkeys_deathCamera camCommit 0;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Verteiler";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Ende___Zeit_abge">*/
+                class Ende___Zeit_abge
+                {
+                        name = "Ende___Zeit_abge";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "" \n
+                         "[] spawn { " \n
+                         "player setpos [8523.37,25051,0.00144196];" \n
+                         "" \n
+                         "time_add =false;" \n
+                         "eM_tot = false;" \n
+                         "sleep 1;" \n
+                         "" \n
+                         "EMonkeys_deathCamera cameraEffect [""TERMINATE"",""BACK""];" \n
+                         "camDestroy EMonkeys_deathCamera;" \n
+                         "player  setVariable[""onkill"",false,true];" \n
+                         "player setVariable[""Revive"",false,true];" \n
+                         "player setVariable[""ausgeraubt"",FALSE,TRUE];" \n
+                         "" \n
+                         "" \n
+                         "closeDialog 0;" \n
+                         "" \n
+                         "" \n
+                         "EMonkeys_hu164 = 100;" \n
+                         "EMonkeys_thi164 = 100;" \n
+                         "" \n
+                         "{" \n
+                         "	_item = _x;" \n
+                         "	_value = missionNamespace getVariable _item;" \n
+                         "	missionNamespace setVariable[_x,0];" \n
+                         "	" \n
+                         "	" \n
+                         "} foreach (EMonkeys_inv_items);" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "EMonkeys_carryWeight = 0;" \n
+                         "EMonkeys_c164 = 0; " \n
+                         "player setDamage 0;" \n
+                         "" \n
+                         "[[player], ""HOUSE_fnc_requestSpawnMenu"", false, false] call EMonkeys_fnc_MP;" \n
+                         "" \n
+                         "sleep 0.1;" \n
+                         "" \n
+                         "//[] spawn emonkeys_fnc_aftermath;" \n
+                         "switch(playerSide) do" \n
+                         "{" \n
+                         "	case west: {[] call EMonkeys_fnc_playerLoadout;};" \n
+                         "	case civilian: {[] call EMonkeys_fnc_playerLoadout;};" \n
+                         "	case east: {[] call EMonkeys_fnc_playerLoadout;};" \n
+                         "	case independent: {[] call EMonkeys_fnc_playerLoadout;};" \n
+                         "};" \n
+                         "" \n
+                         "eM_dead = false;" \n
+                         "" \n
+                         "if(eM_removeWanted) then {" \n
+                         "	[[getPlayerUID player],""EMonkeys_fnc_wantedRemove"",false,false] call EMonkeys_fnc_mp;" \n
+                         "};" \n
+                         "[] call SOCK_fnc_updateRequest;" \n
+                         "};" \n
+                         "[[player,""amovppnemstpsraswrfldnon""],""EMonkeys_fnc_animSync"",true,false] call emonkeys_fnc_MP;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Verteiler">*/
+                class Verteiler
+                {
+                        name = "Verteiler";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Time__Check">*/
+                                class Time__Check
+                                {
+                                        itemno = 3;
+                                        priority = 0.000000;
+                                        to="Ende___Zeit_abge";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"emonkey_timeover"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Time_Madic_verf">*/
+                                class Time_Madic_verf
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="Madic_verf__gbar";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _lastcheck) > (5)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Veriable_Check">*/
+                                class Veriable_Check
+                                {
+                                        itemno = 10;
+                                        priority = 0.000000;
+                                        to="Ende__Wiederbele";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(player getVariable[""Revive"",FALSE])"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "abfrage_Reviving">*/
+                                class abfrage_Reviving
+                                {
+                                        itemno = 12;
+                                        priority = 0.000000;
+                                        to="Reviving_Zeiterh";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"((player getVariable[""addtime"",FALSE]) && !time_add)" \n
+                                         ""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Veriable_Ausgera">*/
+                                class Veriable_Ausgera
+                                {
+                                        itemno = 14;
+                                        priority = 0.000000;
+                                        to="Drop_Items";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(player getVariable[""ausgeraubt"",FALSE]) && _ausgeraubt"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Animation">*/
+                                class Animation
+                                {
+                                        itemno = 16;
+                                        priority = 0.000000;
+                                        to="Sterbe_Animation";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(!(animationState player == ""unconscious"") && (time - _lastcheck1) > (5))"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Bewegung">*/
+                                class Bewegung
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Cammera_Position";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!(speed player  == 0)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Madic_verf__gbar">*/
+                class Madic_verf__gbar
+                {
+                        name = "Madic_verf__gbar";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn {" \n
+                         "disableSerialization;" \n
+                         "" \n
+                         "_medicsNear = ((findDisplay 7300) displayCtrl 7305);" \n
+                         "_medicsOnline = ((findDisplay 7300) displayCtrl 7304);" \n
+                         "_nearby = if(([independent,player,1000] call EMonkeys_fnc_nearUnits)) then {""Ja""} else {""Nein""};" \n
+                         "_medicsOnline ctrlSetText format[""Feuerwehr verfügbar: %1"",[independent] call EMonkeys_fnc_playerCount];" \n
+                         "_medicsNear ctrlSetText format[""Feuerwehr in der Nähe: %1"",_nearby];" \n
+                         "};" \n
+                         "" \n
+                         "" \n
+                         "_lastcheck = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Verteiler";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Ende__Wiederbele">*/
+                class Ende__Wiederbele
+                {
+                        name = "Ende__Wiederbele";
+                        itemno = 11;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "hint ""Puh! Noch mal Glück gehabt! Du konntest gerettet werden."";" \n
+                         "" \n
+                         "time_add =false;" \n
+                         "eM_tot = false;" \n
+                         "" \n
+                         "player setVariable[""onkill"",false,true];" \n
+                         "player setVariable[""Revive"",false,true];" \n
+                         "player setVariable[""ausgeraubt"",FALSE,TRUE];" \n
+                         "" \n
+                         "[] spawn {" \n
+                         "sleep 2;" \n
+                         "" \n
+                         "" \n
+                         "EMonkeys_deathCamera cameraEffect [""TERMINATE"",""BACK""];" \n
+                         "camDestroy EMonkeys_deathCamera;" \n
+                         "" \n
+                         "closeDialog 0;" \n
+                         "player setDamage 0;" \n
+                         "" \n
+                         "" \n
+                         "eM_dead = false;" \n
+                         "[] call SOCK_fnc_updateRequest;" \n
+                         "//[] spawn emonkeys_fnc_aftermath;" \n
+                         "[[player,""amovppnemstpsraswrfldnon""],""EMonkeys_fnc_animSync"",true,false] call emonkeys_fnc_MP;" \n
+                         "cutText ["""",""Black In"",6];" \n
+                         "};" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Reviving_Zeiterh">*/
+                class Reviving_Zeiterh
+                {
+                        name = "Reviving_Zeiterh";
+                        itemno = 13;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "player setVariable[""addtime"",false,true];" \n
+                         "" \n
+                         "" \n
+                         "jhmedsys_maxTime = jhmedsys_maxTime + 360;" \n
+                         "time_add =true;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Verteiler";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Drop_Items">*/
+                class Drop_Items
+                {
+                        name = "Drop_Items";
+                        itemno = 15;
+                        init = /*%FSM<STATEINIT""">*/" [player] call EMonkeys_fnc_dropItems;" \n
+                         "" \n
+                         "" \n
+                         "EMonkeys_carryWeight = 0;" \n
+                         "" \n
+                         "EMonkeys_c164 = 0;" \n
+                         "" \n
+                         "_ausgeraubt = false;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Verteiler";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Sterbe_Animation">*/
+                class Sterbe_Animation
+                {
+                        name = "Sterbe_Animation";
+                        itemno = 17;
+                        init = /*%FSM<STATEINIT""">*/"player playAction ""die"";" \n
+                         "_lastcheck1 = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "True">*/
+                                class True
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Verteiler";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="start";
+        finalStates[] =
+        {
+                "Ende___Zeit_abge",
+                "Ende__Wiederbele",
+        };
+};
+/*%FSM</COMPILE>*/

@@ -1,0 +1,10 @@
+private["_vehicle"];
+_vehicle = cursorObject;
+titleText["Stand clear, the vehicle will unflip in 3 seconds..","PLAIN"];
+sleep 3;
+_vehicle allowdamage false;
+//_vehicle setPos [getPos _vehicle select 0, getPos _vehicle select 1, (getPos _vehicle select 2) + 0.5];
+_vehicle setVectorUp [0,0,2];
+_vehicle setPosASL [getPosASL _vehicle select 0, getPosASL _vehicle select 1, (getPosASL _vehicle select 2) + 0.5];
+sleep 2;
+_vehicle allowdamage true;

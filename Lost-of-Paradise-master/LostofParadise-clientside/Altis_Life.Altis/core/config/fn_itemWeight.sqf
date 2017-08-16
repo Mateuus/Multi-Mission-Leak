@@ -1,0 +1,114 @@
+/*
+	File: fn_itemWeight.sqf
+	Author: Bryan "Tonic" Boardwine
+	
+	Description:
+	Gets the items weight and returns it.
+*/
+private["_item"];
+_item = [_this,0,"",[""]] call BIS_fnc_param;
+if(_item == "") exitWith {};
+
+switch (_item) do
+{
+	case "oilu": {5};
+	case "oilp": {4};
+	case "kerosin": {4};
+	case "heroinu": {6};
+	case "heroinp": {4};
+	case "cannabis": {4};
+	case "marijuana": {3};
+	case "apple": {1};
+	case "water": {1};
+	case "bier": {1};
+	case "mais": {2};
+	case "zucker": {4};
+	case "baumat": {3};
+	case "schnaps": {3};
+	case "pille": {1};
+	case "doner": {2};
+	case "rabbit": {1};
+	case "salema": {2};
+	case "scalpel": {2};
+	case "ornate": {2};
+	case "mackerel": {4};
+	case "tuna": {6};
+	case "mullet": {4};
+	case "catshark": {6};
+	case "turtle": {5};
+	case "fishing": {2};
+	case "turtlesoup": {2};
+	case "donuts": {1};
+	case "coffee": {1};
+	case "fuelE": {2};
+	case "fuelF": {5};
+	case "money": {0};
+	case "lampe": {2};
+	case "wand": {2};
+	case "schranke": {2};
+	case "pickaxe": {2};
+	case "copperore": {4};
+	case "ironore": {5};
+	case "copper_r": {3};
+	case "iron_r": {3};
+	case "sand": {3};
+	case "salt": {3};
+	case "salt_r": {2};
+	case "glass": {1};
+	case "diamond": {4};
+	case "diamondc": {2};
+	case "cocaine": {6};
+	case "cocainep": {4};
+    case "badcocaine": {3};
+	case "schmuck": {2};
+	case "krokodile": {2};
+	case "atomwaffe": {3};
+	case "methu": {4};
+	case "methp": {2};
+	case "goldu": {6};
+	case "goldp": {4};
+	case "silberu": {4};
+	case "silberp": {3};
+	case "frogu": {6};
+	case "frogp": {4};
+	case "sperre": {2};
+	case "dixi": {2};
+	case "tisch": {2};
+	case "generator": {2};
+	case "matratze": {2};
+	case "zelt": {2};
+	case "brenn": {2};
+	case "underwatercharge": {18};
+	case "goldbarp": {12};
+	case "muschelu": {2};
+	case "muschelp": {1};
+	case "brennstabu": {8};
+	case "brennstabp": {6};
+	case "radioaktivu": {90};
+	case "radioaktivp": {90};
+	case "kidney": {15};
+	case "pilsu": {4};
+	case "pilsp": {2};
+	case "spikeStrip": {2};
+	case "geld": {4};
+	case "rock": {6};
+	case "cement": {5};
+	case "bleiu": {5};
+	case "bleigp": {3};
+	case "bleilp": {4};
+	case "goldbar": {30};
+	case "mauer": {1};
+	case "blastingcharge": {15};
+	case "boltcutter": {5};
+	case "defusekit": {2};
+	case "storagesmall": {5};
+	case "storagebig": {51};
+	case "henraw": {2};
+	case "roosterraw": {2};
+	case "goatraw": {2};
+	case "sheepraw": {2};
+	case "rabbitraw": {2};
+	case "wolfraw": {2};
+	case "wolf1raw": {2};
+	default {1};
+};

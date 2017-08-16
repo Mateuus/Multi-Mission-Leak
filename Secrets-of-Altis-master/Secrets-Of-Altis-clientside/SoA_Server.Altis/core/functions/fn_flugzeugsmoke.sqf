@@ -1,0 +1,18 @@
+_smokeS = "SmokeShellPurple" createvehicle (getpos player);
+_smokeS attachto [vehicle player,[0,-2,1.5]];
+_smokeR = "SmokeShellRed" createvehicle (getpos player);
+_smokeR attachto [vehicle player,[0,-2,0]];
+_smokeY = "SmokeShellYellow" createvehicle (getpos player);
+_smokeY attachto [vehicle player,[0,-2,-1.5]];
+_smokeS = "SmokeShellPurple" createvehicle (getpos player);
+_smokeS attachto [vehicle player,[0,-2,1.5]];
+_smokeR = "SmokeShellRed" createvehicle (getpos player);
+_smokeR attachto [vehicle player,[0,-2,0]];
+_smokeY = "SmokeShellYellow" createvehicle (getpos player);
+_smokeY attachto [vehicle player,[0,-2,-1.5]];
+_smokeS = "SmokeShellPurple" createvehicle (getpos player);
+_smokeS attachto [vehicle player,[0,-2,1.5]];
+_smokeR = "SmokeShellRed" createvehicle (getpos player);
+_smokeR attachto [vehicle player,[0,-2,0]];
+_smokeY = "SmokeShellYellow" createvehicle (getpos player);
+_smokeY attachto [vehicle player,[0,-2,-1.5]];

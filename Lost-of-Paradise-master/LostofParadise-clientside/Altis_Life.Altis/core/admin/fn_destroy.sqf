@@ -1,0 +1,1 @@
+cursorTarget setDamage 1;

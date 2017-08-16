@@ -1,0 +1,135 @@
+/*%FSM<COMPILE "D:\Program Files\FSM Editor Personal Edition\scriptedFSM.cfg, fuelMonitor">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,89.053802,-288.939453,179.053802,-238.939362,0.000000,"init"};
+item1[] = {"Vehicle_check",4,218,89.882782,-174.418274,179.882782,-124.418266,0.000000,"Vehicle check"};
+item2[] = {"defuel_vehicle",2,4346,199.449615,-76.039001,289.449646,-26.039001,0.000000,"defuel vehicle"};
+item3[] = {"time_check",4,218,81.261620,27.041321,171.261627,77.041321,0.000000,"time check"};
+item4[] = {"_",2,250,-36.513504,-77.334900,53.486511,-27.334900,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,1};
+globals[] = {0.000000,0,0,0,0,640,480,1,8,6316128,1,-218.940231,421.457001,198.476303,-350.780487,1061,911,1};
+window[] = {2,-1,-1,-1,-1,909,150,1590,150,3,1079};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "fuelMonitor";
+  class States
+  {
+    /*%FSM<STATE "init">*/
+    class init
+    {
+      name = "init";
+      init = /*%FSM<STATEINIT""">*/"_fuelConsumption = 0;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Vehicle_check">*/
+        class Vehicle_check
+        {
+          priority = 0.000000;
+          to="defuel_vehicle";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"vehicle player != player && !((vehicle player) isKindOf ""Air"") && driver (vehicle player) == player && isEngineOn (vehicle player)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "defuel_vehicle">*/
+    class defuel_vehicle
+    {
+      name = "defuel_vehicle";
+      init = /*%FSM<STATEINIT""">*/"_vehicleToFuel = (vehicle player);" \n
+       "_speed = speed _vehicleToFuel;" \n
+       "" \n
+       "if (isNil ""_fuelConsumption"")then {" \n
+       "	_fuelConsumption = 0;" \n
+       "};" \n
+       "" \n
+       "//_rate = getNumber (configFile >> ""CfgVehicles"" >> (typeOf (vehicle player)) >> ""fuelconsumptionrate"");" \n
+       "" \n
+       "_velocityOfVehicle = sqrt(((velocity _vehicleToFuel select 0)^2)+((velocity _vehicleToFuel select 1)^2))*3.6;" \n
+       "" \n
+       "		switch(true) do" \n
+       "			{" \n
+       "				case (_speed >= 0 and _speed < 5): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0001};" \n
+       "				case (_speed >= 5 and _speed < 15): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0002};" \n
+       "				case (_speed >= 15 and _speed < 30): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0003};" \n
+       "				case (_speed >= 30 and _speed < 55): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0004};" \n
+       "				case (_speed >= 55 and _speed < 70): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0005};" \n
+       "				case (_speed >= 70 and _speed < 85): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0006};" \n
+       "				case (_speed >= 85 and _speed < 100): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0007};" \n
+       "				case (_speed >= 100 and _speed < 115): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0008};" \n
+       "				case (_speed >= 115 and _speed < 130): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0009};" \n
+       "				case (_speed >= 130 and _speed < 145): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0010};" \n
+       "				case (_speed >= 145 and _speed < 160): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0012};" \n
+       "				case (_speed >= 160 and _speed < 350): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0015};" \n
+       "				case (_speed >= 350 and _speed < 400): 	{_fuelConsumption = _velocityOfVehicle/100000 + 0.0018};" \n
+       "			};" \n
+       "" \n
+       "		_vehicleToFuel setFuel ((fuel _vehicleToFuel)-_fuelConsumption);" \n
+       "		_displayFuel = _fuelConsumption*10000/2;" \n
+       "		//hint format[""Kraftstoffverbrauch: %1L/km"",round(_displayFuel*100)/100]; // Comment" \n
+       "" \n
+       "		if(fuel _vehicleToFuel < 0.2 && fuel _vehicleToFuel > 0.18) then" \n
+       "		{" \n
+       "			hint ""Du musst bald tanken!"";" \n
+       "		}" \n
+       "		else" \n
+       "		{" \n
+       "			if(fuel _vehicleToFuel < 0.03) then" \n
+       "			{" \n
+       "				hint ""Ich hoffe du kannst laufen! -weil, du hast kein Benzin mehr!"";" \n
+       "			};" \n
+       "		};" \n
+       "" \n
+       "_time = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "time_check">*/
+        class time_check
+        {
+          priority = 0.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((time - _time) > 2)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "_">*/
+    class _
+    {
+      name = "_";
+      init = /*%FSM<STATEINIT""">*/"_time = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Vehicle_check">*/
+        class Vehicle_check
+        {
+          priority = 0.000000;
+          to="defuel_vehicle";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"vehicle player != player && !((vehicle player) isKindOf ""Air"") && driver (vehicle player) == player && isEngineOn (vehicle player)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="init";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/

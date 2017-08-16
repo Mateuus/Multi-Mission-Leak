@@ -1,0 +1,192 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, checkUniform">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,179.960007,-656.184265,269.959961,-606.184265,0.000000,"init"};
+item1[] = {"check_uniform",4,218,285.195038,-447.905853,382.726624,-393.113739,1.000000,"check uniform"};
+item2[] = {"setTexture",2,250,289.127075,-362.500824,379.127106,-312.500885,0.000000,"setTexture"};
+item3[] = {"respawn_check",4,218,45.445938,-446.653076,146.400330,-396.653076,2.000000,"respawn check"};
+item4[] = {"update_var",2,250,50.229599,-365.105286,140.229584,-315.105438,0.000000,"update var"};
+item5[] = {"_",4,218,179.954987,-582.066589,269.954987,-532.066589,0.000000,""};
+item6[] = {"_",2,250,178.323746,-485.977081,268.323792,-435.977112,0.000000,""};
+item7[] = {"",7,210,91.214790,-266.284119,99.214790,-258.284119,0.000000,""};
+item8[] = {"__1",2,4346,420.776672,-582.210571,510.776978,-532.210510,0.000000,""};
+item9[] = {"",7,210,330.073090,-266.137939,338.073090,-258.137939,0.000000,""};
+item10[] = {"_",4,218,420.635956,-445.277435,510.635956,-395.277435,0.000000,""};
+item11[] = {"",7,210,461.638306,-265.871552,469.638306,-257.871552,0.000000,""};
+link0[] = {0,5};
+link1[] = {1,2};
+link2[] = {2,9};
+link3[] = {3,4};
+link4[] = {4,7};
+link5[] = {5,6};
+link6[] = {6,1};
+link7[] = {6,3};
+link8[] = {7,9};
+link9[] = {8,5};
+link10[] = {9,11};
+link11[] = {10,8};
+link12[] = {11,10};
+globals[] = {0.000000,0,0,0,0,640,480,3,317,6316128,1,-98.462738,625.766113,-179.965576,-738.620300,1146,884,1};
+window[] = {2,-1,-1,-32000,-32000,1068,-1816,-100,104,3,1164};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "checkUniform";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"// Uniform setTexture Check" \n
+                         "" \n
+                         "_currentPlayerUniform = uniform player;" \n
+                         "_currentPlayerBackpack = backpack player;" \n
+                         "" \n
+                         "_currentTextureUniform = (getObjectTextures player) select 0;" \n
+                         "_currentTextureBackpack = (getObjectTextures (unitBackpack player)) select 0;" \n
+                         "" \n
+                         "//([(getObjectTextures player) select 0, 26] call BIS_fnc_trimString);" \n
+                         "" \n
+                         "[player, uniform player] call lhm_fnc_setUniformTexture;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/"(!isNull player) and (player == player)"/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "setTexture">*/
+                class setTexture
+                {
+                        name = "setTexture";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"_return = [player, uniform player] call lhm_fnc_setUniformTexture; " \n
+                         "_currentPlayerUniform = uniform player;" \n
+                         "_currentPlayerBackpack = backpack player;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 10;
+                                        priority = 0.000000;
+                                        to="__1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "update_var">*/
+                class update_var
+                {
+                        name = "update_var";
+                        itemno = 4;
+                        init = /*%FSM<STATEINIT""">*/"_currentPlayerUniform = """";" \n
+                         "_currentPlayerBackpack = """";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 10;
+                                        priority = 0.000000;
+                                        to="__1";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "_">*/
+                class _
+                {
+                        name = "_";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "respawn_check">*/
+                                class respawn_check
+                                {
+                                        itemno = 3;
+                                        priority = 2.000000;
+                                        to="update_var";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!isnull (findDisplay 7300) and playerAlive"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "check_uniform">*/
+                                class check_uniform
+                                {
+                                        itemno = 1;
+                                        priority = 1.000000;
+                                        to="setTexture";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(uniform player) != _currentPlayerUniform || (backpack player) != _currentPlayerBackpack"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "__1">*/
+                class __1
+                {
+                        name = "__1";
+                        itemno = 8;
+                        init = /*%FSM<STATEINIT""">*/"//if((mission_root + _currentTextureUniform) != _return || (mission_root + _currentTextureBackpack) != _return then {" \n
+                         "//_return = [player, uniform player] call lhm_fnc_setUniformTexture; " \n
+                         "//_currentPlayerUniform = uniform player;" \n
+                         "//_currentPlayerBackpack = backpack player;" \n
+                         "//_currentTextureUniform = (getObjectTextures player) select 0;" \n
+                         "//_currentTextureBackpack = (getObjectTextures (unitBackpack player)) select 0;" \n
+                         "//};" \n
+                         "" \n
+                         "" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

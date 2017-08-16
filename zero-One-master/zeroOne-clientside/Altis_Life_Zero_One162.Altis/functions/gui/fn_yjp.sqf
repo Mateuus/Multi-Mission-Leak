@@ -1,0 +1,1 @@
+disableSerialization;private['_YGE','_kNi','_LpbU','_Kjy'];_YGE = param[0,controlNull,[controlNull]];_kNi = param[1,1,[0]];_LpbU = param[2,0.1,[0]];_Kjy = param[3,[],[[]]];if(isNull _YGE OR _Kjy isEqualTo []) exitWith {};_YGE ctrlMapAnimAdd[_kNi,_LpbU,_Kjy];ctrlMapAnimCommit _YGE;

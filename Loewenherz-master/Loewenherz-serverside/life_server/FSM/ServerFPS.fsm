@@ -1,0 +1,132 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, serverFPS">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,4346,-193.860809,-147.861969,-103.860809,-97.861992,0.000000,"init"};
+item1[] = {"_",4,218,317.390869,-23.333069,407.390869,26.666931,0.000000,""};
+item2[] = {"End",1,250,726.619568,266.472748,816.619568,316.472687,0.000000,"End"};
+item3[] = {"ShowServerFPS__",4,218,527.901428,168.229767,679.028320,246.778503,3.000000,"ShowServerFPS = false"};
+item4[] = {"_",4,218,-193.961533,-21.813538,-103.961533,28.186462,0.000000,""};
+item5[] = {"Show_FPS",2,250,-34.646057,-22.811401,55.353958,27.188599,0.000000,"Show FPS"};
+item6[] = {"time_check",4,218,-39.190796,266.228485,50.809204,316.228485,0.000000,"time check"};
+item7[] = {"condition_check",2,250,317.818176,266.900757,407.818176,316.900757,0.000000,"condition check"};
+link0[] = {0,4};
+link1[] = {1,5};
+link2[] = {3,2};
+link3[] = {4,5};
+link4[] = {5,6};
+link5[] = {6,7};
+link6[] = {7,1};
+link7[] = {7,3};
+globals[] = {0.000000,0,0,0,0,640,480,1,47,6316128,1,-387.524750,865.657837,769.240051,-284.816223,1362,884,1};
+window[] = {2,-1,-1,-1,-1,889,130,1570,130,3,1380};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "serverFPS";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"_sleep = _this select 0;" \n
+                         "_time = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="Show_FPS";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "End">*/
+                class End
+                {
+                        name = "End";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"diag_log ""Server FPS Monitor disabled!"";"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Show_FPS">*/
+                class Show_FPS
+                {
+                        name = "Show_FPS";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"serverFPS = str(round diag_fpsmin);" \n
+                         "publicVariable ""serverFPS"";" \n
+                         "diag_log format [""lhm Server: FPS %1"",serverFPS];"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "time_check">*/
+                                class time_check
+                                {
+                                        itemno = 6;
+                                        priority = 0.000000;
+                                        to="condition_check";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _time) > _sleep"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "condition_check">*/
+                class condition_check
+                {
+                        name = "condition_check";
+                        itemno = 7;
+                        init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "ShowServerFPS__">*/
+                                class ShowServerFPS__
+                                {
+                                        itemno = 3;
+                                        priority = 3.000000;
+                                        to="End";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"!showServerFPS"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/"_vehicle setVariable[""siren"",false,true];" \n
+                                         "//hint ""crew is null"";"/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Show_FPS";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+                "End",
+        };
+};
+/*%FSM</COMPILE>*/

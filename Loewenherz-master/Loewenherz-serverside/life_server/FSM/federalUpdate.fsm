@@ -1,0 +1,109 @@
+/*%FSM<COMPILE "G:\Steam\SteamApps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, federalUpdate">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-193.860809,-147.861969,-103.860809,-97.861992,0.000000,"init"};
+item1[] = {"_",4,218,317.390869,-23.333069,407.390869,26.666931,0.000000,""};
+item2[] = {"_",4,218,-193.961533,-21.813538,-103.961533,28.186462,0.000000,""};
+item3[] = {"update_safe_fund",2,4346,-34.646057,-22.811401,55.353958,27.188599,0.000000,"update safe funds"};
+item4[] = {"wait_60_min",4,218,-39.190796,266.228485,50.809204,316.228485,0.000000,"wait 60 min"};
+item5[] = {"reset_time",2,250,317.818176,266.900757,407.818176,316.900757,0.000000,"reset time"};
+link0[] = {0,2};
+link1[] = {1,3};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,5};
+link5[] = {5,1};
+globals[] = {0.000000,0,0,0,0,640,480,1,1,6316128,1,-225.605911,492.407104,481.118378,-247.611237,820,884,1};
+window[] = {2,-1,-1,-1,-1,889,-1790,-350,130,3,838};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "federalUpdate";
+        class States
+        {
+                /*%FSM<STATE "init">*/
+                class init
+                {
+                        name = "init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"_sleep = (30 * 60);" \n
+                         "_time = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 2;
+                                        priority = 0.000000;
+                                        to="update_safe_fund";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "update_safe_fund">*/
+                class update_safe_fund
+                {
+                        name = "update_safe_fund";
+                        itemno = 3;
+                        init = /*%FSM<STATEINIT""">*/"_funds = fed_bank getVariable[""safe"",0];" \n
+                         "if (_funds > 150) then {" \n
+                         "	_funds = 150; // *** full when 100 players 3h online and gold Price is 100k***" \n
+                         "	fed_bank setVariable[""safe"",_funds,true];" \n
+                         "	diag_log ""Federal Reserve is full (ca 15 Mio $)"";" \n
+                         "} else {" \n
+                         "	fed_bank setVariable[""safe"",round(_funds+((count playableUnits)/2)),true];" \n
+                         "	diag_log format [""Federal Reserve: receiving new Goldbars - Total Amount now %1"",(fed_bank getVariable[""safe"",0])];" \n
+                         "};"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "wait_60_min">*/
+                                class wait_60_min
+                                {
+                                        itemno = 4;
+                                        priority = 0.000000;
+                                        to="reset_time";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _time) > _sleep"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "reset_time">*/
+                class reset_time
+                {
+                        name = "reset_time";
+                        itemno = 5;
+                        init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+                         ""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "_">*/
+                                class _
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="update_safe_fund";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

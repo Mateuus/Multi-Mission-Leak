@@ -1,0 +1,1 @@
+private['_kNi'];_kNi = param[0,0,[0]];profileNamespace setVariable ["Zero_one_Online",_kNi];

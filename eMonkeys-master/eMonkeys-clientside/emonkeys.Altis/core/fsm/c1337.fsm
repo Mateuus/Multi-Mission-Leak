@@ -1,0 +1,314 @@
+
+class FSM
+{
+        fsmName = "Life Client FSM";
+        class States
+        {
+                /*%FSM<STATE "Main_Init">*/
+                class Main_Init
+                {
+                        name = "Main_Init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private[""_lastcheck"",""_food"",""_water"",""_lastsync"",""_hcheck"",""_tcheck"",""_bcheck""];" \n
+                         "_lastcheck = time;" \n
+                         "_food = time;" \n
+                         "_water = time;" \n
+                         "_lastsync = time;" \n
+                         "_hcheck = time;" \n
+                         "_tcheck = time;" \n
+                         "_bcheck = time;" \n
+                         "_paycheckperiode = getNumber(missionConfigFile >> ""Cfgmaster"" >> ""paycheckperiode"");"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Split">*/
+                class Split
+                {
+                        name = "Split";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Time_to_pay_">*/
+                                class Time_to_pay_
+                                {
+                                        itemno = 8;
+                                        priority = 0.000000;
+                                        to="Trinken_5_min";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _hcheck) > (6 * 60) && player distance (getmarkerPos ""jail_marker"") >= 20"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Time_to_pay__1">*/
+                                class Time_to_pay__1
+                                {
+                                        itemno = 11;
+                                        priority = 0.000000;
+                                        to="Trinken_2_min";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _tcheck) > (3 * 60) && player distance (getmarkerPos ""jail_marker"") >= 20"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Time_to_pay__2">*/
+                                class Time_to_pay__2
+                                {
+                                        itemno = 12;
+                                        priority = 0.000000;
+                                        to="Battery_1_min";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _bcheck) > (6 * 60)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                                /*%FSM<LINK "Time_to_pay__3">*/
+                                class Time_to_pay__3
+                                {
+                                        itemno = 5;
+                                        priority = 0.000000;
+                                        to="Pay_me_";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"(time - _lastcheck) > (_paycheckperiode * 60)"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Pay_me_">*/
+                class Pay_me_
+                {
+                        name = "Pay_me_";
+                        itemno = 6;
+                        init = /*%FSM<STATEINIT""">*/"if(((!alive player) || (player getVariable[""onkill"",FALSE]))) then" \n
+                         "{" \n
+                         "	systemChat ""Solange du verletzt bist, kannst du deinen Bonus nicht entgegennehmen."";" \n
+                         "}" \n
+                         "	else" \n
+                         "{" \n
+                         "	if(player distance (getMarkerPos ""fed_reserve"") < 120 && playerSide == west) then" \n
+                         "	{" \n
+                         "		systemChat format[""Du hast %1€ erhalten"",[(call EMonkeys_paycheck) + 1500] call EMonkeys_fnc_numberText];" \n
+                         "		EMonkeys_a164 = EMonkeys_a164 + (call EMonkeys_paycheck) + 1500;" \n
+                         "	}" \n
+                         "		else" \n
+                         "	{" \n
+                         "		EMonkeys_a164 = EMonkeys_a164 + (call EMonkeys_paycheck);" \n
+                         "		systemChat format[""Du hast %1€ erhalten"",[(call EMonkeys_paycheck)] call EMonkeys_fnc_numberText];" \n
+                         "	};" \n
+                         "};" \n
+                         "if(playerSide == civilian || playerSide == east) then " \n
+                         "{" \n
+                         "	if( EMonkeys_housecount > 0) then  " \n
+                         "	{" \n
+                         "		if(EMonkeys_a164 > 30000) then" \n
+                         "		{" \n
+                         "			if(EMonkeys_VIP == 0) then  " \n
+                         "			{" \n
+                         "					_housepreis = EMonkeys_housecount * 1800;" \n
+                         "					systemChat format[""Du hast %1€ Grundsteuer für dein(e) %2 Immobilie(n) bezahlt."",_housepreis,EMonkeys_housecount];" \n
+                         "					EMonkeys_a164 = EMonkeys_a164 - _housepreis;" \n
+                         "			};" \n
+                         "		};" \n
+                         "	}; " \n
+                         "};" \n
+                         "_lastcheck = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Trinken_5_min">*/
+                class Trinken_5_min
+                {
+                        name = "Trinken_5_min";
+                        itemno = 9;
+                        init = /*%FSM<STATEINIT""">*/"" \n
+                         "[] spawn {" \n
+                         "" \n
+                         "if(EMonkeys_hu164 < 2) then {eM_damage_null = eM_damage_null + 0.50;}" \n
+                         "		else" \n
+                         "		{" \n
+                         "" \n
+                         "			EMonkeys_hu164 = EMonkeys_hu164 - 5;" \n
+                         "" \n
+                         "		[] call EMonkeys_fnc_hudUpdate;" \n
+                         "" \n
+                         "		if(EMonkeys_hu164 < 2) then {" \n
+                         "" \n
+                         "eM_damage_null = eM_damage_null + 0.50;" \n
+                         "};" \n
+                         "" \n
+                         "		switch(EMonkeys_hu164) do {" \n
+                         "			case 30: " \n
+                         "				{" \n
+                         "					hint ""Du hast schon lange nichts mehr gegessen. Du solltest schleunigst Nahrung finden!"";" \n
+                         "				};" \n
+                         "			case 20: " \n
+                         "				{" \n
+                         "					hint ""Dein Magen knurrt, du solltest jetzt wirklich etwas Nahrung zu dir nehmen."";" \n
+                         "					[""shortWeak""] call EMonkeys_fnc_weaknessEffects;" \n
+                         "				};" \n
+                         "			case 10: " \n
+                         "				{" \n
+                         "					hint ""Du bist nun am Verhungern. Solltest du nichts essen stirbst du."";" \n
+                         "					player setFatigue 1;" \n
+                         "					[""shortWeak""] spawn EMonkeys_fnc_weaknessEffects;" \n
+                         "				};" \n
+                         "			};" \n
+                         "		};" \n
+                         "};" \n
+                         "_hcheck = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Trinken_2_min">*/
+                class Trinken_2_min
+                {
+                        name = "Trinken_2_min";
+                        itemno = 10;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn {" \n
+                         "" \n
+                         "" \n
+                         "if(EMonkeys_thi164 < 2) then {eM_damage_null = eM_damage_null + 0.50;" \n
+                         "		}" \n
+                         "		else" \n
+                         "		{" \n
+                         "" \n
+                         "" \n
+                         "		EMonkeys_thi164 = EMonkeys_thi164 - 3;" \n
+                         "" \n
+                         "			[] call EMonkeys_fnc_hudUpdate;" \n
+                         "			if(EMonkeys_thi164 < 2) then  {" \n
+                         "" \n
+                         "eM_damage_null = eM_damage_null + 0.50;" \n
+                         "" \n
+                         "" \n
+                         "" \n
+                         "};" \n
+                         "			switch(EMonkeys_thi164) do " \n
+                         "			{" \n
+                         "				case 30: {hint""Du hast schon lange nicht mehr getrunken. Du solltest schleunigst etwas trinken."";};" \n
+                         "				case 20: {" \n
+                         "				" \n
+                         "					hint ""Dir geht langsam die Spucke aus, du solltest nun wirklich etwas trinken.""; " \n
+                         "					player setFatigue 1;" \n
+                         "					[""shortWeak""] spawn EMonkeys_fnc_weaknessEffects;" \n
+                         "					};" \n
+                         "				case 10: {" \n
+                         "					hint ""Du stehst kurz davor an Dehydrierung zu sterben. Finde schleunigst etwas zu trinken!""; " \n
+                         "					player setFatigue 1;" \n
+                         "					[""shortWeak""] spawn EMonkeys_fnc_weaknessEffects;" \n
+                         "					};" \n
+                         "			};" \n
+                         "		};" \n
+                         "" \n
+                         "};" \n
+                         "_tcheck = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Battery_1_min">*/
+                class Battery_1_min
+                {
+                        name = "Battery_1_min";
+                        itemno = 13;
+                        init = /*%FSM<STATEINIT""">*/"[] spawn {" \n
+                         "" \n
+                         "if(EMonkeys_bat164 < 2) then {hint ""Dein Handyakku ist leer."";}" \n
+                         "		else" \n
+                         "		{" \n
+                         "			EMonkeys_bat164 = EMonkeys_bat164 - 9;" \n
+                         "			[] call EMonkeys_fnc_hudUpdate;" \n
+                         "			if(EMonkeys_bat164 < 2) then {hint ""Dein Handyakku ist leer."";};" \n
+                         "			switch(EMonkeys_bat164) do " \n
+                         "			{" \n
+                         "				case 30: {hint ""Dein Handyakku hat nur noch 30%."";};" \n
+                         "				case 20: {hint ""Dein Handyakku hat nur noch 20%. Kauf dir eine Batterie"";};" \n
+                         "				case 10: {hint ""Dein Handyakku hat nur noch 10%.\nKauf dir eine Batterie"";};" \n
+                         "			};" \n
+                         "		};" \n
+                         "" \n
+                         "" \n
+                         "};" \n
+                         "_bcheck = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "true">*/
+                                class true
+                                {
+                                        itemno = 7;
+                                        priority = 0.000000;
+                                        to="Split";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="Main_Init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

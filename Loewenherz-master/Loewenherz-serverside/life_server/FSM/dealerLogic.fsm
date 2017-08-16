@@ -1,0 +1,102 @@
+/*%FSM<COMPILE "D:\LOEWENHERZ\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, dealerLogic">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"init",0,250,-193.860809,-147.861969,-103.860809,-97.861992,0.000000,"init"};
+item1[] = {"_",8,4314,317.390869,-23.333069,407.390869,26.666931,0.000000,""};
+item2[] = {"_",8,218,-193.961533,-21.813538,-103.961533,28.186462,0.000000,""};
+item3[] = {"set_sellers",2,250,-34.646057,-22.811401,55.353958,27.188599,0.000000,"set sellers"};
+item4[] = {"wait_60_min",4,218,-39.190796,266.228485,50.809204,316.228485,0.000000,"wait 60 min"};
+item5[] = {"condition_check",2,250,317.818176,266.900757,407.818176,316.900757,0.000000,"condition check"};
+link0[] = {0,2};
+link1[] = {1,3};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,5};
+link5[] = {5,1};
+globals[] = {0.000000,0,0,0,0,640,480,1,47,6316128,1,-387.524750,865.657837,769.240051,-284.816223,1155,910,1};
+window[] = {2,-1,-1,-1,-1,785,26,1466,26,3,1173};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "dealerLogic";
+  class States
+  {
+    /*%FSM<STATE "init">*/
+    class init
+    {
+      name = "init";
+      init = /*%FSM<STATEINIT""">*/"_sleep = (30 * 60);" \n
+       "_time = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="set_sellers";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "set_sellers">*/
+    class set_sellers
+    {
+      name = "set_sellers";
+      init = /*%FSM<STATEINIT""">*/"diag_log ""Server Dealer Logic FSM (set seller)"";" \n
+       "_logic = missionnamespace getvariable [""bis_functions_mainscope"",objnull];" \n
+       "_queue = _logic getvariable ""lhm_fnc_mp_queue"";" \n
+       "_logic setVariable[""lhm_fnc_mp_queue"",[],TRUE];" \n
+       "" \n
+       "{" \n
+       "	_x setVariable[""sellers"",[],true];" \n
+       "} foreach [Dealer_1,Dealer_2,Dealer_3];"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "wait_60_min">*/
+        class wait_60_min
+        {
+          priority = 0.000000;
+          to="condition_check";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(time - _time) > _sleep"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "condition_check">*/
+    class condition_check
+    {
+      name = "condition_check";
+      init = /*%FSM<STATEINIT""">*/"_time = time;" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="set_sellers";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="init";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/

@@ -1,0 +1,1 @@
+if (!isnil "eGyDV") exitwith { titleRsc ["RGB","PLAIN"]; (((uiNamespace getVariable "aWaQ") displayCtrl 5501) ctrlSetText "Nur alle 60Sek. Bitte.");};[] spawn { eGyDV = true; uisleep 60; eGyDV = nil;};hcsend = [4,getplayeruid player,clientOwner];HC1_owner publicvariableclient "hcsend";hcsend = nil;

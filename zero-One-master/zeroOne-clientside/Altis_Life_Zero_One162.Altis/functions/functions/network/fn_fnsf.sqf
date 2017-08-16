@@ -1,0 +1,1 @@
+private['_nPMZ'];_nPMZ = param[0,objNull,[objNull]];if(isNull _nPMZ) exitWith {};if(player distance _nPMZ > 200) exitWith {};while {true} do { if(isNull _nPMZ OR !alive _nPMZ) exitWith {}; if(isNil {_nPMZ getVariable "mining"}) exitWith {}; if(player distance _nPMZ > 200) exitWith {}; _nPMZ say3D "Device_disassembled_loop"; uisleep 28.6;};

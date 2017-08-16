@@ -1,0 +1,1 @@
+private['_kMp'];_kMp = param[0,ObjNull,[ObjNull]];if(isNull _kMp) exitWith {};if(!(_kMp getVariable ["rZf",false])) exitWith {};if(side _kMp isEqualTo independent) exitWith {};detach _kMp;_kMp setVariable["rZf",false,true];PFAubPbI = nil;RuqfuBIBK = false;

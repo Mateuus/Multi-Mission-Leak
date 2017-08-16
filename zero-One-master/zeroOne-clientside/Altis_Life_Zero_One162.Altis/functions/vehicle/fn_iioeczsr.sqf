@@ -1,0 +1,1 @@
+private['_slk','_hMZ'];_slk = param[0,Objnull,[Objnull]];_hMZ = param[1,2,[0,false]];if(isNull _slk) exitWith {};_slk lock _hMZ;

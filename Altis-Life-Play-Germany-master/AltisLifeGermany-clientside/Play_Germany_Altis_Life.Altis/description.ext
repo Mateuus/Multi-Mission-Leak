@@ -1,0 +1,593 @@
+#include "infiSTAR_AdminMenu.hpp"
+
+author = "Tonic, Itsyuka, Play Germany";
+onLoadName = "Altis Life RPG PG5.2";
+onLoadMission = "An RPG game mode developed by Tonic";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 0;
+disabledAI = true;
+enableDebugConsole = 1;
+disableChannels[]={0,1,2,6};
+LoadScreen = "textures\signs\alg_4.paa";
+respawnDialog = 0;
+
+disableRandomization[] = {"AllVehicles"};
+showGroupIndicator = 0;
+//onPauseScript für den ESCINTERRUPT?
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 75;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 150;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+//SpyGlass configuration
+SPY_Enable = false;
+
+//#include "Config_Spyglass.hpp"
+#include "Config_RemoteExec.hpp"
+
+#include "dialog\MasterHandler.h"
+#include "Config_Master.hpp"
+
+class RscTitles
+{
+	#include "dialog\ui.hpp"
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.h"
+
+	class introLife
+	{
+		idd = -1;
+		duration = 10;
+		class controls
+		{
+			class ExampleControl
+			{
+				idc = -1;
+				type = 0;
+				style = 2192;
+				x = 0.125;
+				y = 0.125;
+				h = 0.75;
+				w = 0.75;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.05;
+				colorBackground[] = {1,1,1,0};
+				colorText[] = {1,1,1,1};
+				text = "textures\Playgermanylogo.paa";
+				lineSpacing = 1;
+			};
+		};
+	};
+};
+
+class CfgFunctions
+{
+	#include "Functions.h"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\cop_siren_long.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class Win
+    {
+    	name = "Win";
+        sound[] = {"\sounds\gambling\Menu8-Bit.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class Jackpot
+    {
+        name = "Jackpot";
+        sound[] = {"\sounds\gambling\Jackpot.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	class Lost
+    {
+        name = "Lost";
+        sound[] = {"\sounds\gambling\TextboxBloop8-Bit.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	class SirenLongMedic
+	{
+		name = "SirenLongMedic";
+		sound[] = {"\sounds\medic_siren_long.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class yelp
+	{
+		name = "yelp";
+		sound[] = {"\sounds\yelp.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class yelp2
+	{
+		name = "yelp2";
+		sound[] = {"\sounds\yelp2.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class hiersprichtdiepolizei
+	{
+		name = "hiersprichtdiepolizei";
+		sound[] = {"\sounds\hiersprichtdiepolizei.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class handcuffs
+	{
+		name = "handcuffs";
+		sound[] = {"\sounds\handcuffs.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class patdown
+	{
+		name = "patdown";
+		sound[] = {"\sounds\patdown.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class car_lock
+	{
+		name = "car_lock";
+		sound[] = {"\sounds\car_lock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class car_unlock
+	{
+		name = "car_unlock";
+		sound[] = {"\sounds\car_unlock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class car_alarm
+	{
+		name = "car_alarm";
+		sound[] = {"\sounds\car_alarm.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class mining
+	{
+		name = "mining";
+		sound[] = {"\sounds\mining.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class harvest
+	{
+		name = "harvest";
+		sound[] = {"\sounds\harvest.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class dance
+	{
+		name="dance";
+		sound[] = {"\sounds\dance.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	class schutzsirene
+	{
+		name="schutzsirene";
+		sound[] = {"\sounds\schutzsirene.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	class bombarm
+    {
+		name = "bombarm";
+		sound[] = {"\sounds\bombarm.ogg", 1.0, 1};
+		titles[] = {};
+    };
+	class mari
+    {
+		name = "mari";
+		sound[] = {"\sounds\mari.ogg", 1.0, 1};
+		titles[] = {};
+    };
+	class empwarn
+    {
+    	name = "empwarn";
+    	sound[] = {"\sounds\empwarn.ogg", 1.0, 1};
+    	titles[] = {};
+    };
+    class empacsound
+    {
+    	name = "empacsound";
+    	sound[] = {"sounds\empac.ogg", db-5, 1};
+    	titles[] = {};
+    };
+    class bankalarm
+    {
+    	name = "bankalarm";
+    	sound[] = {"sounds\bank_alarm.ogg", 1.0, 1};
+    	titles[] = {};
+    };
+	class pgintrork
+    {
+    	name = "pgintrork";
+    	sound[] = {"sounds\pgintrork.ogg", 1.0, 1};
+    	titles[] = {};
+    };
+	class pgparadroprk
+    {
+    	name = "pgparadroprk";
+    	sound[] = {"sounds\pgparadroprk.ogg", 1.0, 1};
+    	titles[] = {};
+    };
+    class pickaxe
+    {
+        name = "pickaxe";
+        sound[] = {"\sounds\pickaxe.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class shovel
+    {
+        name = "shovel";
+        sound[] = {"\sounds\shovel.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	class radioMusic
+    {
+    	name = "radioMusic";
+    	sound[] = {"sounds\Moby_AlmostHome.ogg", db-5, 1};
+    	titles[] = {};
+    };
+	class blackparty1
+    {
+    	name = "blackparty1";
+    	sound[] = {"sounds\blackparty1.ogg", db-5, 1};
+    	titles[] = {};
+    };
+	class blackparty2
+    {
+    	name = "blackparty2";
+    	sound[] = {"sounds\blackparty2.ogg", db-5, 1};
+    	titles[] = {};
+    };
+	class radioactive
+    {
+    	name = "radioactive";
+    	sound[] = {"sounds\radioactive.ogg", db-3, 1};
+    	titles[] = {};
+    };
+	class restart
+	{
+		name = "restart";
+		sound[] = {"\sounds\restart.ogg", 2, 1};
+		titles[] = {};
+	};
+	class housealarm
+	{
+		name = "housealarm";
+		sound[] = {"\sounds\housealarm.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class murmur_8
+	{
+		name = "murmur_8"; // Name for mission editor
+		sound[] = {\sounds\murmur_8.ogg, db+10, 1.0};
+		titles[] = {0, ""};	
+	};		
+	class eruptie_1
+	{
+		name = "eruptie_1";
+		sound[] = {"\sounds\eruptie_1.ogg", db+20, 1};
+		titles[] = {};
+	};		
+	class eruptie_2
+	{
+		name = "eruptie_2";
+		sound[] = {"\sounds\eruptie_2.ogg", db+20, 1};
+		titles[] = {};
+	};	
+	class eruptie_3
+	{
+		name = "eruptie_3";
+		sound[] = {"\sounds\eruptie_3.ogg", db+25, 1};
+		titles[] = {};
+	};
+	class tunet_v_4
+	{
+		name = "tunet_v_4"; // Name for mission editor
+		sound[] = {\sounds\tunet_v_4.ogg, db+15, 1.0};
+		titles[] = {0, ""};
+	};	
+	class tunet_v_5
+	{
+		name = "tunet_v_5"; // Name for mission editor
+		sound[] = {\sounds\tunet_v_5.ogg, db+15, 1.0};
+		titles[] = {0, ""};
+	};	
+	class tunet_v_6
+	{
+		name = "tunet_v_6"; // Name for mission editor
+		sound[] = {\sounds\tunet_v_6.ogg, db+15, 1.0};
+		titles[] = {0, ""};
+	};	
+	class tunet_v_9
+	{
+		name = "tunet_v_9"; // Name for mission editor
+		sound[] = {\sounds\tunet_v_9.ogg, db+15, 1.0};
+		titles[] = {0, ""};
+	};	
+	class expozie
+	{
+		name = "expozie"; // Name for mission editor
+		sound[] = {\sounds\expozie.ogg, db+30, 1.0};
+		titles[] = {0, ""};	
+	};		
+	class bariera_1
+	{
+		name = "bariera_1"; // Name for mission editor
+		sound[] = {\sounds\bariera_1.ogg, db+35, 1.0};
+		titles[] = {0, ""};	
+	};	
+	class bariera_2
+	{
+		name = "bariera_2"; // Name for mission editor
+		sound[] = {\sounds\bariera_2.ogg, db+35, 1.0};
+		titles[] = {0, ""};	
+	};	
+	class bariera_3
+	{
+		name = "bariera_3"; // Name for mission editor
+		sound[] = {\sounds\bariera_3.ogg, db+35, 1.0};
+		titles[] = {0, ""};	
+	};	
+	class bariera_4
+	{
+		name = "bariera_4"; // Name for mission editor
+		sound[] = {\sounds\bariera_4.ogg, db+35, 1.0};
+		titles[] = {0, ""};	
+	};	
+	class bariera_5
+	{
+		name = "bariera_5"; // Name for mission editor
+		sound[] = {\sounds\bariera_5.ogg, db+45, 1.0};
+		titles[] = {0, ""};	
+	};	
+	class meteor_1
+	{
+		name = "meteor_1"; // Name for mission editor
+		sound[] = {\sounds\meteor_1.ogg, db+20, 1.0};
+		titles[] = {0, ""};	
+	};	
+	class earthquakes
+	{
+		name = "earthquakes"; // Name for mission editor
+		sound[] = {\sounds\earthquakes.ogg, 1, 1.0};
+		titles[] = {0, ""};
+	};
+};
+
+class CfgMusic
+{
+	tracks[]={};
+
+
+    class pgintrorkm
+    {
+    	name = "pgintrorkm";
+    	sound[] = {"sounds\pgintrork.ogg", 0.5, 1};
+    };
+	class pgparadroprkm
+	{
+		name = "pgparadroprkm";
+    	sound[] = {"sounds\pgparadroprk.ogg", 0.5, 1};
+	};
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Spielen Verboten";
+		subtitle = "Diesen Spielslot darfst du nicht verwenden";
+		description = "Fehlende Berechtigung im Spiel. Bitte wähle einen anderen Slot aus";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Blacklisted
+	{
+		title = "Spielen Verboten";
+		subtitle = "Dein Account wurde gesperrt";
+		description = "Bitte melde dich im Supprt um dieses Problem zu klären";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class SpyGlass
+	{
+		title = "The SpyGlass sees you";
+		subTitle = "You were detected by the SpyGlass";
+		description = "You were detected for cheating and have been reported to the server. Enjoy your day.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Abort
+	{
+		title = "Auf Wiedersehen";
+		subTitle = "Bis zum nächsten mal!";
+		description = "Play Germany - Altis Life Germany - URL: www.play-germany.de TS3: ts.play-germany.de";
+		pictureBackground = "textures\Playgermanylogo.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Mod
+	{
+		title = "Play Germany";
+		subTitle = "Bitte deaktiviere deine Mods, bevor du versuchst auf unseren Server zu joinen!";
+		description = "Bei Fragen komm zu uns ins TS: ts.play-germany.de oder melde dich bei uns im Forum: www.play-germany.de";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Koth
+	{
+		title = "Play Germany";
+		subTitle = "Du hast gerade 'King of the Hill' gespielt. Du solltest dein Spiel einmal neu starten, um Fehler zu vermeiden.";
+		description = "Bei Fragen komm zu uns ins TS: ts.play-germany.de oder melde dich bei uns im Forum: www.play-germany.de";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class death
+	{
+		title = "Ich dachte du bist tot";
+		subTitle = "";
+		description = "";
+		pictureBackground = "textures\death.jpg";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class fasttravel
+	{
+		title = "Bitte kurz warten...";
+		subTitle = "";
+		description = "";
+		pictureBackground = "textures\fasttravel.jpg";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "Sani angefordert";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	
+	class MedicalAnswer
+	{
+		title = "Anfrage erhalten";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "Ein Sanitäter ist auf dem Weg zu Ihnen";
+		duration = 30;
+		priority = 100;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Auftrag angenommen";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Auftrag fehlgeschalgen";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Auftrag beendet";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Du hast eine Nachricht erhalten";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "Polizeianfrage";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Nachricht";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Admin Nachricht";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+	class ASFMessage
+	{
+		title = "ASF Nachricht";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+	class TaxiMessage
+	{
+		title = "Taxi Nachricht";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class EventMsg
+	{
+		title = "Event Nachricht";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+};

@@ -1,0 +1,257 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, restrained.fsm">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,775.000000,-50.000000,875.000000,0.000000,0.000000,"Start"};
+item1[] = {"true",4,218,675.000000,0.000000,775.000000,50.000000,0.000000,"true"};
+item2[] = {"Quick_Check",2,4346,775.000000,50.000000,875.000000,100.000000,0.000000,"Quick Check"};
+item3[] = {"Alive",4,218,925.000000,300.000000,1025.000000,350.000000,0.000000,"Alive"};
+item4[] = {"Spawn",2,250,775.000000,150.000000,875.000000,200.000000,0.000000,"Spawn"};
+item5[] = {"State_Check",4,218,775.000000,225.000000,875.000000,275.000000,99.000000,"State Check"};
+item6[] = {"RELEASED",1,250,950.000000,450.000000,1050.000000,500.000000,0.000000,"RELEASED"};
+item7[] = {"Monitor_Time",4,218,950.000000,175.000000,1050.000000,225.000000,0.000000,"Monitor Time"};
+item8[] = {"CHECK_CHECK_",2,250,1100.000000,250.000000,1200.000000,300.000000,0.000000,"CHECK CHECK "};
+item9[] = {"Thread_Check",4,218,1150.000000,400.000000,1250.000000,450.000000,0.000000,"Thread Check"};
+item10[] = {"Unrestrained_",4,218,1050.000000,375.000000,1150.000000,425.000000,0.000000,"Unrestrained" \n ""};
+item11[] = {"SetVariables",2,250,775.000000,300.000000,875.000000,350.000000,0.000000,"SetVariables"};
+item12[] = {"Dead",4,218,775.000000,375.000000,875.000000,425.000000,0.000000,"Dead"};
+item13[] = {"IsNull",4,218,875.000000,0.000000,975.000000,50.000000,1.000000,"IsNull"};
+item14[] = {"EMPTYNESS",1,250,1175.000000,100.000000,1275.000000,150.000000,0.000000,"EMPTYNESS"};
+item15[] = {"true",4,218,625.000000,100.000000,725.000000,150.000000,0.000000,"true"};
+link0[] = {0,1};
+link1[] = {0,13};
+link2[] = {1,2};
+link3[] = {2,15};
+link4[] = {3,6};
+link5[] = {4,5};
+link6[] = {4,7};
+link7[] = {5,11};
+link8[] = {7,8};
+link9[] = {8,9};
+link10[] = {8,10};
+link11[] = {9,6};
+link12[] = {10,6};
+link13[] = {11,3};
+link14[] = {11,12};
+link15[] = {12,6};
+link16[] = {13,14};
+link17[] = {15,4};
+globals[] = {0.000000,0,0,0,0,640,480,1,451,6316128,1,396.579254,1527.193970,614.879822,-215.571777,1242,924,1};
+window[] = {2,-1,-1,-1,-1,864,2050,3344,130,3,1260};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "restrained.fsm";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/"_restrainee = param[0,objNull,[objNull]];" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "IsNull">*/
+        class IsNull
+        {
+          priority = 1.000000;
+          to="EMPTYNESS";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"isNull _restrainee"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Quick_Check";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Quick_Check">*/
+    class Quick_Check
+    {
+      name = "Quick_Check";
+      init = /*%FSM<STATEINIT""">*/"if(animationState player isEqualTo ""Incapacitated"") then { " \n
+       "   player playMoveNow ""amovppnemstpsraswrfldnon"";" \n
+       "};" \n
+       "while {dialog} do {" \n
+       "   closeDialog 0;" \n
+       "};" \n
+       "" \n
+       "{" \n
+       "	 [_x] call life_fnc_pareregekesw;" \n
+       "} forEach attachedObjects player;" \n
+       " " \n
+       "titleText[""You were ziptied!"",""PLAIN""];" \n
+       "player setVariable [""tf_unable_to_use_radio"", true];" \n
+       "CRP_var_ThsEnabled = false;" \n
+       "_restrainTime = diag_tickTime;" \n
+       "_checkTime = diag_tickTime;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Spawn";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Spawn">*/
+    class Spawn
+    {
+      name = "Spawn";
+      init = /*%FSM<STATEINIT""">*/"_animation = [] spawn {" \n
+       "	while{player getVariable ""restrained""} do {" \n
+       "		player playMove ""AmovPercMstpSnonWnonDnon_Ease"";" \n
+       "		waitUntil{vehicle player isEqualTo player OR !(player getVariable[""restrained"",false])};" \n
+       "	};" \n
+       "	player switchMove ""AmovPercMstpSlowWrflDnon_SaluteIn"";" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "State_Check">*/
+        class State_Check
+        {
+          priority = 99.000000;
+          to="SetVariables";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!(player getVariable[""restrained"",false]) OR !(alive player)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Monitor_Time">*/
+        class Monitor_Time
+        {
+          priority = 0.000000;
+          to="CHECK_CHECK_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(diag_ticktime - _restrainTime) >= (15 * 60)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "RELEASED">*/
+    class RELEASED
+    {
+      name = "RELEASED";
+      init = /*%FSM<STATEINIT""">*/"terminate _animation;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "CHECK_CHECK_">*/
+    class CHECK_CHECK_
+    {
+      name = "CHECK_CHECK_";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Unrestrained_">*/
+        class Unrestrained_
+        {
+          priority = 0.000000;
+          to="RELEASED";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!(player getVariable [""restrained"",FALSE])"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Thread_Check">*/
+        class Thread_Check
+        {
+          priority = 0.000000;
+          to="RELEASED";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(!([west,getPos player,30] call life_fnc_zexavufredr) && {(player getVariable [""restrained"",false])} && {isNull objectParent player})" \n
+           "" \n
+           ""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/"player setVariable [""restrained"",false,true];" \n
+           "player setVariable[""restrainedtype"",nil,true];" \n
+           "player setVariable [""Escorting"",false,true];" \n
+           "player setVariable [""transporting"",false,true];" \n
+           "player setVariable [""tf_unable_to_use_radio"",true];" \n
+           "detach player;" \n
+           "titleText[""You were unrestrained due to the restrained monitor thread"",""PLAIN""];"/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "SetVariables">*/
+    class SetVariables
+    {
+      name = "SetVariables";
+      init = /*%FSM<STATEINIT""">*/"player setVariable [""Escorting"",false,true];" \n
+       "player setVariable [""restrained"",false,true];" \n
+       "player setVariable [""restrainedtype"",nil,true];" \n
+       "player setVariable [""transporting"",false,true];" \n
+       "player setVariable [""tf_unable_to_use_radio"", false];" \n
+       "CRP_var_ThsEnabled = true;detach player;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Dead">*/
+        class Dead
+        {
+          priority = 0.000000;
+          to="RELEASED";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!alive player"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Alive">*/
+        class Alive
+        {
+          priority = 0.000000;
+          to="RELEASED";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"alive player"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/"_time = diag_tickTime;" \n
+           "titleText[""You were let go."",""PLAIN""];"/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "EMPTYNESS">*/
+    class EMPTYNESS
+    {
+      name = "EMPTYNESS";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+    "RELEASED",
+    "EMPTYNESS",
+  };
+};
+/*%FSM</COMPILE>*/
