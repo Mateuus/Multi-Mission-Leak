@@ -1,1 +1,0 @@
-#include "info\InfoConfig.hpp"
