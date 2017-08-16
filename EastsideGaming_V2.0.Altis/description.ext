@@ -1,0 +1,24 @@
+#include "config\Config_SpyGlass.hpp"
+#include "config\CfgRemoteExec.hpp"
+#include "dialog\MasterHandler.hpp"
+#include "config\Config_Master.hpp"
+#include "infiSTAR_AdminMenu.hpp"
+enableDebugConsole = 1;
+disableChannels[]={{0, true, true},{1, false, true},{2, true, false},{3, false, false},{4, false, false},{5, false, false},{6, true, true}};
+#include "config\Config_Includes.hpp"
+author = "Eastside Gaming - Development";
+onLoadName = "Altis Life";
+onLoadMission = "Eastside-Gaming Altis Life";
+class Header
+{
+	gameType = RPG; // MP mission type
+	minPlayers = 1;
+	maxPlayers = 131;
+};
+
+#include "config\Config_RscTitles.hpp"
+
+class Params {
+	#define DEBUGCONSOLE_DEFAULT 1
+	#include "\a3\functions_f\Params\paramDebugConsole.hpp"
+};

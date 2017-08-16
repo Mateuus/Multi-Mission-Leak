@@ -1,0 +1,3 @@
+
+#include <macro.h>
+ if(isNil "perk_12") then {perk_12 = 0;};  life_maxWeight = LIFE_SETTINGS(getNumber,"total_maxWeight");  if(backpack player != "") then { 	ADD(life_maxWeight,(round(FETCH_CONFIG2(getNumber,CONFIG_VEHICLES,(backpack player),"maximumload") / 4))); };  switch (true) do { 	case (perk_12 >= 12): {life_maxWeight = life_maxWeight + 30;}; 	case (perk_12 >= 6): {life_maxWeight = life_maxWeight + 20;}; 	case (perk_12 >= 2): {life_maxWeight = life_maxWeight + 10;}; };  if(safekeeping_active && safe_gearset == "admin" && !safekeep_toDisable) then {life_maxWeight = 5000};  life_maxWeight;   

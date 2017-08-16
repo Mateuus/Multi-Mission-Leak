@@ -1,0 +1,162 @@
+author = "Tonic modifié par Skrow et Skyfezzer";
+loadScreen = "textures\HUD\screen.jpg";
+onloadmission = "Venez sur Teamspeak : ts.projet.life";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 1;
+disabledAI = 1;
+disableChannels[]= {0,1,2,6};
+enableDebugConsole = 1;
+respawnDialog = 0;
+scriptedPlayer = 1;
+briefing = 0;
+debriefing = 0;
+allowFunctionsRecompile = 0;
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 170;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 150;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+//Rangement 1
+#include "config\Config_RemoteExec.hpp"
+#include "config\Config_Infistar.hpp"
+
+class CfgFunctions {
+    #include "config\Config_Functions.hpp"
+};
+
+//Rangement 2
+#include "dialog\MasterHandler.hpp"
+#include "config\Config_Master.hpp"
+
+
+
+class RscTitles {
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.hpp"
+	#include "dialog\hud_stats.hpp"
+	#include "dialog\statusbar.hpp"
+};
+
+class CfgSounds
+{
+	#include "config\Config_Sounds.hpp"
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are not white-listed to use this slot";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Blacklisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "Médecin requis !";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Mission de livraison acceptée";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = Livraison échouée";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Livraison réussie !";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Message reçu";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "Message Gendarmerie";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Message Admin";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+	class GarageMessage
+	{
+		title = "Demande de depannage reçu";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+};

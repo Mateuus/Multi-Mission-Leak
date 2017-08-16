@@ -1,0 +1,3 @@
+
+#include <macro.h>
+ disableSerialization; private ["_zowrhlzdbjrqiunttvqqahbwzosdfjuihldzrsizqismaaqlfzecmeemamachlt"]; waitUntil {!(isNull (findDisplay 7100))}; _dialog = findDisplay 7100; _listbox = _dialog displayCtrl 7055; _zowrhlzdbjrqiunttvqqahbwzosdfjuihldzrsizqismaaqlfzecmeemamachlt = _dialog displayCtrl 7099; _zowrhlzdbjrqiunttvqqahbwzosdfjuihldzrsizqismaaqlfzecmeemamachlt ctrlShow false;  { 	_itemName = _x select 0; 	_itemDisplayName = M_CONFIG(getText,"VirtualItems",_itemName,"displayname"); 	_itemDisplayName = localize _itemDisplayName; 	_listbox lbAdd format ["%1",_itemDisplayName]; 	if(_itemName == "oil_processed") then {_listbox lbSetColor [_forEachIndex,(var_base getVariable ["Oil_color",[0.55,0.22,0.05,1]])];}; 	 } forEach DYNMARKET_prices; 

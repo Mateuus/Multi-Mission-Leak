@@ -1,0 +1,1 @@
+/*	Author Shinji	Clears the Messages fo the player... cant read the old messages again..*/Shinji_names = [];Shinji_messages = [];Shinji_positions = [];lbClear 2100;lbClear 1500;[] spawn life_fnc_initMessages;

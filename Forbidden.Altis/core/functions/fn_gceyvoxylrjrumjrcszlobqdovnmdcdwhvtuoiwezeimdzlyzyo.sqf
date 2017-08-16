@@ -1,0 +1,1 @@
+if (soundVolume != 1 OR life_adminjail != 0) then { 	1 fadeSound 1; 	hint localize "STR_m_SoundHigher"; } else { 	1 fadeSound 0.1; 	hint localize "STR_m_SoundLowered"; };   sleep 0.2; [] spawn life_fnc_cylcoklbmemomcaqesrqdstaesompwmgeoaiyuujdlphokfnsxl; 

@@ -1,0 +1,203 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, GTA: Simulation Manager">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Init",0,250,-50.000000,-150.000000,50.000000,-100.000000,0.000000,"Init"};
+item1[] = {"Client",4,218,-50.000000,-75.000000,50.000000,-25.000000,0.000000,"Client"};
+item2[] = {"Manager",2,250,-50.000000,0.000000,50.000000,50.000000,0.000000,"Manager"};
+item3[] = {"Wait",4,218,-50.000000,75.000000,50.000000,125.000000,0.000000,"Wait"};
+item4[] = {"",7,210,96.000000,96.000000,104.000000,104.000000,0.000000,""};
+item5[] = {"",7,210,96.000000,20.999998,104.000000,29.000000,0.000000,""};
+item6[] = {"Server",4,218,-50.000000,-225.000000,50.000000,-175.000000,0.000000,"Server"};
+item7[] = {"Manager_1",2,250,-50.000000,-300.000000,50.000000,-250.000000,0.000000,"Manager"};
+item8[] = {"Wait",4,4314,-50.000000,-375.000000,50.000000,-325.000000,0.000000,"Wait"};
+item9[] = {"",7,210,96.000000,-354.000000,104.000000,-346.000000,0.000000,""};
+item10[] = {"",7,210,96.000008,-279.000000,104.000000,-271.000000,0.000000,""};
+link0[] = {0,1};
+link1[] = {0,6};
+link2[] = {1,2};
+link3[] = {2,3};
+link4[] = {3,4};
+link5[] = {4,5};
+link6[] = {5,2};
+link7[] = {6,7};
+link8[] = {7,8};
+link9[] = {8,9};
+link10[] = {9,10};
+link11[] = {10,7};
+globals[] = {25.000000,1,0,0,0,640,480,1,14,6316128,1,-464.096558,567.268799,201.237030,-454.411682,1514,883,1};
+window[] = {0,-1,-1,-1,-1,1107,78,2417,78,1,1532};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "GTA: Simulation Manager";
+  class States
+  {
+    /*%FSM<STATE "Init">*/
+    class Init
+    {
+      name = "Init";
+      init = /*%FSM<STATEINIT""">*/"private ""_isServer"";" \n
+       "_isServer = [ _this, 0, false, [true] ] call BIS_fnc_param;" \n
+       "" \n
+       "GTA_fnc_simulationManager_disableClient = false;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Server">*/
+        class Server
+        {
+          priority = 0.000000;
+          to="Manager_1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_isServer"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Client">*/
+        class Client
+        {
+          priority = 0.000000;
+          to="Manager";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!_isServer"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Manager">*/
+    class Manager
+    {
+      name = "Manager";
+      init = /*%FSM<STATEINIT""">*/"_handle = [] spawn {" \n
+       "" \n
+       "	scriptName ""fn_simulationManager : Client Manager"";" \n
+       "" \n
+       "	{" \n
+       "" \n
+       "		private [ ""_object"", ""_type"", ""_dist"", ""_multiplier"", ""_simulate"" ];" \n
+       "		_object = _x;" \n
+       "		_type = typeOf _object;" \n
+       "		_dist = player distance _object;" \n
+       "		_multiplier = 1;" \n
+       "" \n
+       "		//--- Check players speed" \n
+       "		if ( player call BIS_fnc_absSpeed > 100 ) then {" \n
+       "" \n
+       "			//--- Set distance check multiplier" \n
+       "			_multiplier = 1.5;" \n
+       "" \n
+       "		};" \n
+       "" \n
+       "		//--- Money, food, water and items" \n
+       "		switch ( true ) do {" \n
+       "" \n
+       "			//--- Ignore" \n
+       "			case ( _object getVariable [ ""GTA_fnc_simulationManager_ignore"", false ] ) : {};" \n
+       "" \n
+       "			//--- Is local" \n
+       "			//case ( local _object ) : {};" \n
+       "" \n
+       "			//--- Vehicles" \n
+       "			case ( [ _object, [ ""Car_F"", ""Tank_F"", ""Ship_F"", ""Air"", ""StaticWeapon"" ] ] call GTA_fnc_isKindOf ) : {" \n
+       "" \n
+       "				_simulate = !( _dist > 2000 * _multiplier && count crew _object == 0 ) || local _object;" \n
+       "" \n
+       "			};" \n
+       "" \n
+       "		};" \n
+       "" \n
+       "		//--- Set simulation" \n
+       "		if !( isNil ""_simulate"" ) then {" \n
+       "" \n
+       "			//--- Override" \n
+       "			if ( GTA_fnc_simulationManager_disableClient ) then { _simulate = true };" \n
+       "			" \n
+       "			_object enableSimulation _simulate;" \n
+       "			_object hideObject !_simulate;" \n
+       "" \n
+       "		};" \n
+       "" \n
+       "	} forEach entities ""AllVehicles"";" \n
+       "" \n
+       "	sleep 4;" \n
+       "" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Wait">*/
+        class Wait
+        {
+          priority = 0.000000;
+          to="Manager";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"scriptDone _handle"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Manager_1">*/
+    class Manager_1
+    {
+      name = "Manager_1";
+      init = /*%FSM<STATEINIT""">*/"_handle = [] spawn {" \n
+       "" \n
+       "	scriptName ""fn_simulationManager : Server Manager"";" \n
+       "" \n
+       "	{" \n
+       "" \n
+       "		_object = _x;" \n
+       "		_type = typeOf _object;" \n
+       "" \n
+       "		//--- Money, food, water and items" \n
+       "		switch ( true ) do {" \n
+       "" \n
+       "			//--- Ignore" \n
+       "			case ( _object getVariable [ ""GTA_fnc_simulationManager_ignore"", false ] ) : {};" \n
+       "" \n
+       "			//--- Money, food, water and items" \n
+       "			case ( _type in [ ""Land_BottlePlastic_V1_F"", ""Land_TacticalBacon_F"", ""Land_Can_V3_F"", ""Land_CanisterFuel_F"", ""Land_Can_V3_F"", ""Land_Money_F"", ""Land_Suitcase_F"" ] ) : {" \n
+       "" \n
+       "				if ( simulationEnabled _object ) then { " \n
+       "					" \n
+       "					_object enableSimulationGlobal false;" \n
+       "					_object setVariable [ ""GTA_fnc_simulationManager_ignore"", true ];" \n
+       "" \n
+       "				};" \n
+       "" \n
+       "			};" \n
+       "" \n
+       "		};" \n
+       "" \n
+       "	} forEach entities ""All"";" \n
+       "" \n
+       "	sleep 4;" \n
+       "" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Wait">*/
+        class Wait
+        {
+          priority = 0.000000;
+          to="Manager_1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"scriptDone _handle"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Init";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/

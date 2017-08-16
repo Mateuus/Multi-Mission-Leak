@@ -1,0 +1,3 @@
+ private["_ssthzibfwlrnhvtqwvzowmfydbhpttzuadvktobkzezmoamfwprvrsejddmdfhfnwtcsg","_zclvkicljbaieoazroleogzepbsiuhmndyovxnnimhvbtybqinmimjkvazpaanmoitbcaa"]; _ssthzibfwlrnhvtqwvzowmfydbhpttzuadvktobkzezmoamfwprvrsejddmdfhfnwtcsg = _this select 0; _zclvkicljbaieoazroleogzepbsiuhmndyovxnnimhvbtybqinmimjkvazpaanmoitbcaa = _this select 1; if(isServer && !hasInterface) exitWith {};  
+#include <macro.h>
+if(FETCH_CONST(life_adminlevel) < 1) exitWith {}; hint parseText format["<t align='center'><t color='#FF0000'><t size='3'>SPY-GLASS</t></t><br/>Cheater Flagged</t><br/><br/>Name: %1<br/>Detection: %2",_ssthzibfwlrnhvtqwvzowmfydbhpttzuadvktobkzezmoamfwprvrsejddmdfhfnwtcsg,_zclvkicljbaieoazroleogzepbsiuhmndyovxnnimhvbtybqinmimjkvazpaanmoitbcaa]; 

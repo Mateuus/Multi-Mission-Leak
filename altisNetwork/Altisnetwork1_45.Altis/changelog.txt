@@ -1,0 +1,13 @@
+*/
+
+Added Cop Licenses - RTU
+Added Grey Vehicles to RTU 
+Added Upgrade Button to Gangs : DONE
+Changed Max Members to 15 : FIXING
+Changed a few prices in rebel stores : DONE
+Added Mags for AKM : DONE
+Changed Admin Mask to Special Helmet : FIXING
+Removed VR Goggles from Admin Gear Loadout : DONE
+Added Special Helemet to Admin Gear Loadout : FIXING
+
+*/

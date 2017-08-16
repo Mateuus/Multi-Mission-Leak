@@ -1,0 +1,12 @@
+This script will increase client FPS by 25-50% for missions with a lot of vehicles spread throughout the map.
+It must be spawned or execVM'd once on every client. For A3Wasteland, it is execVM'd at the end of "client\init.sqf"
+If you decide to use this in another mission, a little mention in the credits would be appreciated :) - AgentRev
+
+This Script is portet vom Wasteland to Altis Life from MarkusSR1984 is you want to use it in your Misssion you have to
+give Credits to:
+
+AgentRev (A3Wasteland development Team) as Developer
+and
+MarkusSR1984 (Division Wolf development Team) as Porter
+
+Thanks.

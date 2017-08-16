@@ -1,0 +1,1 @@
+  nearestObjects[player,["Land_Stone_4m_F"],10];  { 	_x allowDamage false; } forEach nearestObjects[player,[],20]; 

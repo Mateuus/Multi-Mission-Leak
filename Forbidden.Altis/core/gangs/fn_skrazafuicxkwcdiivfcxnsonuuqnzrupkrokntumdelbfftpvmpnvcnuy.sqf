@@ -1,0 +1,3 @@
+
+#include <macro.h>
+ private "_group"; life_action_gangInUse = nil;  if(BANK < (LIFE_SETTINGS(getNumber,"gang_price"))) exitWith { 	hint format[localize "STR_GNOTF_NotEnoughMoney",[((LIFE_SETTINGS(getNumber,"gang_price"))-BANK)] call life_fnc_ccxpkhrsgzfibqpgmuxgqovtqnwczbibnrrxqvyckzrmhckzyugqq]; 	{grpPlayer SVAR [_x,nil,true];} foreach ["gang_id","gang_owner","gang_name","gang_members","gang_officers","gang_maxmembers","gang_bank"]; };  SUB(BANK,(LIFE_SETTINGS(getNumber,"gang_price")));  hint format[localize "STR_GNOTF_CreateSuccess",(group player) getVariable "gang_name",[(LIFE_SETTINGS(getNumber,"gang_price"))] call life_fnc_ccxpkhrsgzfibqpgmuxgqovtqnwczbibnrrxqvyckzrmhckzyugqq]; 

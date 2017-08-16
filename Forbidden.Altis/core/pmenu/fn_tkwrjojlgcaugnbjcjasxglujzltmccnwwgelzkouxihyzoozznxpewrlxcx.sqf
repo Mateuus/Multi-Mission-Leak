@@ -1,0 +1,1 @@
+[[cursorTarget,player,false],"life_fnc_tfhhijlfhdchnjqigaepkaymnwhmjkeipyoqtidtcaxooxxfkwi",false,false] spawn life_fnc_MP; 

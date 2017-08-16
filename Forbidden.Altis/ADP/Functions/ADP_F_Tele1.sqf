@@ -1,0 +1,1 @@
+      _pos = _this select 0; if (!(getPlayerUID player == "76561198016842326")) then { 	[4,(getPlayerUID player),"-","Tele Map",str _pos,profileName,"-",str (getPos player)] remoteExec ["TON_fnc_cqbslmzhelexdchvshruhtirwniyhyywbybxhiltsdxdujmnhjuhnal",2]; }; vehicle player setPos _pos; hint ""; ["TelID", "onMapSingleClick"] call BIS_fnc_RemoveStackedEventHandler; openMap false; 

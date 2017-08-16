@@ -1,0 +1,550 @@
+<Key ID="STR_m_AdminRuleQuestion32">
+	<Original>En spelare stjäl din lastbil, du skyndar dig till ett garage för att ta ut en bil och leta efter honom. Efter några minuter så hittar du honom och lastbilen, du vill ta tillbaka lastbilen, hur ska du gå till väga?</Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer32a">
+	<Original>Skjuta honom</Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer32b">
+	<Original>Se dig omkring och se om han har vänner i närheten, isåfall skjuter jag dom först</Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer32c">
+	<Original>Jag får inte skjuta honom eftersom det var en stund sedan han stal lastbilen, så jag smyger upp till honom och rånar honom på lastbilen</Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer32d">
+	<Original>Jag kör över honom och hoppar fort in i min lastbil och kör därifrån</Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect32">
+	<Original>c</Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion33">
+	<Original>En person skjöt dig just helt utan anledning, utan en korrekt engage. Vad gör du?</Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer33a">
+	<Original>Jag skriver i side chat att han har RDMat mig och ber han komma in på Teamspeak</Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer33b">
+	<Original>Jag skickar direkt ett SMS till admin och säger att jag just blev RDMad</Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer33c">
+	<Original>Jag tabbar direkt ner till teamspeak och pokar en admin, säger att jag blev RDMad och behöver hjälp</Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer33d">
+	<Original>Skickar ett SMS till personen och förklarar att han troligen har begått ett regelbrott, du ber honom prata med dig i Teamspeak</Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect33">
+	<Original>d</Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion34">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer34a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer34b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer34c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer34d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect34">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion35">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer35a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer35b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer35c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer35d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect35">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion36">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer36a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer36b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer36c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer36d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect36">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion37">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer37a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer37b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer37c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer37d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect37">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion38">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer38a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer38b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer38c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer38d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect38">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion39">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer39a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer39b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer39c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer39d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect39">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion40">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer40a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer40b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer40c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer40d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect40">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion41">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer41a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer41b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer41c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer41d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect41">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion42">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer42a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer42b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer42c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer42d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect42">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion43">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer43a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer43b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer43c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer43d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect43">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion44">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer44a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer44b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer44c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer44d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect44">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion45">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer45a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer45b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer45c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer45d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect45">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion46">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer46a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer46b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer46c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer46d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect46">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion47">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer47a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer47b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer47c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer47d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect47">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion48">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer48a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer48b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer48c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer48d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect48">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion49">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer49a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer49b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer49c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer49d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect49">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion50">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer50a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer50b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer50c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer50d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect50">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion51">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer51a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer51b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer51c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer51d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect51">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion52">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer52a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer52b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer52c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer52d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect52">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion53">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer53a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer53b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer53c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer53d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect53">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion54">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer54a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer54b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer54c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer54d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect54">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion55">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer55a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer55b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer55c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer55d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect55">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion56">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer56a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer56b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer56c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer56d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect56">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion57">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer57a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer57b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer57c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer57d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect57">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion58">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer58a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer58b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer58c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer58d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect58">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion59">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer59a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer59b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer59c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer59d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect59">
+	<Original></Original>
+</Key>
+
+<Key ID="STR_m_AdminRuleQuestion60">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer60a">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer60b">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer60c">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleAnswer60d">
+	<Original></Original>
+</Key>
+<Key ID="STR_m_AdminRuleCorrect60">
+	<Original></Original>
+</Key>

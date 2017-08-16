@@ -1,0 +1,21 @@
+#define GETC(var) (call var)
+private["_veh","_pos"];
+if(GETC(life_tafflevel) != 8) exitWith {titleText["\n\n\n\n\n\n\n\n\n\n\n\nVous n'êtes pas un employé de la Brinks !","PLAIN"];};
+if(brinks_inMission) exitWith {titleText["\n\n\n\n\n\n\n\n\n\n\n\nVous êtes déjà en mission !","PLAIN"];};
+_pos = getMarkerPos "brinks_vspawn";
+if(count(nearestObjects[_pos,["Car","Ship","Air"],5]) != 0) exitWith {titleText["\n\n\n\n\n\n\n\n\n\n\n\nQuelque chose bloque la sortie du véhicule !","PLAIN"];};
+_veh = "I_MRAP_03_F" createVehicle _pos;
+_veh setDir 116; 
+_veh setObjectTextureGlobal  [0,"images\taff\brinks.paa"]; 
+_veh lock 2;
+clearWeaponCargoGlobal _veh;
+clearMagazineCargoGlobal _veh;
+clearItemCargoGlobal _veh;
+_money = round((random 100000) + 50000);
+brinks_moneyStart = _money;
+_veh setVariable ["money",_money,true];
+_veh setVariable ["brinksvehic",true,true];
+life_vehicles pushBack _veh;
+brinks_inMission = true;
+brinksVehic = _veh;
+titleText[format["\n\n\n\n\n\n\n\n\n\n\n\nVotre Objectif : Remplir les DAB\nVotre véhicule à été préparé et contient %1€. Revenez lorqu'il sera vide.\nSi vous êtes en équipe, vous êtes le seul a pouvoir remplir les DAB, vos collègues doivent vous protéger.",_money],"PLAIN"];

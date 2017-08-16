@@ -1,0 +1,384 @@
+/**
+ * Copyright © 2015 DnA, Grand Theft ArmA.
+ * All Rights Reserved.
+ */
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 162;
+};
+
+author = "DnA and Lakotiz";
+onLoadName = "Altis Life";
+onLoadMission = "For more information visit www.grandtheftarma.com";
+loadScreen = "gui\data\gta_logo.paa";
+joinUnassigned = 1;
+saving = 0;
+
+respawn = 3;
+respawnDelay = 30;
+respawnDialog = 0;
+respawnButton = 0;
+respawnTemplates[] = {};
+
+disabledAI = 1;
+disableChannels[]={ 0, 2 };
+enableDebugConsole = 1;
+allowFunctionsLog = 0;
+
+corpseManagerMode = 0;
+wreckManagerMode = 0;
+
+showHUD[] = {
+	true,	// Scripted HUD (same as showHUD command)
+	true,	// Vehicle + soldier info
+	true,	// Vehicle radar [HIDDEN]
+	true,	// Vehicle compass [HIDDEN]
+	true,	// Tank direction indicator
+	true,	// Commanding menu
+	false,	// Group Bar
+	true	// HUD Weapon Cursors
+};
+
+onPauseScript[] = { "GTA_fnc_onPause" };
+
+class Params
+{
+	class Debug
+	{
+		title = "Debug";
+		values[] = {0, 1};
+		texts[] = {"Off", "On"};
+		default = 0;
+	};
+};
+
+class GTA_CfgScriptPaths
+{
+	default = "gui\scripts\";
+	GUI = "gui\scripts\";
+};
+
+#include "gui\include.h"
+#include "core\include.h"
+#include "dialog\MasterHandler.h"
+
+class RscTitles
+{
+	#include "gui\includeTitles.h"
+	#include "dialog\progress.hpp"
+};
+
+class CfgFunctions
+{
+	#include "CfgFunctions.hpp"
+};
+
+class CfgMusic
+{
+	tracks[]={};
+	class Intro
+	{
+		name = "GTA Intro Music";
+		sound[] = { "\sounds\intro.ogg", 1.0, 1 };
+	};
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+
+	class Wood_Chop
+	{
+		name = "wood_chop";
+		sound[] = {"\sounds\wood_chop.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\Siren_Long.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+
+	class handcuffson
+	{
+		name = "handcuffson";
+		sound[] = {"\sounds\handcuffson.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class handcuffsoff
+	{
+		name = "handcuffsoff";
+		sound[] = {"\sounds\handcuffsoff.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class Intro
+	{
+		name = "GTA Intro Music";
+		sound[] = {"\sounds\intro.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class Cream
+	{
+		name = "The Sound of Cream";
+		sound[] = {"\sounds\cream.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class car_lock
+	{
+		name = "car_lock";
+		sound[] = {"\sounds\car_lock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class unlock
+	{
+		name = "unlock";
+		sound[] = {"\sounds\unlock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class key_jangling
+	{
+		name = "key_jangling";
+		sound[] = {"\sounds\key_jangling.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class slot_pull
+	{
+		name = "slot_pull";
+		sound[] = {"\sounds\slot_pull.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class slot_roll_stop
+	{
+		name = "slot_roll_stop";
+		sound[] = {"\sounds\slot_roll_stop.ogg", 0.5, 1};
+		titles[] = {};
+	};
+
+	class slot_jackpot
+	{
+		name = "slot_jackpot";
+		sound[] = {"\sounds\slot_jackpot.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+};
+
+class CfgDebriefing
+{
+	class Abort
+	{
+		title = "Successfully Aborted";
+		subtitle = "Player data was synced with the server";
+		description = "Be sure to visit us again. Check out our website at grandtheftarma.com";
+		pictureBackground = "";
+		picture = "\a3\ui_f\data\gui\cfg\Hints\tasks_ca.paa";
+		pictureColor[] = { 1, 1, 1, 1 };
+	};
+
+	class NotWhitelisted
+	{
+		title = "Not Whitelisted";
+		subtitle = "You are not white-listed to use this slot";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Blacklisted
+	{
+		title = "Blacklisted";
+		subtitle = "You are blacklisted";
+		description = "You have been blacklisted from the server.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class SpeakingSideChat
+	{
+		title = "You were kicked";
+		subTitle = "You were kicked for speaking in sidechat";
+		description = "You were kicked for speaking in sidechat";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class ReviveIncapacitated
+	{
+		title = "Paramedic Request";
+		iconPicture = "\a3\ui_f\data\igui\cfg\Actions\heal_ca.paa";
+		description = "%1 has been incapacitated";
+		duration = 5;
+		priority = 7;
+	};
+
+	class MessagingMessage
+	{
+		title = "Message";
+		iconPicture = "gui\data\RscDisplayMessaging\message.paa";
+		description = "New message from %1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class MessagingPoliceDispatch
+	{
+		title = "Police Dispatch";
+		iconPicture = "gui\data\RscDisplayMessaging\police_dispatch.paa";
+		description = "New dispatch received";
+		duration = 10;
+		priority = 6;
+	};
+
+	class MessagingNATODispatch
+	{
+		title = "NATO Dispatch";
+		iconPicture = "gui\data\RscDisplayMessaging\nato_dispatch.paa";
+		description = "New dispatch received";
+		duration = 10;
+		priority = 6;
+	};
+
+	class MessagingParamedicDispatch
+	{
+		title = "Paramedic Dispatch";
+		iconPicture = "gui\data\RscDisplayMessaging\paramedic_dispatch.paa";
+		description = "New dispatch received";
+		duration = 10;
+		priority = 6;
+	};
+
+	class MessagingHATODispatch
+	{
+		title = "HATO Dispatch";
+		iconPicture = "gui\data\RscDisplayMessaging\hato_dispatch.paa";
+		description = "New dispatch received";
+		duration = 10;
+		priority = 6;
+	};
+
+	class MessagingPSA
+	{
+		title = "Public Servie Announcement";
+		iconPicture = "gui\data\RscDisplayMessaging\public_announcement.paa";
+		description = "New public service announcement issued";
+		duration = 10;
+		priority = 6;
+	};
+
+	class MessagingVicinity
+	{
+		title = "Vicinity Message";
+		iconPicture = "gui\data\RscDisplayMessaging\vicinity.paa";
+		description = "New message from %1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class MessagingAdminRequest
+	{
+		title = "Staff Request";
+		iconPicture = "gui\data\RscDisplayMessaging\admin_request.paa";
+		description = "New admin request from %1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class MessagingAdminAnnouncement
+	{
+		title = "Staff Announcement";
+		iconPicture = "gui\data\RscDisplayMessaging\admin_announcement.paa";
+		description = "New admin announcement from %1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepted";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+};
+
+class CfgRemoteExecCommands
+{
+	class allowDamage {};
+	class disableCollisionWith {};
+	class lock {};
+	class playMove {};
+	class playMoveNow {};
+	class say3d;
+	class setCaptive {};
+	class setFace {};
+	class setFlagTexture {};
+	class setObjectMaterial {};
+	class setObjectTextureGlobal {};
+	class setPos {};
+	class setUnitRecoilCoefficient {};
+	class switchMove {};
+};
+
+class CfgRemoteExecFunctions
+{
+	class GTA_fnc_abort { disabled = 1; };
+	class GTA_fnc_action { disabled = 1; };
+	class GTA_fnc_call { disabled = 1; };
+	class GTA_fnc_conditionalSelect { disabled = 1; };
+	class GTA_fnc_const { disabled = 1; };
+	class GTA_fnc_getConstant { disabled = 1; };
+	class GTA_fnc_sessionExecClient { disabled = 1; };
+	class GTA_fnc_setConstant { disabled = 1; };
+	class GTA_fnc_setTransferLimit { disabled = 1; };
+	class life_fnc_getDPMission { disabled = 1; };
+};
+
+#include "CfgRemoteExec.hpp"
+
+__EXEC (MISSION_ROOT = __FILE__ select [0, count __FILE__ - 15])

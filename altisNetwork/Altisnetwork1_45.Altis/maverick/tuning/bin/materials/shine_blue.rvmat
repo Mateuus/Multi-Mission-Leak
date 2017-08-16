@@ -1,0 +1,12 @@
+////////////////////////////////////////////////////////////////////
+//DeRap: Produced from mikero's Dos Tools Dll version 5.93
+//'now' is Tue Feb 07 00:06:09 2017 : 'file' last modified on Wed Oct 12 13:16:38 2016
+//http://dev-heaven.net/projects/list_files/mikero-pbodll
+////////////////////////////////////////////////////////////////////
+
+#define _ARMA_
+
+//Class ALRP.Altis : maverick\tuning\bin\materials\shine_blue.rvmat{
+specular[] = {0.21,0.86,0.998,0.639};
+specularPower = 60;
+//};

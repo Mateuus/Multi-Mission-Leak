@@ -1,0 +1,2 @@
+createDialog "SlotMachineGUI";
+disableSerialization;

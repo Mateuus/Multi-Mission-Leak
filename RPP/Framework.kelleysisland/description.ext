@@ -1,0 +1,91 @@
+joinUnassigned = 1;
+
+respawn = BASE;
+respawndelay = 5;
+respawnDialog = 0;
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 150;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+disabledAI = true;
+disableChannels[]={0,1,2};
+enableDebugConsole = 1;
+
+class Header {
+	gameType = "RPG";
+	minPlayers = 1;
+	maxPlayers = 93;
+};
+
+
+author = "Conner™ - Freelance Developer";
+OnLoadName = "Framework Test [Beta]";
+
+#include "Dialogs\RPP_Defines.hpp"
+#include "Dialogs\RPP_Login.hpp"
+#include "Dialogs\RPP_Login_Register.hpp"
+#include "Dialogs\RPP_Shop.hpp"
+#include "Dialogs\RPP_ShopManager.hpp"
+#include "Dialogs\RPP_VehicleMenu.hpp"
+#include "Dialogs\RPP_VehicleTrunk.hpp"
+#include "Dialogs\RPP_PlayerMenu.hpp"
+#include "Dialogs\RPP_Paintballmenu.hpp"
+#include "Dialogs\RPP_Phone.hpp"
+#include "Dialogs\RPP_Anims.hpp"
+#include "Dialogs\RPP_P_Interacting.hpp"
+#include "Dialogs\RPP_AskforName.hpp"
+#include "Dialogs\RPP_RevokLicense.hpp"
+#include "Dialogs\RPP_SearchMenu.hpp"
+#include "Dialogs\RPP_EMTMenu.hpp"
+#include "Dialogs\RPP_ATM.hpp"
+#include "Dialogs\RPP_AdminDialog.hpp"
+#include "Dialogs\RPP_DMV.hpp"
+#include "Dialogs\RPP_PoliceDatabase.hpp"
+#include "Dialogs\RPP_CrimeRecords.hpp"
+#include "Dialogs\RPP_CrimeSubmitter.hpp"
+#include "Dialogs\RPP_PoliceVehicleDB.hpp"
+#include "Dialogs\RPP_JailMenu.hpp"
+#include "Dialogs\RPP_ShopDialog.hpp"
+#include "Dialogs\RPP_ShopInfoDialog.hpp"
+#include "Dialogs\RPP_VehicleStorage_Dialog.hpp"
+#include "Dialogs\RPP_PostOffice.hpp"
+#include "Dialogs\RPP_Company_Main.hpp"
+#include "Dialogs\RPP_Company_Create.hpp"
+#include "Dialogs\RPP_Company_Manager.hpp"
+#include "Dialogs\RPP_Company_Application.hpp"
+#include "Dialogs\RPP_Company_ManageApplication.hpp"
+#include "Dialogs\RPP_Market.hpp"
+#include "Dialogs\RPP_CheckPointBuilder.hpp"
+#include "Dialogs\RPP_PowerGenerator.hpp"
+#include "Dialogs\RPP_OnlineShop.hpp"
+#include "Dialogs\RPP_JobFinder_Menu.hpp"
+#include "Dialogs\RPP_SearchDialog.hpp"
+#include "Dialogs\RPP_TicketDialog.hpp"
+#include "Dialogs\RPP_TicketGet.hpp"
+#include "Dialogs\RPP_Governor_Main.hpp"
+#include "Dialogs\RPP_Governor_Laws.hpp"
+#include "Dialogs\RPP_Governor_BodyGuards.hpp"
+#include "Dialogs\RPP_GangMenu.hpp"
+#include "Dialogs\RPP_HouseMenu.hpp"
+#include "Dialogs\RPP_DutyDialog.hpp"
+#include "Dialogs\RPP_MethDialog.hpp"
+#include "Dialogs\RPP_GangMange.hpp"
+#include "Dialogs\RPP_CallScreen.hpp"
+#include "Dialogs\RPP_PhoneScreen.hpp"
+#include "Dialogs\RPP_PhoneCall.hpp"
+#include "Dialogs\RPP_PhoneCallScreen.hpp"
+#include "Dialogs\RPP_PhoneMainMenu.hpp"
+#include "Dialogs\RPP_PhoneContactList.hpp"
+#include "Dialogs\RPP_PhoneAddContact.hpp"
+#include "Dialogs\RPP_PhoneOtherSettings.hpp"
+#include "Dialogs\RPP_PhoneSettings.hpp"
+
+class RscTitles
+{
+	#include "Dialogs\RPP_Hud.hpp"
+	#include "Dialogs\RPP_ProgressBar.hpp"
+};

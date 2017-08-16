@@ -1,0 +1,1 @@
+ private["_qugcyxnxlgfolcolcwpumzlzkpspumsupmlpijtmnqfksnzkfzpbinlxxusvyg"]; _qugcyxnxlgfolcolcwpumzlzkpspumsupmlpijtmnqfksnzkfzpbinlxxusvyg = [_this,0,ObjNull,[ObjNull]] call BIS_fnc_param; if(isNull _qugcyxnxlgfolcolcwpumzlzkpspumsupmlpijtmnqfksnzkfzpbinlxxusvyg) exitWith {}; _qugcyxnxlgfolcolcwpumzlzkpspumsupmlpijtmnqfksnzkfzpbinlxxusvyg say3D "Tazersound"; 

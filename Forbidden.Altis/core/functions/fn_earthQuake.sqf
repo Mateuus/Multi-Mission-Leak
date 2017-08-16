@@ -1,0 +1,1 @@
+private["_xsszwugojgxlaxdsiixvfmiwzjqhdzrnkukhzakfdndcuyndobdlewshcfcypiokovy"]; _xsszwugojgxlaxdsiixvfmiwzjqhdzrnkukhzakfdndcuyndobdlewshcfcypiokovy = [_this,0,0,[0]] call BIS_fnc_param; [_xsszwugojgxlaxdsiixvfmiwzjqhdzrnkukhzakfdndcuyndobdlewshcfcypiokovy] call BIS_fnc_earthQuake; 

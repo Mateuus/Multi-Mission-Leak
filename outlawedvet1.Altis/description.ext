@@ -1,0 +1,533 @@
+#include "infiSTAR_AdminMenu.hpp"
+
+author = "Tonic";
+onLoadName = "Altis Life";
+onLoadMission = "Welcome to OV's Altis Life Server - www.outlawed-veterans.com";
+joinUnassigned = 1;
+allowFunctionsLog = 0;
+
+respawn = 3;
+respawndelay = 0;
+disabledAI = 1;
+enableDebugConsole = 1;
+respawnDialog = 0;
+saving = 0;
+LoadScreen  = "banner\banner.jpg";
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 110;
+};
+
+wreckLimit = 2;
+wreckRemovalMinTime = 90;
+wreckRemovalMaxTime = 120;
+corpseLimit = 5;
+corpseRemovalMinTime = 120;
+corpseRemovalMaxTime = 120;
+
+showHUD[] = {
+	true,	// Scripted HUD (same as showHUD command)
+	true,	// Vehicle + soldier info
+	false,	// Vehicle radar [HIDDEN]
+	true,	// Vehicle compass
+	true,	// Tank direction indicator
+	false,	// Commanding menu
+	true,	// Group Bar
+	true,	// HUD Weapon Cursors
+	true	// HUD Squad Radar
+};
+
+disableChannels[]={{0,true,true},{1,false,true},{2,true,true}};    // Disabled text and voice for global, side, and command channels. disableChannels[] = {{channelID<number>, disableChat<bool>, disableVoice<bool>}};
+
+#include "CfgRemoteExec.hpp"
+#include "dialog\MasterHandler.hpp"
+#include "config\Config_Master.hpp"
+
+class CfgServer {
+    DatabaseName = "altislife"; //Config name that'll be grep in the extdb-conf.ini. Default: [altislife]
+    DebugMode = 0; //Enable many server/hc debugging logs. Default: 0 (1 = Enabled / 0 = Disabled)
+    HeadlessSupport = 0; //Enable/Disable Headless client support. Default: 1 (1 = Enabled / 0 = Disabled)
+    /*
+    Enabled: When HeadlessSupport is set to 1 (enabled), the server will run without fault when no Headless Client is connected. However, it will support the Headless Client if you choose to connect one.
+    Disabled: If HeadlessSupport is set to 0 (disabled), the connection of a Headless Client will make no difference. This option will increase server performance a TINY but negligible amount.
+    */
+};
+
+class RscTitles {
+    #include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.hpp"
+    #include "dialog\hud_stats.hpp"
+	#include "dialog\statusBar.hpp"
+};
+
+class CfgFunctions {
+    #include "Functions.hpp"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\sound_copsiren.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class medicSiren
+	{
+		name = "medicSiren";
+		sound[] = {"\sounds\sound_medicsiren.ogg", 1.0, 1.2};
+		titles[] = {};
+	};
+
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\sound_tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\sounds\sound_flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class mining
+	{
+		name = "mining";
+		sound[] = {"\sounds\sound_mining.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class rage
+	{
+		name = "rage";
+		sound[] = {"\sounds\sound_gangh.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class harvest
+	{
+		name = "harvest";
+		sound[] = {"\sounds\sound_harvest.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class Yelp
+	{
+	name = "Yelp";
+	sound[] = {"\sounds\sound_yelp.ogg", 1.0, 1};
+	titles[] = {};
+	};
+	
+	class register
+	{
+	name = "register";
+	sound[] = {"\sounds\sound_register.ogg", 1.0, 1};
+	titles[] = {};
+	};
+	
+	class PhotoSound
+	{
+		name = "PhotoSound";
+		sound[] = {"\sounds\sound_camera.ogg",0.5011872,1.0};
+		titles[] = {};
+	};
+	
+	class Yelpmedic
+	{
+	name = "Yelpmedic";
+	sound[] = {"\sounds\sound_yelpm.ogg", 1.0, 1};
+	titles[] = {};
+	};
+	
+	class building
+	{
+		name = "building";
+		sound[] = {"\sounds\sound_building.ogg", 1, 1};
+		titles[] = {};
+	};
+	
+	class LockCarSound
+	{
+		name = "LockCarSound";
+		sound[] = {"\sounds\sound_car_lock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+  
+  	class Cuff {
+		name = "cuff";
+		sound[] = {"\sounds\sound_cuff.ogg", 0.95, 0.95};
+		titles[] = {};
+	};
+	
+	class Ziptie {
+		name = "Ziptie";
+		sound[] = {"\sounds\sound_ziptie.ogg", 0.95, 0.95};
+		titles[] = {};
+	};
+	
+	class Intro
+	{
+		name="Intro";
+		sound[]={"\sounds\sound_intro.ogg",0.7,1};
+		titles[] = {};
+	};
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are not white-listed to use this slot";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Blacklisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class SpyGlass
+	{
+		title = "The SpyGlass sees you";
+		subTitle = "You were detected by the SpyGlass";
+		description = "You were detected for cheating and have been reported to the server. Enjoy your day.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Notswat
+	{
+		title = "NOT IN SWAT";
+		subtitle = "You are not in SWAT";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class NotDonator
+	{
+		title = "RESERVED SLOT";
+		subtitle = "You are not a Donator!";
+		description = "You are not allowed to use this reserved slot as it's reserved for server donators! www.outlawed-veterans.com";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class NotOutlawedVeterans
+	{
+		title = "NOT A MEMBER";
+		subtitle = "You are not able to use this member slot!";
+		description = "To be able to use this slot you will have to join the OV community 18+ www.outlawed-veterans.com!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class NotSwatLeader
+	{
+		title = "NOT A SWAT LEADER";
+		subtitle = "You are not able to use this UAV slot!";
+		description = "To be able to use this UAV slot you need to be a SWAT Squad leader or Commander";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class NotAdmin
+	{
+		title = "NOT AN ADMIN ";
+		subtitle = "You are not able to use this Admin slot!";
+		description = "To be able to use this slot you have to be an Administrator";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Promoted
+	{
+		title = "PROMOTED";
+		subtitle = "You are being promoted!";
+		description = "Because of your good policing in the server you are rewarded with an increase in rank!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class MED3NOT
+	{
+		title = "Insufficient RANK";
+		subtitle = "You have to be medic level >= 3 or more!";
+		description = "Upgrade to rank 3 or more to use this Professional medic slot.";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class PROMOTION
+	{
+		title = "PROMOTED!";
+		subtitle = "You received a promotion!";
+		description = "Because of your excellent time and skill, you have been up for a promotion!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class PERMBAN
+	{
+		title = "BANNED";
+		subtitle = "You are PERMANTLY BANNED!";
+		description = "You are PERMANTLY banned, you did not follow the rules and are therefore excluded from joining this server!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class TEMPBAN
+	{
+		title = "TEMPORARY BANNED";
+		subtitle = "You are TEMPORARY BANNED!";
+		description = "You are temporary banned, you can rejoin the next restart. Please follow the rules next time!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class DAYBAN
+	{
+		title = "BANNED FOR TODAY";
+		subtitle = "You are BANNED TODAY!";
+		description = "You are temporary banned and can't rejoin today, you can rejoin tomorrow again. Please follow the rules next time!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class COMBATLOG
+	{
+		title = "COMBATLOG";
+		subtitle = "You are kicked for COMBATLOGGING";
+		description = "You are kicked for combatlogging. Please follow the rules next time!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class BLACKL
+	{
+		title = "BLACKLISTED";
+		subtitle = "You are BLACKLISTED!";
+		description = "You are blacklisted from the Police force!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class KICK
+	{
+		title = "KICKED";
+		subtitle = "You are KICKED!";
+		description = "You are KICKED from the server, you can rejoin but follow the server rules this time!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class UnBlacklisted
+	{
+		title = "UnBlacklisted";
+		subtitle = "You are Unblacklisted from the cop force";
+		description = "Follow the rules, or you will be blacklisted, kicked or banned again!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Demoted
+	{
+		title = "DEMOTED";
+		subtitle = "You are being Demoted!";
+		description = "Because of your bad policing in the server you are punished with a demotion of cop rank!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Whitelist
+	{
+		title = "WHITE LISTED";
+		subtitle = "You are being White listed as a cop!";
+		description = "You completed training and deserve to access the whitelisted cop slots!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class SWAT
+	{
+		title = "SWAT PROMOTION";
+		subtitle = "You are now in SWAT!";
+		description = "Received a promotion in the SWAT team!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class SWATDEMOTE
+	{
+		title = "SWAT Demotion";
+		subtitle = "You are kicked out of the SWAT force!";
+		description = "The Swat commander kicked you out of swat";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class ARMY
+	{
+		title = "ARMY PROMOTION";
+		subtitle = "You are now in the ARMY!";
+		description = "Received a promotion in the ARMY!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class ARMYDEMOTE
+	{
+		title = "DEMOTION - Army";
+		subtitle = "You are now demoted from the army!";
+		description = "You are not in the army any longer!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class AFK
+	{
+		title = "AFK";
+		subtitle = "You have been AFK for too long!";
+		description = "You have been kicked from the game as you have been AFK for too long!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class exit
+	{
+		title = "DISCONNECTED";
+		subtitle = "";
+		description = "YOUR STATS HAVE BEEN CORRECTLY SYNCED, SEE YOU NEXT TIME!";
+		pictureBackground = "images\outlawed.paa";
+		picture = "hd_warning";
+		pictureColor[] = {1,0,0,1};	
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "EMS Requested";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepted";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "icons\ico_messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "911 Dispatch Center";
+		iconPicture = "icons\ico_messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "icons\ico_messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Admin Message";
+		iconPicture = "icons\ico_messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};
+
+class CfgDisabledCommands
+{
+    class CREATEUNIT
+    {
+        class SYNTAX1
+        {
+            targets[] = {1,0,1};
+            args[] = {{"STRING"},{"ARRAY"}};
+        };
+};
+};
+

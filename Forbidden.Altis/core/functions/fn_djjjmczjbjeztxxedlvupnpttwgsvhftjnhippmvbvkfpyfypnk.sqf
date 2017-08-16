@@ -1,0 +1,1 @@
+ player say3d "purge"; 

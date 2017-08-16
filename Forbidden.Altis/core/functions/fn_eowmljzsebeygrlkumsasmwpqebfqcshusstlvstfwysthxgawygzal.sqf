@@ -1,0 +1,3 @@
+
+#include <macro.h>
+ private ["_wgacnpchvmpudwtilgeyebyxhodcwxgmgicbhgfmlyaqigerjsvnlsxaqpdstgzllmmdia","_qndyjshadwtszyfwabsmgcupqvufkudyfnkzqctpwydcelrejngsdjiolmldmmzixdbq"]; _wgacnpchvmpudwtilgeyebyxhodcwxgmgicbhgfmlyaqigerjsvnlsxaqpdstgzllmmdia = nearestObjects [player, [], 3]; _qndyjshadwtszyfwabsmgcupqvufkudyfnkzqctpwydcelrejngsdjiolmldmmzixdbq = false; { 	if(["atm_",str(_x)] call BIS_fnc_inString) exitWith {_qndyjshadwtszyfwabsmgcupqvufkudyfnkzqctpwydcelrejngsdjiolmldmmzixdbq = true;}; } foreach _wgacnpchvmpudwtilgeyebyxhodcwxgmgicbhgfmlyaqigerjsvnlsxaqpdstgzllmmdia;  _qndyjshadwtszyfwabsmgcupqvufkudyfnkzqctpwydcelrejngsdjiolmldmmzixdbq; 

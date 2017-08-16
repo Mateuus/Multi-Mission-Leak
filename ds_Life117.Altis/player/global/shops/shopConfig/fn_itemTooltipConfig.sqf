@@ -1,0 +1,164 @@
+/*
+Darkside Life
+
+Author: Shawn "Huntah" Macgillivray
+
+Description:
+	Returns string name of selected item
+*/
+
+private ["_className","_return"];
+
+_className = _this select 0;
+
+if([_className,"item"] call KRON_StrInStr)then{_className = [_className,"DS_item_",""] call KRON_Replace};
+
+switch(_className)do
+	{
+	case "water": {"Fully rehydrate by drinking this"};
+	case "donut": {"Taste great, will make you fat. Police love these"};
+	case "repairKit": {"Use these on any vehicle to fully repair it"};
+	case "refuelKit": {"Use these on any vehicle to partially refuel it"};
+	case "lockpick": {"Use this on someones vehicle to break its locks and get a copy of its key"};
+	case "lighter": {"Use this on someones vehicle to set its fuel tank a light and watch it blow up"};
+	case "siphonKit": {"Use this on any vehicle to siphon some fuel from it"};
+	case "nitro": {"Install this on a land vehicle to enabled a nos boost"};
+	case "goKart": {"Use this item to unpack a portable go kart"};
+	case "coffee": {"Fully rehydrate by drinking this"};
+	case "pepsi": {"Fully rehydrate by drinking this"};
+	case "apple": {"Eat this to keep your hunger pains in check"};
+	case "rabbit": {"Eat this to keep your hunger pains in check"};
+	case "salema": {"Eat this to keep your hunger pains in check"};
+	case "ornate": {"Eat this to keep your hunger pains in check"};
+	case "mackerel": {"Eat this to keep your hunger pains in check"};
+	case "tuna": {"Eat this to keep your hunger pains in check"};
+	case "mullet": {"Eat this to keep your hunger pains in check"};
+	case "catshark": {"Eat this to keep your hunger pains in check"};
+	case "turtle": {"Eat this to keep your hunger pains in check"};
+	case "tbacon": {"Eat this to keep your hunger pains in check"};
+	case "peach": {"Eat this to keep your hunger pains in check"};
+	case "pie": {"Eat this to keep your hunger pains in check"};
+	case "burger": {"Eat this to keep your hunger pains in check"};
+	case "chips": {"Eat this to keep your hunger pains in check"};
+	case "doritos": {"Eat this to keep your hunger pains in check"};
+	case "mediKit": {"Use this to fully heal yourself"};
+	case "armour": {"Buy this to give yourself protection from certain ammo types"};
+	case "heroinp": {"Sell these at an Illegal goods dealer"};
+	case "cocainep": {"Sell these at an Illegal goods dealer"};
+	case "weedp": {"Sell these at an Illegal goods dealer"};
+	case "heroinu": {"Process this raw drug at the appropriate gang hideout"};
+	case "cocaineu": {"Process this raw drug at the appropriate gang hideout"};
+	case "weedu": {"Process this raw drug at the appropriate gang hideout"};
+	case "hydro": {"Combine this with Sodium Hydroxide at the Meth processor to create Crystal Meth"};
+	case "sodium": {"Combine this with Hydrochloric Acid at the Meth processor to create Crystal Meth"};
+	case "hydroPack": {"Open this to receive some Hydrochloric Acid"};
+	case "sodiumPack": {"Open this to receive some Sodium Hydroxid"};
+	case "illegalRelicu": {"Clean these at a gang hideout to prepare them for selling"};
+	case "illegalRelicp": {"Sell these at an Illegal goods dealer"};
+	case "meth": {"Sell this at any drug dealer"};
+	case "goldBar": {"Trade this for cash at a rebel trader"};
+	case "spyDocs": {"Sell this at a Rebel base or Gang hideout"};
+	case "pickAxe": {"Use this by pressing tab at mining fields to collect resources"};
+	case "oilu": {"Process this at the oil processor"};
+	case "diamondu": {"Process this at the diamond processor"};
+	case "copperu": {"Process this at the copper processor"};
+	case "rocku": {"Process this at the cement processor"};
+	case "saltu": {"Process this at the salt processor"};
+	case "ironu": {"Process this at the iron processor"};
+	case "sandu": {"Process this at the sand processor"};
+	case "woodu": {"Process this at the lumber Mill"};
+	case "woodp": {"Sell or use this at a factory"};
+	case "oilp": {"Sell or use this at a factory"};
+	case "diamondp": {"Sell or use this at a factory"};
+	case "copperp": {"Sell or use this at a factory"};
+	case "rockp": {"Sell or use this at a factory"};
+	case "saltp": {"Sell or use this at a factory"};
+	case "ironp": {"Sell or use this at a factory"};
+	case "sandp": {"Sell or use this at a factory"};
+	case "relic": {"Sell or use this at a factory"};
+	case "c4": {"Use this to destroy various objects |Bank Gate|Power Station|"};
+	case "defuse": {"Used by police to defuse C4"};
+	case "battery": {"Use this to enable the thermal scope on a night stalker"};
+	case "cracker": {"Use this to crack the safes at Fort Knox"};
+	case "spikeStrip": {"Used to blow a vehicles tiers out"};
+	case "UAV": {"A thermal aerial UAV that can be set up on the spot to scout for criminals"};
+	case "fuelDart": {"Used by the police inside of a Fuel Dart launcher to disable criminals in the air"};
+	case "vodka": {"Drink this to get drunk increasing your carry weight for awhile"};
+	case "bourbon": {"Drink this to get drunk increasing your carry weight for awhile"};
+	case "bpVehSecurity": {"Vehicle Security Blueprint (Click 'use' for details"};
+	case "bpVehWeight": {"Vehicle Capacity Blueprint (Click 'use' for details"};
+	case "bpVehFuel": {"Vehicle Fuel Blueprint (Click 'use' for details"};
+	case "bpVehNos": {"Vehicle Nos Blueprint (Click 'use' for details"};
+	case "mattBronze": {"An ingredient used at a factory"};
+	case "mattCrystalGlass": {"An ingredient used at a factory"};
+	case "mattCircuitBoard": {"An ingredient used at a factory"};
+	case "mattSmallBattery": {"An ingredient used at a factory"};
+	case "mattCpu": {"An ingredient used at a factory"};
+	case "mattSteel": {"An ingredient used at a factory"};
+	case "mattTreatedLumber": {"An ingredient used at a factory"};
+	case "vehSecurity": {"Use this on a land vehicle to improve its security"};
+	case "vehWeight": {"Use this on a land vehicle to increase its capacity"};
+	case "vehFuel": {"Use this on a vehicle to enhance its fuel consumption"};
+	case "vehSecurityAdv": {"Use this on a land vehicle to improve its security"};
+	case "vehWeightAdv": {"Use this on a land vehicle to improve its carry weight"};
+	case "vehFuelAdv": {"Use this on a land vehicle to improve its fuel consumption"};
+	case "chute": {"Used by scrolling while conditions are met"};
+	case "fire": {"Place this fire place anywhere to be-able to heal at it"};
+	case "ziptie": {"Press shift R on an unconscious person to put them in zipties"};
+	case "bpGunLynx": {"Lynx Blueprint, click 'Use' for details"};
+	case "gunLynx": {"Click use to convert this item into a lynx"};
+	case "gunLynxAdv": {"Click use to convert this item into a lynx"};
+	case "bpAmmoLynx": {"Lynx Ammo Blueprint, click 'Use' for details"};
+	case "gunLynx": {"Click use to convert this item into a lynx Ammo"};
+	case "gunLynxAdv": {"Click use to convert this item into a lynx Ammo"};
+	case "bpAmmoRpg": {"RPG Rocket Blueprint, Click 'use' for more information"};
+	case "ammoRpg": {"Click use to convert this item into a RPG HE Rocket"};
+	case "ammoRpgAdv": {"Click use to convert this item into a RPG AP Rocket"};
+	case "ied": {"Improvised Explosive Device"};
+	case "buildingBox": {"Building Box"};
+	case "vehNos": {"Install on your vehicle to gain 5 nos boost"};
+	case "vehNosAdv": {"Install on your vehicle to gain 10 nos boost"};
+	case "houseItemUpgrade": {"You must have this item in your inventory when you attempt to upgrade storage beyond its capacity"};
+	case "houseWeaponUpgrade": {"You must have this item in your inventory when you attempt to upgrade storage beyond its capacity"};
+	case "jail10": {"Use this item while in jail to legally end your sentence"};
+	case "safeCrackerAdv": {"Have this item in your inventory while cracking a safe at fortknox to have the time lowered"};
+	case "jailBreak": {"Use this item while in jail to be quickly broken out"};
+	case "steriods": {"Use this item to have you carry weight increased to 500kg for 1 hour"};
+	case "noRecoil": {"Use this item to have a very steady aim for 10 minutes"};
+	case "quickCap": {"Have this item in your inventory while taking Rebel KOS to take it much quicker"};
+	case "pawnee": {"Use this item to spawn in a fully armed rental Pawnee"};
+	case "convoy": {"Have this item in your inventory when starting a rebel convoy to disable the server wide alert"};
+	case "wheatu": {"Process this at the bakery to make bread to sell"};
+	case "wheatp": {"Eat this or sell it at the market for profit"};
+	case "vehAmmo": {"Adds ammo to the following vehicles (Hunter, Ifrit, Strider, Armed Offroad, Gorgon)"};
+	case "ammoFlash": {"Open this to put 5 Flash Grenades into your inventory"};
+	case "ammoTear": {"Open this to put 5 Tear Gas Grenades into your inventory"};
+	case "bpVehSUV": {"Special Vehicle Fuel Blueprint (Click 'use' for details"};
+	case "bpGunRpg": {"RPG Launcher Blueprint, Click 'use' for more information"};
+	case "gunRpg": {"Click use to convert this item into a RPG Launcher"};
+	case "bpGun3gl": {"3GL Blueprint, Click 'use' for more information"};
+	case "gun3gl": {"Click use to convert this item into a MX 3GL"};
+	case "bpGunNavid": {"Navid Blueprint, Click 'use' for more information"};
+	case "gunNavid": {"Click use to convert this item into a Navid Rifle"};
+	case "thermal": {"'Use' this on a vehicle to enable its thermal vision (If it can)"};
+	case "weaponsAir": {"Upgrade your ammo on an air vehicle (Pawnee, Orca, Kajman, Blackfoot)"};
+	case "weaponsLand": {"Adds ammo to the following vehicles (Hunter, Ifrit, Strider, Armed Offroad, Gorgon)"};
+	case "blackfoot": {"Blackfoot Helicopter"};
+	case "bpThermal": {"Thermal blueprint, Click 'use' for more information"};
+	case "bpWeaponsAir": {"Air Vehicle Ammo blueprint, Click 'use' for more information"};
+	case "bpWeaponsLand": {"Land Vehicle Ammo blueprint, Click 'use' for more information"};
+	case "bpBlackfoot": {"Blackfoot blueprint, Click 'use' for more information"};
+	case "armour": {"Provides Stun protection to civilians and bullet protection to police"};
+	case "packSteel": {"Pack of 200 Steel"};
+	case "packBronze": {"Pack of 200 Bronze"};
+	case "packGlass": {"Pack of 200 Crystal Glass"};
+	case "packCircuitBoard": {"Pack of 30 Circuitboards"};
+	case "packBattery": {"Pack of 30 Small Batteries"};
+	case "packCPU": {"Pack of 15 CPU's"};
+	case "idChanger": {"This item will change your ID until you're arrested"};
+	case "bones": {"Traded at hospitals for cash by medics"};
+	case "goldBarMedium": {"A Medium bag of money traded at rebel dealers"};
+	case "goldBarLarge": {"A Large bag of money traded at rebel dealers"};
+	default {""};
+	};
+	

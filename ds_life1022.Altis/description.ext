@@ -1,0 +1,619 @@
+author = "Huntah";
+onLoadName = "Darkside Life";
+onLoadMission = "An Arma Life game mode developed by Huntah for TheDarkSideGames";
+loadScreen = "Loading.jpg";
+joinUnassigned = 1;
+enableDebugConsole = 1;
+disabledAI = true;
+respawn = BASE;
+respawndelay = 5;
+respawnDialog = 0;
+showSquadRadar = 1;
+ballisticsComputer = 0;
+disableChannels[]={{0,true,true},{1,true,true},{2,true,true}};
+
+#include "dialogs\MasterHandler.hpp"
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 150;
+};
+
+class RscTitles
+{
+	#include "dialogs\ui.hpp"
+	#include "dialogs\progress.hpp"
+};
+
+class CfgFunctions
+{
+	#include "Functions.hpp"
+};
+
+class CfgDebriefing
+{
+	class tempBan
+	{
+		title = "Mission Failed";
+		subtitle = "You have been banned from the server until the next restart";
+		description = "You are banned from the server until restart";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class donorSlot
+	{
+		title = "Mission Failed";
+		subtitle = "You are not white-listed to use this slot";
+		description = "This slot is for donors only, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class quickKick
+	{
+		title = "Mission Failed";
+		subtitle = "You have been kicked from the server";
+		description = "You have been kicked from the server";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class PubInKav
+	{
+		title = "Mission Failed";
+		subtitle = "You are not allowed in this area";
+		description = "Public Cops are not allowed to travel over 8km's from Kavala!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class officerKick
+	{
+		title = "Mission Failed";
+		subtitle = "You have been fired from the cop force";
+		description = "You have been kicked from the cop team by a ranking officer, Talk to the police on TS";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class Blacklisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class NotWhitelisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are not white-listed to use this slot";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class NotEnoughHours
+	{
+		title = "Mission Failed";
+		subtitle = "You do not have enough game hours to play this slot";
+		description = "You need at least 5 hours playing civilian before playing public cop";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class sameName
+	{
+		title = "Mission Failed";
+		subtitle = "Name Error!";
+		description = "You can not use the same name as somebody already on the server";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class sameName2
+	{
+		title = "Mission Failed";
+		subtitle = "Name Error!";
+		description = "You are using illegal characters in your name";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\extras\sounds\flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class alarm
+	{
+		name = "alarm";
+		sound[] = {"\extras\sounds\alarm.ogg", 1.0, 1};
+		titles[] = {};
+	};
+  	class unlock
+  	{
+		name = "unlock";
+		sound[] = {"\extras\sounds\unlock.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+	class lock
+  	{
+		name = "lock";
+		sound[] = {"\extras\sounds\lock.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+	class innerlock
+  	{
+		name = "innerlock";
+		sound[] = {"\extras\sounds\innerlock.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+	class introSongCiv
+	{
+		name = "introSongCiv";
+		sound[] = {"\extras\sounds\introSongCiv.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class introSongCop
+	{
+		name = "introSongCop";
+		sound[] = {"\extras\sounds\introSongCop.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class repair
+  	{
+		name = "repair";
+		sound[] = {"\extras\sounds\repair.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+  	class Cash
+  	{
+		name="Cash";
+		sound[] = {"\extras\sounds\cash.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class lockpick
+  	{
+		name = "lockpick";
+		sound[] = {"\extras\sounds\lockpick.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+	class cow
+  	{
+		name = "cow";
+		sound[] = {"\extras\sounds\cow.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+	class sheep
+  	{
+		name = "sheep";
+		sound[] = {"\extras\sounds\sheep.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+	class chicken
+  	{
+		name = "chicken";
+		sound[] = {"\extras\sounds\chicken.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+	class lighter
+  	{
+		name = "lighter";
+		sound[] = {"\extras\sounds\lighter.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+  	class fail
+	{
+		name="fail";
+		sound[] = {"\extras\sounds\fail.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+  	class success
+  	{
+		name="success";
+		sound[] = {"\extras\sounds\success.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class drink
+  	{
+		name="drink";
+		sound[] = {"\extras\sounds\drink.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class burp1
+  	{
+		name="burp1";
+		sound[] = {"\extras\sounds\burp1.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class burp2
+  	{
+		name="burp2";
+		sound[] = {"\extras\sounds\burp2.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class burp3
+  	{
+		name="burp3";
+		sound[] = {"\extras\sounds\burp3.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class eat
+  	{
+		name="eat";
+		sound[] = {"\extras\sounds\eat.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class fart1
+  	{
+		name="fart1";
+		sound[] = {"\extras\sounds\fart1.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class fart2
+  	{
+		name="fart2";
+		sound[] = {"\extras\sounds\fart2.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+	class fart3
+  	{
+		name="fart3";
+		sound[] = {"\extras\sounds\fart3.ogg", 1.0, 1};
+		titles[] = {0, ""};
+ 	};
+  	class dingDong
+  	{
+		name="dingDong";
+		sound[] = {"\extras\sounds\dingDong.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class vomit
+  	{
+		name="vomit";
+		sound[] = {"\extras\sounds\vomit.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class reload
+  	{
+		name="reload";
+		sound[] = {"\extras\sounds\reload.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class sickCough
+  	{
+		name="sickCough";
+		sound[] = {"\extras\sounds\sickCough.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class tazer
+  	{
+		name="tazer";
+		sound[] = {"\extras\sounds\tazer.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class stun
+  	{
+		name="stun";
+		sound[] = {"\extras\sounds\stun.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class sirenLong
+  	{
+		name="sirenLong";
+		sound[] = {"\extras\sounds\sirenLong.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class sirenLongLoud
+  	{
+		name="sirenLongLoud";
+		sound[] = {"\extras\sounds\sirenLongLoud.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class strangle
+  	{
+		name="strangle";
+		sound[] = {"\extras\sounds\strangle.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class plane
+  	{
+		name="plane";
+		sound[] = {"\extras\sounds\plane.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+ 	class yelp
+ 	{
+		name = "yelp";
+		sound[] = {"\extras\sounds\yelp.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+ 	 class pullOver
+  	{
+		name = "pullOver";
+		sound[] = {"\extras\sounds\pullOver.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+ 	 class policeSound1
+  	{
+		name = "policeSound1";
+		sound[] = {"\extras\sounds\policeSound1.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+	class punch
+  	{
+		name="punch";
+		sound[] = {"\extras\sounds\punch.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+  	class punchBreak
+  	{
+		name="punchBreak";
+		sound[] = {"\extras\sounds\punchBreak.ogg", 1.0, 1};
+		titles[] = {};
+  	};
+ 	 class nosSound
+  	{
+		name="nosSound";
+		sound[] = {"\extras\sounds\nosSound.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class cough
+ 	{
+		name="cough";
+		sound[] = {"\extras\sounds\cough.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class tyrePop
+  		{
+		name="tyrePop";
+		sound[] = {"\extras\sounds\tyrePop.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  		};
+	class fuelDart
+  	{
+		name="fuelDart";
+		sound[] = {"\extras\sounds\fuelDartLaunch.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class fuelDartHit
+  	{
+		name="fuelDartHit";
+		sound[] = {"\extras\sounds\fuelDartHit.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class adminWarning
+ 	{
+		name="adminWarning";
+		sound[] = {"\extras\sounds\rueWhistle.ogg", 1.0, 1};
+		titles[] = {0, ""};
+  	};
+	class medicSiren
+	{
+		name = "medicSiren";
+		sound[] = {"\extras\sounds\medicSiren.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class drunk1
+	{
+		name="drunk1";
+		sound[] = {"\extras\sounds\drunk1.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+  	class drunk2
+	{
+		name="drunk2";
+		sound[] = {"\extras\sounds\drunk2.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+  	class drunk3
+	{
+		name="drunk3";
+		sound[] = {"\extras\sounds\drunk3.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class drunk4
+	{
+		name="drunk4";
+		sound[] = {"\extras\sounds\drunk4.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class zip
+	{
+		name="zip";
+		sound[] = {"\extras\sounds\zip.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class cuff
+	{
+		name="cuff";
+		sound[] = {"\extras\sounds\cuff.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class phoneCall
+	{
+		name="phoneCall";
+		sound[] = {"\extras\sounds\phoneCall.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class dogBarkSingle
+	{
+		name="dogBarkSingle";
+		sound[] = {"\extras\sounds\dogBarkSingle.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class dogBark
+	{
+		name="dogBark";
+		sound[] = {"\extras\sounds\dogBark.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class dogBite
+	{
+		name="dogBite";
+		sound[] = {"\extras\sounds\dogBite.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class dogChase
+	{
+		name="dogChase";
+		sound[] = {"\extras\sounds\dogChase.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class alert
+	{
+		name="alert";
+		sound[] = {"\extras\sounds\alert.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class american
+	{
+		name="american";
+		sound[] = {"\extras\sounds\american.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class anger
+	{
+		name="anger";
+		sound[] = {"\extras\sounds\anger.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class clapping
+	{
+		name="clapping";
+		sound[] = {"\extras\sounds\clapping.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class failSound
+	{
+		name="failSound";
+		sound[] = {"\extras\sounds\failSound.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class foghorn
+	{
+		name="foghorn";
+		sound[] = {"\extras\sounds\foghorn.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class laugh
+	{
+		name="laugh";
+		sound[] = {"\extras\sounds\laugh.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class mine
+	{
+		name="mine";
+		sound[] = {"\extras\sounds\mine.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class noMercy
+	{
+		name="noMercy";
+		sound[] = {"\extras\sounds\noMercy.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class piss
+	{
+		name="piss";
+		sound[] = {"\extras\sounds\piss.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class smoke
+	{
+		name="smoke";
+		sound[] = {"\extras\sounds\smoke.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class suspense
+	{
+		name="suspense";
+		sound[] = {"\extras\sounds\suspense.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class torture
+	{
+		name="torture";
+		sound[] = {"\extras\sounds\torture.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+	class xFiles
+	{
+		name="xFiles";
+		sound[] = {"\extras\sounds\xFiles.ogg", 1.0, 1};
+		titles[] = {0, ""};
+	};
+};
+
+class CfgNotifications
+{
+	class phoneMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "extras\icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	class policeCall
+	{
+		title = "Police Dispatch Center";
+		iconPicture = "extras\icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	class medicCall
+	{
+		title = "Medic Requested";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	class mechanicCall
+	{
+		title = "Mechanic Requested";
+		iconPicture = "\A3\ui_f\data\map\markers\nato\b_service.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	class securityCall
+	{
+		title = "Security Contractor Requested";
+		iconPicture = "\A3\ui_f\data\map\markers\nato\n_support.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	class adminCall
+	{
+		title = "Admin Requested";
+		iconPicture = "extras\icons\messageadmin.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	class PayCheck
+	{
+		title = "Income Information";
+		iconPicture = "extras\icons\money.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+};

@@ -1,0 +1,1007 @@
+author = "Tonic";
+loadScreen  = "images\altisnewlife.jpg";
+onLoadName = "Altis New Life";
+onLoadMission = "WEB : www.altisnewlife.fr | TS : ts.altisnewlife.fr";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 2;
+disabledAI = 1;
+disableChannels[]={0,1,2};
+enableDebugConsole = 1;
+respawnDialog = 0;
+saving = 0;
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 115;
+};
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 150;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+#include "dialog\MasterHandler.h"
+#include "core\config_ANL.hpp"
+#include "dialog\agb.hpp"
+#include "AS_AdminMenu\spectating.hpp"
+class RscTitles
+{
+	#include "dialog\ui.hpp"
+	#include "dialog\progress.hpp"
+	#include "dialog\statusBar.hpp"
+	#include "dialog\hud_nameTags.h"
+    class ANLintro {
+        idd = -1;
+        duration = 6;
+        class controls {
+            class ExampleControl {
+                idc = -1;
+                type = 0;
+                style = 2192;
+                x = 0.125;
+                y = 0.125;
+                h = 0.75;
+                w = 0.75;
+                font = "EtelkaNarrowMediumPro";
+                sizeEx = 0.05;
+                colorBackground[] = {1,1,1,0};
+                colorText[] = {1,1,1,1};
+                text = "images\ANL\anl_intro.paa";
+                lineSpacing = 1;
+            };
+        };
+    };
+    class wasted {
+        idd = -1;
+        duration = 6;
+        class controls {
+            class ExampleControl {
+                idc = -1;
+                type = 0;
+                style = 2192;
+                x = 0.125;
+                y = 0.125;
+                h = 0.75;
+                w = 0.75;
+                font = "EtelkaNarrowMediumPro";
+                sizeEx = 0.05;
+                colorBackground[] = {1,1,1,0};
+                colorText[] = {1,1,1,1};
+                text = "images\icons\wasted.paa";
+                lineSpacing = 1;
+            };
+        };
+    };
+};
+class CfgFunctions
+{
+	class Socket_Reciever
+	{
+	tag = "SOCK";
+	class SQL_Socket
+	{
+		file = "core\session";
+		class requestReceived;
+		class dataQuery;
+		class insertPlayerInfo;
+		class updateRequest;
+		class syncData;
+		class updatePartial;
+		};
+	};
+class Life_Client_Core
+{
+	tag = "life";
+	class Master_Directory
+	{
+		file = "core\init";
+		class initActions;
+		class initEVH;
+		class initCiv;
+		class initCop;
+		class initMedic;
+		class initAdac;
+	};
+	class AdminMenu
+	{
+		file = "AS_AdminMenu";
+		class openMenu;
+		class ASreceiver;
+		class execute;
+		class ASrefund;
+	};	
+	class Admin
+	{
+		file = "core\admin";
+		class admininfo;
+		class adminid;
+		class admingetID;
+		class adminMenu;
+		class adminQuery;
+		class adminSpectate;
+		class adminTeleport;
+		class adminTpHere;
+		class adminDebugCon;
+		class adminCompensate;
+		class adminGodMode;
+		class adminFreeze;
+		class adminMarkers;
+		class admin_cam;
+		class adminBan;
+		class adminKick;
+		class adminCheckAuth;
+		class adminAuthentificate;
+	};
+	class Medical_System
+	{
+		file = "core\medical";
+		class revivePlayer;
+		class revived;
+		class medicMarkers;
+		class requestMedic;
+		class medicRequest;
+		class deathScreen;
+		class medicLoadout;
+		class medicSirenLights;
+		class medicLights;
+		class medicSiren;
+		class medicChirp;
+		class restrainMed;
+		class restrainActionMed;
+		class medInteractionMenu;
+		class asile;
+		class therapieaction;
+		class therapie;
+		class teamMarkers;
+		class setpain;
+		class rapatriement;
+	};
+	class Actions
+	{
+		file = "core\actions";
+		class buyLicense;
+		class chemlightUse;
+		class heal;
+		class healHospital;
+		class repairTruck;
+		class serviceChopper;
+		class serviceTruck;
+		class catchFish;
+		class catchTurtle;
+		class dropFishingNet;
+		class postBail;
+		class processAction;
+		class sellOil;
+		class suicideBomb;
+		class arrestAction;
+		class escortAction;
+		class impoundAction;
+		class pulloutAction;
+		class putInCar;
+		class stopEscorting;
+		class restrainAction;
+		class searchAction;
+		class searchVehAction;
+		class unrestrain;
+		class pickupItem;
+		class pickupMoney;
+		class ticketAction;
+		class pumpRepair;
+		class storeVehicle;
+		class robAction;
+		class sellTurtle;
+		class repairTruckCop;
+		class processMeth97;
+		class robEphedrine;
+		class robMetylamine;
+		class surrender;
+		class takeOrgans;
+		class healkidney;
+		class robShops;
+		class activateNitro;
+		class removeWeaponAction;
+		class rapeAction;
+		class rapefail;
+		class processActionLsd;
+		class craftAction;
+		class sitdown;
+		class getoutofSlavery;
+		class sellHostage;
+		class sellHostageAction;
+		class holsterWeapon;
+		class gather;
+		class skyDiving;
+		class robATM;
+		class toggleActions;
+		class sac;
+		class enlevesac;
+		class prendreobjet;
+		class gagAction;
+		class gagged;
+		class removeGagAction;
+		class packupSpikes;
+		class GatherWater;
+		class buyTicket;	
+		class fullDAB;
+		class holdupVehicle;
+		class startBrinksMission;
+		class stopBrinksMission;
+		class stopService;
+		class takeService;		
+	};
+	class Vetements
+	{
+		file = "core\vet";
+		class clothing_cop;
+		class clothing_bruce;
+		class clothing_reb;
+		class clothing_dive;
+		class clothing_kart;
+		class clothing_med;
+	};
+	class Special
+	{
+		file = "core\special";
+		class openEmpMenu;
+		class isEmpOperator;
+		class scanVehicles;
+		class warnVehicle;
+		class empVehicle;
+		class vehicleWarned;
+		class vehicleEmpd;
+	};
+	class Paintball
+	{
+		file = "core\paintball";
+		class pb_response;
+	};
+	class Housing
+	{
+		file = "core\housing";
+		class buyHouse;
+		class getBuildingPositions;
+		class houseMenu;
+		class lightHouse;
+		class lightHouseAction;
+		class sellHouse;
+		class initHouses;
+		class copBreakDoor;
+		class raidHouse;
+		class lockupHouse;
+		class copHouseOwner;
+		class lockHouse;
+		class lootHouse;
+		class houseConfig;
+		class secureHouse;
+		class webcamHouse;
+	};
+	class Player_Menu
+	{
+		file = "core\pmenu";
+		class wantedList;
+		class wantedInfo;
+		class wantedMenu;
+		class pardon;
+		class giveItem;
+		class giveMoney;
+		class p_openMenu;
+		class p_updateMenu;
+		class removeItem;
+		class useItem;
+		class cellphone;
+		class keyMenu;
+		class keyGive;
+		class keyDrop;
+		class s_onSliderChange;
+		class updateViewDistance;
+		class settingsMenu;
+		class settingsInit;
+		class AAN;
+		class cellphone2;
+		class craft;
+		class craft_update;
+		class craft_updateFilter;
+		class wantedadd2;
+		class wanted2;
+		class p_prisionbreak;
+		class fps;
+		class revokeLicense;
+	};
+	class Functions
+	{
+		file = "core\functions";
+		class setRating;		
+		class calWeightDiff;
+		class fetchCfgDetails;
+		class handleInv;
+		class hudSetup;
+		class hudUpdate;
+		class tazeSound;
+		class animSync;
+		class simDisable;
+		class keyHandler;
+		class dropItems;
+		class dropItemsFloor;
+		class onPlayerKilled;
+		class onPlayerRespawn;
+		class respawned;
+		class handleDamage;
+		class numberText;
+		class handleItem;
+		class accType;
+		class receiveItem;
+		class giveDiff;
+		class receiveMoney;
+		class playerTags;
+		class clearVehicleAmmo;
+		class pullOutVeh;
+		class nearUnits;
+		class playerCount;
+		class fetchDeadGear;
+		class loadDeadGear;
+		class isnumeric;
+		class onTakeItem;
+		class fetchVehInfo;
+		class pushObject;
+		class onFired;
+		class revealObjects;
+		class nearestDoor;
+		class inventoryClosed;
+		class inventoryOpened;
+		class isUIDActive;
+		class keyUpHandler;
+		class showProgress;
+		class playSound;
+		class updateCash;
+		class stripDownPlayer;
+		class callCellPhone;
+		class emptyFuel;
+		class prisionbreak;
+		class progressBaren;
+		class saveGear;
+		class loadGear;
+		class ryn_message;
+		class purge;
+		class captureBroadcast;
+		class captureBroadcast2;
+		class sacpatate;
+		class globalsound;
+		class globalSoundClient;
+		class callbackup;
+		class backupCall;
+		class blinkerLights;
+		class blinkerManage;
+		class escInterupt;	
+		class loggedOut;		
+	};
+	class Network
+	{
+		file = "core\functions\network";
+		class broadcast;
+		class MP;
+		class MPexec;
+		class netSetVar;
+		class corpse;
+		class jumpFnc;
+		class soundDevice;
+		class setFuel;
+		class setTexture;
+		class say3D;
+	};
+	class Civilian
+	{
+		file = "core\civilian";
+		class jailMe;
+		class jail;
+		class tazed;
+		class civLoadout;
+		class knockedOut;
+		class knockoutAction;
+		class robReceive;
+		class robPerson;
+		class removeLicenses;
+		class demoChargeTimer;
+		class hasOrgan;
+		class hooker;
+		class civInteractionMenu;
+		class manChargeTimer;
+		class waterChargeTimer;
+		class removeWeapons;
+		class inJail;
+		class outOfJail;
+		class cookMeat;
+		class skinanimal;
+		class serendre;
+		class anllic;
+        class anllicshow;
+		class freezePlayer;
+		class depLights;
+        class depSirenLights;
+		class depSiren;		
+	};
+	class Vehicle
+	{
+		file = "core\vehicle";
+		class colorVehicle;
+		class openInventory;
+		class lockVehicle;
+		class vehicleOwners;
+		class vehStoreItem;
+		class vehTakeItem;
+		class vehInventory;
+		class vInteractionMenu;
+		class vehicleWeight;
+		class deviceMine;
+		class addVehicle2Chain;
+		class reverseTruckSound;
+		class vehicleAnimate;
+		class vehicleWeightCfg;
+		class vehShopLicenses;
+		class impoundPrice;
+	};
+	class Cop
+	{
+		file = "core\cop";
+		class copMarkers;
+		class copLights;
+		class vehInvSearch;
+		class copSearch;
+		class bountyReceive;
+		class searchClient;
+		class restrain;
+		class ticketGive;
+		class ticketPay;
+		class ticketPrompt;
+		class copSiren;
+		class spikeStripEffect;
+		class radar;
+		class questionDealer;
+		class copInteractionMenu;
+		class sirenLights;
+		class copChirp;		
+		class licenseCheck;
+		class licensesRead;
+		class repairDoor;
+		class doorAnimate;
+		class fedCamDisplay;
+		class copEnter;
+		class showArrestDialog;
+		class arrestDialog_Arrest;
+		class copOpener;
+		class breathalyzer;
+		class seizeObjects;
+		class copLoadout;
+		class ticketPaid;
+		class copMarkerZones;
+		class checkBody;
+		class analyzeProofs;
+		class giveProofs;
+		class receiveProofs;		
+	};
+	class Adac
+	{
+		file = "core\adac";
+		class adacMarkers;
+		class adacLoadout;
+	};
+	class Gangs
+	{
+	file = "core\gangs";
+		class initGang;
+		class createGang;
+		class gangCreated;
+		class gangMenu;
+		class gangKick;
+		class gangLeave;
+		class gangNewLeader;
+		class gangUpgrade;
+		class gangInvitePlayer;
+		class gangInvite;
+		class gangDisband;
+		class gangDisbanded;
+		class gangMarkers;
+	};
+	class Shops
+	{
+	file = "core\shops";
+		class atmMenu;
+		class buyClothes;
+		class changeClothes;
+		class clothingMenu;
+		class clothingFilter;
+		class vehicleShopMenu;
+		class vehicleShopLBChange;
+		class vehicleShopBuy;
+		class weaponShopFilter;
+		class weaponShopMenu;
+		class weaponShopSelection;
+		class weaponShopBuySell;
+		class virt_buy;
+		class virt_menu;
+		class virt_update;
+		class virt_sell;
+		class chopShopMenu;
+		class chopShopSelection;
+		class chopShopSell;
+		class slotmachine;
+		class slotSpin;
+		class blackjack;
+		class BJbet;
+		class BJhit;
+		class BJstay;
+		class licenses;
+	};
+	class Items
+	{
+	file = "core\items";
+		class pickaxeUse;
+		class lockpick;
+		class jerryRefuel;
+		class flashbang;
+		class boltcutter;
+		class blastingCharge;
+		class defuseKit;
+		class storageBox;
+		class nitro;
+		class vehAmmo;
+		class speedBomb;
+		class demolitionCharge;
+		class underwaterCharge;
+		class gpsTracker;
+		class pLockpick;
+		class tent;
+		class searchWreck;
+		class multipass;
+		class spikeStrip;
+		class painkillers;
+		class bloodbag;
+		class itemWeight;
+	};
+	class Dialog_Controls
+	{
+	file = "dialog\function";
+		class setMapPosition;
+		class displayHandler;
+		class spawnConfirm;
+		class spawnMenu;
+		class spawnPointCfg;
+		class spawnPointSelected;
+		class progressBar;
+		class impoundMenu;
+		class unimpound;
+		class sellGarage;
+		class bankDeposit;
+		class bankWithdraw;
+		class bankTransfer;
+		class garageLBChange;
+		class safeInventory;
+		class safeOpen;
+		class safeTake;
+		class safeFix;
+		class vehicleGarage;
+		class gangDeposit;
+		class calldialog;
+		class sendChannel;
+		class safeInvGold;
+		class safeGold;
+		class goldTake;
+		class InsureCar;
+		class gangWithdraw;
+	};
+	class Market
+	{
+		file = "core\market";
+		class bought;
+		class update;
+		class DisplayPrices;
+		class LoadIntoListbox;
+		class ForcePrice;
+		class DYNMARKET_getPrice;
+	};
+	class Taxi
+	{
+		file = "core\taxi";
+		class taxiService;
+		class taxiPurchaseFare;
+		class taxiPurchaseSpeedyFare;
+	};
+	class Tunning
+	{
+		file = "core\repaint";
+		class RepaintMenu;
+		class Repaintcolor;
+		class RepaintVehicle;
+	};
+	class Drogue
+	{
+		file ="core\drogue";
+		class cigarette;
+		class drinkbeer;
+		class drinkmoonshine;
+		class drinkwhiskey;
+		class meth;
+		class weed;
+		class coke;
+		class heroin;
+		class opium;
+		class overdose;
+	};
+    class vAH
+    {
+        file = "core\vAH";
+        class vAH_load;
+        class vAH_buy;
+        class vAH_reciever;
+        class vAH_loadInventory;
+        class vAH_sell;
+        class vAH_checkItem;
+        class vAH_takeBack;
+        class vAH_select;
+    };	
+};
+};
+class CfgSounds
+{
+sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"sons\siren_cop.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class medicSiren
+    {
+        name = "medicSiren";
+        sound[] = {"sons\siren_medic.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	class ChirpMedic
+	{
+		name = "ChirpMedic";
+		sound[] = {"sons\chirpmedic.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class Chirp
+	{
+		name = "Chirp";
+		sound[] = {"sons\chirpcop.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class BeepBeep
+	{
+		name = "BeepBeep";
+		sound[] = {"sons\car_lock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class BigAlarm
+	{
+		name = "BigAlarm";
+		sound[] = {"sons\alarm_big.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class Alarm_maison
+	{
+		name = "Alarm_maison";
+		sound[] = {"sons\alarm_maison.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class Caching
+	{
+		name = "caching";
+		sound[] = {"sons\caching.ogg", 1, 1};
+		titles[] = {};
+	};
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"sons\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+	class cuff
+	{
+		name = "cuff";
+		sound[] = {"sons\cuff.ogg", 0.95, 1};
+		titles[] = {};
+	};
+	class car_lock
+	{
+		name = "car_lock";
+		sound[] = {"sons\car_lock.ogg", 0.95, 1};
+		titles[] = {};
+	};
+	class reverse_truck
+	{
+		name = "reverse_truck";
+		sound[] = {"sons\truck_reverse.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class IntroCiv
+	{
+		name = "IntroCiv";
+		sound[] = {"sons\intro.ogg", 0.80, 1};
+		titles[] = {};
+	};
+	class Bag
+	{
+		name = "bag";
+		sound[] = {"sons\bag.ogg", 1, 1};
+		titles[] = {};
+	};
+ 	class punch
+	{
+		name="punch";
+		sound[] = {"sons\punch.ogg",1,1};
+		titles[] = {};
+	};
+	class punch_break
+	{
+		name="punch_break";
+		sound[] = {"sons\punch_break.ogg",1,1};
+		titles[] = {};
+	};
+	class punch_balls
+	{
+		name="punch_balls";
+		sound[] = {"sons\punch_balls.ogg",1,1};
+		titles[] = {};
+	};
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"sons\flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class CarAlarm
+	{
+		name = "CarAlarm";
+		sound[] = {"sons\alarm_car.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class bombarm
+	{
+		name = "bombarm";
+		sound[] = {"sons\bombarm.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class spraycan
+	{
+		name = "spraycan";
+		sound[] = {"sons\spraycan.ogg", db-20, 1};
+		titles[] = {};
+	};
+	class airplane
+	{
+		name = "airplane";
+		sound[] = {"sons\airplane.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class alert
+	{
+		name = "alert";
+		sound[] = {"sons\alert.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class knockout
+	{
+		name = "knockout";
+		sound[] = {"sons\knockout.ogg", 1.0, 1};
+		titles[] = {};
+	};
+    class dog_whine
+	{
+		name = "dog_whine";
+		sound[] = {"sons\dog_whine.ogg", 1, 1};
+		titles[] = {};
+
+	};
+	class dog_growl
+	{
+		name = "dog_growl";
+		sound[] = {"sons\dog_growl.ogg", 1, 1};
+		titles[] = {};
+
+	};
+	class dog_ruff
+	{
+		name = "dog_ruff";
+		sound[] = {"sons\dog_ruff.ogg", 1, 1};
+		titles[] = {};
+
+	};
+	class whistle
+	{
+		name = "whistle";
+		sound[] = {"sons\whistle.ogg", 1, 1};
+		titles[] = {};
+
+	};
+	class dog_close
+	{
+		name = "dog_close";
+		sound[] = {"sons\dog_close.ogg", 1, 1};
+		titles[] = {};
+
+	};
+	class dog_one
+	{
+		name = "dog_one";
+		sound[] = {"sons\dog_one.ogg", 1, 1};
+		titles[] = {};
+
+	};
+    class purge
+    {
+        name = "purge";
+        sound[] = {"sons\purge.ogg",8,1.0};
+        titles[] = {};
+    };
+	class meth_son
+	{
+		name = "meth_son";
+		sound[] = {"sons\meth_son.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class overdose_son
+	{
+		name = "overdose_son";
+		sound[] = {"sons\overdose_son.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class heroin_son
+	{
+		name = "heroin_son";
+		sound[] = {"sons\heroin_son.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class cocaine_son
+	{
+		name = "cocain_son";
+		sound[] = {"sons\cocaine_son.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class weed_son
+	{
+		name = "weed_son";
+		sound[] = {"sons\weed_son.ogg", 1.0, 1};
+		titles[] = {};
+	};
+    class wasted
+    {
+        name = "wasted";
+        sound[] = {"sons\wasted.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	class empwarn
+	{
+		name = "empwarn";
+		sound[] = {"sons\empwarn.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class empacsound
+	{
+		name = "empacsound";
+		sound[] = {"sons\empac.ogg", db-5, 1};
+		titles[] = {};
+	};	
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Echoué";
+		subtitle = "Vous n'êtes pas autorisé à utiliser ce slot";
+		description = "Vous ne pouvez pas accèder à ce slot car vous n'êtes pas dans la whitlist.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Blacklisted
+	{
+		title = "Mission Echoué";
+		subtitle = "Vous n'êtes pas autorisé à utiliser ce slot";
+		description = "Vous ne pouvez pas accèder à ce slot car vous êtes blacklisté.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+    class Abort
+    {
+        title = "Déconnection réussie";
+        subtitle = "Votre profil à été sauvegardé";
+        description = "En ésperant vous revoir très bientôt, n'hesitez pas à nous rejoindre sur le TeamSpeak: ts.altisnewlife.fr";
+        pictureBackground = "";
+        picture = "\a3\ui_f\data\gui\cfg\Hints\tasks_ca.paa";
+        pictureColor[] = {1,1,1,1};
+     };
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "EMS Requested";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepted";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "images\icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "911 Dispatch Center";
+		iconPicture = "images\icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdacMessage
+	{
+		title = "Adac Message";
+		iconPicture = "images\icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "images\icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Admin Message";
+		iconPicture = "images\icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};

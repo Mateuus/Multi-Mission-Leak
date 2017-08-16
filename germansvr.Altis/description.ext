@@ -1,0 +1,312 @@
+disableChannels[]={0,1,2};
+
+#include "config\Config_Spyglass.hpp"
+#include "CfgRemoteExec.hpp"
+#include "dialog\MasterHandler.hpp"
+#include "dialog\agb.hpp"
+#include "config\Config_Master.hpp"
+#include "maverick\maverick_master.cpp"
+#include "config\Config_Message.hpp"
+
+class CfgServer {
+    DatabaseName = "altislife"; //Config name that'll be grep in the extdb-conf.ini. Default: [altislife]
+    DebugMode = 0; //Enable many server/hc debugging logs. Default: 0 (1 = Enabled / 0 = Disabled)
+    HeadlessSupport = 0; //Enable/Disable Headless client support. Default: 1 (1 = Enabled / 0 = Disabled)
+    /*
+    Enabled: When HeadlessSupport is set to 1 (enabled), the server will run without fault when no Headless Client is connected. However, it will support the Headless Client if you choose to connect one.
+    Disabled: If HeadlessSupport is set to 0 (disabled), the connection of a Headless Client will make no difference. This option will increase server performance a TINY but negligible amount.
+    */
+};
+
+class RscTitles {
+	#include "dialog\uiPerso.hpp"
+    #include "dialog\progress.hpp"
+    #include "dialog\hud_nameTags.hpp"
+    #include "dialog\hud_stats.hpp"
+	#include "dialog\vehInfo.hpp"
+	#include "maverick\introcam\dialogs\title_status.hpp"
+	#include "maverick\tuning\dialogs\titles.hpp"
+	#include "maverick\talent-tree-modular\gui\_masterTitles.cpp"
+
+	class Default {
+		idd = -1;
+		fadein = 0;
+		fadeout = 0;
+		duration = 0;
+	};
+	class RageCoreintro {
+		idd = -1;
+		duration = 6;
+		class controls {
+			class ExampleControl {
+				idc = -1;
+				type = 0;
+				style = 2192;
+				x = 0.125;
+				y = 0.125;
+				h = 0.75;
+				w = 0.75;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.05; 
+				colorBackground[] = {1,1,1,0};
+				colorText[] = {1,1,1,1};
+				text = "";
+				lineSpacing = 1;
+			}; 
+		}; 
+	}; 
+};
+
+class CfgFunctions {
+    #include "Functions.hpp"
+	#include "maverick\maverick_functions_master.cpp"
+};
+
+class CfgSounds {
+    sounds[] = {};
+    class sirenLong {
+        name = "sirenLong";
+        sound[] = {"\sounds\sirenLong.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class medicSiren {
+        name = "medicSiren";
+        sound[] = {"\sounds\medicSiren.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class tazerSound {
+        name = "tazerSound";
+        sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+        titles[] = {};
+    };
+
+    class flashbang {
+        name = "flashbang";
+        sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class mining {
+        name = "mining";
+        sound[] = {"\sounds\mining.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class harvest {
+        name = "harvest";
+        sound[] = {"\sounds\harvest.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class lockSound {
+        name = "lockSound";
+        sound[] = {"\sounds\unlock.ogg", 0.25, 1};
+        titles[] = {};
+    };
+	class cam_intro {
+        name = "cam_intro";
+        sound[] = {"\maverick\introcam\intro.ogg", 0.2, 1};
+        titles[] = {};
+    };
+	class wu {
+        name = "wu";
+        sound[] = {"\sounds\wu.ogg", 0.5, 1};
+        titles[] = {};
+    };
+	class eat {
+        name = "eat";
+        sound[] = {"\sounds\eat.ogg", 0.5, 1};
+        titles[] = {};
+    };
+	class drink {
+        name = "drink";
+        sound[] = {"\sounds\drink.ogg", 0.5, 1};
+        titles[] = {};
+    };
+	class reparatur {
+        name = "reparatur";
+        sound[] = {"\sounds\reparatur.ogg", 0.5, 1};
+        titles[] = {};
+    };
+	class hand {
+        name = "hand";
+        sound[] = {"\sounds\handschellen.ogg", 0.5, 1};
+        titles[] = {};
+    };
+	class schmerzmittel {
+        name = "schmerzmittel";
+        sound[] = {"\sounds\schmerzmittel.ogg", 0.5, 1};
+        titles[] = {};
+    };
+	class niederschlagen {
+        name = "niederschlagen";
+        sound[] = {"\sounds\niederschlagen.ogg", 0.5, 1};
+        titles[] = {};
+    };
+	class CarAlarm {
+		name = "CarAlarm";
+		sound[] = {"\sounds\caralarm.ogg", 0.25, 1};
+		titles[] = {};
+	};
+	class empwarn {
+        name = "empwarn";
+        sound[] = {"\sounds\empwarn.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class empacsound {
+        name = "empacsound";
+        sound[] = {"sounds\empac.ogg", db-5, 1};
+        titles[] = {};
+    };
+};
+
+class CfgDebriefing {
+    class NotWhitelisted {
+        title = "$STR_NotWhitelisted_Title";
+        subtitle = "$STR_NotWhitelisted_SubTitle";
+        description = "$STR_NotWhitelisted_Descript";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0,0.3,0.6,1};
+    };
+
+    class Blacklisted {
+        title = "$STR_Blacklisted_Title";
+        subtitle = "$STR_Blacklisted_SubTitle";
+        description = "$STR_Blacklisted_Descript";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0,0.3,0.6,1};
+    };
+	class falschprof {
+		title = "Falscher Profilname";
+		subTitle = "";
+		description = "Dein aktuelles Profil (Name) stimmt nicht mit dem abgespeicherten Namen im Personalausweis berein! Bitte aendere dein Profil. Falls du deinen Namen nicht mehr kennst, melde dich bitte beim Support!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class fehlerprof {
+		title = "Fehler im Personalausweis";
+		subTitle = "";
+		description = "Bitte melde dich im Support und gebe den Fehler mit an!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class persoA {
+		title = "Personalausweis";
+		subTitle = "";
+		description = "Bitte aendere dein Profilnamen auf den Namen, den du vor 5 Minuten beim Buergeramt angegeben hast!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class fformatprof {
+		title = "Format Personalausweis";
+		subTitle = "";
+		description = "Bitte melde dich im Support und gebe den Fehler mit an!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class dialogperso {
+		title = "Personalausweisdialog geschlossen";
+		subTitle = "";
+		description = "Dialog des Personalausweises wurde geschlossen...";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	class NameExists {
+        title = "Falscher Spielername";
+        subTitle = "";
+        description = "Bitte Ändere deinen Spielernamen!";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0,0.3,0.6,1};
+    };
+};
+
+class CfgNotifications {
+    class MedicalRequestEmerg {
+        title = "$STR_MedicalRequestEmerg_Title";
+        iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+        description = "%1";
+        duration = 5;
+        priority = 7;
+    };
+
+    class DeliveryAssigned {
+        title = "$STR_DeliveryAssigned_Title";
+        iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+        description = "%1";
+        duration = 10;
+        priority = 7;
+    };
+
+    class DeliveryFailed {
+        title = "$STR_DeliveryFailed_Title";
+        iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+        description = "%1";
+        duration = 7;
+        priority = 7;
+    };
+
+    class DeliverySucceeded {
+        title = "$STR_DeliverySucceeded_Title";
+        iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+        description = "%1";
+        duration = 6;
+        priority = 6;
+    };
+
+    class TextMessage {
+        title = "$STR_TextMessage_Title";
+        iconPicture = "icons\ico_messageNew.paa";
+        description = "%1";
+        duration = 10;
+        priority = 6;
+    };
+
+    class PoliceDispatch {
+        title = "$STR_PoliceDispatch_Title";
+        iconPicture = "icons\ico_messagePolice.paa";
+        description = "%1";
+        duration = 10;
+        priority = 6;
+    };
+
+    class AdminDispatch {
+        title = "$STR_AdminDispatch_Title";
+        iconPicture = "icons\ico_messageAdmin.paa";
+        description = "%1";
+        duration = 10;
+        priority = 6;
+    };
+
+    class AdminMessage {
+        title = "$STR_AdminMessage_Title";
+        iconPicture = "icons\ico_messageAdmin.paa";
+        description = "%1";
+        duration = 10;
+        priority = 5;
+    };
+	class AdacMessage {
+		title = "Adac Message";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+	class PolizeiRundfunk {
+		title = "Polizei Rundfunk";
+		iconPicture = "icons\messagepolice.paa"; //Icon kann gendert werden, kein Icon = leere ""
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};
+#include "infiSTAR_AdminMenu.hpp"

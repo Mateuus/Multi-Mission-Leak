@@ -1,0 +1,1 @@
+      sleep 0; FirstStart = false; ADPFade = 0; closedialog 0; createdialog "ADP"; 

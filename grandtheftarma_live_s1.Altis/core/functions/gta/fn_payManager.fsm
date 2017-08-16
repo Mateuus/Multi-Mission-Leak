@@ -1,0 +1,132 @@
+/*%FSM<COMPILE "E:\Games\Steam\steamapps\common\Arma 3 Tools\FSMEditor\scriptedFSM.cfg, GTA: Pay Manager">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Init",0,250,-25.000000,-150.000000,75.000000,-100.000000,0.000000,"Init"};
+item1[] = {"Next__Paycheck",4,218,-25.000000,-75.000000,75.000000,-25.000000,0.000000,"Next " \n "Paycheck"};
+item2[] = {"Pay",2,4346,-25.000000,0.000000,75.000000,50.000000,0.000000,"Pay"};
+item3[] = {"",7,210,-79.000000,20.999996,-71.000008,29.000002,0.000000,""};
+item4[] = {"",7,210,-79.000000,-54.000000,-70.999992,-46.000004,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,1};
+globals[] = {0.000000,0,0,0,0,640,480,1,30,6316128,1,-644.589844,565.481384,555.143677,-370.942078,1639,1244,1};
+window[] = {2,-1,-1,-1,-1,844,185,813,26,3,1657};
+*//*%FSM</HEAD>*/
+class FSM
+{
+        fsmName = "GTA: Pay Manager";
+        class States
+        {
+                /*%FSM<STATE "Init">*/
+                class Init
+                {
+                        name = "Init";
+                        itemno = 0;
+                        init = /*%FSM<STATEINIT""">*/"private ""_lastCheck"";" \n
+                         "_lastCheck = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Next__Paycheck">*/
+                                class Next__Paycheck
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Pay";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time - _lastCheck > ( ""life_paycheck_period"" call GTA_fnc_const ) * 60"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+                /*%FSM<STATE "Pay">*/
+                class Pay
+                {
+                        name = "Pay";
+                        itemno = 2;
+                        init = /*%FSM<STATEINIT""">*/"scriptName ""fn_payManager"";" \n
+                         "" \n
+                         "private [ ""_paycheck"", ""_payRise"" ];" \n
+                         "_paycheck = ""life_paycheck"" call GTA_fnc_const;" \n
+                         "" \n
+                         "if !( alive player ) then {" \n
+                         "" \n
+                         "	systemChat localize ""STR_FSM_MissedPay"";" \n
+                         "" \n
+                         "} else {" \n
+                         "" \n
+                         "	_payRise = switch ( ""pay_rise"" call GTA_fnc_perkRank ) do {" \n
+                         "" \n
+                         "		case 1: { 500 };" \n
+                         "		case 2: { 1100};" \n
+                         "		case 3: { 1800 };" \n
+                         "		case 4: { 2600 };" \n
+                         "		case 5: { 3600 };" \n
+                         "		default { 0 };" \n
+                         "" \n
+                         "	};" \n
+                         "" \n
+                         "	_paycheck = _paycheck + _payRise;" \n
+                         "" \n
+                         "	//--- Lab sector control" \n
+                         "	if ( count playableUnits >= 30 && { [ ""Lab_01"" ] call GTA_fnc_ownsSector } ) then {" \n
+                         "		" \n
+                         "		//--- Check rebel status" \n
+                         "		if ( playerSide == civilian && { !license_civ_rebel || !license_civ_advrebel } ) exitWith {};" \n
+                         "" \n
+                         "		_paycheck = _paycheck + 5000;" \n
+                         "		[ 500, ""Lab Sector Control"" ] call GTA_fnc_addExp;" \n
+                         "" \n
+                         "	};" \n
+                         "" \n
+                         "	GTA_money_bank = GTA_money_bank + _paycheck;" \n
+                         "	systemChat format [ localize ""STR_FSM_ReceivedPay"", _paycheck call life_fnc_numberText ];" \n
+                         "" \n
+                         "	//--- NATO + Cop experience" \n
+                         "	/*if ( playerSide == west ) then {" \n
+                         "" \n
+                         "		//--- Add experience" \n
+                         "		[ ""patrol"", ""On the Beat"" ] call GTA_fnc_addExp;" \n
+                         "" \n
+                         "	};*/" \n
+                         "" \n
+                         "	//--- HATO experience" \n
+                         "	if ( [] call GTA_fnc_isHATO ) then {" \n
+                         "" \n
+                         "		//--- Add experience" \n
+                         "		[ ""patrol"", ""Keeping the streets clean"" ] call GTA_fnc_addExp;" \n
+                         "	};" \n
+                         "" \n
+                         "};" \n
+                         "" \n
+                         "systemChat format [ localize ""STR_FSM_Paycheck"", ""life_paycheck_period"" call GTA_fnc_const ];" \n
+                         "" \n
+                         "_lastCheck = time;"/*%FSM</STATEINIT""">*/;
+                        precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+                        class Links
+                        {
+                                /*%FSM<LINK "Next__Paycheck">*/
+                                class Next__Paycheck
+                                {
+                                        itemno = 1;
+                                        priority = 0.000000;
+                                        to="Pay";
+                                        precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+                                        condition=/*%FSM<CONDITION""">*/"time - _lastCheck > ( ""life_paycheck_period"" call GTA_fnc_const ) * 60"/*%FSM</CONDITION""">*/;
+                                        action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+                                };
+                                /*%FSM</LINK>*/
+                        };
+                };
+                /*%FSM</STATE>*/
+        };
+        initState="Init";
+        finalStates[] =
+        {
+        };
+};
+/*%FSM</COMPILE>*/

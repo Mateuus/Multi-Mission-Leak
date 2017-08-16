@@ -1,0 +1,1 @@
+ if!(isNull myUAV) then { 	if!(isNull ((UAVControl myUAV) select 0)) then { 		objNull remoteControl (driver myUAV); 		deleteVehicle (driver myUAV); 	}; };  player setDamage 1; 

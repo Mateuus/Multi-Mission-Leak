@@ -1,0 +1,17 @@
+_vehicle =  [_this,0,Objnull,[Objnull]] call BIS_fnc_param;
+if(isNull _vehicle) exitWith {};
+if((_vehicle getVariable ["esg_fuelWarned", false])) exitWith {};
+_vehicle setVariable ["esg_fuelWarned",true,true];
+["<t font='PuristaBold' size = '.8'>Du wirst von einem EMP-System gewarnt!</t>",-1,-1,4,1,0,789] spawn BIS_fnc_dynamicText;
+sleep 1;
+["<t font='PuristaBold' size = '.8'>Du wirst von einem EMP-System gewarnt!</t>",-1,-1,4,1,0,789] spawn BIS_fnc_dynamicText;
+sleep 1;
+["<t font='PuristaBold' size = '.8'>Du wirst von einem EMP-System gewarnt!</t>",-1,-1,4,1,0,789] spawn BIS_fnc_dynamicText;
+sleep 1;
+["<t font='PuristaBold' size = '.8'>Du wirst von einem EMP-System gewarnt!</t>",-1,-1,4,1,0,789] spawn BIS_fnc_dynamicText;
+sleep 1;
+["<t font='PuristaBold' size = '.8'>Du wirst von einem EMP-System gewarnt!</t>",-1,-1,4,1,0,789] spawn BIS_fnc_dynamicText;
+sleep 1;
+["<t font='PuristaBold' size = '.8'>Du wirst von einem EMP-System gewarnt!</t>",-1,-1,4,1,0,789] spawn BIS_fnc_dynamicText;
+sleep 3;
+_vehicle setVariable ["esg_fuelWarned",false,true];

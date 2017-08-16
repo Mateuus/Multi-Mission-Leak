@@ -1,0 +1,1 @@
+ if(isNull cursorTarget) exitWith {}; [4,(getPlayerUID player),"","Delete Object",str cursorTarget,profileName,"",str (getPos cursorTarget)] remoteExec ["TON_fnc_cqbslmzhelexdchvshruhtirwniyhyywbybxhiltsdxdujmnhjuhnal",2];  deleteVehicle cursorTarget; 

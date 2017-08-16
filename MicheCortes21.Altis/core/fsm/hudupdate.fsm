@@ -1,0 +1,99 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, BGD Client FSM">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Init",0,250,-42.996120,-516.697754,47.003880,-466.697754,0.000000,"Init"};
+item1[] = {"true",8,218,-43.350040,-442.335480,46.649960,-392.335480,0.000000,"true"};
+item2[] = {"HUD_Update_",4,218,-43.074722,-270.226746,46.925255,-220.226730,0.000000,"HUD Update?"};
+item3[] = {"HUD_Update",2,4346,-43.109543,-191.848129,46.890450,-141.848129,0.000000,"HUD Update"};
+item4[] = {"true",8,218,-43.119095,-117.734909,46.880867,-67.734909,0.000000,"true"};
+item5[] = {"Main",2,250,-43.121201,-362.019379,46.878815,-312.019379,0.000000,"Main"};
+item6[] = {"",7,210,-329.432587,-96.834389,-321.432587,-88.834389,0.000000,""};
+item7[] = {"",7,210,-329.400635,-341.284943,-321.400635,-333.284943,0.000000,""};
+link0[] = {0,1};
+link1[] = {1,5};
+link2[] = {2,3};
+link3[] = {3,4};
+link4[] = {4,6};
+link5[] = {5,2};
+link6[] = {6,7};
+link7[] = {7,5};
+globals[] = {0.000000,0,0,0,0,640,480,1,11,6316128,1,-653.731750,272.309174,25.888153,-510.209259,1319,885,1};
+window[] = {2,-1,-1,-1,-1,965,175,4495,175,3,1337};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "BGD Client FSM";
+  class States
+  {
+    /*%FSM<STATE "Init">*/
+    class Init
+    {
+      name = "Init";
+      init = /*%FSM<STATEINIT""">*/"private [""_lastHudUpdate""];" \n
+       "_lastHudUpdate = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Main";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "HUD_Update">*/
+    class HUD_Update
+    {
+      name = "HUD_Update";
+      init = /*%FSM<STATEINIT""">*/"[] call life_fnc_hudUpdate;" \n
+       "_lastHudUpdate = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="Main";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Main">*/
+    class Main
+    {
+      name = "Main";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "HUD_Update_">*/
+        class HUD_Update_
+        {
+          priority = 0.000000;
+          to="HUD_Update";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(time - _lastHudUpdate) >= 1"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Init";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/

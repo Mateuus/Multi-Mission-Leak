@@ -1,0 +1,1 @@
+   datvarfortesting = true; daDistance = 0;  [] spawn { 	while {datvarfortesting} do { 		[] spawn { 			while {datvarfortesting} do { 				daDistance = daDistance + (player distance (getMarkerPos "kavala_safezone")); 				sleep 0.001; 			}  		}; 		sleep 5; 	}; 	daDistance = 0; }; 

@@ -1,0 +1,465 @@
+author = "Tonic modified by Division Wolf";
+#include "worldconfig\world.ext"
+loadScreen = "textures\Wolflogo\loadscreen.paa";
+onLoadMission = "RPG game developed by TAW_Tonic modified by Division Wolf";
+joinUnassigned = 1;
+respawnButton = 0;
+respawn = BASE;
+respawndelay = 5;
+disabledAI = true;
+//disableChannels[]={{0,true,true},{1,true,true},{2,true,true},{6,true,true}};
+enableDebugConsole = 1; // Debugconsole Ingame aktivieren = 1 / deaktivieren = 0
+respawnDialog = 0;
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 240;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 1;
+corpseRemovalMinTime = 900;
+corpseRemovalMaxTime = 1800;
+
+#include "dialog\MasterHandler.h"
+#include "dialog\Config_Perso.hpp"
+#include "config\Config_Master.hpp"
+
+class RscTitles
+{
+
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.h"
+	#include "dialog\taximeter.hpp"
+	#include "dialog\wl_hud.hpp"
+	#include "dialog\welcome.hpp"
+	#include "dialog\uiPerso.hpp"
+	
+class introLife
+{
+   idd = -1;
+   duration = 6;
+   class controls
+   {
+         class ExampleControl
+         {
+            idc = -1;
+            type = 0;
+            style = 2192;
+            x = 0.125;
+            y = 0.125;
+            h = 0.75;
+            w = 0.75;
+            font = "EtelkaNarrowMediumPro";
+            sizeEx = 0.05; 
+            colorBackground[] = {1,1,1,0};
+            colorText[] = {1,1,1,1};
+            text = "textures\Wolflogo\intro_logo.paa";
+            lineSpacing = 1;
+         }; 
+      }; 
+   }; 
+};
+
+class CfgFunctions
+{
+	#include "Functions.h"
+};
+
+class CfgRemoteExec
+{
+	#include "CfgRemoteExec.h"
+};
+
+class CfgSounds
+{
+  sounds[] = {};
+  class SirenLong
+  {
+    name = "SirenLong";
+    sound[] = {"\sounds\Siren_Long.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class Siren_med
+  {
+    name = "Siren_med";
+    sound[] = {"\sounds\Siren_med.ogg", 1.0, 1};
+    titles[] = {};
+  };
+    class tazersound
+  {
+    name = "Tazersound";
+    sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+    titles[] = {};
+  };
+  
+  class knockout
+	{
+		name = "knockout";
+		sound[] = {"\sounds\knockout.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class warnung
+  {
+   name = "warnung";
+   sound[] = {"\sounds\warnung.ogg", 1.0, 1};
+   titles[] = {};
+  };
+  
+  class Polizeiheulen
+  {
+    name = "Polizeiheulen";
+    sound[] = {"\sounds\Polizeiheulen.ogg", 1.0, 1};
+    titles[] = {};
+  };
+	
+	class baby_cry
+  {
+	name="baby_cry";
+	sound[] = {"\sounds\baby_cry.ogg", 1.0, 1};
+	titles[] = {0, " "};
+  };
+
+  class LockSound
+  {
+    name = "LockSound";
+    sound[] = {"\sounds\lock.ogg", 0.75, 1};
+    titles[] = {};
+  };
+  class cuff
+  {
+    name = "cuff";
+    sound[] = {"\sounds\cuff.ogg", 0.75, 1};
+    titles[] = {};
+  };
+  
+  class empwarn
+  {
+    name = "empwarn";
+    sound[] = {"\sounds\empwarn.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class empacsound
+  {
+    name = "empacsound";
+    sound[] = {"sounds\empac.ogg", db-5, 1};
+    titles[] = {};
+  };
+  
+  class emphit
+  {
+    name = "emphit";
+    sound[] = {"\sounds\emphit.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  
+   class bag
+  {
+    name = "bag";
+    sound[] = {"\sounds\bag.ogg", 0.75, 1};
+    titles[] = {};
+  };
+  
+  class mining {
+        name = "mining";
+        sound[] = {"\sounds\mining.ogg", 1.0, 1};
+        titles[] = {};
+    };
+  
+  class intro_sound
+  {
+    name = "intro_sound";
+    sound[] = {"\sounds\wolf_intro.ogg", db+15, 1};
+    titles[] = {};
+  };
+ 
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Failed";
+		subtitle = "Du bist nicht auf der Whitelist";
+		description = "Dieser Slot ist nur für Whitelist User gedacht, Bewirb dich.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Blacklisted
+	{
+		title = "Server Ban";
+		subtitle = "Du wurdest vom Server gebannt.";
+		description = "Melde dich im Teamspeak (ts.division-wolf.de) bei einem Admin um den Grund dafür zu erfahren";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class SpyGlass
+	{
+		title = "CHEATER";
+		subTitle = "Das AntiCheat Tool hat dich erkannt";
+		description = "Dein Betrugsversuch wurde erkannt und du gebannt. Genieß dein Tag du Hund!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class AdminKick
+	{
+		title = "Admin Kick";
+		subTitle = "Du wurdest vom Admin aus dem Spiel gekickt";
+		description = "Melde dich im Teamspeak (division-wolf.de) bei einem Admin um den Grund dafür zu erfahren";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class BAN
+	{
+		title = "Server Ban";
+		subTitle = "Du wurdest vom Server gebannt.";
+		description = "Melde dich im Teamspeak (ts.division-wolf.de) bei einem Admin um den Grund dafür zu erfahren";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class FreshCop
+	{
+		title = "Coplevel zu niedrig";
+		subTitle = "Dein Coplevel ist zu niedrig";
+		description = "Du kannst zur Zeit nicht als Zivilist spielen, da dein Coplevel noch zu gering ist.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class FreshMedic
+	{
+		title = "Feuerwehrlevel zu niedrig";
+		subTitle = "Dein Feuerwehrlevel ist zu niedrig";
+		description = "Du kannst zur Zeit nicht als Zivilist spielen, da dein Feuerwehrlevel noch zu gering ist.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class lessCops
+	{
+		title = "Zu wenige Cops Online";
+		subTitle = "Es sind zu wenige Cops Online";
+		description = "Du kannst zur Zeit nicht als Zivilist spielen, da gerade zu wenige Cops online sind!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class lessMedics
+	{
+		title = "Zu wenige Feuerwehrleute Online";
+		subTitle = "Es sind zu wenige Feuerwehrleute Online";
+		description = "Du kannst zur Zeit nicht als Zivilist spielen, da gerade zu wenige Feuerwehrleute online sind!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class wrongSide
+	{
+		title = "Falsche Fraktion Ausgewählt";
+		subTitle = "Falsche Fraktion ausgewählt";
+		description = "Du muss die gleiche Fraktion wählen, mit der du auch abgereist bist!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class cancelButton
+	{
+		title = "Abbgebrochen";
+		subTitle = "Spawn Abgebrochen";
+		description = "Du hast das Spawnmenü verlassen";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class noBalance
+	{
+		title = "Zu Früh drann!";
+		subTitle = "Du wolltest zu früh als Zivilist spielen";
+		description = "Das Verhältniss tritt erst 5 Minuten nach Serverstart in kraft!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class falschprof
+	{
+	title = "Falscher Profilname";
+	subTitle = "";
+	description = "Dein aktuelles Profil (Name) stimmt nicht mit dem abgespeicherten Namen im Personalausweis überein! Bitte ändere dein Profil. Falls du deinen Namen nicht mehr kennst, melde dich bitte beim Support!";
+	pictureBackground = "";
+	picture = "";
+	pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class fehlerprof
+	{
+	title = "Fehler im Personalausweis";
+	subTitle = "";
+	description = "Bitte melde dich im Support und gebe den Fehler mit an!";
+	pictureBackground = "";
+	picture = "";
+	pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class persoA
+	{
+	title = "Personalausweis";
+	subTitle = "";
+	description = "Bitte ändere dein Profilnamen auf den Namen, den du vor 5 Minuten beim Bürgeramt angegeben hast!";
+	pictureBackground = "";
+	picture = "";
+	pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class fformatprof
+	{
+	title = "Format Personalausweis";
+	subTitle = "";
+	description = "Bitte melde dich im Support und gebe den Fehler mit an!";
+	pictureBackground = "";
+	picture = "";
+	pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class dialogperso
+	{
+	title = "Personalausweisdialog geschlossen";
+	subTitle = "";
+	description = "Dialog des Personalausweises wurde geschlossen...";
+	pictureBackground = "";
+	picture = "";
+	pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+		class DeliveryAssigned
+	{
+		title = "Delivery Job aktzeptiert.";
+		iconPicture = "icons\paket.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class DeliveryFailed
+	{
+		title = "Delivery Job fehlgeschlagen.";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+	
+	class DeliverySucceeded
+	{
+		title = "Delivery Job abgeschlossen.";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+	
+	class TextMessage
+	{
+		title = "Textnachricht erhalten.";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class PoliceDispatch
+	{
+		title = "110 Notruf Zentrale.";
+		iconPicture = "icons\Polizei128.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminDispatch
+	{
+		title = "Admin Notruf Zentrale.";
+		iconPicture = "icons\adminwolf.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminMessage
+	{
+		title = "Admin Nachricht.";
+		iconPicture = "icons\adminwolf.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+	
+	class PoliceMessage
+	{
+		title = "Polizei Nachricht.";
+		iconPicture = "icons\Polizei128.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+	
+	class MedicalRequestEmerg
+	{
+		title = "Feuerwehr Wiederbelebung.";
+		iconPicture = "icons\Feuerwehr128.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+	
+	class feuernachricht
+	{
+		title = "Feuerwehr Nachricht.";
+		iconPicture = "icons\Feuerwehr128.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class OpforMessage
+	{
+		title = "Sicherheits Nachricht.";
+		iconPicture = "icons\Sicherheit128.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+	
+	class EventMessage
+	{
+		title = "Event Nachricht.";
+		iconPicture = "icons\adminwolf.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};

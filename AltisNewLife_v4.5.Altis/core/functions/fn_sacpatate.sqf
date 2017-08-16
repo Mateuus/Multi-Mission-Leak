@@ -1,0 +1,16 @@
+private "_unit";
+_unit = [_this,0,Objnull,[Objnull]] call BIS_fnc_param;
+if (!(player getVariable ["restrained",false])) exitWith {};
+hint format["%1 vous a mis un sac sur la tete.", name _unit];
+player setVariable ["sacpatate", true, true];
+cutText["Vous avez un sac sur la tete vous ne pouvez rien voir.","BLACK FADED"];
+0 cutFadeOut 9999999;
+_bf = "Land_Bucket_F" createVehicle (getPos player);
+_bf attachTo [player,[0,-0.05,0],"Head"];
+_bf setVectorUp [0,0,-1];
+_bf setVariable ["owner", player, true];
+player setVariable ["sac", _bf, true];
+waitUntil {!(player getVariable ["sacpatate",false])};
+player setVariable ["sac", nil, true];
+deleteVehicle _bf;
+0 cutFadeOut 1;

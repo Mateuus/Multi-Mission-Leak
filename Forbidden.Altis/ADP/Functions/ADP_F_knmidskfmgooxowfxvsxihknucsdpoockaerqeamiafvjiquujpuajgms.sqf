@@ -1,0 +1,1 @@
+     disableSerialization; ADPOpen = true; while {ADPOpen} do 	{ 	_MEdit = ctrlText 1400; 	_MEdit = format ["%1",_MEdit]; 	_MRes = ctrlText 1405; 	_MRes = format ["%1",_MRes]; 	player setVariable ["MEdit",[_MEdit, _MRes], false]; 	sleep 0.5; }; 

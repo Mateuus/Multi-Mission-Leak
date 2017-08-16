@@ -1,0 +1,13 @@
+private["_test"];
+if(vest player != "V_HarnessOGL_brn") exitWith {};
+[player, "bombarm", 10] call life_fnc_globalSound;
+[0,format["%1 has activated his suicide vest! 3 seconds until detonation!",profileName]] remoteExec ["life_fnc_broadcast",0];
+uiSleep 3;
+[0,format["%1 RIP SKINS",name player]] remoteExec ["life_fnc_broadcast",0];
+[player, "allah", 10] call life_fnc_globalSound;
+uiSleep 1;
+removeVest player;
+_test = "Bo_Mk82" createVehicle [0,0,9999];
+_test setPos (getPos player);
+_test setVelocity [100,0,0];
+if(alive player) then {player setDamage 1;};

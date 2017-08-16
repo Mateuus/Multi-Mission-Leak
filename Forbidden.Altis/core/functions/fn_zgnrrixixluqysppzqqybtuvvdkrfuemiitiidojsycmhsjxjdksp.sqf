@@ -1,0 +1,1 @@
+ if (isNil "life_is_arrested") then {life_is_arrested = 0;};  sleep 3; if (life_is_arrested > 0) then { 	[2,localize "STR_m_AnnounceBreakInPrisoner"] call life_fnc_broadcast; }; 

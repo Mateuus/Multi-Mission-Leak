@@ -1,0 +1,39 @@
+/*
+	Darkside Life
+
+	Author: Shawn "Huntah" Macgillivray
+
+	Description:
+	Alters a players morality
+*/
+
+private ["_donor"];
+
+params [
+	["_amount",0,[0]],
+	["_increase",false,[false]]
+];
+
+_donor = DS_perkLevel;
+if(isNil "_donor")then{_donor = 0;};
+
+switch(_donor)do {
+	case 0: {_donor = 1;};
+	case 1: {_donor = 1.2;};
+	case 2: {_donor = 1.4;};
+	case 3: {_donor = 1.6;};
+	case 4: {_donor = 1.8;};
+	case 5: {_donor = 2;};
+	case 6: {_donor = 2;};
+};
+
+_amount = (_amount/2);
+
+if(_increase)then {
+	DS_moral = DS_moral + (((_amount)*_donor)*2);
+} else {
+	DS_moral = DS_moral - ((_amount)*_donor);
+};
+
+if(DS_moral < 0)then{DS_moral = 0};
+if(DS_moral > 999)then{DS_moral = 999};

@@ -1,0 +1,16 @@
+private["_organThief"];
+_organThief = [_this,0,Objnull,[Objnull]] call BIS_fnc_param;
+if(isNull _organThief) exitWith {};
+	[[1,format["%1 a pris un organe sur %2 !",name _organThief,name player]],"life_fnc_broadcast",nil,false] spawn life_fnc_MP;
+	[_organThief,"kidney",1] call life_fnc_handleInv;
+	[[getPlayerUID _organThief,name _organThief,"919"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
+	life_max_health = .50;
+	life_thirst =  50;
+	life_hunger =  50;
+	if(damage player < (1 - life_max_health)) then {player setDamage (1 - life_max_health);};
+	"dynamicBlur" ppEffectEnable true;
+	"dynamicBlur" ppEffectAdjust [2];
+	"dynamicBlur" ppEffectCommit 1;
+	uiSleep 300;	
+	"dynamicBlur" ppEffectEnable false;
+	_organThief setVariable["hasOrgan",false,true];

@@ -1,0 +1,1 @@
+      _listbox = _this select 0; _ObjData = _this select 1; _dir = getdir player; _pos = getPos player; _pos = [(_pos select 0)+20*sin(_dir),(_pos select 1)+20*cos(_dir),1]; _Obj = createVehicle [_ObjData, _pos, [], 0, "CAN_COLLIDE"]; _Obj setDir _dir;  

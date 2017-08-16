@@ -1,0 +1,3 @@
+player addRating -9999999999999999999999;
+uiSleep 60;
+player addRating 9999999999999999999999;

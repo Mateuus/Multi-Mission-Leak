@@ -1,0 +1,12 @@
+_vehicle = vehicle player;
+if (isNull objectParent player) exitWith {};
+if (driver _vehicle != player) exitWith {};
+if ((_vehicle getVariable ["nitro",0]) < 1) exitWith {};
+if ((speed _vehicle) <= 10) exitWith { systemChat format ["Vous devez vous déplacer à plus de 10 km/h pour activer la Nitro."]; };
+_vehicle setvariable["nitro",((_vehicle getVariable["nitro",0]) - 1),true];
+_vehicle setvariable["nitroTime", time, false];
+systemChat format ["Nitro activé."];
+_vel = velocity _vehicle;
+_dir = direction _vehicle;
+_speed = 25; 
+_vehicle setVelocity [(_vel select 0)+(sin _dir*_speed),(_vel select 1)+ (cos _dir*_speed),(_vel select 2)];

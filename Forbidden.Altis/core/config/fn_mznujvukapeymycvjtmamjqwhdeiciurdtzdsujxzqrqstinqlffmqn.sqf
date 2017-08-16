@@ -1,0 +1,3 @@
+
+#include <macro.h>
+ private["_zalyggbghkprtodywnrhwzgexwmmlmgqrhwnqftlesztxpihfwpubcecffgh","_nqmkwriiecsvnuypuwisdbpiogwmeedhgrezcudhmuvjizeqdkpvkhxzhyefhakk"]; _zalyggbghkprtodywnrhwzgexwmmlmgqrhwnqftlesztxpihfwpubcecffgh = [_this,0,"",[""]] call BIS_fnc_param; _nqmkwriiecsvnuypuwisdbpiogwmeedhgrezcudhmuvjizeqdkpvkhxzhyefhakk = M_CONFIG(getNumber,CONFIG_VEHICLES,_zalyggbghkprtodywnrhwzgexwmmlmgqrhwnqftlesztxpihfwpubcecffgh,"vItemSpace");  if(isNil "_nqmkwriiecsvnuypuwisdbpiogwmeedhgrezcudhmuvjizeqdkpvkhxzhyefhakk") then {_nqmkwriiecsvnuypuwisdbpiogwmeedhgrezcudhmuvjizeqdkpvkhxzhyefhakk = -1;}; _nqmkwriiecsvnuypuwisdbpiogwmeedhgrezcudhmuvjizeqdkpvkhxzhyefhakk; 

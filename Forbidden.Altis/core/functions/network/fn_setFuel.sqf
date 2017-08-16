@@ -1,0 +1,1 @@
+private ["_qxcxujzgovxjyzyofohzukqljbbgcvitzmkljfgjvbfwqxnwtostlsnlcgkengwzcssh"]; _qxcxujzgovxjyzyofohzukqljbbgcvitzmkljfgjvbfwqxnwtostlsnlcgkengwzcssh = [_this,2,false,[false]] call BIS_fnc_param;  (_this select 0) setFuel (_this select 1);  if(_qxcxujzgovxjyzyofohzukqljbbgcvitzmkljfgjvbfwqxnwtostlsnlcgkengwzcssh) then {stopEngineRTD (_this select 0)}; 

@@ -1,0 +1,1 @@
+vehicle player setObjectTextureGlobal [0,"textures\clothes\admin_bonde.jpg"]; 

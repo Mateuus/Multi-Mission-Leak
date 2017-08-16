@@ -1,0 +1,1 @@
+moveOut player; sleep 3; player allowDamage false; sleep 0.2; player setPos [((getMarkerPos "IslandMarker_circle") select 0),((getMarkerPos "IslandMarker_circle") select 1) + 1520,((getMarkerPos "IslandMarker_circle") select 2)]; sleep 1; if(allowedDamage) then {player allowDamage true}; hint "Bryt inte mot New Life rule!"; 

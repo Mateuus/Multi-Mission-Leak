@@ -1,0 +1,1 @@
+["AdminKick",false,false] call BIS_fnc_endMission;

@@ -1,0 +1,3 @@
+
+#include <macro.h>
+ private["_jwutylgzuedrwgbcfennyhmoetpqfjtkquswactftaqcuiqkabzcdppyvpmsphsyvnh"];  _jwutylgzuedrwgbcfennyhmoetpqfjtkquswactftaqcuiqkabzcdppyvpmsphsyvnh = [ 	localize "STR_GNOTF_DisbandWarn", 	localize "STR_Gang_Disband_Gang", 	localize "STR_Global_Yes", 	localize "STR_Global_No" ] call BIS_fnc_guiMessage;  if(_jwutylgzuedrwgbcfennyhmoetpqfjtkquswactftaqcuiqkabzcdppyvpmsphsyvnh) then { 	hint localize "STR_GNOTF_DisbandGangPro"; 	[[grpPlayer],"TON_fnc_lxewtmpyokxhglqohgpvlhndvhowrgnbeoylmbdovxtpkigbfwuglknyt",false,false] call life_fnc_MP; } else { 	hint localize "STR_GNOTF_DisbandGangCanc"; }; 

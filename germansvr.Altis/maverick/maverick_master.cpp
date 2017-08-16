@@ -1,0 +1,5 @@
+#include "indicators\config.cpp"
+#include "introcam\config.cpp"
+#include "SpeedCameras\config.cpp"
+#include "tuning\config.cpp"
+#include "talent-tree-modular\config.cpp"

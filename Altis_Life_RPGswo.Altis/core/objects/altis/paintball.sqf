@@ -1,0 +1,25 @@
+// Paintball
+[
+	["Land_LampDecor_F",[14231.4,13017.8,-0.00423813],179.843,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14234.3,13002.1,-0.00834894],179.608,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14267.9,12997.6,-0.00803709],179.752,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14283.3,12997.3,0.000926018],179.879,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14299.3,12997.4,-0.0242522],179.622,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14315.5,13000.2,-0.00978518],179.936,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14329.7,13003.8,0.00831079],179.626,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14335.3,13015.5,-0.016897],180.066,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14231,13044.2,-0.00293922],179.81,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14231.4,13031.8,-0.00696182],179.763,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14304.6,13036.4,-0.000732899],179.883,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14304.7,13023.5,-0.00317907],179.886,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14287.8,13023.4,-0.00059557],179.888,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14288.1,13036.7,5.10216e-005],179.898,"_this allowDamage false;"],
+	["Land_CncWall4_F",[14287.1,13030.6,0.00432348],271.998,"_this allowDamage false; _this enableSimulation false;"],
+	["Land_LampDecor_F",[14342.4,13026,-0.027385],181.524,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14352.6,13037.2,-0.0289648],179.385,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14353.8,13048.3,0.00280762],179.859,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14231.6,13056.6,0.0100377],180.123,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14339.2,13066.4,0.00945592],180.052,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14322.9,13068.3,0.00140595],179.89,"_this allowDamage false;"],
+	["Land_LampDecor_F",[14350,13060.8,0.0215218],179.782,"_this allowDamage false;"]
+]

@@ -1,0 +1,22 @@
+X_Server = false;
+X_Client = false;
+X_JIP = false;
+StartProgress = false;
+if(!isDedicated) then { X_Client = true;};
+enableSaving[false,false];
+life_versionInfo = "AltisNewLife v3.3";
+[] execVM "scripts\teargas.sqf";
+[] execVM "scripts\statusBar.sqf";
+[] execVM "scripts\IntLight.sqf";
+{_x setMarkerAlphaLocal 0} forEach ["mrkRed","mrkRed_1","mrkRed_1_1","mrkRed_1_3","mrkGreen"];
+StartProgress = true;
+life_fnc_switchMove = {
+    private["_object","_anim"];
+    _object = _this select 0;
+    _anim = _this select 1;
+    _object switchMove _anim;
+};
+setTerrainGrid 45;
+setViewDistance 1000;
+setObjectViewDistance [800,50];
+null = [[monitor1,monitor2,monitor3],["cop_23","cop_24","cop_25"]] execVM "scripts\feedInit.sqf";

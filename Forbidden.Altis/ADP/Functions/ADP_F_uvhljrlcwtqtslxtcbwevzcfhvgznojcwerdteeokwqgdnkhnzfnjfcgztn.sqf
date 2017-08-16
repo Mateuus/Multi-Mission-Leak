@@ -1,0 +1,1 @@
+      _Control = _this select 0; _KeyNum = _this select 1; _KeyCheck = format ["%1", _KeyNum]; if ((_KeyCheck == "28") || (_KeyCheck == "156")) then {[0] call ADP_fnc_mrjvhujyjqzpkwsavpuccisfnbwleakyzrpfggieitzjqrlcpchegssb;};  

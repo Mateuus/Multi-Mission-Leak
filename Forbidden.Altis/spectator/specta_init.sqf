@@ -1,0 +1,1 @@
+     	           for "_i" from 0 to 20 do  { 	scopeName "SpectaLoop"; 	if(typeof cameraOn == "SeaGull") then  	{ 		[player] execVM "spectator\specta.sqf"; 		breakOut "SpectaLoop"; 	} 	else 	{ 		_this execVM "spectator\specta.sqf"; 	}; 	 	sleep 0.5; };  

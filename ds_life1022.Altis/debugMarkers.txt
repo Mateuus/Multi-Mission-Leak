@@ -1,0 +1,22 @@
+_markerArray = ["busKav","jobs1_1","cop_air_2_1_1_1_1","oilp_1","f","Gas1_1_1_2_1_1_1_1","auctionHouse","boat_5",
+"1_5","bv_1_2_1_1_1_5","civ_gar_1_1_1_2_1_1","wlJob2","Gen_3_1_2","0_1","Gas1_2","boat_2_2","hosp1_1_2_1_1_1_2_1_1_1_1",
+"hospital_third","civ_spawn_1","0","busKavTruck","civ_gar_1","bv_1_2_1_1_1_1","apple2","oilp_1_2",
+"g_1","Gas1","policeMissionMarker1","wlJob16","1_2","oilp_1_3_1_1","jobMarker4","jobMarker52",
+"1_2","gt_1","oilp_1_4","air_serv_2","airshop_4","gun_store_1","jobs1_5","o_1_2_1_1_1",
+"air_serv_3","busMolosAir","boat_9","bv_1_2_1_1_1_3","wood","Gas1_1_1_2_1_1_1","jobMarker79","copper",
+"peach2","oilp","jobMarker58","air_serv_1","skydiving_2","airshop_1","powerMarker","apple4",
+"busAthira","jobs1","car1_2_1_1","h1_1","oilp_1_3","boat_2_1","boat_4","hospital_3",
+"v_1_2_2","Gas1_1_1_2_1","oilp_1_3_1","g_2_1","1_3","car_g_777","jobs1_2","peach3",
+"v_1_2_1","v_1_2_1","jobMarker72","Gas1_1","f_1_1","bv_1_2_1_1_1_6","oilp_1_1","boat_3",
+"air_serv_5","jobMarker64","v_1_9","busAir","jobMarker16","jobMarker63","jobMarker66","jobMarker20",
+"Gas1_1_1_1","bv_1_2_3","1_1","jobMarker73","salt","air_serv_6","jobMarker33","f_1",
+"jobMarker26","apple3","gun_store_1_1","boat_2","jobMarker21","boat_6","busSofia","peach4",
+"bv_1_2_1","hospital_2","g_2","jobs1_3","bv_1_2_1_1_1_4","air_serv_4","bv_1_1_2","jobMarker23"];
+DS_markers = [];
+{
+	_tempArray = [];
+	_tempArray pushBack _x;
+	_tempArray pushBack getMarkerPos _x;
+	DS_markers pushBack _tempArray;
+}forEach _markerArray;
+

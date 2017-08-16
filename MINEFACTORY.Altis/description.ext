@@ -1,0 +1,84 @@
+/*################################
+#	(c) 2016 Minefactory         #
+#								 #
+#	Author: PierreAmyf   		 #
+#	Lizenz: Lizenz.txt Lesen!	 #
+################################*/
+
+author               = "PierreAmyf, Vincent, Jonas, Tonic";
+onLoadName           = "MineFactory v1.3";
+onLoadMission        = "Wir wünschen viel Spaß!";
+loadScreen           = "MINEFACTORY\textures\LadeBild.paa";
+disabledAI           = 1;
+disableChannels[]    = {0,1,2};
+joinUnassigned       = 1;      
+respawn              = BASE;
+respawnDelay         = 5;    
+enableDebugConsole   = 1;      
+respawnDialog        = 0;
+wreckLimit           = 3;      
+wreckRemovalMinTime  = 60;    
+wreckRemovalMaxTime  = 320;     
+corpseLimit          = 150;     
+corpseRemovalMinTime = 999;    
+corpseRemovalMaxTime = 9999;   
+saving 			     = 0;
+
+class Header
+{
+	gameType         = RPG;
+	minPlayers       = 1;
+	maxPlayers       = 140;
+};
+
+class CfgServer {
+	DatabaseName 	 = "MINEFACTORY";
+	HeadlessMode	 = 1;
+	DebugMode 		 = 1;
+};
+
+#include "CONFIG\CfgRemoteExec.hpp"
+#include "MINEFACTORY\dialog\MasterHandler.hpp"
+#include "CONFIG\Config_Master.hpp"
+#include "MINEFACTORY\Scripts\CHVD\dialog.hpp"
+#include "MINEFACTORY\licenses\lizenzamt.hpp"
+#include "MINEFACTORY\locker\locker.hpp"
+#include "CONFIG\Config_Debriefing.hpp"
+#include "CONFIG\Config_Sounds.hpp"
+#include "CONFIG\Config_Notifications.hpp"
+#include "MINEFACTORY\news\news.hpp"
+#include "MINEFACTORY\news\news_new.hpp"
+
+
+class RscTitles {
+	#include "MINEFACTORY\dialog\progress.hpp"
+	#include "MINEFACTORY\dialog\hud_nameTags.hpp"
+	#include "MINEFACTORY\dialog\hud_stats.hpp"
+	#include "MINEFACTORY\dialog\safezone.hpp"
+	
+	class introaltis {
+		idd = -1;
+		duration = 6;
+		class controls {
+			class ExampleControl {
+				idc = -1;
+				type = 0;
+				style = 2192; //1 2 3...176
+				x = 0.125;
+				y = 0.125;
+				h = 0.75;
+				w = 0.75;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.05; 
+				colorBackground[] = {1,1,1,0};
+				colorText[] = {1,1,1,1};
+				text = "MINEFACTORY\textures\intro.paa";
+				lineSpacing = 1;
+			}; 
+		}; 
+	}; 
+};
+
+class CfgFunctions {
+	#include "CONFIG\Functions.hpp"
+};

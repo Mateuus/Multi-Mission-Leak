@@ -1,0 +1,1 @@
+ [cursorTarget,"duck",15] remoteExec ["life_fnc_trhseodhngmgvxncyytnwswxjnpawhscwsjplsavkvanngibxeptqc"]; 

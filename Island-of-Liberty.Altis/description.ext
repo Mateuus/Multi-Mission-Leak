@@ -1,0 +1,683 @@
+author = "Team Island of Liberty bearbeitet";
+loadScreen = "textures\armalife.jpg";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 5;
+disabledAI = 1;
+disableChannels[]={0,1,2};
+enableDebugConsole = 1;
+respawnDialog = 0;
+saving = 0;
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 136;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 150;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+#include "Config_Spyglass.hpp"
+#include "CfgRemoteExec.hpp"
+#include "dialog\MasterHandler.hpp"
+#include "Config_Master.hpp"
+#include "dialog\agb.hpp"
+#include "scripts\license\licenses.hpp"
+
+class RscTitles {
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.hpp"
+	#include "dialog\hud_stats.hpp"
+	#include "dialog\live_Anzeige.hpp"
+};
+
+class CfgFunctions {
+	#include "Functions.hpp"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\Siren_Long.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class bankalarm
+    {
+        name = "bankalarm";
+        sound[] = {"\sounds\bank_alarm.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+	class medicSiren
+	{
+		name = "medicSiren";
+		sound[] = {"\sounds\medic_siren.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+	
+	class drink
+	{
+		name = "drink";
+		sound[] = {"\sounds\drink.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class empacsound
+	{
+		name = "empacsound";
+		sound[] = {"sounds\empac.ogg", db-5, 1};
+		titles[] = {};
+	};
+	
+	class empwarn
+	{
+		name = "empwarn";
+		sound[] = {"\sounds\empwarn.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class copansage
+	{
+		name = "copansage";
+		sound[] = {"\sounds\copansage.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class drogenmaschine
+	{
+	name = "drogenmaschine";
+	sound[] = {"\sounds\drogenmaschine.ogg", 1.0, 1};
+	titles[] = {};
+	};
+	
+	class reviveplayer
+    {
+        name = "reviveplayer";
+        sound[] = {"\sounds\reviveplayer.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	
+	class yelp
+	{
+		name = "yelp";
+		sound[] = {"\sounds\Yelp.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class alert
+    {
+        name = "alert";
+        sound[]= {"\sounds\alert.ogg",1.0,1};
+        titles[] = {};
+    };
+	
+	class crowd
+	{
+		name = "crowd";
+		sound[] = {"\sounds\crowd.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class mining
+	{
+		name = "mining";
+		sound[] = {"\sounds\mining.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class harvest
+	{
+		name = "harvest";
+		sound[] = {"\sounds\harvest.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class purge
+    {
+        name = "purge";
+        sound[] = {"\sounds\purge.ogg",1.0,1};
+        titles[] = {};
+    };
+	class Intro
+	{
+		name = "Intro";
+		sound[] = {"\sounds\Intro.ogg", 1.5, 1};
+		titles[] = {};
+	};
+
+	class yelp2
+	{
+		name = "yelp2";
+		sound[] = {"\sounds\yelp2.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class restart
+	{
+		name = "restart";
+		sound[] = {"\sounds\restart.ogg", 2, 1};
+		titles[] = {};
+	};
+	
+	class barMusic
+	{
+		name = "barMusic";
+		sound[] = {"\sounds\bar.ogg", 1, 1};
+		titles[] = {};
+	};
+	
+	class handcuff
+	{
+		name="handcuff";
+		sound[] = {"\sounds\handcuff.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	
+	class ziptie {
+		name = "ziptie";
+		sound[] = {"\sounds\zip.ogg",1.0,1};
+		titles[] = {};
+	};
+	
+	class unlock
+	{
+		name = "unlock";
+		sound[] = {"\sounds\unlock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class car_lock
+	{
+		name = "car_lock";
+		sound[] = {"\sounds\car_lock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class paradroprk
+    {
+    	name = "paradroprk";
+    	sound[] = {"sounds\paradroprk.ogg", 1.0, 1};
+    	titles[] = {};
+    };
+	class carAlarm
+	{
+		name = "carAlarm";
+		sound[] = {"\sounds\caralarm.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class pilze
+	{
+		name = "pilze";	
+		sound[] = {"\sounds\pilze.ogg", 1.0, 1};  
+		titles[] = {};
+	};
+	
+	class Heroin_sound
+	{
+		name = "Heroin_sound";
+		sound[] = {"\sounds\Heroin_sound.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class Abhaengig_Sound
+	{
+		name = "Abhaengig_Sound";
+		sound[] = {"\sounds\Abhaengig_Sound.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class smokeweed
+	{
+		name = "smokeweed";
+		sound[] = {"\sounds\smokeweed.ogg", 1.0, 1};
+		titles[] = {};
+	};
+		class Cocaine_sound
+	{
+		name = "Cocaine_sound";
+		sound[] = {"\sounds\Cocaine_sound.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class repair
+    {
+        name = "repair";
+        sound[] = {"\sounds\repair.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+		class launch1
+	{
+		name="launch1";
+		sound[]={"scripts\feuerwerk\sounds\launches\launch1.ogg", db+10, 1};
+		titles[]={};
+	};
+	class launch2
+	{
+		name="launch2";
+		sound[]={"scripts\feuerwerk\sounds\launches\launch2.ogg", db+10, 1};
+		titles[]={};
+	};
+	class launch3
+	{
+		name="launch3";
+		sound[]={"scripts\feuerwerk\sounds\launches\launch3.ogg", db+10, 1};
+		titles[]={};
+	};
+	class launch4
+	{
+		name="launch4";
+		sound[]={"scripts\feuerwerk\sounds\launches\launch4.ogg", db+10, 1};
+		titles[]={};
+	};
+	class launch5
+	{
+		name="launch5";
+		sound[]={"scripts\feuerwerk\sounds\launches\launch5.ogg", db+10, 1};
+		titles[]={};
+	};
+	class launch6
+	{
+		name="launch6";
+		sound[]={"scripts\feuerwerk\sounds\launches\launch6.ogg", db+10, 1};
+		titles[]={};
+	};
+	class launch7
+	{
+		name="launch7";
+		sound[]={"scripts\feuerwerk\sounds\launches\launch7.ogg", db+10, 1};
+		titles[]={};
+	};
+	class whistling1
+	{
+		name="whistling1";
+		sound[]={"scripts\feuerwerk\sounds\launches\whistling1.ogg", db+10, 1};
+		titles[]={};
+	};
+	class whistling2
+	{
+		name="whistling2";
+		sound[]={"scripts\feuerwerk\sounds\launches\whistling2.ogg", db+10, 1};
+		titles[]={};
+	};
+	class whistling3
+	{
+		name="whistling3";
+		sound[]={"scripts\feuerwerk\sounds\launches\whistling3.ogg", db+10, 1};
+		titles[]={};
+	};
+	class whistling4
+	{
+		name="whistling4";
+		sound[]={"scripts\feuerwerk\sounds\launches\whistling4.ogg", db+10, 1};
+		titles[]={};
+	};
+	class bang01
+	{
+		name="bang01";
+		sound[]={"scripts\feuerwerk\sounds\bangs\bang01.ogg", db+10, 1};
+		titles[]={};
+	};
+	class bang02
+	{
+		name="bang02";
+		sound[]={"scripts\feuerwerk\sounds\bangs\bang02.ogg", db+10, 1};
+		titles[]={};
+	};
+	class bang03
+	{
+		name="bang03";
+		sound[]={"scripts\feuerwerk\sounds\bangs\bang03.ogg", db+10, 1};
+		titles[]={};
+	};
+	class bang04
+	{
+		name="bang04";
+		sound[]={"scripts\feuerwerk\sounds\bangs\bang04.ogg", db+10, 1};
+		titles[]={};
+	};
+	class bang05
+	{
+		name="bang05";
+		sound[]={"scripts\feuerwerk\sounds\bangs\bang05.ogg", db+10, 1};
+		titles[]={};
+	};
+	class bang06
+  {
+    name="bang06";
+    sound[]={"scripts\feuerwerk\sounds\bangs\bang06.ogg", db+10, 1};
+    titles[]={};
+  };
+  class bang07
+  {
+    name="bang07";
+    sound[]={"scripts\feuerwerk\sounds\bangs\bang07.ogg", db+10, 1};
+    titles[]={};
+  };
+  class bang08
+  {
+    name="bang08";
+    sound[]={"scripts\feuerwerk\sounds\bangs\bang08.ogg", db+10, 1};
+    titles[]={};
+  };
+  class bang10
+  {
+    name="bang10";
+    sound[]={"scripts\feuerwerk\sounds\bangs\bang10.ogg", db+10, 1};
+    titles[]={};
+  };
+  class bang11
+  {
+    name="bang11";
+    sound[]={"scripts\feuerwerk\sounds\bangs\bang11.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_single_type1_1
+  {
+    name="fizz_single_type1_1";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_single_type1_1.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_single_type1_2
+  {
+    name="fizz_single_type1_2";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_single_type1_2.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_single_type1_3
+  {
+    name="fizz_single_type1_3";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_single_type1_3.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_single_type1_4
+  {
+    name="fizz_single_type1_4";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_single_type1_4.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_single_type2_1
+  {
+    name="fizz_single_type2_1";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_single_type2_1.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_single_type2_2
+  {
+    name="fizz_single_type2_2";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_single_type2_2.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_single_type2_3
+  {
+    name="fizz_single_type2_3";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_single_type2_3.ogg", db+10, 1};
+    titles[]={};
+  };
+    class fizz_single_type2_4
+  {
+    name="fizz_single_type2_4";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_single_type2_4.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_group1
+  {
+    name="fizz_group1";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_group1.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_group2
+  {
+    name="fizz_group2";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_group2.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_group3
+  {
+    name="fizz_group3";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_group3.ogg", db+10, 1};
+    titles[]={};
+  };
+  class fizz_group4
+  {
+    name="fizz_group4";
+    sound[]={"scripts\feuerwerk\sounds\fizzes\fizz_group4.ogg", db+10, 1};
+    titles[]={};
+  };
+  
+  	class radioactive
+    {
+    	name = "radioactive";
+    	sound[] = {"sounds\radioactive.ogg", db-3, 1};
+    	titles[] = {};
+    };
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Fehlgeschlagen";
+		subtitle = "Du wurdest vom Dienst suspendiert";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Blacklisted
+	{
+		title = "Mission Fehlgeschlagen";
+		subtitle = "Du stehst auf der Polizei Blacklist";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Abort
+	{
+		title = "Auf Wiedersehen";
+		subtitle = "www.Island-of-Liberty.com";
+		description = "Wir hoffen das du uns erneut besuchst.<br/>Check doch mal unsere Website auf www.Island-of-Liberty.com";
+		pictureBackground = "textures\allgemein\bilder\Logo.jpg";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+class Bugusing
+	{
+		title = "Wurdest erwischt!";
+		subTitle = "www.Island-of-Liberty.com";
+		description = "You were detected for cheating(Injection with memory editor) and have been reported to the server. Enjoy your day.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class ByeBye
+	{
+		title = "Bis zum nächsten Mal";
+		subtitle = "Spielerdaten erfolgreich gespeichert";
+		description = "";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class KeineSlots
+	{
+		title = "Mission Fehlgeschlagen";
+		subtitle = "Fehler beim Laden der Map.";
+		description = "Es Gab keinen Freien Slot gehe zurück in die Lobby und versuche es erneut!";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class KeinRebelle
+	{
+		title = "Mission Fehlgeschlagen";
+		subtitle = "Du bist kein Rebell";
+		description = "Du bist kein Rebell. Die Rebellenlizenz erhälst du in der Rebellen Stad.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class DubistRebelle
+	{
+		title = "Mission Fehlgeschlagen";
+		subtitle = "Du bist ein Rebelle";
+		description = "Benutze die OPFOR Rollen um ein Rebelle zu sein.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+class CfgMusic
+	{
+	tracks[]={};
+
+		class nuke
+	{
+		name = "";
+		sound[] = {"scripts\events\nuke\nuke.ogg", db+0, 1.0};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "Notruf";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Job angenommen";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Job gescheitert!";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Job beendet!";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Neue Nachricht";
+		iconPicture = "icons\system\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "Polizei Notruf";
+		iconPicture = "icons\system\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Nachrichten Center";
+		iconPicture = "icons\system\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Admin Nachricht";
+		iconPicture = "icons\system\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+	
+	class PoliceNews
+	{
+		title = "Polizei Einsatz Zentrale";
+		iconPicture = "icons\system\polizei.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class PoliceEinsatz
+	{
+		title = "Polizei Einsatz";
+		iconPicture = "icons\system\polizei.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class PoliceEinsatzbeendet
+	{
+		title = "Polizei Einsatz beendet";
+		iconPicture = "icons\system\polizei.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class mtdNews
+	{
+		title = "MTD Leitstelle";
+		iconPicture = "icons\system\sani.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};

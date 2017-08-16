@@ -1,0 +1,513 @@
+//--- Control Chat - Format: {channelID<number>, disableChat<bool>, disableVoice<bool>}
+disableChannels[] = {
+	{0, true, true}, //--- Global Chat
+	{1, true, true}, //--- Side Chat
+	{2, true, true}, //--- Command Chat
+	{3, false, false}, //--- Group Chat
+	{4, false, false}, //--- Vehicle Chat
+	{5, false, false}, //--- Direct Chat
+	{6, true, true},	//--- System Chat
+	{7, false, true}  //--- Civ Side Chat
+};
+//overviewText = "$STR_MISC_overviewText";    // Text to be displayed below the overviewPicture on the mission selection screen when the mission is available to play.
+
+//#include "config\Config_SpyGlass.hpp"
+#include "CfgRemoteExec.hpp"
+#include "dialog\MasterHandler.hpp"
+#include "config\Config_Master.hpp"
+#include "dialog\pickup.hpp"
+#include "infiSTAR_AdminMenu.hpp"
+
+class CfgServer {
+    DatabaseName = "db35239"; //Config name that'll be grep in the extdb-conf.ini. Default: [altislife]
+    DebugMode = 0; //Enable many server/hc debugging logs. Default: 0 (1 = Enabled / 0 = Disabled)
+    HeadlessSupport = 0; //Enable/Disable Headless client support. Default: 1 (1 = Enabled / 0 = Disabled)
+    /*
+    Enabled: When HeadlessSupport is set to 1 (enabled), the server will run without fault when no Headless Client is connected. However, it will support the Headless Client if you choose to connect one.
+    Disabled: If HeadlessSupport is set to 0 (disabled), the connection of a Headless Client will make no difference. This option will increase server performance a TINY but negligible amount.
+    */
+};
+
+class RscTitles {
+    #include "dialog\progress.hpp"
+    #include "dialog\hud_nameTags.hpp"
+    #include "dialog\hud_stats.hpp"
+    //#include "dialog\statusBar.hpp"
+	#include "dialog\jailhud.hpp"
+	#include "dialog\rpgmsgsys.hpp"
+	#include "maverick\tuning\dialogs\titles.hpp"
+	#include "maverick\talent-tree-modular\gui\_masterTitles.cpp"
+
+    class introLife
+    {
+       idd = -1;
+       duration = 6;
+       class controls
+       {
+             class ExampleControl
+             {
+                idc = -1;
+                type = 0;
+                style = 2192;
+                x = 0.125;
+                y = 0.125;
+                h = 0.75;
+                w = 0.75;
+                font = "EtelkaNarrowMediumPro";
+                sizeEx = 0.05; 
+                colorBackground[] = {1,1,1,0};
+                colorText[] = {1,1,1,1};
+                text = "textures\rpg.paa";
+                lineSpacing = 1;
+             }; 
+          }; 
+       }; 
+    };
+
+class CfgFunctions {
+    #include "Functions.hpp"
+    #include "maverick\maverick_functions_master.cpp"
+};
+
+class CfgSounds {
+    sounds[] = {};
+    class sirenLong {
+        name = "sirenLong";
+        sound[] = {"\sounds\sirenLong.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class tazerSound {
+        name = "tazerSound";
+        sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+        titles[] = {};
+    };
+
+    class flashbang {
+        name = "flashbang";
+        sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class mining {
+        name = "mining";
+        sound[] = {"\sounds\mining.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class harvest {
+        name = "harvest";
+        sound[] = {"\sounds\harvest.ogg", 1.0, 1};
+        titles[] = {};
+    };
+
+    class lockCarSound {
+        name = "lockCarSound";
+        sound[] = {"\sounds\carLock.ogg", 0.25, 1};
+        titles[] = {};
+    };
+
+    class unlockCarSound {
+        name = "unlockCarSound";
+        sound[] = {"\sounds\carUnlock.ogg", 0.25, 1};
+        titles[] = {};
+    };
+    class caralarm
+    {
+        name= "caralarm";
+        sound[] = {"sounds\caralarm.ogg", 2, 1};
+        titles[] = {};
+    };
+    class MedicSirenLong
+    {
+        name = "MedicSirenLong";
+        sound[] = {"sounds\MedicSirenLong.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class bankalarm
+    {
+        name = "bankalarm";
+        sound[] = {"\sounds\bankalarm.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class alert 
+    {
+        name = "alert";
+        sound[] = {"\sounds\sms.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class handcuffs
+    {
+        name="handcuffs";
+        sound[] = {"\sounds\handcuffs.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    
+    class cuffs
+    {
+        name = "cuff";
+        sound[] = {"\sounds\cuff.ogg", 1.0, 1};
+        titles[] = {};
+    
+    };
+    class Patdown {
+        name = "Patdown";
+        sound[] = {"\sounds\patdown.ogg", .90, 1};
+        titles[] = {};
+    };
+    class caching
+    {
+        name = "caching";
+        sound[] = {"\sounds\caching.ogg", .90, 1};
+        titles[] = {};
+    };
+    class eat
+    {
+        name = "eat";
+        sound[] = {"\sounds\eat.ogg", 0.95, 1};
+        titles[] = {};
+    };
+    class drink
+    {
+        name = "drink";
+        sound[] = {"\sounds\drink.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class ziptie
+    {
+        name = "ziptie";
+        sound[] = {"\sounds\zip_tie.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class beep
+    {
+        name = "beep";
+        sound[] = {"\sounds\beep.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class allah
+    {
+        name = "allah";
+        sound[] = {"\sounds\allah.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class robbed
+    {
+        name = "robbed";
+        sound[] = {"\sounds\robbed.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class nitro
+    {
+        name = "nitro";
+        sound[] = {"\sounds\nitro.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    class seatbelt
+    {
+        name = "seatbelt";
+        sound[] = {"\sounds\seatbelt.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	class seatwarn
+	{
+		name = "seatwarn";
+		sound[] = {"\sounds\seatwarn.ogg", 1, 1};
+		titles[] = {};
+	};
+	class death
+	{
+		name = "death";
+		sound[] = {"\sounds\death.ogg", 1, 1};
+		titles[] = {};
+	};
+	class glassbreak
+	{
+		name = "glassbreak";
+		sound[] = {"\sounds\glassbreak.ogg", 1, 1};
+		titles[] = {};
+	};
+    class startup
+    {
+        name = "startup";
+        sound[] = {"\sounds\startup.ogg", 1, 1};
+        titles[] = {};
+    };
+	class trunk_open
+	{
+		name="trunk_open";
+		sound[] = {"\sounds\trunk_open.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	class trunk_close
+	{
+		name="trunk_close";
+		sound[] = {"\sounds\trunk_close.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	class defib
+	{
+		name = "defib";
+		sound[] = {"\sounds\defib.ogg", 1.7, 1};
+		titles[] = {};
+	};
+	class knockhit
+	{
+		name = "knockhit";
+		sound[] = {"\sounds\knockhit.ogg", 1, 1};
+		titles[] = {};
+	};
+	class drob
+	{
+		name = "drob";
+		sound[] = {"\dispatch\drob.ogg", 0.7, 1.1};
+		titles[] = {};
+	};
+	class cellclose
+	{
+		name = "cellclose";
+		sound[] = {"\sounds\cellclose.ogg", 1, 1};
+		titles[] = {};
+	};
+	class Airhorn
+	{
+	    name = "Airhorn";
+	    sound[] = {"\sounds\Airhorn.ogg", 1.2, 1};
+	    titles[] = {};
+	};
+	class dpanic
+	{
+		name = "dpanic";
+		sound[] = {"\dispatch\dpanic.ogg", 0.7, 1.1};
+		titles[] = {};
+	};
+	class panicbutton
+	{
+		name = "panicbutton";
+		sound[] = {"\sounds\panicbutton.ogg", 1, 1};
+		titles[] = {};
+	};
+	class repair
+	{
+		name = "repair";
+		sound[] = {"\sounds\repair.ogg", 1, 1};
+		titles[] = {};
+	};
+	class warning
+	{
+		name = "warning";
+		sound[] = {"\sounds\WARNING.ogg", 1, 1};
+		titles[] = {};
+	};
+	class warning_2
+	{
+		name = "warning_2";
+		sound[] = {"\sounds\WARNING_2.ogg", 1, 1};
+		titles[] = {};
+	};	
+	class warning_3
+	{
+		name = "warning_3";
+		sound[] = {"\sounds\WARNING_3.ogg", 1, 1};
+		titles[] = {};
+	};
+	class planted
+	{
+		name = "planted";
+		sound[] = {"\sounds\planted.ogg",1,1};
+		titles[] = {0,""};
+	};
+	class PhoneRing
+	{
+	  name = "PhoneRing";
+	  sound[] = {"\sounds\phonering.ogg", 1, 1};
+	  titles[] = {};
+	};
+	class PhoneDial
+	{
+	  name = "PhoneDial";
+	  sound[] = {"\sounds\phonedial.ogg", 1, 1};
+	  titles[] = {};
+	};
+	class PhoneHangup
+	{
+	  name = "PhoneHangup";
+	  sound[] = {"\sounds\phonehangup.ogg", 1, 1};
+	  titles[] = {};
+	};
+	class PhoneNoService
+	{
+	  name = "PhoneNoService";
+	  sound[] = {"\sounds\phonenoservice.ogg", 1, 1};
+	  titles[] = {};
+	};
+	class signal
+	{
+	  name = "signal";
+	  sound[] = {"\sounds\signal.ogg", 1, 1};
+	  titles[] = {};
+	};
+	class dbank
+	{
+		name = "dbank";
+		sound[] = {"\dispatch\dbank.ogg", 0.7, 1.1};
+		titles[] = {};
+	};
+	class hit
+	{
+		name="hit";
+		sound[] = {"\sounds\hit.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	class ciggy
+	{
+		name="ciggy";
+		sound[] = {"\sounds\ciggy.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	class jackpot1
+	{
+		name="jackpot1";
+		sound[] = {"\sounds\jackpot1.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	class jackpot2
+	{
+		name="jackpot2";
+		sound[] = {"\sounds\jackpot2.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	class spin
+	{
+		name="spin";
+		sound[] = {"\sounds\spin.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};	
+	class frog
+	{
+		name="frog";
+		sound[] = {"\sounds\frog.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	/*class prisonalarm
+	{
+		name="prisonalarm";
+		sound[] = {"\sounds\prisonalarm.ogg", 4.0, 1};
+		titles[] = {0, " "};
+	};*/
+};
+
+class CfgDebriefing {
+    class NotWhitelisted {
+        title = "$STR_NotWhitelisted_Title";
+        subtitle = "$STR_NotWhitelisted_SubTitle";
+        description = "$STR_NotWhitelisted_Descript";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0,0.3,0.6,1};
+    };
+
+    class Blacklisted {
+        title = "$STR_Blacklisted_Title";
+        subtitle = "$STR_Blacklisted_SubTitle";
+        description = "$STR_Blacklisted_Descript";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0,0.3,0.6,1};
+    };
+
+    class SpyGlass {
+        title = "$STR_SpyDetect_Title";
+        subTitle = "$STR_SpyDetect_SubTitle";
+        description = "$STR_SpyDetect_Descript";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0,0.3,0.6,1};
+    };
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "EMS Requested";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepted";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "911 Dispatch Center";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Admin Message";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+
+	class GovMessage
+	{
+		title = "Governor Message";
+		iconPicture = "icons\govern.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};
+
+#include "maverick\maverick_master.cpp"

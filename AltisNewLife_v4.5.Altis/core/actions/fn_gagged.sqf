@@ -1,0 +1,15 @@
+private["_gagger"];
+_gagger = [_this,0,Objnull,[Objnull]] call BIS_fnc_param;
+hint format["Vous avez été bâillonné par %1.", _gagger getVariable["realname",_gagger]];
+titleText ["Vous avez un baîllon sur la bouche, vous ne pouvez plus parler !", "PLAIN"];
+enableRadio false;
+5 enableChannel false;
+3 enableChannel false;
+4 enableChannel false;
+waitUntil{!(player getVariable ["gagged",false]) OR !(player getVariable ["restrained",false])};
+hint format["Le baîllon a été enlevé, vous pouvez a nouveau parler !"];
+titleText ["Vous n'êtes plus bâillonné", "PLAIN"];
+enableRadio true;
+5 enableChannel true;
+3 enableChannel true;
+4 enableChannel true;

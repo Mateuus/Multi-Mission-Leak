@@ -1,0 +1,49 @@
+/*
+Darkside Life
+
+Author: Shawn "Huntah" Macgillivray
+
+Returns information on your cursorTarget
+*/
+private ["_objects","_name","_nameString","_players","_cursorTarget","_target","_targetsGang"];
+if(DS_tags)exitwith{};
+_cursorTarget = cursorTarget;
+if((_cursorTarget isKindOf "Car")||(_cursorTarget isKindOf "Air")||(_cursorTarget isKindOf "Ship")||(_cursorTarget isKindOf "Tank"))exitWith
+	{
+	_target = (driver _cursorTarget);
+	[[player],"DS_fnc_returnTag",_target,false] spawn DS_fnc_MP;
+	sleep 3;
+	DS_tags = false;
+	};
+DS_tags = true;
+_nameString = "";
+if(_cursorTarget getVariable ["player",false])then
+	{
+	if(side _cursorTarget == west)then
+		{
+		_nameString = format ["<t size='0.7' color='#01DF01'>Officer %1</t>",_cursorTarget getVariable ["name","Unknown Officer"]];
+		}
+		else
+		{
+		_targetsGang = (group _cursorTarget) getVariable ["gangName","No Gang"];
+		_nameString = format ["<t size='0.7' color='#01DF01'>%1 (%2)</t>",_cursorTarget getVariable ["name","Unknown Civilian"],_targetsGang];
+		};
+	};
+[_nameString,0.5,0.4,3,0,0,3] spawn bis_fnc_dynamicText;
+sleep 3;
+DS_tags = false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
