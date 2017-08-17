@@ -1,0 +1,3 @@
+@echo off
+echo Installing BattlEye...
+..\arma3battleye.exe 1 0

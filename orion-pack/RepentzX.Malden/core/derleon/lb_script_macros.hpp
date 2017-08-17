@@ -1,0 +1,1 @@
+#define LB_SETTINGS(TYPE,SETTING) TYPE(missionConfigFile >> "Leonbeeser2_Settings" >> SETTING)

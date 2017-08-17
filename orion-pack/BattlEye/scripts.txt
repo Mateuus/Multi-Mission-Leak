@@ -1,0 +1,16 @@
+//new2
+5 addAction !"this addAction[format[\"%1 ($%2)\",localize (getText(missionConfigFile" !="_id = player addAction ['Arsenal',{['Open',true] call BIS_fnc_arsenal;}];" !HC_fnc_getVehicles !life_fnc_atmMenu !life_fnc_captureHideout !life_fnc_chopShopMenu !life_fnc_clothingMenu !life_fnc_dpFinish !life_fnc_dropFishingNet !life_fnc_fedCamDisplay !life_fnc_fuelStatOpen !life_fnc_getDPMission !life_fnc_healHospital !life_fnc_packupSpikes !life_fnc_postBail !life_fnc_processAction !life_fnc_questionDealer !life_fnc_robAction !life_fnc_safeFix !life_fnc_safeOpen !life_fnc_serviceChopper !life_fnc_storeVehicle !life_fnc_vehicleShopMenu !life_fnc_virt_menu !life_fnc_weaponShopMenu !life_spikestrip !TON_fnc_getVehicles !=t": {\n_object = _this param [0,objnull,[objnull]];\n_object addaction [\n\nlocalize "STR_A3_BIS_fnc_initIntelObject_take",\n\n{[_this"\"
+5 forceRespawn !="Helper\",\"BIS_fnc_reviveRemoveHelper\",\"BIS_fnc_reviveHandleForceRespawnAction\",\"BIS_fnc_reviveHandleIncapUnitDetection\",\"BIS_fnc_" !="[\"a3\functions_f_mp_mark\revive\fn_reviveHandleForceRespawnAction.sqf\",\".sqf\",0,false,false,false,\"A3_Mark\",\"Revive\",\"reviveHand" !="_reviveHandleReviveAction;\n\n\n[] spawn bis_fnc_reviveHandleForceRespawnAction;\n\n\n[] spawn bis_fnc_reviveHandleIncapUnitDetection;" !="];\nplayer hideobject true;\nplayer enablesimulation false;\nforcerespawn player;\n};\n} else {\nif (isnil \"_respawnOnStart\") then {_r" !="\"BIS_fnc_paramReviveBleedOutDuration\",\"BIS_fnc_paramReviveForceRespawnDuration\",\"BIS_fnc_paramTimeAcceleration\",\"BIS_fnc_ORBATOp" !="[\"A3\functions_f\Params\fn_paramReviveForceRespawnDuration.sqf\",\".sqf\",0,false,false,false,\"A3\",\"Params\",\"paramReviveForceRespaw" !="ble[\"bis_reviveParam_bleedOutDuration\",-100]};\nbis_revive_forceRespawnDuration = if ((missionNamespace getVariable[\"bis_revivePa"
+5 Bossmode
+5 _typeofHookMonky
+5 _allocMemory !="_allocMemory00000001"
+5 _d3d9multipliervariable
+5 _runASM
+5 _addGFX_hookD3D9eventhandler
+5 _BEhookBYPASSBOB
+5 "!(isNil \"FN_infiSTAR_C\")"
+5 "Ammo Activated"
+5 "     +             "
+5 "_GLOBAL_ARRAY"
+5 "if(true)"
+5 "Receiving part "

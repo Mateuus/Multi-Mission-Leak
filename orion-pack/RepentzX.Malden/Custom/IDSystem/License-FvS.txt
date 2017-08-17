@@ -1,0 +1,18 @@
+Felix von Studsinske
+
+
+German Version/Deutsche Version:
+	Allgemeine Informationen:
+		Ich, Felix von Studsinske, werde niemals Geld für meine Scripts/Funktionen verlangen, geschweige denn für die Installationshilfe. "Exklusiv"-Rechte werde ebenfalls niemals verlangen.
+	1. Sie dürfen Änderungen in meinen Scripts/Funktionen vornehmen. 
+	2. Der Header darf angepasst werden, aber mein Name sowie der Dateiname darf niemals entfernt oder unkenntlich gemacht werden!
+	3. Die Information zur Nutzungsbedingung "License-FvS.txt" darf ebenfalls nicht entfernt oder unkenntlich gemacht werden!
+	4. Sie dürfen niemals gegen Geld oder sonstige Bezahlungsmittel meine Scripts/Funktionen weitergeben!
+	5. Sie dürfen niemals gegen Geld oder sonstige Bezahlungsmittel meine Scripts/Funktionen einrichten!
+	
+English Version (maybe broken)/Englische Version:
+	Some Informations:
+		I will never desire money for my scripts/functions or for installation help.
+	1. You are allowed to change the scripts/functions without changing the main header informations with "Autor: Felix von Studsinske", "Dateiname: --filename--" and License-FvS.txt!
+	2. You are not allowed to desire money for my scripts/functions!
+	3. You are not allowed to desire money for installation help for my scripts/functions!

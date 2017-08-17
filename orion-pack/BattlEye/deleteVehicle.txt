@@ -1,0 +1,2 @@
+//regex
+1 "" !Land_(Razorwire|Money|Suitcase|CanisterFuel|Can|BottlePlastic|TacticalBacon)_F !Land_Can_V3_F !Land_BottlePlastic_V1_F !Box_IND_Grenades_F !B_supplyCrate_F !(Cock|Goat|Hen|Ornate|Sheep)_random_F !(CatShark|Mackerel|Mullet|Salema|Tuna|Turtle)_F !"Land_LuggageHeap_02_F" !"O_APC_Wheeled_02_rcws_F" !="[0-9]:[0-9]" !"GroundWeaponHolder"

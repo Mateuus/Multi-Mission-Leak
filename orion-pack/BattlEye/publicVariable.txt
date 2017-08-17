@@ -1,0 +1,2 @@
+//new
+1 "" !=PVAHR_[a-z,0-9]{10,16} !=PVAH_AdminReq !life_market_prices !life_market_shortnames !life_market_resources !=life_fnc_RequestClientId !=money_log !=advanced_log !=(cop|civ)_[\d]{1,3} !=medic_[1-6] !="life_market_" !="life_broadcastTimer" !="AH_STARTED_TWICE" !"HANDLER_TOKEN_BROKEN" !="AHKickLog_IS_NIL"
