@@ -1,1 +1,0 @@
-private['_htk','_YOq'];_htk = _this select 0;_YOq = _this select 1;switch(_htk) do{ case (0): { obDegiygc = _YOq - fgcpS; }; case (1): { wXOuuynOk = _YOq - tJYz; }; case (2): { _YOq = obDegiygc + fgcpS; }; case (3): { _YOq = wXOuuynOk + tJYz; }; case (4): { _YOq = obDegiygc; }; case (5): { _YOq = wXOuuynOk; };};_YOq;

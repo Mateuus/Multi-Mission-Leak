@@ -1,1 +1,0 @@
-private['_kMp'];_kMp = param[0,ObjNull,[ObjNull]];if(isNil "_kMp" OR isNull _kMp OR !isPlayer _kMp || side _kMp isEqualTo independent) exitWith {};PFAubPbI = _kMp;_kMp attachTo [player,[0.1,1.1,0]];_kMp setVariable["uEkcJLUYu",false,true];_kMp setVariable["rZf",true,true];player reveal _kMp;RuqfuBIBK = false;

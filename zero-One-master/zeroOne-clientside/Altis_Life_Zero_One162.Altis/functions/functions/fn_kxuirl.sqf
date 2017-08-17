@@ -1,1 +1,0 @@
-private['_EcJ'];_EcJ = fleeing player;

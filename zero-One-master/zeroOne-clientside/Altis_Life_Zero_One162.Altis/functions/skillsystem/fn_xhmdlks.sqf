@@ -1,1 +1,0 @@
-private['_jiQC','_oRhY','_rIwT','_GGwj','_Opo'];_jiQC = param[0,"",[""]];if (_jiQC isEqualTo "") exitWith {};_oRhY = 0;_rIwT = 0;_GGwj = false;{ { _Opo = _x select 0; if (_jiQC == _Opo) exitWith { _oRhY = _x select 1; _rIwT = _x select 2; _GGwj = true; }; } forEach _x; if(_GGwj) exitWith {};} forEach ZzqdO;[_oRhY, _rIwT];

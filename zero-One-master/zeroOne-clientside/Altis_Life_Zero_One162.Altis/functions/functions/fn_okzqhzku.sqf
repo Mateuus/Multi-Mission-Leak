@@ -1,1 +1,0 @@
-private['_hqXp','_sqI','_Crcg','_FGH','_XLj'];_hqXp = _this select 0;_FGH = _this select 1;if(typeName _FGH != "ARRAY") exitWith {};_sqI = (count _FGH)-1;for "_i" from 0 to _sqI do{ _Crcg = _FGH select _i; if((_hqXp in _Crcg) && (isNil {_XLj})) then { _XLj = _i; };};if(isNil {_XLj}) then {_XLj = -1;};_XLj;

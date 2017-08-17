@@ -1,1 +1,0 @@
-private['_SRc','_qZe','_vaZY','_BbsM'];_SRc = param[0,-1,[0]];waitUntil {(!(isNil "KmSS")) && (!(isNil "DXi"))};disableSerialization;_qZe = findDisplay 2650;_vaZY = _qZe displayCtrl 2652;_BbsM = _qZe displayCtrl 2653;KmSS = sliderPosition _vaZY;_BbsM ctrlSetStructuredText parseText format[localize "STR_Cop_Ticket_Curr",(KmSS),"%",[round(DXi*(KmSS/100))] call zero_fnc_nAnP];

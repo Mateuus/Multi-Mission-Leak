@@ -1,1 +1,0 @@
-private['_rIqb','_sJQl'];_rIqb = false;_sJQl = _this select 1;if(_sJQl isEqualTo 1) then {_rIqb = true;};_rIqb;

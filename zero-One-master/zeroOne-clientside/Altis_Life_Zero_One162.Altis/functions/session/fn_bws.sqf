@@ -1,1 +1,0 @@
-if(GmRPE) exitWith {};cutText[format[localize "STR_Session_Query",getPlayerUID player],"BLACK FADED"];0 cutFadeOut 999999999;[getPlayerUID player,playerSide,player,(profileNamespace getVariable["Zero_one_Online",0])] remoteExec ["zero_fnc_queryRequest",2];

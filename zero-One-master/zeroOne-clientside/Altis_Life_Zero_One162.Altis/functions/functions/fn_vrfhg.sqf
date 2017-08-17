@@ -1,1 +1,0 @@
-private['_Cll','_fIJI','_qrVe','_yuc'];_fIJI = _this select 0;_Cll = ["0","1","2","3","4","5","6","7","8","9"];_qrVe = [_fIJI] call KRON_StrToArray;_yuc = true;{ if(_x in _Cll) then {} else { _yuc = false; };} foreach _qrVe;_yuc;

@@ -1,1 +1,0 @@
-private['_tAYj','_SLp'];_tAYj = (findDisplay 35020) displayCtrl 35021;_SLp = (findDisplay 35020) displayCtrl 35022;_SLp ctrlSetStructuredText (parseText format["<t align='center'>%1</t>",(_this select 0)]);_tAYj progressSetPosition (_this select 1);

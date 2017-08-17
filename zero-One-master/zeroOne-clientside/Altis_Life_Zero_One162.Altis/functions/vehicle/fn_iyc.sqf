@@ -1,1 +1,0 @@
-private['_slk'];_slk = param[0,ObjNull,[ObjNull]];if(isNull _slk) exitWith {};if(!(_slk in YPCst)) then { YPCst pushBack _slk;};

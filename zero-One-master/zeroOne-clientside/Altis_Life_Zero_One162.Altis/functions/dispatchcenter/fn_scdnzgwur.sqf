@@ -1,1 +1,0 @@
-if (!(playerSide in [west,independent])) exitWith {};yMirRDD = [];yMirRDD = _this select 0;

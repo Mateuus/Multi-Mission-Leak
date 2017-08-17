@@ -1,1 +1,0 @@
-disableSerialization;private['_PKh','_weSl','_PdK','_BTi'];_PKh = (findDisplay 3100) displayCtrl 3102;_weSl = lbCurSel _PKh;if(_weSl isEqualTo -1) exitWith {};if(isNull _PKh) exitWith {hint localize "STR_Shop_NoDisplay"};_PdK = _PKh lbData _weSl;_BTi = [_PdK] call zero_fnc_NKBUBCzsG;if(_BTi isEqualTo []) exitWith {};_BTi call zero_fnc_OejzYiDz; [] call zero_fnc_TvxlnVKLX;

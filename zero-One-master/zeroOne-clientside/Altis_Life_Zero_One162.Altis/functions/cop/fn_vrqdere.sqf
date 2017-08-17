@@ -1,1 +1,0 @@
-removeVest player;removeUniform player;removeHeadgear player;[] call zero_fnc_LAgHtB;[] spawn zero_fnc_wYF;titleText[localize "STR_ISTR_ClothingRemovedOwn","PLAIN"];

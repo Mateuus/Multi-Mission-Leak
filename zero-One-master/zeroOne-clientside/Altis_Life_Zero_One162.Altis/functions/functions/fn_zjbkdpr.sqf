@@ -1,1 +1,0 @@
-if(vehicle player == player) exitWith {};if(player getVariable ["GHdlZHW",false]) then { detach player; player setVariable["rZf",false,true]; player setVariable["uEkcJLUYu",false,true];};uzssuUs = true;player action ["Eject", vehicle player];titleText[localize "STR_NOTF_PulledOut","PLAIN"];titleFadeOut 4;uzssuUs = nil;

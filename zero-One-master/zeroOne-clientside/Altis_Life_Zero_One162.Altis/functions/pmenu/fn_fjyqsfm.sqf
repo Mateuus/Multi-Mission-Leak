@@ -1,1 +1,0 @@
-private['_qZe','_kTg'];disableSerialization;createDialog "MSAB";_qZe = findDisplay 2400;_kTg = _qZe displayCtrl 2401;lbClear _kTg;if(call(qGwMF) < 3) then {ctrlShow[2405,false];};if(tFHiSiX isEqualTo []) then { ((findDisplay 2400) displayctrl 2401) lbAdd localize "STR_PM_WantedList_sear";} else { [tFHiSiX] call zero_fnc_TFyd;};

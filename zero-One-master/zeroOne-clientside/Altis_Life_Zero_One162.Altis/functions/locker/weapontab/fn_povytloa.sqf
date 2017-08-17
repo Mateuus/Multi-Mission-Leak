@@ -1,1 +1,0 @@
-private ['_kTg','_AktS','_fLq','_RcAr'];disableSerialization;_kTg = param[0,controlNull,[controlNull]];_AktS = param[1,0,[0]];_fLq = if((ctrlIDC _kTg) isEqualTo 1618) then {(findDisplay 1000) displayCtrl 1620}else{(findDisplay 1000) displayCtrl 1621};_RcAr = _kTg lbValue _AktS;_fLq ctrlSetText str(_RcAr);

@@ -1,1 +1,0 @@
-private['_slk','_AkR','_ZoRe'];_slk = param[0,ObjNull,[ObjNull]];_AkR = param[1,"",[""]];_ZoRe = param[2,5,[5]];if(isNull _slk || !alive _slk || _AkR isEqualTo "") exitWith {};CAUkAjL = true;_slk say3D _AkR;uisleep _ZoRe;CAUkAjL = false;

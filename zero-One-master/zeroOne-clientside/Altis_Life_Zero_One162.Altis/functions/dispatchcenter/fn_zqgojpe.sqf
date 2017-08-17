@@ -1,1 +1,0 @@
-private['_gNrd'];_gNrd = param[0,objNull,[objNull]];if (isNull _gNrd) exitWith {};if ((side _gNrd) isEqualTo west) then {[kjcotSjcS] remoteExecCall ["zero_fnc_scdnZgWUr",_gNrd]};if ((side _gNrd) isEqualTo independent) then {[dIOg] remoteExecCall ["zero_fnc_scdnZgWUr",_gNrd]};

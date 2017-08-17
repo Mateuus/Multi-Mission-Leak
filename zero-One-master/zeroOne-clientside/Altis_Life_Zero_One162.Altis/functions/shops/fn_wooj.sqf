@@ -1,1 +1,0 @@
-private['_DcHM'];_DcHM = _this select 3;if(isNil {_DcHM}) exitWith {};IotxnSSfE = _DcHM;hhtht = _this select 0;if(_DcHM == "cop" && playerSide != west) exitWith {hint localize "STR_NOTF_NotACop"};if(vehicle player != player) exitWith {hintSilent localize "STR_NOTF_Sell_Virt_Vehicle"};createDialog "PSjSFwvPv";[] call zero_fnc_OwiDOgli;

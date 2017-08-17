@@ -1,1 +1,0 @@
-private['_IUQL','_mtr'];_IUQL = param[0,ObjNull,[ObjNull]];_mtr = param[1,"",[""]];if(isNull _IUQL || _mtr == "") exitWith {};_IUQL say3D _mtr;

@@ -1,1 +1,0 @@
-hint "Du wurdest aus der Gang geworfen.";if (!(isNil "aAbyZPF")) then {[""] call zero_fnc_JpgVPuGa;};hc_updateGang = [clientOwner,8,[0, getPlayerUID player, playerSide]];HC1_owner publicVariableClient "hc_updateGang";hc_updateGang = nil;

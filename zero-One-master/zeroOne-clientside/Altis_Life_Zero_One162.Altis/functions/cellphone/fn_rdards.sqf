@@ -1,1 +1,0 @@
-disableSerialization;if(ctrlText 3001 != "") then { [] spawn zero_fnc_umGYPkva;} else { [1] spawn zero_fnc_rrEYhtDV;};

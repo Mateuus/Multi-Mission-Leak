@@ -1,1 +1,0 @@
-private['_BOpo','_zIDc','_zZc','_sjrf'];_zIDc = _this select 0;_BOpo = ["0","1","2","3","4","5","6","7","8","9"];_zZc = [_zIDc] call KRON_StrToArray;_sjrf = true;{ if(_x in _BOpo) then {} else { _sjrf = false; };} foreach _zZc;_sjrf;

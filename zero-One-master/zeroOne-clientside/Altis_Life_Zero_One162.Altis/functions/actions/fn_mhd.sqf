@@ -1,1 +1,0 @@
-private['_dgb','_GGwj'];_dgb = cursorObject;if(isNull _dgb || !isPlayer _dgb) exitWith {};_GGwj = false;if(playerSide != west) then { if(_dgb getVariable["klT",false]) exitWith {_GGwj = true;};};if(_GGwj) exitWith {};[player] remoteExecCall ["zero_fnc_Die",_dgb];if(playerSide != west) then { _dgb setVariable["klT",true,true]; [] call zero_fnc_nbxA; };

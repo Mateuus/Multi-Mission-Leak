@@ -1,1 +1,0 @@
-private['_UyDG','_oXPs'];_UyDG = param[0,"",[""]];if(_UyDG isEqualTo "") exitWith {false};_oXPs = false;{ if(getPlayerUID _x == _UyDG) exitWith {_oXPs = true;};} foreach playableUnits;_oXPs;

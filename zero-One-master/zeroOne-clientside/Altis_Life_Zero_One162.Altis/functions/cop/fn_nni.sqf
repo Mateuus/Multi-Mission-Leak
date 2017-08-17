@@ -1,1 +1,0 @@
-private['_jknF'];_jknF = param[0,ObjNull,[ObjNull]];if(isNull _jknF) exitWith {};uiSleep 3;aYkYocq = false;BBkMYZfDB = false;hint "Dein PKW und LKW Führerschein wurden entzogen.";[1,format["Der PKW und LKW Führerschein von %1 wurden entzogen.",player getVariable["aOsyc",name player]]] remoteExecCall ["zero_fnc_cpbpJzzAd",_jknF];RuqfuBIBK = false;
