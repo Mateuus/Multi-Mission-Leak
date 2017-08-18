@@ -1,0 +1,1 @@
+[] spawn TON_fnc_capZones;

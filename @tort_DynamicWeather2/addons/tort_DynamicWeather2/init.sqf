@@ -1,0 +1,1 @@
+#include "\@TORT_DYNAMICWEATHER2\script\init.sqf"

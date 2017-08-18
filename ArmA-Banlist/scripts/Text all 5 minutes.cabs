@@ -1,0 +1,4 @@
+This script will send a text all 5 minutes to the Global Chat
+sheduledboolTrue
+battleye.saytextArmA-Banlist.de - send all 5 minutes this text to Global chat
+sleeptime00:05:00

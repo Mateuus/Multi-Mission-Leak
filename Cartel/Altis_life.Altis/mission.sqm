@@ -1,0 +1,179 @@
+class Markers
+{
+	items=12;
+	class Item0
+		{
+			position[]={4870.5049,336.65994,21907.865};
+			name="capture_label_2";
+			text="Cocaine Cartel";
+			type="hd_flag";
+			colorName="ColorRed";
+			angle=-350.99701;
+		};
+		class Item1
+		{
+			position[]={4869.4873,336.84415,21908.59};
+			name="capture_area_2";
+			text="Illegal area";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorRed";
+			a=50;
+			b=50;
+		};
+		class Item2
+		{
+			position[]={4935.4697,339.38785,21889.129};
+			name="veh_sp_54";
+			type="Empty";
+			angle=120;
+		};
+		class Item3
+		{
+			position[]={11202.161,182.41,8717.7695};
+			name="capture_label_1";
+			text="Arms Dealer";
+			type="hd_flag";
+			colorName="ColorRed";
+		};
+		class Item4
+		{
+			position[]={11202.138,182.41,8717.1973};
+			name="capture_area_1";
+			text="Illegal area";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorRed";
+			a=50;
+			b=50;
+		};
+		class Item5
+		{
+			position[]={11214.824,178.50533,8633.4414};
+			name="veh_sp_58";
+			type="Empty";
+			angle=245.806;
+		};
+		class Item6
+		{
+			position[]={21996.693,28.352285,21052.029};
+			name="capture_label_4";
+			text="Heroin Cartel";
+			type="hd_flag";
+			colorName="ColorRed";
+			angle=-350.99701;
+		};
+		class Item7
+		{
+			position[]={21995.719,28.333988,21052.93};
+			name="capture_area_4";
+			text="Illegal area";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorRed";
+			a=50;
+			b=50;
+		};
+		class Item8
+		{
+			position[]={22060.518,37.244843,21095.68};
+			name="veh_sp_56";
+			type="Empty";
+			angle=65;
+		};
+		class Item9
+		{
+			position[]={20224.598,47.13879,8915.3184};
+			name="capture_label_3";
+			text="Meth Cartel";
+			type="hd_flag";
+			colorName="ColorRed";
+			angle=-350.99701;
+		};
+		class Item10
+		{
+			position[]={20223.623,47.208485,8916.082};
+			name="capture_area_3";
+			text="Illegal area";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorRed";
+			a=50;
+			b=50;
+		};
+		class Item11
+		{
+			position[]={20219.629,44.217159,8849.2656};
+			name="veh_sp_60";
+			type="Empty";
+			angle=220;
+		};
+};
+class Sensors
+	{
+		items=4;
+		class Item0
+		{
+			position[]={4869.4619,336.93668,21908.779};
+			activationBy="CIV";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Capture Base 2";
+			name="capture_2";
+			expCond="player in (list capture_2)";
+			expActiv="[2] call life_fnc_toggleCaptureUI;";
+			expDesactiv="[0] call life_fnc_toggleCaptureUI;";
+			class Effects
+			{
+			};
+		};
+		class Item1
+		{
+			position[]={11202.305,182.41,8717.2939};
+			activationBy="CIV";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Capture Base 1";
+			name="capture_1";
+			expCond="player in (list capture_1)";
+			expActiv="[1] call life_fnc_toggleCaptureUI;";
+			expDesactiv="[0] call life_fnc_toggleCaptureUI;";
+			class Effects
+			{
+			};
+		};
+		class Item2
+		{
+			position[]={21995.65,28.332605,21052.943};
+			activationBy="CIV";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Capture Base 4";
+			name="capture_4";
+			expCond="player in (list capture_4)";
+			expActiv="[4] call life_fnc_toggleCaptureUI;";
+			expDesactiv="[0] call life_fnc_toggleCaptureUI;";
+			class Effects
+			{
+			};
+		};
+		class Item3
+		{
+			position[]={20223.555,47.216564,8916.2324};
+			activationBy="CIV";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Capture Base 3";
+			name="capture_3";
+			expCond="player in (list capture_3)";
+			expActiv="[3] call life_fnc_toggleCaptureUI;";
+			expDesactiv="[0] call life_fnc_toggleCaptureUI;";
+			class Effects
+			{
+			};
+		};
+	};

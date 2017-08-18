@@ -1,0 +1,46 @@
+frmMain_title==ArmA Banlist 2
+frmMain_title_debug==ArmA Banlist 2 Build {0}
+
+tabPage_home_title==Startseite
+tabPage_gab_title==ArmA Banlist
+
+button_changePath==Ändern
+button_gab_status_start==Starten
+button_gab_status_stop==Stoppen
+
+groupBox_gab_settings_title==Einstellungen
+groupBox_gab_status_title_running==Status: Läuft
+groupBox_gab_status_title_stopped==Status: Gestoppt
+
+label_gab_settings_readBantxt==Eingabe ban.txt:
+label_gab_settings_writeBantxt==Ausgabe ban.txt:
+label_gab_settings_serverKey==Serverschlüssel:
+label_gab_settings_playerRating==Spielerbewertung:
+label_gab_settings_playerRatingValue=={0} pt.
+label_gab_settings_updateTime==Update Zeit (In sekunden):
+
+label_gab_status_download_nothing==Warte auf Eingabe
+label_gab_status_download_waiting==Warte {0}s ...
+label_gab_status_download_downloading==Downloaden: {0}% fertig
+label_gab_status_download_processingBans==Verarbeite bekannte bans
+label_gab_status_download_writingBans==Schreibe bans
+
+label_gab_status_upload_nothing==Warte auf Eingabe
+label_gab_status_upload_waiting==Warte {0}s ...
+label_gab_status_upload_waitingChange==Warte
+label_gab_status_upload_downloading==Hochladen: {0}/{1} fertig
+
+checkBox_gab_settings_autStart==Automatisch starten
+checkBox_gab_settings_showInfoOnFrontPage==Status auf startseite anzeigen
+checkBox_gab_settings_autoDetectChanges==Änderungen automatisch erkennen
+
+
+listView_cabs_columns_status==Status
+listView_cabs_columns_name==Name
+listView_cabs_columns_description==Beschreibung
+
+
+msg_error==Ein Fehler ist aufgetreten.\nBitte sende uns folgene Fehlernachricht an\ntech@arma-banlist.de oder via Ticket auf help.arma-banlist.de\n\nError:\n{0}\n\nStackTrace:\n{1}
+
+msg_errorception_title==Zu viele Fehler
+msg_errorception_body==Ein Fehler ist bei der Fehlerbenachrichtigung aufgetreten.\nBitte mache eine aufnahme dieser Informationsbox und sende sie an\ntech@arma-banlist.de oder via Ticket auf help.arma-banlist.de\n\nError of errorreporting:\n{0}\n\nError itself:\n{1}

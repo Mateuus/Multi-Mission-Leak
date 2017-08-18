@@ -1,0 +1,64 @@
+* INTRODUCTION
+
+This document covers the basic installation procedure for the
+accompanying BattlEye filters.  For ease of navigation, this file is
+laid out sequentially as a step-by-step guide.
+
+The text annotations are compatible with org-mode.  For more
+information, please see http://orgmode.org
+
+* Preparing the server
+
+** Determine the proper location for the BattlEye files
+
+BattlEye can live in several different places on your server depending
+on command line options.
+
+*** -bepath=
+
+The bepath command-line option is the preferred method for specifying
+the location of the BattlEye config.  This option overrides all other
+configuration options and ensures that your server is looking in the
+correct place.
+
+Example: -bepath="C:\Arma 3\battleye"
+
+*** -profiles
+
+If bepath does not exist, the server will next look in the BattlEye
+directory of the path specified by -profiles.
+
+Example: -bepath="C:\Arma 3\AltisLife"
+
+The BattlEye directory would then become 
+"C:\Arma 3\AltisLife\BattleEye"
+
+*** The default location
+
+If neither -bepath nor -profiles exist as command-line options, then
+the server will look for the BattlEye directory in the root of your
+server installation.  
+
+Example: If you have your server installed as C:\Arma 3\ then the
+BattlEye directory is C:\Arma 3\BattlEye
+
+** (optional) Enabling RCON
+
+RCON has rich support for third party tools.  It *SHOULD* be enabled.
+
+*** Create a secure password for RCON
+
+- Point your web browser to https://www.random.org/passwords/
+- Click the Get Passwords button
+- Copy one of the 5 randomly generated passwords
+
+*** Create beserver.cfg in the BattlEye directory with the following:
+
+MaxPing 200
+RConPassword <insert random password here>
+
+* Installing the files
+
+- Copy all the .txt files here to your BattlEye directory
+- Copy your beserver.cfg file to your BattlEye directory
+- Restart the server

@@ -1,0 +1,16 @@
+
+//This type of init for the object that people vote at
+class Item1108
+{
+	position[]={9488.8252,118.79512,15902.25};
+	azimut=90;
+	offsetY=0.5;
+	id=1506;
+	side="EMPTY";
+	vehicle="Land_InfoStand_V2_F";
+	skill=0.60000002;
+	init="this allowDamage false; this enableSImulation false; this addAction[""Vote for President"",life_fnc_voteDialog]; this SetObjectTexture [0,""images\sign_vote.jpg""];";
+};
+
+//Then to run for president, same as above but add this addAction
+//this addAction[""Run for President"",life_fnc_runDialog];";

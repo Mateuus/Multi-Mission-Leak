@@ -1,0 +1,68 @@
+5 "addAction" !"life_fnc_" !"addAction [localize" !"player addAction [\"Touch-Off Explosives\", bTouchOff" !"life_actions = [player addAction[localize" !"life_action_barGateDeploy = player addAction[" !"life_action_spikeStripDeploy = player addAction[localize" !"this addaction [\"Join Paintball\",\"core\paintball\pb_join.sqf\"" !"uwg_cruise_control = uwg_cruise addAction" !"this addAction[\"Remove Contents\", {clearWeaponCargoGlobal copDetectorCase;" !"copDetectorCase = this; this addAction[\"Remove Contents\", {clearWeaponCargoGlobal copDetectorCase;" !"sheriffDetectorCase = this; this addAction[\"Remove Contents\", {clearWeaponCargoGlobal sheriffDetectorCas"
+5 "createDialog" !="createDialog \"life_ticket_give\"" !="createDialog \"shop_menu\"" !="createDialog \"pInteraction_Menu\"" !="createDialog \"life_ticket_pay\"" !="createDialog \"Life_My_Gang_Diag\"" !="createDialog \"DeathScreen\"" !="createDialog \"playerSettings\"" !="createDialog \"SettingsMenu\"" !="createDialog \"life_wanted_menu\"" !="createDialog \"Life_atm_management\"" !="createDialog \"Chop_Shop\"" !="createDialog \"Life_Clothing\"" !="createDialog \"Life_impound_menu\"" !="createDialog \"Life_Vehicle_Shop_v2\"" !="createDialog \"shops_menu\"" !="createDialog \"TrunkMenu\"" !="createDialog \"vInteraction_Menu\"" !="createDialog \"Federal_Safe\"" !="createDialog \"life_spawn_selection\"" !"Life_Create_Gang_Diag\"" !="createDialog \"Life_key_management\"" !="createDialog \"Life_cell_phone\"" !="createDialog \"life_admin_menu\"" !="createDialog \"\"Life_Create_Gang_Diag\"\"" !="createDialog \"life_weapon_shop\"" !="createDialog \"Life_my_smartphone\"" !="createDialog \"Life_smartphone_schreiben\"" !="createDialog \"Life_smartphone_notruf\"" !="createDialog \"marketView\"" !="createDialog \"Gold_Safe\"" !="createDialog \"BlackjackGUI\"" !="createDialog \"Life_Admin_Compensate\"" !="createDialog \"LicenseShop\"" !="createDialog \"revokeLicense_Menu\"" !="createDialog \"Life_craft\"" !="createDialog \"RscDisplayLocWeaponInfo\"" !="createDialog \"jail_time\"" !="createDialog \"life_prof_dialog\""
+5 "ctrlCreate"
+5 "ctrlDelete"
+5 "forceRespawn"  !="];\nplayer hideobject true;\nplayer enablesimulation false;\nforcerespawn player;\n} else {\n_isDeath = false;\n};\n};\nif (_respawnOnSt"
+5 "setPosATL" !"player setPosATL _pos;" !"_vehicle setPosATL (_hs modelToWorld [-0.4,-4,12.65])" !"_obj setPosATL (getPosATL player)" !"_container setPosATL _pos;" !"_obj setPosATL (getPosATL _unit)" !"_object setPosATL [_pos select 0,_pos select 1,_posObj select 2]"
+5 "setPosASL" !"player setPosASL (visiblePositionASL life_corpse);" !"_smokeg setPosASL [(_pH"
+5 "setPosASL2"
+5 "setPosASLW"
+5 "setPosWorld"
+5 "setdamage" !"STR_NOTF_EatMSG_Death" !"STR_NOTF_RepairedVehicle" !"spikeStrip" !"STR_NOTF_HS_Healed" !"STR_Service_Chopper_Done" !"_fnc_scriptname" !"life_hunger" !"_spikeStrip" !"_wire setDamage 1"
+1 "setHitPointDamage" !"_vehicle setHitPointDamage[\"Hit" !"_x setHitPointDamage [\"hitEngine\", 1.0];" !"_veh setHitPointDamage ["hitEngine", 1.0];"
+5 "sethit" !"_Lights select 0) say3D \"electricity_loop\"" !"_x sethit [\"light_l\",1]" !"_vehicle setHitPointDamage[\"Hit" !"_x setHitPointDamage [\"hitEngine\", 1.0];" !"_veh setHit [\"engine\", 1];" !"_veh setHit [\"motor\", 1];" !"_veh sethit [\"light_l\",1];" !"_veh sethit [\"light_r\",1];"
+5 "disableUserInput" !"STR_ANOTF_Frozen" !"warn_one = true" !"STR_NOTF_Tazed" !"from 0 to 101 do {disableUserInput true;};"
+5 "setVelocity" !"_thingToPush setVelocity [0,0,0]" !"_unit setVelocity[(_vel select 0)+(sin _dir*_v2),(_vel select 1)+(cos _dir*_v2),(_vel select 2)+_v1]" !"_smokeg setVelocity _Gvel" !"domnr = [2,-1] call BIS_fnc_selectRandom;" !"preProcessFile "\SpyGlass\endof"
+5 "BIS_fnc_dbg_reminder_value" !"if ((!isNil {BIS_fnc_dbg_reminder_value}) && {!isNil {BIS_fnc_dbg_reminder}}) then {"
+5 _typeofHookMonky
+ 
+5 _allocMemory
+ 
+5 _d3d9multipliervariable
+ 
+5 _runASM
+ 
+5 _addGFX_hookD3D9eventhandler
+ 
+5 _BEhookBYPASSBOB
+ 
+5 "compileFinal" !"__CONST__(var1,var2)" !"life_fnc_moveIn" !"life_fnc_garageRefund" !"BIS_fnc_preload_server" !"uinamespace setvariable [_scriptName + " !"BIS_fnc_endMission = compileFinal (if(typeName BIS_fnc_endMission == \"STRING\") then" !"life_adminlevel = compileFinal (if(typeName parseNumber" !"BIS_fnc_initParams_paramsArray = compilefinal str paramsArray;" !"uinamespace setvariable ["
+ 
+5 setVehicleLock
+
+7 G_E_F
+7 "G_E_F"
+7 GEF__MENUONSCRIPT
+7 FINAL_MENU
+7 MainMenubyThirtySix
+7 EquipmentMenubyThirtySix
+7 VehicleMenubyThirtySix
+7 _typeofHookMonky
+7 _allocMemory
+7 _d3d9multipliervariable
+7 _runASM
+7 _addGFX_hookD3D9eventhandler
+7 _BEhookBYPASSBOB
+7 "cursorTarget setDamage 1;"
+7 "player addeventhandler ["fired", {(_this select 0) setvehicleammo 1}]"
+7 "["fired", {(_this select 0) setvehicleammo 1}]"
+7 "vehicle player addeventhandler ["fired", {(_this select 0) setvehicleammo 1}]"
+7 "vehicle player allowDamage false;"
+7 "cursorTarget setDamage 0;"
+7 "vehicle player setDamage 0;"
+7 "moveOut driver vehicle player;"
+7 "[] spawn BIS_fnc_earthquake;"
+7 "life_vehicles set[count life_vehicles,cursorTarget];"
+7 "ThirtySix"
+7 "[[cursorTarget,0],"life_fnc_lockVehicle",cursorTarget,false] spawn life_fnc_MP;"
+7 "[[cursorTarget,2],"life_fnc_lockVehicle",cursorTarget,false] spawn life_fnc_MP;"
+7 _src\test.sqf
+7 ThirtySix_Arma
+7 ThirtySix_Unlim_Ammo
+7 call ThirtySix;
+7 ThirtySix_Unlim_Ammo
+7 FuryV2.sqf
+7 "ExtasyFinalMenu.sqf"
+7 ExtasyFinalMenu.sqf
+7 "test_EmptyObjectForFireBig"
+7 "HelicopterExploBig"

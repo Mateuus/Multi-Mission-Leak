@@ -1,0 +1,1 @@
+disable "deathMessages" from 1 to 0 for whichever mission difficulty.

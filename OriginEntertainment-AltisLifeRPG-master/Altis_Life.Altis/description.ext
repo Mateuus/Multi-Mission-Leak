@@ -1,0 +1,302 @@
+author = "Tonic, JBothe";
+onLoadName = "Origin AltisLife v1.0";
+onLoadMission = "A RPG developed by Tonic, edited by Origin Dev Team";
+joinUnassigned = 1;
+respawn = BASE;
+respawndelay = 5;
+disabledAI = true;
+disableChannels[]={0,1,2};
+enableDebugConsole = 1;
+loadScreen = "textures\loadscreen.jpg";
+respawnDialog = 0;
+
+class Header
+{
+	gameType = RPG;
+	minPlayers = 1;
+	maxPlayers = 70;
+};
+
+wreckLimit = 3;
+wreckRemovalMinTime = 60;
+wreckRemovalMaxTime = 320;
+corpseLimit = 150;
+corpseRemovalMinTime = 999;
+corpseRemovalMaxTime = 9999;
+
+//SpyGlass configuration
+SPY_Enable = true;
+
+#include "Config_Spyglass.hpp"
+
+/* R3F Logistics */
+//#include "R3F_LOG\desc_include.h"
+
+#include "dialog\MasterHandler.h"
+#include "scripts\outlw_magRepack\MagRepack_config.hpp"
+
+class RscTitles
+{
+	#include "dialog\ui.hpp"
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.h"
+	#include "dialog\statusBar.hpp"	
+class introLife
+{
+   idd = -1;
+   duration = 6;
+   class controls
+   {
+         class ExampleControl
+         {
+            idc = -1;
+            type = 0;
+            style = 2192;
+            x = 0.125;
+            y = 0.125;
+            h = 0.75;
+            w = 0.75;
+            font = "EtelkaNarrowMediumPro";
+            sizeEx = 0.05; 
+            colorBackground[] = {1,1,1,0};
+            colorText[] = {1,1,1,1};
+            text = "textures\loadscreenlogo.paa";
+            lineSpacing = 1;
+         }; 
+      }; 
+   }; 
+};
+
+class CfgFunctions
+{
+	#include "Functions.h"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	
+	class lock
+	{
+		name = "lock";
+		sound[] = {"\sounds\vehicle_lock.ogg", 1.0, 1};
+		titles[] = {};
+	};
+ 
+	class unlock
+	{
+		name = "unlock";
+		sound[] = {"\sounds\vehicle_unlock.ogg", 1.0, 1};
+		titles[] = {};
+	};	
+	
+    class trunk_open
+    {
+        name = "trunk_open";
+        sound[] = {"\sounds\trunk_open.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	
+	class Yelp
+	{
+	name = "Yelp";
+	sound[] = {"\sounds\Yelp.ogg", 1.0, 1};
+	titles[] = {};
+	};
+	
+    class ticket
+	{
+		name="ticket";
+		sound[] = {"\sounds\ticket.ogg", 1.0, 1};
+		titles[] = {0, " "};
+	};
+	
+	class medic_siren
+	{
+    name = "medic_siren";
+    sound[] = {"\sounds\Siren_Med.ogg", 1.0, 1};
+    titles[] = {};
+	};
+	
+	class Cuff 
+	{
+		name = "cuff";
+		sound[] = {"\sounds\cuff.ogg", 0.95, 0.95};
+		titles[] = {};
+	};
+	
+   	class car_alarm
+	{
+    name = "car_alarm";
+    sound[] = {"\sounds\caralarm.ogg", 1.0, 1};
+    titles[] = {};
+	};
+	
+    class buy
+	{
+		name = "buy";
+		sound[] = {"\sounds\buy.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class bank_alarm 
+	{
+		name = "bank_alarm";
+		sound[] = {"\sounds\bank.ogg", 0.95, 0.95};
+		titles[] = {};
+	};
+	
+	class blinker
+	{
+    name = "blinker";
+    sound[] = {"\sounds\blinker.ogg", 1.0, 1};
+    titles[] = {};
+	};
+	
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\Siren_Long.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+	
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are not white-listed to use this slot";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class Blacklisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class SpyGlass
+	{
+		title = "The SpyGlass sees you";
+		subTitle = "You were detected by the SpyGlass";
+		description = "You were detected for cheating and have been reported to the server. Enjoy your day.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+	
+	class NameExists
+	{
+	title = "Change your name!";
+	subTitle = "";
+	description = "Use your old name in the profile on the settings menu!";
+	pictureBackground = "";
+	picture = "";
+	pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "EMS Requested";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+	
+	class DeliveryAssigned
+	{
+		title = "Delivery Job Accepted";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+	
+	class DeliveryFailed
+	{
+		title = "Delivery Job Failed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+	
+	class DeliverySucceeded
+	{
+		title = "Delivery Job Completed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+	
+	class TextMessage
+	{
+		title = "Received A Text Message";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class PoliceDispatch
+	{
+		title = "911 Dispatch Center";
+		iconPicture = "icons\messagepolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+	
+	class AdminMessage
+	{
+		title = "Admin Message";
+		iconPicture = "icons\messageadmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+	class Cop2Message
+	{
+		title = "OpFor Message";
+		iconPicture = "icons\messagenew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};

@@ -1,0 +1,46 @@
+frmMain_title==ArmA Banlist 2
+frmMain_title_debug==ArmA Banlist 2 Build {0}
+
+tabPage_home_title==Home
+tabPage_gab_title==ArmA Banlist
+
+button_changePath==Change
+button_gab_status_start==Start
+button_gab_status_stop==Stop
+
+groupBox_gab_settings_title==Settings
+groupBox_gab_status_title_running==Status: Running
+groupBox_gab_status_title_stopped==Status: Stopped
+
+label_gab_settings_readBantxt==Input ban.txt:
+label_gab_settings_writeBantxt==Output ban.txt:
+label_gab_settings_serverKey==Server key:
+label_gab_settings_playerRating==Player rating:
+label_gab_settings_playerRatingValue=={0} pt.
+label_gab_settings_updateTime==Update time (In seconds):
+
+label_gab_status_download_nothing==Nothing to do here
+label_gab_status_download_waiting==Waiting {0}s ...
+label_gab_status_download_downloading==Downloading: {0}% done
+label_gab_status_download_processingBans==Processing known bans
+label_gab_status_download_writingBans==Writing bans
+
+label_gab_status_upload_nothing==Nothing to do here
+label_gab_status_upload_waiting==Waiting {0}s ...
+label_gab_status_upload_waitingChange==Waiting
+label_gab_status_upload_downloading==Uploading: {0}/{1} done
+
+checkBox_gab_settings_autStart==Auto start
+checkBox_gab_settings_showInfoOnFrontPage==Show status on front page
+checkBox_gab_settings_autoDetectChanges==Automatically detect changes
+
+
+listView_cabs_columns_status==Status
+listView_cabs_columns_name==Name
+listView_cabs_columns_description==Description
+
+
+msg_error==An error accured.\nPlease send the error message below to\ntech@arma-banlist.de or via ticket at help.arma-banlist.de\n\nError:\n{0}\n\nStackTrace\n{1}
+
+msg_errorception_title==Errorception
+msg_errorception_body==An error accured while reporting an error.\nPlease make a screen shot of the message below and send it to\ntech@arma-banlist.de or via ticket at help.arma-banlist.de\n\nError of errorreporting:\n{0}\n\nError itself:\n{1}

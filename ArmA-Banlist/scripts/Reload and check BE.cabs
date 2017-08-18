@@ -1,0 +1,8 @@
+This script will relead an check battleye for new updates every hour
+sheduledboolTrue
+battleye.bans.load
+battleye.events.load
+battleye.scripts.load
+battleye.update
+battleye.bans.write
+sleeptime01:00:00

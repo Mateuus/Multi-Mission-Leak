@@ -1,0 +1,6 @@
+// block all raw code broadcasts
+// tiny chance of false positives, but most entries will be from scriptkiddies
+5 "^\{"
+
+// http://www.altisliferpg.com/topic/9594-problem-blacklisting-a-hack-via-be-filters/
+5 "life_fnc_netSetVar"

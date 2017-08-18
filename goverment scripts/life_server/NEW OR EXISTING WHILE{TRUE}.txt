@@ -1,0 +1,13 @@
+//This is to be added in an existing while{true} loop on a 1 hour sleep schedule. If you can't find one, make a new one like below such as at the bottom of init.sqf: 
+
+[] spawn { 
+	while{true} do {
+		sleep 3600;
+		_query = "UPDATE rules SET time=time+1";
+		[_query,1] call DB_fnc_asyncCall;
+	}; 
+};
+
+//Otherwise just add the inner contents of that while loop to your existing 1 hour sleep loop.
+
+//This loop is here to keep track of how much time the governor has been in office, and selecting a new one after x amount of hours have passed
