@@ -1,1 +1,0 @@
-createDialog "ADT_Jobcentre";

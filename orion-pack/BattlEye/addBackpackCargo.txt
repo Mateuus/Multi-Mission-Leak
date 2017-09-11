@@ -1,2 +1,0 @@
-//regex
-1 "" !"GroundWeaponHolder" !"B_OutdoorPack_blk" !"B_AssaultPack_(blk|khk|dgtl|rgr|sgg|blk|cbr|mcamo|tna_f)" !"B_TacticalPack_oli" !"B_Kitbag_(mcamo|sgg|cbr|rgr)" !"B_FieldPack_(blk|ocamo|oucamo|ghex_f|tna_f)" !"B_Bergen_(sgg|mcamo|rgr|blk|dgtl_f|tna_f)" !"B_Carryall_(ocamo|oucamo|mcamo|oli|khk|cbr|ghex_f\")" !"B_AssaultPack_(khk|dgtl|rgr|sgg|blk|cbr|Kerry)" !"B_TacticalPack_blk" !"B_TacticalPack_oli" !"B_Parachute" !"B_Carryall_ghex_F"
