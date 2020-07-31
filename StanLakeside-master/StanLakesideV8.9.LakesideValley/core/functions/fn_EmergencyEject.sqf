@@ -1,0 +1,1 @@
+moveOut player;

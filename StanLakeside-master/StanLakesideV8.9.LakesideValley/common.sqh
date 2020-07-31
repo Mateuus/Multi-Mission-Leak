@@ -1,0 +1,4 @@
+#define __maxMessages 8
+#define __messageTimeoutDuration 15 // in seconds
+
+#define __IDC_main 100
