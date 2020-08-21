@@ -1,0 +1,20 @@
+#include "..\..\script_macros.hpp"
+/*
+	File: fn_adminTpHere.sqf
+	Author: ColinM9991
+	
+	Description:
+	Teleport selected player to you.
+*/
+if(FETCH_CONST(life_adminlevel) < 4) exitWith {closeDialog 0;};
+
+private["_target"];
+_target = lbData[2902,lbCurSel (2902)];
+_target = call compile format["%1", _target];
+if(isNil "_target") exitWith {};
+if(isNull _target) exitWith {};
+if(_unit == player) exitWith {hint localize "STR_ANOTF_Error";};
+
+_target setPos (getPos player);
+hint format["Teleportowałeś Gracza %1 do siebie",_target getVariable["realname",name _target]];
+[] spawn TON_fnc_adminTpHere;
