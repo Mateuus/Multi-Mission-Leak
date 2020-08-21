@@ -1,0 +1,349 @@
+
+disableChannels[] = {
+  {0, true, true}, // Global
+  {1, false, true}, // Side
+  {2, true, true} // Command
+};
+
+
+#include "CfgRemoteExec.hpp"
+#include "dialog\MasterHandler.hpp"
+#include "Config_Master.hpp"
+#include "CHVD\dialog.hpp"
+
+
+class CfgServer {
+	DatabaseName = "altislife"; //Config name that'll be grep in the extdb-conf.ini. Default: [altislife]
+	HeadlessMode = 0; //Enable/Disable headless client addon. Default: 0 (1 = Enabled / 0 = Disabled)
+	DebugMode = 0; //Enable many server/hc debugging logs. Default: 0 (1 = Enabled / 0 = Disabled)
+};
+
+class RscTitles {
+	#include "dialog\progress.hpp"
+	#include "dialog\hud_nameTags.hpp"
+	#include "dialog\hud_stats.hpp"
+	#include "dialog\statusBar.hpp"
+};
+
+class CfgFunctions {
+	#include "Functions.hpp"
+    #include "CHVD\CfgFunctions.hpp"
+};
+
+class CfgSounds
+{
+	sounds[] = {};
+	class SirenLong
+	{
+		name = "SirenLong";
+		sound[] = {"\sounds\Siren_Long.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class heroine
+	{
+		name = "heroine";
+		sound[] = {"\sounds\heroine.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class medicSiren
+	{
+		name = "medicSiren";
+		sound[] = {"\sounds\medic_siren.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class allahu
+	{
+		name = "allahu";
+		sound[] = {"\sounds\allahu.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class spraycan
+	{
+		name = "spraycan";
+		sound[] = {"\sounds\spraycan.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class tazersound
+	{
+		name = "Tazersound";
+		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
+		titles[] = {};
+	};
+
+	class flashbang
+	{
+		name = "flashbang";
+		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class mining
+	{
+		name = "mining";
+		sound[] = {"\sounds\mining.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class harvest
+	{
+		name = "harvest";
+		sound[] = {"\sounds\harvest.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class alert
+	{
+		name = "alert";
+		sound[] = {"\sounds\alert.ogg", 1, 1};
+		titles[] = {};
+	};
+
+	class seatwarn
+	{
+		name = "seatwarn";
+		sound[] = {"\sounds\seatwarn.ogg", 1, 1};
+		titles[] = {};
+	};
+
+	class seatbelt
+	{
+		name = "seatbelt";
+		sound[] = {"\sounds\seatbelt.ogg", 1, 1};
+		titles[] = {};
+	};
+
+	class bank
+	{
+		name = "bank";
+		sound[] = {"\sounds\bank.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class blinker
+	{
+		name = "blinker";
+		sound[] = {"\sounds\blinker.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class welcome
+	{
+		name = "welcome";
+		sound[] = {"\sounds\welcomee.ogg", 1, 1};
+		titles[] = {};
+	};
+
+	class glassbreak
+	{
+		name = "glassbreak";
+		sound[] = {"\sounds\glassbreak.ogg", 1, 1};
+		titles[] = {};
+	};
+
+	class fasttravel
+	{
+		name = "fasttravel";
+		sound[] = {"\sounds\fasttravel.ogg", 0.5011872,1.0};
+		titles[] = {};
+	};
+
+	class car_lock
+	{
+		name = "car_lock";
+		sound[] = {"\sounds\car_lock.ogg", 1, 1};
+		titles[] = {};
+	};
+
+	class car_unlock
+	{
+		name = "car_unlock";
+		sound[] = {"\sounds\car_unlock.ogg", 1, 1};
+		titles[] = {};
+	};
+
+	class CarAlarm {
+ 	name = "CarAlarm";
+ 	sound[] = {"\sounds\caralarm.ogg", 1.0, 1};
+ 	titles[] = {};
+ 		};
+
+	class jihad
+	{
+		name = "jihad";
+		sound[] = {"\sounds\satire.ogg", 0.25, 1};
+		titles[] = {};
+	};
+
+	class smokeweed
+	{
+		name = "smokeweed";
+		sound[] = {"\sounds\smokeweed.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class handcuffs
+	{
+		name = "handcuffs";
+		sound[] = {"\sounds\handcuffs.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class patdown
+	{
+		name = "patdown";
+		sound[] = {"\sounds\patdown.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class defib
+	{
+		name = "defib";
+		sound[] = {"\sounds\defib.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class repair
+	{
+		name = "repair";
+		sound[] = {"\sounds\repair.ogg", 1.0, 1};
+		titles[] = {};
+	};
+
+	class knockout
+	{
+		name = "knockout";
+		sound[] = {"\sounds\knockout.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class rad
+	{
+		name = "rad";
+		sound[] = {"\sounds\rad.ogg", 0.25, 1};
+		titles[] = {};
+    };
+	class calarm
+	{
+		name = "calarm";
+		sound[] = {"\sounds\calarm.ogg", 0.25, 1};
+		titles[] = {};
+    };
+	class empwarn
+	{
+		name = "empwarn";
+		sound[] = {"\sounds\empwarn.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	class empacsound
+	{
+		name = "empacsound";
+		sound[] = {"sounds\empac.ogg", 1.0, 1};
+		titles[] = {};
+	};
+};
+
+class CfgDebriefing
+{
+	class NotWhitelisted
+	{
+		title = "Mission Failed";
+		subtitle = "Nie jesteś na białej liście";
+		description = "Nie masz permisji aby wejść na dany slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class Blacklisted
+	{
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+};
+
+class CfgNotifications
+{
+	class MedicalRequestEmerg
+	{
+		title = "Wezwanie Medyka";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 5;
+		priority = 7;
+	};
+
+	class DeliveryAssigned
+	{
+		title = "Otrzymano zlecenie";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		duration = 10;
+		priority = 7;
+	};
+
+	class DeliveryFailed
+	{
+		title = "Zlecenie doreczenia przesyłki nieudane";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
+		description = "%1";
+		duration = 7;
+		priority = 7;
+	};
+
+	class DeliverySucceeded
+	{
+		title = "Doręczono przesyłke";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
+		description = "%1";
+		duration = 6;
+		priority = 6;
+	};
+
+	class TextMessage
+	{
+		title = "Otrzymano Prywatną Wiadomość";
+		iconPicture = "icons\ico_messageNew.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class PoliceDispatch
+	{
+		title = "Zgłoszenie";
+		iconPicture = "icons\ico_messagePolice.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminDispatch
+	{
+		title = "Admin Dispatch Center";
+		iconPicture = "icons\ico_messageAdmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 6;
+	};
+
+	class AdminMessage
+	{
+		title = "Wiadomość od Admina";
+		iconPicture = "icons\ico_messageAdmin.paa";
+		description = "%1";
+		duration = 10;
+		priority = 5;
+	};
+};
+
+
+
+#include "infiSTAR_AdminMenu.hpp"
